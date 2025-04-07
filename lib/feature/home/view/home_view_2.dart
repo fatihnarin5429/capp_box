@@ -1,4 +1,5 @@
 import 'package:capp_box/feature/create_capsul/view/create_capsul_view.dart';
+import 'package:capp_box/feature/create_capsul/widgets/continue_button.dart';
 import 'package:capp_box/feature/package/widgets/custom_navigation_bar.dart';
 import 'package:capp_box/product/constants/color_cons.dart';
 import 'package:capp_box/product/widgets/background_gradient.dart';
@@ -129,26 +130,24 @@ class _HomeView2State extends State<HomeView2> {
                             ),
                           );
                         },
-                        child: Container(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 40, vertical: 10),
-                          decoration: BoxDecoration(
-                            gradient: const LinearGradient(
-                              colors: [Color(0xFFB224EF), Color(0xFF7579FF)],
-                              begin: Alignment.centerRight,
-                              end: Alignment.centerLeft,
-                            ),
-                            borderRadius: BorderRadius.circular(100),
-                          ),
-                          child: const Text(
-                            'İlk Kapsülü Oluştur!',
-                            style: TextStyle(
-                              color: Color(0xFFE5E5E5),
-                              fontSize: 14,
-                              fontFamily: 'Urbanist',
-                              fontWeight: FontWeight.w700,
-                            ),
-                          ),
+                        child: ContinueButton(
+                          text: 'İlk Kapsülü Oluştur!',
+                          displayNameController: TextEditingController(),
+                          mailController: TextEditingController(),
+                          phoneController: TextEditingController(),
+                          videoFile: null,
+                          photoFile: null,
+                          audioFile: null,
+                          type: null,
+                          secilenTip: null,
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const CreateCapsulView(),
+                              ),
+                            );
+                          },
                         ),
                       ),
                     ),

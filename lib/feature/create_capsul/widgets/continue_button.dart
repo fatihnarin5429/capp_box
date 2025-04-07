@@ -18,7 +18,7 @@ class ContinueButton extends StatelessWidget {
   final String? selectedFileName;
   final MediaType? secilenTip;
   final VoidCallback onPressed;
-
+  final String? text;
   const ContinueButton({
     Key? key,
     required this.displayNameController,
@@ -31,6 +31,7 @@ class ContinueButton extends StatelessWidget {
     this.selectedFileName,
     required this.secilenTip,
     required this.onPressed,
+    this.text,
   }) : super(key: key);
 
   @override
@@ -38,7 +39,7 @@ class ContinueButton extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(bottom: 24),
       child: SizedBox(
-        width: double.infinity,
+        width: 350,
         height: 60,
         child: ElevatedButton(
           onPressed: () {
@@ -74,11 +75,11 @@ class ContinueButton extends StatelessWidget {
             ),
             child: Container(
               alignment: Alignment.center,
-              child: const Text(
-                'Devam Et',
-                style: TextStyle(
+              child: Text(
+                text ?? 'Devam Et',
+                style: const TextStyle(
                   color: Color(0xFFE5E5E5),
-                  fontSize: 14,
+                  fontSize: 16,
                   fontFamily: 'Urbanist',
                   fontWeight: FontWeight.w700,
                 ),

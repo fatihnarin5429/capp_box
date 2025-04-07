@@ -14,8 +14,9 @@ mixin Onboard2Mixin<T extends StatefulWidget> on State<T> {
   Widget buildAuthButtons() {
     return Column(
       mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        buildGradientButton(
+        buildOutlinedButton(
           onPressed: () {
             setState(() {
               selectedButtonIndex = 0;
@@ -205,25 +206,30 @@ mixin Onboard2Mixin<T extends StatefulWidget> on State<T> {
       child: MaterialButton(
         onPressed: onPressed,
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 32),
+          padding: const EdgeInsets.symmetric(horizontal: 10),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
-            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               SizedBox(
                 width: 24,
+                height: 24,
                 child: Center(child: icon),
               ),
               const SizedBox(width: 8),
-              Text(
-                label,
-                style: TextStyle(
-                  color: isSelected
-                      ? const Color(0xFFE5E5E5)
-                      : const Color(0xFF84858E),
-                  fontSize: 14,
-                  fontFamily: 'Urbanist',
-                  fontWeight: FontWeight.w700,
+              SizedBox(
+                width: 150,
+                child: Text(
+                  label,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: isSelected
+                        ? const Color(0xFFE5E5E5)
+                        : const Color(0xFF84858E),
+                    fontSize: 14,
+                    fontFamily: 'Urbanist',
+                    fontWeight: FontWeight.w700,
+                  ),
                 ),
               ),
             ],

@@ -27,47 +27,55 @@ class _Onboard2ViewState extends State<Onboard2View> with Onboard2Mixin {
           // Kaydırılabilir ekran
           physics:
               const BouncingScrollPhysics(), // iOS ve Android için güzel kaydırma efekti
-          child: Container(
-            width: double.infinity,
-            constraints: BoxConstraints(
-              minHeight: MediaQuery.of(context).size.height, // Taşmayı önler
-            ),
-            padding: const EdgeInsets.symmetric(
-                horizontal: 20), // Kenarlardan padding ekledik
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                const SizedBox(height: 40),
-                Image.asset(
-                  'assets/images/logocappbox.png',
-                  width: 200,
-                  height: 200,
-                ),
-                const SizedBox(height: 20), // Görsel ile yazı arasında boşluk
-                isLoading
-                    ? const CircularProgressIndicator()
-                    : SizedBox(
-                        width: 322,
-                        child: Text.rich(
-                          TextSpan(
-                            children: [
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 60),
+            child: Container(
+              width: double.infinity,
+              constraints: BoxConstraints(
+                minHeight: MediaQuery.of(context).size.height, // Taşmayı önler
+              ),
+              padding: const EdgeInsets.symmetric(
+                  horizontal: 20), // Kenarlardan padding ekledik
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 40),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Image.asset(
+                      'assets/images/logocappbox.png',
+                      width: 200,
+                      height: 200,
+                    ),
+
+                    isLoading
+                        ? const CircularProgressIndicator()
+                        : SizedBox(
+                            width: 322,
+                            child: Text.rich(
                               TextSpan(
-                                text: 'Anılarınızı geleceğe\n',
-                                style: _textStyle(20),
+                                children: [
+                                  TextSpan(
+                                    text: 'Anılarınızı geleceğe\n',
+                                    style: _textStyle(20),
+                                  ),
+                                  TextSpan(
+                                    text: 'taşıyın',
+                                    style: _textStyle(32),
+                                  ),
+                                ],
                               ),
-                              TextSpan(
-                                text: 'taşıyın',
-                                style: _textStyle(32),
-                              ),
-                            ],
+                              textAlign: TextAlign.center,
+                            ),
                           ),
-                          textAlign: TextAlign.center,
-                        ),
-                      ),
-                const SizedBox(height: 40), // Butonlar için boşluk
-                buildAuthButtons(),
-                const SizedBox(height: 40), // En altta biraz boşluk bırak
-              ],
+                    // Butonlar için boşluk
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 40),
+                      child: buildAuthButtons(),
+                    ),
+                    // En altta biraz boşluk bırak
+                  ],
+                ),
+              ),
             ),
           ),
         ),
