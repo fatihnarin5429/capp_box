@@ -1,0 +1,141 @@
+import 'package:capp_box/feature/login/view/login_form_view.dart';
+import 'package:capp_box/feature/login/view/register_form_view.dart';
+
+import 'package:capp_box/product/widgets/background_gradient.dart';
+import 'package:flutter/material.dart';
+
+class LoginView extends StatefulWidget {
+  const LoginView({super.key});
+
+  @override
+  State<LoginView> createState() => _LoginViewState();
+}
+
+class _LoginViewState extends State<LoginView> with TickerProviderStateMixin {
+  late TabController _tabController;
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _passwordConfirmController =
+      TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    _tabController = TabController(length: 2, vsync: this);
+  }
+
+  @override
+  void dispose() {
+    _tabController.dispose();
+    _emailController.dispose();
+    _nameController.dispose();
+    _passwordController.dispose();
+    _passwordConfirmController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: GestureDetector(
+        onTap: () {
+          FocusScope.of(context).unfocus();
+        },
+        child: Stack(
+          children: [
+            const BackgroundGradient(),
+            SafeArea(
+              child: Column(
+                children: [
+                  const SizedBox(height: 44),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    child: _buildTabBar(),
+                  ),
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      child: _buildTabBarView(),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildTabBar() {
+    return TabBar(
+      unselectedLabelColor: const Color(0xFF929395),
+      labelColor: Colors.white,
+      indicatorColor: const Color(0xFF832893),
+      indicatorWeight: 0,
+      dividerColor: Colors.transparent,
+      indicator: BoxDecoration(
+        color: const Color(0xFF832893),
+        borderRadius: BorderRadius.circular(20),
+      ),
+      indicatorSize: TabBarIndicatorSize.tab,
+      labelPadding: const EdgeInsets.symmetric(horizontal: 20),
+      controller: _tabController,
+      tabs: _buildTabs(),
+    );
+  }
+
+  List<Widget> _buildTabs() {
+    return const [
+      Tab(
+        child: Text(
+          'Kayıt Ol',
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            fontSize: 14,
+            fontFamily: 'Urbanist',
+            fontWeight: FontWeight.w700,
+          ),
+        ),
+      ),
+      Tab(
+        child: Text(
+          'Giriş Yap',
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            fontSize: 14,
+            fontFamily: 'Urbanist',
+            fontWeight: FontWeight.w700,
+          ),
+        ),
+      ),
+    ];
+  }
+
+  Widget _buildTabBarView() {
+    return TabBarView(
+      controller: _tabController,
+      physics: const NeverScrollableScrollPhysics(),
+      children: [
+        SingleChildScrollView(
+          child: RegisterFormView(
+            emailController: _emailController,
+            passwordController: _passwordController,
+            passwordConfirmController: _passwordConfirmController,
+            nameController: _nameController,
+            onRegisterSuccess: () {
+              Navigator.pushReplacementNamed(context, '/package');
+            },
+          ),
+        ),
+        SingleChildScrollView(
+          child: LoginFormView(
+            emailController: _emailController,
+            passwordController: _passwordController,
+          ),
+        ),
+      ],
+    );
+  }
+}
