@@ -51,5 +51,13 @@
 	<string>Profil fotoğrafı çekebilmeniz için kamera erişim izni gerekiyor.</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>Profil fotoğrafı çekerken ses kaydı için mikrofon erişim izni gerekiyor.</string>
+	<key>NSAppleMusicUsageDescription</key>
+	<string>Ses dosyası seçmek için izin gerekiyor</string>
+	<key>UIFileSharingEnabled</key>
+	<true/>
+	<key>LSSupportsOpeningDocumentsInPlace</key>
+	<true/>
+	<key>NSDocumentsUsageDescription</key>
+	<string>Ses dosyalarına erişim için izin gerekiyor</string>
 </dict>
 </plist>
