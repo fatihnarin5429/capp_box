@@ -1,5 +1,6 @@
 import 'package:capp_box/feature/login/view/login_form_view.dart';
 import 'package:capp_box/feature/login/view/register_form_view.dart';
+import 'package:capp_box/feature/create_capsul/widgets/back_button_widget.dart';
 
 import 'package:capp_box/product/widgets/background_gradient.dart';
 import 'package:flutter/material.dart';
@@ -47,11 +48,25 @@ class _LoginViewState extends State<LoginView> with TickerProviderStateMixin {
             const BackgroundGradient(),
             SafeArea(
               child: Column(
+                mainAxisSize: MainAxisSize.min,
                 children: [
-                  const SizedBox(height: 44),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 20),
-                    child: _buildTabBar(),
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(
+                            top: 20,
+                            bottom: 20,
+                            right: 0,
+                            left: 0,
+                          ),
+                          child: const BackButtonWidget(),
+                        ),
+                        const SizedBox(height: 20),
+                        _buildTabBar(),
+                      ],
+                    ),
                   ),
                   Expanded(
                     child: Padding(

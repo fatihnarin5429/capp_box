@@ -1,7 +1,7 @@
-import 'package:capp_box/feature/home/view/home_view.dart';
 import 'package:capp_box/feature/home/view/home_view_2.dart';
 import 'package:capp_box/feature/login/bloc/login_bloc.dart';
 import 'package:capp_box/feature/package/widgets/custom_text_field.dart';
+import 'package:capp_box/feature/create_capsul/widgets/back_button_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -25,6 +25,7 @@ class RegisterFormView extends StatelessWidget {
     return BlocBuilder<LoginBloc, LoginState>(
       builder: (context, state) {
         return SingleChildScrollView(
+          physics: const BouncingScrollPhysics(),
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 20),
             child: Column(
@@ -134,23 +135,26 @@ class RegisterFormView extends StatelessWidget {
       },
       child: Container(
         width: double.infinity,
-        height: MediaQuery.of(context).size.height * 0.08,
+        height: 56,
+        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
         decoration: BoxDecoration(
           gradient: const LinearGradient(
-            begin: Alignment(1.00, 0.00),
-            end: Alignment(-1, 0),
+            begin: Alignment.centerRight,
+            end: Alignment.centerLeft,
             colors: [Color(0xFFB224EF), Color(0xFF7579FF)],
           ),
           borderRadius: BorderRadius.circular(100),
         ),
-        alignment: Alignment.center,
-        child: const Text(
-          'Kayıt Ol',
-          style: TextStyle(
-            color: Color(0xFFE5E5E5),
-            fontSize: 14,
-            fontFamily: 'Urbanist',
-            fontWeight: FontWeight.w700,
+        child: const Center(
+          child: Text(
+            'Kayıt Ol',
+            style: TextStyle(
+              color: Color(0xFFE5E5E5),
+              fontSize: 14,
+              fontFamily: 'Urbanist',
+              fontWeight: FontWeight.w700,
+              height: 1.70,
+            ),
           ),
         ),
       ),
