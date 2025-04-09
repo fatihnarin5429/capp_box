@@ -29,6 +29,7 @@ class FormFields extends StatelessWidget {
         ),
         const SizedBox(height: 12),
         CustomTextField(
+          textInputType: TextInputType.name,
           controller: displayNameController,
           hintText: 'Ad Soyad',
           onChanged: (value) {},
@@ -45,6 +46,7 @@ class FormFields extends StatelessWidget {
         ),
         const SizedBox(height: 12),
         CustomTextField(
+          textInputType: TextInputType.emailAddress,
           controller: mailController,
           hintText: 'Mail Adresi',
           onChanged: (value) {},
@@ -61,6 +63,7 @@ class FormFields extends StatelessWidget {
         ),
         const SizedBox(height: 12),
         CustomTextField(
+          textInputType: TextInputType.phone,
           controller: phoneController,
           hintText: 'Telefon Numarası',
           onChanged: (value) {},

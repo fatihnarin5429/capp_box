@@ -37,9 +37,9 @@ class RegisterFormView extends StatelessWidget {
                   child: _buildLabel('Ad - Soyad'),
                 ),
                 CustomTextField(
+                  textInputType: TextInputType.name,
                   controller: nameController,
                   hintText: 'Adınız-Soyadınız',
-                  keyboardType: TextInputType.name,
                   style: const TextStyle(color: Colors.white),
                 ),
                 Padding(
@@ -47,6 +47,7 @@ class RegisterFormView extends StatelessWidget {
                   child: _buildLabel('E-posta'),
                 ),
                 CustomTextField(
+                  textInputType: TextInputType.emailAddress,
                   controller: emailController,
                   hintText: 'E-posta',
                   keyboardType: TextInputType.emailAddress,
@@ -57,6 +58,7 @@ class RegisterFormView extends StatelessWidget {
                   child: _buildLabel('Şifre Oluştur'),
                 ),
                 CustomTextField(
+                  textInputType: TextInputType.visiblePassword,
                   controller: passwordController,
                   hintText: 'Şifre',
                   obscureText: true,
@@ -67,6 +69,7 @@ class RegisterFormView extends StatelessWidget {
                   child: _buildLabel('Şifre Tekrar'),
                 ),
                 CustomTextField(
+                  textInputType: TextInputType.visiblePassword,
                   controller: passwordConfirmController,
                   hintText: 'Şifre Tekrar',
                   obscureText: true,
@@ -116,6 +119,7 @@ class RegisterFormView extends StatelessWidget {
         }
         context.read<LoginBloc>().add(
               RegisterAction(
+                phone: context.read<LoginBloc>().state.phone,
                 user: context.read<LoginBloc>().state.user!.copyWith(
                       password: passwordController.text,
                       email: emailController.text,

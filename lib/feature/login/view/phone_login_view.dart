@@ -1,5 +1,14 @@
+import 'package:capp_box/feature/create_capsul/widgets/back_button_widget.dart';
+import 'package:capp_box/feature/create_capsul/widgets/continue_button.dart';
+import 'package:capp_box/feature/home/widgets/capsule_title.dart';
+import 'package:capp_box/feature/login/bloc/login_bloc.dart';
+import 'package:capp_box/feature/login/model/user_model.dart';
 import 'package:capp_box/feature/login/view/phone_login_otp_view.dart';
+import 'package:capp_box/product/widgets/background_gradient.dart';
+import 'package:capp_box/product/utility/enums/mediaType_enum.dart';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:capp_box/feature/package/widgets/custom_text_field.dart';
 
 class PhoneLoginView extends StatefulWidget {
@@ -10,167 +19,190 @@ class PhoneLoginView extends StatefulWidget {
 }
 
 class _PhoneLoginViewState extends State<PhoneLoginView> {
-  final TextEditingController _phoneController = TextEditingController();
+  TextEditingController _phoneController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    _phoneController =
+        TextEditingController(text: context.read<LoginBloc>().state.phone);
+  }
+
+  @override
+  void didUpdateWidget(PhoneLoginView oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    _phoneController.text = context.read<LoginBloc>().state.phone;
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: GestureDetector(
-        onTap: () {
-          FocusScope.of(context).unfocus();
-        },
-        child: Container(
-          decoration: const BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage('assets/images/background.jpg'),
-              fit: BoxFit.cover,
-            ),
-          ),
-          child: SafeArea(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const SizedBox(height: 12),
+    return BlocBuilder<LoginBloc, LoginState>(
+      builder: (context, state) {
+        _phoneController.text = state.phone ?? "5XX XXX XX XX";
 
-                  // Geri butonu
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      GestureDetector(
-                        onTap: () => Navigator.pop(context),
-                        child: Container(
-                          width: 40,
-                          height: 40,
-                          decoration: const BoxDecoration(
-                            image: DecorationImage(
-                              image: AssetImage('assets/icons/ellipse.png'),
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                          child: const Center(
-                            child: Padding(
-                              padding: EdgeInsets.only(left: 8),
-                              child: Icon(
-                                Icons.arrow_back_ios,
-                                color: Colors.white,
-                                size: 18,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                      const Expanded(
-                        child: Text(
-                          'Kayıt Ol',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            color: Color(0xFFF1F1F1),
-                            fontSize: 16,
-                            fontFamily: 'Urbanist',
-                            fontWeight: FontWeight.w600,
-                            height: 1.40,
-                            letterSpacing: -0.50,
-                          ),
-                        ),
-                      ),
-                      IconButton(
-                        onPressed: () {},
-                        icon: const Icon(
-                          Icons.info_outlined,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ],
-                  ),
-
-                  const SizedBox(height: 24),
-                  // Başlık
-                  const Text(
-                    'Hoşgeldiniz',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 32,
-                      fontFamily: 'Urbanist',
-                      fontWeight: FontWeight.w700,
-                    ),
-                  ),
-                  const SizedBox(height: 8),
-                  // Alt başlık
-                  const Text(
-                    'Devam etmek için telefon numaranızı girin.',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 16,
-                      fontFamily: 'Urbanist',
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                  const SizedBox(height: 32),
-                  // Telefon numarası girişi
-                  CustomTextField(
-                    controller: _phoneController,
-                    hintText: 'Telefon Numaranız',
-                    onChanged: (value) {
-                      // Telefon numarası değiştiğinde yapılacak işlemler
-                    },
-                    keyboardType: TextInputType.phone,
-                  ),
-
-                  const Spacer(),
-                  // Kayıt ol butonu
-                  Center(
-                    child: Container(
-                      height: 56,
-                      decoration: BoxDecoration(
-                        gradient: const LinearGradient(
-                          begin: Alignment(1.00, 0.00),
-                          end: Alignment(-1, 0),
-                          colors: [Color(0xFFB224EF), Color(0xFF7579FF)],
-                        ),
-                        borderRadius: BorderRadius.circular(100),
-                      ),
-                      child: Center(
-                        child: ElevatedButton(
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => PhoneLoginOtpView(
-                                  phoneNumber: _phoneController.text,
+        return Scaffold(
+          body: GestureDetector(
+            onTap: () {
+              FocusScope.of(context).unfocus();
+            },
+            child: Stack(
+              children: [
+                const BackgroundGradient(),
+                SafeArea(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 16, vertical: 32),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          children: [
+                            const BackButtonWidget(),
+                            const Expanded(
+                              child: Center(
+                                child: CapsuleTitle(
+                                  title: 'Kayıt Ol',
                                 ),
                               ),
-                            );
-                            // Telefon doğrulama işlemleri buraya gelecek
-                          },
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.transparent,
-                            shadowColor: Colors.transparent,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(100),
                             ),
-                          ),
-                          child: const Text(
-                            'Devam Et',
+                            IconButton(
+                              onPressed: () {},
+                              icon: const Icon(
+                                Icons.info_outlined,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ],
+                        ),
+                        const Padding(
+                          padding: EdgeInsets.only(top: 24),
+                          child: Text(
+                            'Hoşgeldiniz',
                             style: TextStyle(
-                              color: Color(0xFFE5E5E5),
-                              fontSize: 14,
+                              color: Colors.white,
+                              fontSize: 32,
                               fontFamily: 'Urbanist',
                               fontWeight: FontWeight.w700,
                             ),
                           ),
                         ),
-                      ),
+                        const Padding(
+                          padding: EdgeInsets.only(top: 16),
+                          child: Text(
+                            'Devam etmek için telefon numaranızı girin.',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 16,
+                              fontFamily: 'Urbanist',
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 24),
+                          child: CustomTextField(
+                            keyboardType: TextInputType.phone,
+                            textInputType: TextInputType.phone,
+                            textInputAction: TextInputAction.next,
+                            autofocus: state.phone.isEmpty,
+                            controller: _phoneController,
+                            hintText: "0XXX XXX XX XX",
+                            onChanged: (value) {
+                              if (value.isEmpty || value[0] == '0') {
+                                context
+                                    .read<LoginBloc>()
+                                    .add(LoginChangePhone(phone: value));
+                                return;
+                              }
+
+                              String formattedPhone = '0$value';
+                              if (formattedPhone.length > 10) {
+                                formattedPhone =
+                                    formattedPhone.substring(0, 10);
+                              }
+                              if (formattedPhone.length < 10) {
+                                formattedPhone =
+                                    formattedPhone.padRight(10, '0');
+                              }
+
+                              _phoneController.value = TextEditingValue(
+                                text: formattedPhone,
+                                selection: TextSelection.collapsed(
+                                    offset: formattedPhone.length),
+                              );
+
+                              context
+                                  .read<LoginBloc>()
+                                  .add(LoginChangePhone(phone: formattedPhone));
+                            },
+                          ),
+                        ),
+                        const Spacer(),
+                        BlocBuilder<LoginBloc, LoginState>(
+                          builder: (context, state) {
+                            return Padding(
+                              padding: const EdgeInsets.only(bottom: 24),
+                              child: SizedBox(
+                                width: 350,
+                                height: 60,
+                                child: ElevatedButton(
+                                  onPressed: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => PhoneLoginOtpView(
+                                            phoneNumber: state.phone),
+                                      ),
+                                    );
+                                  },
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: Colors.transparent,
+                                    shadowColor: Colors.transparent,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(100),
+                                    ),
+                                    padding: EdgeInsets.zero,
+                                  ),
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      gradient: const LinearGradient(
+                                        begin: Alignment(1.00, 0.00),
+                                        end: Alignment(-1, 0),
+                                        colors: [
+                                          Color(0xFFB224EF),
+                                          Color(0xFF7579FF)
+                                        ],
+                                      ),
+                                      borderRadius: BorderRadius.circular(100),
+                                    ),
+                                    child: Container(
+                                      alignment: Alignment.center,
+                                      child: const Text(
+                                        'Devam Et',
+                                        style: TextStyle(
+                                          color: Color(0xFFE5E5E5),
+                                          fontSize: 16,
+                                          fontFamily: 'Urbanist',
+                                          fontWeight: FontWeight.w700,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            );
+                          },
+                        ),
+                      ],
                     ),
                   ),
-                  const SizedBox(height: 32),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
-        ),
-      ),
+        );
+      },
     );
   }
 

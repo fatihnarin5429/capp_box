@@ -44,6 +44,7 @@ class _EpostaViewState extends State<EpostaView> {
                   ),
                 ),
                 CustomTextField(
+                  textInputType: TextInputType.emailAddress,
                   controller: _emailController,
                   hintText: "E-posta adresiniz",
                   onChanged: (value) {},

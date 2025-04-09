@@ -49,6 +49,7 @@ class _NameViewState extends State<NameView> {
                         ),
                       ),
                       CustomTextField(
+                        textInputType: TextInputType.name,
                         controller: _nameController,
                         hintText: "Ad-Soyad",
                         onChanged: (value) {},

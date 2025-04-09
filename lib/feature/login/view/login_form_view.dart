@@ -58,6 +58,7 @@ class _LoginFormViewState extends State<LoginFormView> with LoginMixin {
               labelText: 'E-posta',
               hintText: 'E-postanızı giriniz',
               autofocus: true,
+              textInputType: TextInputType.emailAddress,
               onChanged: (value) {},
             ),
             const SizedBox(height: 18),
@@ -78,6 +79,7 @@ class _LoginFormViewState extends State<LoginFormView> with LoginMixin {
               hintText: 'Şifrenizi giriniz',
               isPassword: true,
               isError: isPasswordError,
+              textInputType: TextInputType.visiblePassword,
               onPasswordVisibilityChanged: (isVisible) {
                 setState(() {});
               },

@@ -40,9 +40,9 @@ class CreateCapsul3View extends StatefulWidget {
 
 class _CreateCapsul3ViewState extends State<CreateCapsul3View> {
   bool hasText = false;
-  TextEditingController _displayNameController = TextEditingController();
-  TextEditingController _mailController = TextEditingController();
-  TextEditingController _phoneController = TextEditingController();
+  final TextEditingController _displayNameController = TextEditingController();
+  final TextEditingController _mailController = TextEditingController();
+  final TextEditingController _phoneController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -60,11 +60,11 @@ class _CreateCapsul3ViewState extends State<CreateCapsul3View> {
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Row(
+                    const Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const BackButtonWidget(),
-                        const Expanded(
+                        BackButtonWidget(),
+                        Expanded(
                           child: PageTitle(title: 'Kapsül Oluştur'),
                         ),
                       ],
@@ -105,6 +105,7 @@ class _CreateCapsul3ViewState extends State<CreateCapsul3View> {
           controller: _displayNameController,
           hintText: 'Ad Soyad',
           onChanged: (value) {},
+          textInputType: TextInputType.name,
         ),
         const SizedBox(height: 24),
         const Text(
@@ -121,6 +122,7 @@ class _CreateCapsul3ViewState extends State<CreateCapsul3View> {
           controller: _mailController,
           hintText: 'Mail Adresi',
           onChanged: (value) {},
+          textInputType: TextInputType.emailAddress,
         ),
         const SizedBox(height: 24),
         const Text(
@@ -137,6 +139,7 @@ class _CreateCapsul3ViewState extends State<CreateCapsul3View> {
           controller: _phoneController,
           hintText: 'Telefon Numarası',
           onChanged: (value) {},
+          textInputType: TextInputType.phone,
         ),
       ],
     );

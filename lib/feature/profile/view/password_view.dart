@@ -133,6 +133,7 @@ class _PasswordViewState extends State<PasswordView> {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8),
       child: CustomTextField(
+        textInputType: TextInputType.visiblePassword,
         controller: controller,
         hintText: hintText,
         obscureText: true,

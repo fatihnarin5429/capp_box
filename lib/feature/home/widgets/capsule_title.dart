@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
 
 class CapsuleTitle extends StatelessWidget {
-  const CapsuleTitle({super.key});
+  const CapsuleTitle({super.key, required this.title});
+
+  final String title;
 
   @override
   Widget build(BuildContext context) {
-    return const Text(
-      'Kapsüller',
-      style: TextStyle(
+    return Text(
+      title,
+      style: const TextStyle(
         color: Colors.white,
-        fontSize: 24,
+        fontSize: 20,
         fontFamily: 'Urbanist',
-        fontWeight: FontWeight.bold,
+        fontWeight: FontWeight.w700,
       ),
     );
   }

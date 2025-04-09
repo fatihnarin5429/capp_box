@@ -77,6 +77,7 @@ class _CapsuleReviewState extends State<CapsuleReview> {
                               currentStep: widget.currentStep),
                         ),
                         CapsuleTitle(
+                          title: state.createCapsuleModel.title ?? '',
                           state: state,
                         ),
                         MediaPreview(

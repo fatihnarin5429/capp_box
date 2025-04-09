@@ -11,6 +11,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   LoginBloc() : super(const LoginState()) {
     on<LoginAction>(_onLoginAction);
     on<LogoutAction>(_onLogoutAction);
+    on<LoginChangePhone>(_onLoginChangePhone);
   }
 
   Future<void> _onLoginAction(
@@ -35,5 +36,12 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       isAuthenticated: false,
       user: null,
     ));
+  }
+
+  void _onLoginChangePhone(
+    LoginChangePhone event,
+    Emitter<LoginState> emit,
+  ) {
+    emit(state.copyWith(phone: event.phone));
   }
 }

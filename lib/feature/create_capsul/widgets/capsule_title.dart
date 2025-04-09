@@ -9,6 +9,7 @@ class CapsuleTitle extends StatelessWidget {
   const CapsuleTitle({
     Key? key,
     required this.state,
+    required String title,
   }) : super(key: key);
 
   @override

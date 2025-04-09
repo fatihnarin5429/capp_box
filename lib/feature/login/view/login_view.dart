@@ -54,14 +54,14 @@ class _LoginViewState extends State<LoginView> with TickerProviderStateMixin {
                     padding: const EdgeInsets.symmetric(horizontal: 20),
                     child: Column(
                       children: [
-                        Padding(
-                          padding: const EdgeInsets.only(
+                        const Padding(
+                          padding: EdgeInsets.only(
                             top: 20,
                             bottom: 20,
                             right: 0,
                             left: 0,
                           ),
-                          child: const BackButtonWidget(),
+                          child: BackButtonWidget(),
                         ),
                         const SizedBox(height: 20),
                         _buildTabBar(),

@@ -62,6 +62,7 @@ class _PhoneViewState extends State<PhoneView> {
                         ),
                       ),
                       CustomTextField(
+                        textInputType: TextInputType.phone,
                         controller: _phoneController,
                         hintText: "5XX XXX XX XX",
                         keyboardType: TextInputType.phone,

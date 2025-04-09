@@ -410,6 +410,7 @@ class _CreateCapsul2ViewState extends State<CreateCapsul2View> {
                           onChanged: (value) {},
                           hintText: 'Başlık',
                           controller: _titleController,
+                          textInputType: TextInputType.name,
                         ),
                         const SizedBox(height: 24),
                         const Align(
@@ -427,6 +428,7 @@ class _CreateCapsul2ViewState extends State<CreateCapsul2View> {
                         ),
                         const SizedBox(height: 12),
                         CustomTextField(
+                          textInputType: TextInputType.text,
                           controller: _messageController,
                           hintText: widget.hintText ?? 'Mesajınızı yazın...',
                           maxLines: null,

@@ -1,3 +1,5 @@
+import 'package:capp_box/feature/create_capsul/widgets/back_button_widget.dart';
+import 'package:capp_box/feature/home/widgets/capsule_title.dart';
 import 'package:capp_box/feature/package/widgets/success_dialog.dart';
 import 'package:capp_box/product/widgets/background_gradient.dart';
 import 'package:flutter/material.dart';
@@ -74,100 +76,80 @@ class _PhoneLoginOtpViewState extends State<PhoneLoginOtpView> {
           const BackgroundGradient(),
           SafeArea(
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24),
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 32),
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  const Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      GestureDetector(
-                        onTap: () => Navigator.pop(context),
-                        child: Container(
-                          width: 40,
-                          height: 40,
-                          decoration: const BoxDecoration(
-                            image: DecorationImage(
-                              image: AssetImage('assets/icons/ellipse.png'),
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                          child: const Center(
-                            child: Padding(
-                              padding: EdgeInsets.only(left: 8),
-                              child: Icon(
-                                Icons.arrow_back_ios,
-                                color: Colors.white,
-                                size: 18,
-                              ),
-                            ),
+                      BackButtonWidget(),
+                      Expanded(
+                        child: Center(
+                          child: CapsuleTitle(
+                            title: 'Kayıt OL',
                           ),
                         ),
                       ),
-                      const Expanded(
-                        child: Text(
-                          'Giriş',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 16,
-                            fontFamily: 'Urbanist',
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                      ),
-                      const SizedBox(width: 40),
+                      SizedBox(width: 40), // To balance the back button
                     ],
                   ),
-                  const SizedBox(height: 32),
-                  Text(
-                    'Telefon numaranıza OTP kodu gönderdik\n${widget.phoneNumber}\nLütfen kodu giriniz.',
-                    textAlign: TextAlign.center,
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 16,
-                      fontFamily: 'Urbanist',
-                      fontWeight: FontWeight.w500,
+                  Padding(
+                    padding: const EdgeInsets.only(top: 24),
+                    child: Text(
+                      '${widget.phoneNumber} nolu telefon numaranıza OTP kodu gönderdik \nLütfen kodu giriniz.',
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 18,
+                        fontFamily: 'Urbanist',
+                        fontWeight: FontWeight.w500,
+                      ),
                     ),
                   ),
-                  const SizedBox(height: 32),
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width,
-                    child: Pinput(
-                      focusedPinTheme: PinTheme(
-                        textStyle: const TextStyle(
-                          fontSize: 24,
-                          fontFamily: 'Inter',
-                          fontWeight: FontWeight.w600,
-                          height: 1.33,
+                  Padding(
+                    padding: const EdgeInsets.only(top: 24),
+                    child: SizedBox(
+                      width: MediaQuery.of(context).size.width,
+                      child: Pinput(
+                        autofocus: true,
+                        focusedPinTheme: PinTheme(
+                          textStyle: const TextStyle(
+                            fontSize: 24,
+                            fontFamily: 'Inter',
+                            fontWeight: FontWeight.w600,
+                          ),
+                          height: 75,
+                          decoration: BoxDecoration(
+                              border: Border.all(
+                                width: 2,
+                                color: Colors.white,
+                              ),
+                              borderRadius: BorderRadius.circular(12)),
                         ),
-                        height: 75,
-                        decoration: BoxDecoration(
-                            border: Border.all(
-                              width: 2,
-                              color: const Color(0xFF737A7F),
-                            ),
-                            borderRadius: BorderRadius.circular(12)),
-                      ),
-                      defaultPinTheme: PinTheme(
-                        textStyle: const TextStyle(
-                          color: Color(0xFF737A7F),
-                          fontSize: 24,
-                          fontFamily: 'Inter',
-                          fontWeight: FontWeight.w600,
-                          height: 1.33,
+                        defaultPinTheme: PinTheme(
+                          textStyle: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 24,
+                            fontFamily: 'Inter',
+                            fontWeight: FontWeight.w600,
+                          ),
+                          height: 75,
+                          decoration: BoxDecoration(
+                              color: const Color(0xFF282943),
+                              borderRadius: BorderRadius.circular(12)),
                         ),
-                        height: 75,
-                        decoration: BoxDecoration(
-                            color: const Color(0xFF282943),
-                            borderRadius: BorderRadius.circular(12)),
+                        errorText: 'Hatalı kod girdiniz, tekrar deneyiniz.',
+                        length: 4,
+                        onCompleted: (pin) => verifyOtp(),
                       ),
-                      errorText: 'Hatalı kod girdiniz, tekrar deneyiniz.',
-                      length: 4,
-                      onCompleted: (pin) => verifyOtp(),
                     ),
                   ),
-                  const SizedBox(height: 32),
-                  _buildResendButton(),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 24, right: 0),
+                    child: _buildResendButton(),
+                  ),
                 ],
               ),
             ),
@@ -185,10 +167,12 @@ class _PhoneLoginOtpViewState extends State<PhoneLoginOtpView> {
             ? 'Kodu Tekrar Gönder'
             : 'Kodu $_remainingTime saniye sonra tekrar gönderebilirsiniz',
         style: TextStyle(
-          color: _remainingTime <= 0 ? Colors.blue : Colors.white,
-          fontSize: 14,
+          color: _remainingTime <= 0 ? Colors.red : Colors.white,
+          fontSize: 12,
+          decoration: TextDecoration.underline,
+          decorationColor: _remainingTime <= 0 ? Colors.red : Colors.white,
           fontFamily: 'Urbanist',
-          fontWeight: FontWeight.w500,
+          fontWeight: FontWeight.w400,
         ),
       ),
     );

@@ -39,6 +39,7 @@ class CustomTextField extends StatefulWidget {
     this.maxLines = 1,
     this.height,
     this.textInputAction = TextInputAction.done,
+    required TextInputType textInputType,
   });
 
   get width => null;

@@ -26,6 +26,7 @@ class _ChangePasswordViewState extends State<ChangePasswordView> {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 24),
       child: CustomTextField(
+        textInputType: TextInputType.emailAddress,
         controller: _emailController,
         hintText: 'E-posta',
         isPassword: false,
