@@ -61,7 +61,10 @@ class _LoginViewState extends State<LoginView> with TickerProviderStateMixin {
                             right: 0,
                             left: 0,
                           ),
-                          child: BackButtonWidget(),
+                          child: Align(
+                            alignment: Alignment.centerLeft,
+                            child: BackButtonWidget(),
+                          ),
                         ),
                         const SizedBox(height: 20),
                         _buildTabBar(),

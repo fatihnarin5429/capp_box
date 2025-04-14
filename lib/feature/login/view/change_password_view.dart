@@ -23,22 +23,18 @@ class _ChangePasswordViewState extends State<ChangePasswordView> {
   }
 
   Widget _buildTextField() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 24),
-      child: CustomTextField(
-        textInputType: TextInputType.emailAddress,
-        controller: _emailController,
-        hintText: 'E-posta',
-        isPassword: false,
-        onChanged: (String value) {},
-      ),
+    return CustomTextField(
+      textInputType: TextInputType.emailAddress,
+      controller: _emailController,
+      hintText: 'E-posta',
+      isPassword: false,
+      onChanged: (String value) {},
     );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ColorConst.backgroundDark1,
       body: Stack(
         children: [
           const BackgroundGradient(),
@@ -91,8 +87,10 @@ class _ChangePasswordViewState extends State<ChangePasswordView> {
                             height: 1.40,
                           ),
                         ),
-                        const SizedBox(height: 8),
-                        _buildTextField(),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 12),
+                          child: _buildTextField(),
+                        ),
                         const Expanded(child: SizedBox()),
                         Center(
                           child: Container(
