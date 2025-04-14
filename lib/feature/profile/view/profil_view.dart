@@ -136,7 +136,7 @@ class _ProfilViewState extends State<ProfilView> {
                         'Profil',
                         style: TextStyle(
                           color: Colors.white,
-                          fontSize: 16,
+                          fontSize: 20,
                           fontFamily: 'Urbanist',
                           fontWeight: FontWeight.w600,
                         ),

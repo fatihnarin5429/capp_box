@@ -13,7 +13,7 @@ class CapsuleTitle extends StatelessWidget {
         color: Colors.white,
         fontSize: 20,
         fontFamily: 'Urbanist',
-        fontWeight: FontWeight.w700,
+        fontWeight: FontWeight.w600,
       ),
     );
   }

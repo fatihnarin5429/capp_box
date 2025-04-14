@@ -76,15 +76,10 @@ class _PhoneLoginOtpViewState extends State<PhoneLoginOtpView> {
           const BackgroundGradient(),
           SafeArea(
             child: Padding(
-
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 32),
-
               child: Column(
-
                 mainAxisAlignment: MainAxisAlignment.start,
-
                 crossAxisAlignment: CrossAxisAlignment.start,
-                
                 children: [
                   const Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -93,7 +88,7 @@ class _PhoneLoginOtpViewState extends State<PhoneLoginOtpView> {
                       Expanded(
                         child: Center(
                           child: CapsuleTitle(
-                            title: 'Kayıt OL',
+                            title: 'Kayıt Ol',
                           ),
                         ),
                       ),

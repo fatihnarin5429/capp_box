@@ -14,7 +14,7 @@ class NotificationHeader extends StatelessWidget {
             "Bildirimler",
             style: TextStyle(
               color: Colors.white,
-              fontSize: 18,
+              fontSize: 20,
               fontWeight: FontWeight.w600,
               fontFamily: 'Urbanist',
             ),
