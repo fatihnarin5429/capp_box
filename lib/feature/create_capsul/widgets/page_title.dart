@@ -18,7 +18,7 @@ class PageTitle extends StatelessWidget {
           textAlign: TextAlign.center,
           style: const TextStyle(
             color: Colors.white,
-            fontSize: 16,
+            fontSize: 18,
             fontFamily: 'Urbanist',
             fontWeight: FontWeight.w600,
           ),

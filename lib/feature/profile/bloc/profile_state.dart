@@ -11,6 +11,8 @@ final class ProfileState extends Equatable {
     this.name = '',
     this.password = '',
     this.imagePath,
+    this.isLoggedIn = false,
+    this.isDeleted = false,
   });
 
   final String displayName;
@@ -22,6 +24,8 @@ final class ProfileState extends Equatable {
   final String? name;
   final String password;
   final String? imagePath;
+  final bool isLoggedIn;
+  final bool isDeleted;
   @override
   List<Object?> get props => [
         displayName,
@@ -31,6 +35,8 @@ final class ProfileState extends Equatable {
         name,
         password,
         imagePath,
+        isLoggedIn,
+        isDeleted,
       ];
 
   ProfileState copyWith({
@@ -40,6 +46,8 @@ final class ProfileState extends Equatable {
     String? name,
     String? error,
     String? password,
+    bool? isLoggedIn,
+    bool? isDeleted,
     String? imagePath,
   }) {
     return ProfileState(
@@ -50,6 +58,8 @@ final class ProfileState extends Equatable {
       error: error ?? this.error,
       password: password ?? this.password,
       imagePath: imagePath ?? this.imagePath,
+      isLoggedIn: isLoggedIn ?? this.isLoggedIn,
+      isDeleted: isDeleted ?? this.isDeleted,
     );
   }
 }

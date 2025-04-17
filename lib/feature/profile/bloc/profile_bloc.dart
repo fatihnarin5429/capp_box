@@ -12,6 +12,8 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     on<ProfileChangePassword>(_onProfileChangePassword);
     on<ProfileChangePhone>(_onProfileChangePhone);
     on<ProfileChangeImage>(_onProfileChangeImage);
+    on<ProfileLogout>(_onProfileLogout);
+    on<ProfileDelete>(_onProfileDelete);
   }
 
   Future<void> _onProfileChangeName(
@@ -45,5 +47,19 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     Emitter<ProfileState> emit,
   ) async {
     emit(state.copyWith(imagePath: event.imagePath));
+  }
+
+  Future<void> _onProfileLogout(
+    ProfileLogout event,
+    Emitter<ProfileState> emit,
+  ) async {
+    emit(state.copyWith(isLoggedIn: false));
+  }
+
+  Future<void> _onProfileDelete(
+    ProfileDelete event,
+    Emitter<ProfileState> emit,
+  ) async {
+    emit(state.copyWith(isLoggedIn: false));
   }
 }

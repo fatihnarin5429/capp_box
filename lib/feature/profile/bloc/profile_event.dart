@@ -46,3 +46,21 @@ class ProfileChangeImage extends ProfileEvent {
   @override
   List<Object> get props => [imagePath];
 }
+
+class ProfileLogout extends ProfileEvent {
+  final String email;
+  final String password;
+  const ProfileLogout({required this.email, required this.password});
+
+  @override
+  List<Object> get props => [email, password];
+}
+
+class ProfileDelete extends ProfileEvent {
+  final String email;
+  final String password;
+  const ProfileDelete({required this.email, required this.password});
+
+  @override
+  List<Object> get props => [email, password];
+}
