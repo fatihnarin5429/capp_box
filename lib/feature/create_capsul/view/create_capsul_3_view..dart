@@ -9,6 +9,7 @@ import 'package:capp_box/feature/package/widgets/custom_text_field.dart';
 import 'package:capp_box/feature/create_capsul/view/time_capsule_history_view.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:capp_box/feature/create_capsul/widgets/step_indicator.dart';
+import 'package:capp_box/feature/create_capsul/widgets/continue_button.dart';
 
 class CreateCapsul3View extends StatefulWidget {
   final TextEditingController controller;
@@ -146,62 +147,30 @@ class _CreateCapsul3ViewState extends State<CreateCapsul3View> {
   }
 
   Widget _buildContinueButton(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 32.0),
-      child: InkWell(
-        onTap: () {
-          context.read<CreateCapsuleBloc>().add(
-                CreateCapsuleAction(
-                  createCapsuleModel: context
-                      .read<CreateCapsuleBloc>()
-                      .state
-                      .createCapsuleModel
-                      .copyWith(
-                        displayName: _displayNameController.text,
-                        email: _mailController.text,
-                        phoneNumber: _phoneController.text,
-                      ),
-                ),
-              );
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => TimeCapsuleHistoryView(
-                videoFile: widget.videoFile,
-                photoFile: widget.photoFile,
-                audioFile: widget.audioFile,
-                type: widget.type,
-                selectedFileName: widget.selectedFileName,
-              ),
-            ),
-          );
-        },
-        child: Container(
-          width: 327,
-          height: 56,
-          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
-          decoration: BoxDecoration(
-            gradient: const LinearGradient(
-              begin: Alignment.centerRight,
-              end: Alignment.centerLeft,
-              colors: [Color(0xFFB224EF), Color(0xFF7579FF)],
-            ),
-            borderRadius: BorderRadius.circular(100),
-          ),
-          child: const Center(
-            child: Text(
-              'Devam Et',
-              style: TextStyle(
-                color: Color(0xFFE5E5E5),
-                fontSize: 14,
-                fontFamily: 'Urbanist',
-                fontWeight: FontWeight.w700,
-                height: 1.70,
-              ),
+    return ContinueButton(
+      displayNameController: _displayNameController,
+      mailController: _mailController,
+      phoneController: _phoneController,
+      videoFile: widget.videoFile,
+      photoFile: widget.photoFile,
+      audioFile: widget.audioFile,
+      type: widget.type,
+      selectedFileName: widget.selectedFileName,
+      secilenTip: widget.type,
+      onPressed: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => TimeCapsuleHistoryView(
+              videoFile: widget.videoFile,
+              photoFile: widget.photoFile,
+              audioFile: widget.audioFile,
+              type: widget.type,
+              selectedFileName: widget.selectedFileName,
             ),
           ),
-        ),
-      ),
+        );
+      },
     );
   }
 }

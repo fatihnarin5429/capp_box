@@ -1,3 +1,4 @@
+import 'package:capp_box/feature/create_capsul/widgets/back_button_widget.dart';
 import 'package:capp_box/feature/package/widgets/success_dialog.dart';
 import 'package:capp_box/product/widgets/background_gradient.dart';
 import 'package:flutter/material.dart';
@@ -92,29 +93,7 @@ class _PhoneOtpViewState extends State<PhoneOtpView> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          GestureDetector(
-                            onTap: () => Navigator.pop(context),
-                            child: Container(
-                              width: 40,
-                              height: 40,
-                              decoration: const BoxDecoration(
-                                image: DecorationImage(
-                                  image: AssetImage('assets/icons/ellipse.png'),
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                              child: const Center(
-                                child: Padding(
-                                  padding: EdgeInsets.only(left: 8),
-                                  child: Icon(
-                                    Icons.arrow_back_ios,
-                                    color: Colors.white,
-                                    size: 18,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
+                          BackButtonWidget(),
                           const Expanded(
                             child: Text(
                               'Telefon Doğrulama',
@@ -150,7 +129,6 @@ class _PhoneOtpViewState extends State<PhoneOtpView> {
                               fontSize: 24,
                               fontFamily: 'Inter',
                               fontWeight: FontWeight.w600,
-                              height: 1.33,
                             ),
                             height: 75,
                             decoration: BoxDecoration(
@@ -166,7 +144,6 @@ class _PhoneOtpViewState extends State<PhoneOtpView> {
                               fontSize: 24,
                               fontFamily: 'Inter',
                               fontWeight: FontWeight.w600,
-                              height: 1.33,
                             ),
                             height: 75,
                             decoration: BoxDecoration(

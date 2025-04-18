@@ -9,7 +9,30 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_credit_card/flutter_credit_card.dart';
 import 'package:capp_box/product/widgets/background_gradient.dart';
 import 'package:mesh_gradient/mesh_gradient.dart';
+import 'package:capp_box/feature/create_capsul/widgets/credit_card_display.dart';
+import 'package:capp_box/feature/create_capsul/widgets/credit_card_form_widget.dart';
+import 'package:capp_box/feature/create_capsul/widgets/app_bar_widget.dart';
 
+// Create a mixin for credit card information
+mixin CreditCardInfoMixin {
+  String cardNumber = '';
+  String expiryDate = '';
+  String cardHolderName = '';
+  String cvvCode = '';
+  bool isCvvFocused = false;
+
+  void onCreditCardModelChange(CreditCardModel? model) {
+    if (model != null) {
+      cardNumber = model.cardNumber;
+      expiryDate = model.expiryDate;
+      cardHolderName = model.cardHolderName;
+      cvvCode = model.cvvCode;
+      isCvvFocused = model.isCvvFocused;
+    }
+  }
+}
+
+// Update the CapsuleBuyView to use the new widgets
 class CapsuleBuyView extends StatefulWidget {
   const CapsuleBuyView({Key? key}) : super(key: key);
 
@@ -17,13 +40,8 @@ class CapsuleBuyView extends StatefulWidget {
   State<CapsuleBuyView> createState() => _CapsuleBuyViewState();
 }
 
-class _CapsuleBuyViewState extends State<CapsuleBuyView> {
-  String cardNumber = '';
-  String expiryDate = '';
-  String cardHolderName = '';
-  String cvvCode = '';
-  bool isCvvFocused = false;
-
+class _CapsuleBuyViewState extends State<CapsuleBuyView>
+    with CreditCardInfoMixin {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   @override
@@ -39,73 +57,12 @@ class _CapsuleBuyViewState extends State<CapsuleBuyView> {
               SafeArea(
                 child: Column(
                   children: [
-                    AppBar(
-                      backgroundColor: Colors.transparent,
-                      elevation: 0,
-                      leading: IconButton(
-                        padding: EdgeInsets.zero,
-                        constraints: const BoxConstraints(),
-                        icon: const Icon(
-                          Icons.arrow_back_ios_new,
-                          color: Colors.white,
-                          size: 24,
-                        ),
-                        onPressed: () {
-                          Navigator.maybePop(context);
-                        },
-                      ),
-                      centerTitle: true,
-                      title: const Text(
-                        "Ödeme Yap",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.w700,
-                          fontSize: 16,
-                          fontFamily: 'Urbanist',
-                        ),
-                      ),
-                    ),
+                    AppBarWidget(),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 20),
                       child: SizedBox(
                         height: 200,
-                        child: Stack(
-                          children: [
-                            CreditCardWidget(
-                              cardNumber: cardNumber,
-                              bankName: 'Capp Box',
-                              expiryDate: expiryDate,
-                              cardHolderName: cardHolderName == ""
-                                  ? "İsim Soyisim"
-                                  : cardHolderName,
-                              cvvCode: cvvCode,
-                              showBackView: isCvvFocused,
-                              obscureCardNumber: false,
-                              obscureCardCvv: false,
-                              isHolderNameVisible: true,
-                              glassmorphismConfig:
-                                  Glassmorphism.defaultConfig(),
-                              labelValidThru: 'SKT',
-                              frontCardBorder: Border.all(
-                                color: Colors.white,
-                                width: 1,
-                              ),
-                              backCardBorder: Border.all(
-                                color: Colors.white,
-                                width: 1,
-                              ),
-                              padding: 10,
-                              cardBgColor: const Color(0xFF1C1D31),
-                              textStyle: const TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.w600,
-                                fontSize: 14,
-                              ),
-                              isSwipeGestureEnabled: true,
-                              onCreditCardWidgetChange: (_) {},
-                            ),
-                          ],
-                        ),
+                        child: CreditCardDisplay(),
                       ),
                     ),
                     Expanded(
@@ -113,193 +70,7 @@ class _CapsuleBuyViewState extends State<CapsuleBuyView> {
                         padding: const EdgeInsets.symmetric(horizontal: 20),
                         child: Column(
                           children: [
-                            CreditCardForm(
-                              formKey: formKey,
-                              obscureCvv: false,
-                              obscureNumber: false,
-                              cardNumber: cardNumber,
-                              cvvCode: cvvCode,
-                              isHolderNameVisible: true,
-                              isCardNumberVisible: true,
-                              isExpiryDateVisible: true,
-                              cardHolderName: cardHolderName,
-                              expiryDate: expiryDate,
-                              onCreditCardModelChange: onCreditCardModelChange,
-                              inputConfiguration: InputConfiguration(
-                                cardNumberTextStyle: const TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 14,
-                                  fontFamily: 'Urbanist',
-                                  fontWeight: FontWeight.w700,
-                                ),
-                                cvvCodeTextStyle: const TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 14,
-                                  fontFamily: 'Urbanist',
-                                  fontWeight: FontWeight.w700,
-                                ),
-                                expiryDateTextStyle: const TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 14,
-                                  fontFamily: 'Urbanist',
-                                  fontWeight: FontWeight.w700,
-                                ),
-                                cardHolderTextStyle: const TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 14,
-                                  fontFamily: 'Urbanist',
-                                  fontWeight: FontWeight.w700,
-                                ),
-                                cardNumberDecoration: InputDecoration(
-                                  labelText: 'Kart Numarası',
-                                  hintText: '16 haneli kart numarasını giriniz',
-                                  labelStyle: const TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 14,
-                                    fontFamily: 'Urbanist',
-                                    fontWeight: FontWeight.w700,
-                                  ),
-                                  hintStyle: const TextStyle(
-                                    color: Color(0xFF84858E),
-                                    fontSize: 14,
-                                    fontFamily: 'Urbanist',
-                                    fontWeight: FontWeight.w700,
-                                    height: 1.70,
-                                  ),
-                                  filled: true,
-                                  fillColor: const Color(0xFF262742),
-                                  contentPadding: const EdgeInsets.symmetric(
-                                    horizontal: 24,
-                                    vertical: 16,
-                                  ),
-                                  border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(100),
-                                    borderSide: BorderSide.none,
-                                  ),
-                                  enabledBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(100),
-                                    borderSide: BorderSide.none,
-                                  ),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(100),
-                                    borderSide: const BorderSide(
-                                      color: Colors.transparent,
-                                    ),
-                                  ),
-                                ),
-                                cvvCodeDecoration: InputDecoration(
-                                  labelText: 'CVV',
-                                  hintText: '3 haneli güvenlik kodu',
-                                  labelStyle: const TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 14,
-                                    fontFamily: 'Urbanist',
-                                    fontWeight: FontWeight.w700,
-                                  ),
-                                  hintStyle: const TextStyle(
-                                    color: Color(0xFF84858E),
-                                    fontSize: 14,
-                                    fontFamily: 'Urbanist',
-                                    fontWeight: FontWeight.w700,
-                                    height: 1.70,
-                                  ),
-                                  filled: true,
-                                  fillColor: const Color(0xFF262742),
-                                  contentPadding: const EdgeInsets.symmetric(
-                                    horizontal: 24,
-                                    vertical: 16,
-                                  ),
-                                  border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(100),
-                                    borderSide: BorderSide.none,
-                                  ),
-                                  enabledBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(100),
-                                    borderSide: BorderSide.none,
-                                  ),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(100),
-                                    borderSide: const BorderSide(
-                                      color: Colors.transparent,
-                                    ),
-                                  ),
-                                ),
-                                expiryDateDecoration: InputDecoration(
-                                  labelText: 'Son Kullanma Tarihi',
-                                  hintText: 'AA/YY',
-                                  labelStyle: const TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 14,
-                                    fontFamily: 'Urbanist',
-                                    fontWeight: FontWeight.w700,
-                                  ),
-                                  hintStyle: const TextStyle(
-                                    color: Color(0xFF84858E),
-                                    fontSize: 14,
-                                    fontFamily: 'Urbanist',
-                                    fontWeight: FontWeight.w700,
-                                    height: 1.70,
-                                  ),
-                                  filled: true,
-                                  fillColor: const Color(0xFF262742),
-                                  contentPadding: const EdgeInsets.symmetric(
-                                    horizontal: 24,
-                                    vertical: 16,
-                                  ),
-                                  border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(100),
-                                    borderSide: BorderSide.none,
-                                  ),
-                                  enabledBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(100),
-                                    borderSide: BorderSide.none,
-                                  ),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(100),
-                                    borderSide: const BorderSide(
-                                      color: Colors.transparent,
-                                    ),
-                                  ),
-                                ),
-                                cardHolderDecoration: InputDecoration(
-                                  labelText: 'Kart Üzerindeki İsim',
-                                  hintText: 'Kart sahibinin adı',
-                                  labelStyle: const TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 14,
-                                    fontFamily: 'Urbanist',
-                                    fontWeight: FontWeight.w700,
-                                  ),
-                                  hintStyle: const TextStyle(
-                                    color: Color(0xFF84858E),
-                                    fontSize: 14,
-                                    fontFamily: 'Urbanist',
-                                    fontWeight: FontWeight.w700,
-                                    height: 1.70,
-                                  ),
-                                  filled: true,
-                                  fillColor: const Color(0xFF262742),
-                                  contentPadding: const EdgeInsets.symmetric(
-                                    horizontal: 24,
-                                    vertical: 16,
-                                  ),
-                                  border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(100),
-                                    borderSide: BorderSide.none,
-                                  ),
-                                  enabledBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(100),
-                                    borderSide: BorderSide.none,
-                                  ),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(100),
-                                    borderSide: const BorderSide(
-                                      color: Colors.transparent,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
+                            CreditCardFormWidget(formKey: formKey),
                             Padding(
                               padding:
                                   const EdgeInsets.symmetric(vertical: 20.0),
@@ -352,17 +123,5 @@ class _CapsuleBuyViewState extends State<CapsuleBuyView> {
         },
       ),
     );
-  }
-
-  void onCreditCardModelChange(CreditCardModel? model) {
-    if (model != null) {
-      setState(() {
-        cardNumber = model.cardNumber;
-        expiryDate = model.expiryDate;
-        cardHolderName = model.cardHolderName;
-        cvvCode = model.cvvCode;
-        isCvvFocused = model.isCvvFocused;
-      });
-    }
   }
 }

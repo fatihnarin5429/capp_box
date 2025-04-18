@@ -19,6 +19,8 @@ import '../widgets/page_title.dart';
 import '../widgets/step_indicator.dart';
 import '../widgets/continue_button.dart';
 import '../widgets/media_selector_button.dart';
+import '../mixins/media_mixin.dart';
+import '../widgets/selected_media_preview.dart';
 
 class CreateCapsul2View extends StatefulWidget {
   final TextEditingController controller;
@@ -55,7 +57,7 @@ class CreateCapsul2View extends StatefulWidget {
   State<CreateCapsul2View> createState() => _CreateCapsul2ViewState();
 }
 
-class _CreateCapsul2ViewState extends State<CreateCapsul2View> {
+class _CreateCapsul2ViewState extends State<CreateCapsul2View> with MediaMixin {
   bool hasText = false;
   final int currentStep = 0;
   File? photoFile;
@@ -70,7 +72,7 @@ class _CreateCapsul2ViewState extends State<CreateCapsul2View> {
   @override
   void initState() {
     super.initState();
-    _checkPermissions();
+    checkPermissions(widget.type);
     if (videoFile != null) {
       _initializeVideoPlayer();
     }
@@ -82,25 +84,6 @@ class _CreateCapsul2ViewState extends State<CreateCapsul2View> {
     super.dispose();
   }
 
-  Future<void> _checkPermissions() async {
-    if (Platform.isAndroid) {
-      if (await Permission.storage.isDenied) {
-        await Permission.storage.request();
-      }
-
-      if (widget.type == MediaType.voice) {
-        if (await Permission.audio.isDenied) {
-          await Permission.audio.request();
-        }
-      } else if (widget.type == MediaType.photo ||
-          widget.type == MediaType.video) {
-        if (await Permission.camera.isDenied) {
-          await Permission.camera.request();
-        }
-      }
-    }
-  }
-
   Future<void> _initializeVideoPlayer() async {
     if (videoFile != null) {
       _videoPlayerController = VideoPlayerController.file(videoFile!)
@@ -108,259 +91,6 @@ class _CreateCapsul2ViewState extends State<CreateCapsul2View> {
           setState(() {});
         });
     }
-  }
-
-  Future<void> _pickAudioFile() async {
-    final context = this.context;
-    try {
-      FilePickerResult? result = await FilePicker.platform.pickFiles(
-        type: FileType.custom,
-        allowMultiple: false,
-        allowCompression: false,
-        withData: true,
-        dialogTitle: 'Ses Dosyası Seç',
-        allowedExtensions: [
-          'mp3',
-          'mp4',
-          'mpeg',
-          'mpga',
-          'webm',
-          'wav',
-          'm4a',
-          'aac',
-        ],
-      );
-
-      if (!mounted) return;
-
-      if (result != null &&
-          result.files.isNotEmpty &&
-          result.files.single.path != null) {
-        setState(() {
-          audioFile = File(result.files.single.path!);
-          selectedFileName = result.files.single.name;
-        });
-        BotToast.showText(
-            text: 'Ses dosyası başarıyla seçildi', contentColor: Colors.green);
-      }
-    } catch (e) {
-      if (!mounted) return;
-
-      print('Ses dosyası seçme hatası: $e');
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content:
-              Text('Ses dosyası seçilirken bir hata oluştu: ${e.toString()}'),
-          backgroundColor: Colors.red,
-          duration: const Duration(seconds: 5),
-        ),
-      );
-    }
-  }
-
-  Future<void> _pickImage() async {
-    try {
-      final ImagePicker picker = ImagePicker();
-      final XFile? image = await picker.pickImage(source: ImageSource.gallery);
-
-      if (image != null) {
-        setState(() {
-          photoFile = File(image.path);
-        });
-      }
-    } catch (e) {
-      print('Resim seçme hatası: $e');
-    }
-  }
-
-  Future<void> _pickVideo() async {
-    try {
-      final ImagePicker picker = ImagePicker();
-      final XFile? video = await picker.pickVideo(source: ImageSource.gallery);
-
-      if (video != null) {
-        setState(() {
-          videoFile = File(video.path);
-          _initializeVideoPlayer();
-        });
-      }
-    } catch (e) {
-      print('Video seçme hatası: $e');
-    }
-  }
-
-  Widget _buildSelectedMediaPreview() {
-    if (widget.type == MediaType.photo && photoFile != null) {
-      return Container(
-        margin: const EdgeInsets.symmetric(vertical: 16),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(16),
-          border: Border.all(color: Colors.white.withOpacity(0.2)),
-        ),
-        child: Stack(
-          children: [
-            ClipRRect(
-              borderRadius: BorderRadius.circular(16),
-              child: Image.file(
-                photoFile!,
-                width: double.infinity,
-                height: 250,
-                fit: BoxFit.cover,
-                errorBuilder: (context, error, stackTrace) {
-                  return Container(
-                    width: double.infinity,
-                    height: 250,
-                    color: Colors.grey.withOpacity(0.3),
-                    child: const Center(
-                      child: Text(
-                        'Resim yüklenemedi',
-                        style: TextStyle(color: Colors.white),
-                      ),
-                    ),
-                  );
-                },
-              ),
-            ),
-            Positioned(
-              top: 8,
-              right: 8,
-              child: GestureDetector(
-                onTap: () {
-                  setState(() {
-                    photoFile = null;
-                  });
-                },
-                child: Container(
-                  padding: const EdgeInsets.all(8),
-                  decoration: BoxDecoration(
-                    color: Colors.black.withOpacity(0.5),
-                    shape: BoxShape.circle,
-                  ),
-                  child: const Icon(Icons.close, color: Colors.white, size: 20),
-                ),
-              ),
-            ),
-          ],
-        ),
-      );
-    } else if (widget.type == MediaType.video && videoFile != null) {
-      return Container(
-        margin: const EdgeInsets.symmetric(vertical: 16),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(16),
-          color: Colors.black.withOpacity(0.3),
-          border: Border.all(color: Colors.white.withOpacity(0.2)),
-        ),
-        child: Stack(
-          alignment: Alignment.topRight,
-          children: [
-            if (_videoPlayerController != null &&
-                _videoPlayerController!.value.isInitialized)
-              AspectRatio(
-                aspectRatio: _videoPlayerController!.value.aspectRatio,
-                child: VideoPlayer(_videoPlayerController!),
-              ),
-            Padding(
-              padding: const EdgeInsets.only(top: 8, right: 8),
-              child: GestureDetector(
-                onTap: () {
-                  setState(() {
-                    videoFile = null;
-                    _videoPlayerController?.dispose();
-                    _videoPlayerController = null;
-                  });
-                },
-                child: Container(
-                  padding: const EdgeInsets.all(8),
-                  decoration: BoxDecoration(
-                    color: Colors.black.withOpacity(0.5),
-                    shape: BoxShape.circle,
-                  ),
-                  child: const Icon(Icons.close, color: Colors.white, size: 20),
-                ),
-              ),
-            ),
-          ],
-        ),
-      );
-    } else if (widget.type == MediaType.voice && audioFile != null) {
-      return Container(
-        margin: const EdgeInsets.symmetric(vertical: 16),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(16),
-          color: Colors.black.withOpacity(0.3),
-          border: Border.all(color: Colors.white.withOpacity(0.2)),
-        ),
-        child: Stack(
-          children: [
-            Container(
-              padding: const EdgeInsets.all(20),
-              child: Row(
-                children: [
-                  Container(
-                    padding: const EdgeInsets.all(12),
-                    decoration: BoxDecoration(
-                      color: const Color(0xFFA737FF).withOpacity(0.2),
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: const Icon(Icons.audiotrack, color: Colors.white),
-                  ),
-                  const SizedBox(width: 16),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Text(
-                          'Ses Dosyası',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 16,
-                            fontFamily: 'Urbanist',
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                        const SizedBox(height: 4),
-                        Text(
-                          selectedFileName ?? 'Ses dosyası seçildi',
-                          style: TextStyle(
-                            color: Colors.white.withOpacity(0.7),
-                            fontSize: 14,
-                            fontFamily: 'Urbanist',
-                          ),
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Positioned(
-              top: 8,
-              right: 8,
-              child: GestureDetector(
-                onTap: () {
-                  setState(() {
-                    audioFile = null;
-                    selectedFileName = null;
-                  });
-                },
-                child: Container(
-                  padding: const EdgeInsets.all(8),
-                  decoration: BoxDecoration(
-                    color: Colors.black.withOpacity(0.5),
-                    shape: BoxShape.circle,
-                  ),
-                  child: const Icon(Icons.close, color: Colors.white, size: 20),
-                ),
-              ),
-            ),
-          ],
-        ),
-      );
-    }
-    return const SizedBox();
   }
 
   @override
@@ -475,21 +205,45 @@ class _CreateCapsul2ViewState extends State<CreateCapsul2View> {
                                 ),
                               ),
                         const SizedBox(height: 12),
-                        widget.type == MediaType.text
-                            ? const SizedBox()
-                            : MediaSelectorButton(
-                                type: widget.type,
-                                onTap: () {
-                                  if (widget.type == MediaType.photo) {
-                                    _pickImage();
-                                  } else if (widget.type == MediaType.video) {
-                                    _pickVideo();
-                                  } else if (widget.type == MediaType.voice) {
-                                    _pickAudioFile();
-                                  }
-                                },
-                              ),
-                        _buildSelectedMediaPreview(),
+                        MediaSelectorButton(
+                          type: widget.type!,
+                          onTap: () {
+                            if (widget.type == MediaType.photo) {
+                              pickImage(
+                                  (file) => setState(() => photoFile = file));
+                            } else if (widget.type == MediaType.video) {
+                              pickVideo((file) => setState(() {
+                                    videoFile = file;
+                                    _initializeVideoPlayer();
+                                  }));
+                            } else if (widget.type == MediaType.voice) {
+                              pickAudioFile(
+                                  context,
+                                  (file, name) => setState(() {
+                                        audioFile = file;
+                                        selectedFileName = name;
+                                      }));
+                            }
+                          },
+                        ),
+                        SelectedMediaPreview(
+                          type: widget.type!,
+                          photoFile: photoFile,
+                          videoFile: videoFile,
+                          audioFile: audioFile,
+                          selectedFileName: selectedFileName,
+                          videoPlayerController: _videoPlayerController,
+                          onRemovePhoto: () => setState(() => photoFile = null),
+                          onRemoveVideo: () => setState(() {
+                            videoFile = null;
+                            _videoPlayerController?.dispose();
+                            _videoPlayerController = null;
+                          }),
+                          onRemoveAudio: () => setState(() {
+                            audioFile = null;
+                            selectedFileName = null;
+                          }),
+                        ),
                         Padding(
                           padding: const EdgeInsets.symmetric(vertical: 32.0),
                           child: ContinueButton(
@@ -499,16 +253,16 @@ class _CreateCapsul2ViewState extends State<CreateCapsul2View> {
                             videoFile: videoFile,
                             photoFile: photoFile,
                             audioFile: audioFile,
-                            type: widget.type,
+                            type: widget.type!,
                             selectedFileName: selectedFileName,
-                            secilenTip: widget.type,
+                            secilenTip: widget.type!,
                             onPressed: () {
                               context.read<CreateCapsuleBloc>().add(
                                     CreateCapsuleAction(
                                       createCapsuleModel: CreateCapsuleModel(
                                         title: _titleController.text,
                                         message: _messageController.text,
-                                        mediaType: widget.type,
+                                        mediaType: widget.type!,
                                         mediaUrl: widget.type == MediaType.photo
                                             ? photoFile
                                             : widget.type == MediaType.video
