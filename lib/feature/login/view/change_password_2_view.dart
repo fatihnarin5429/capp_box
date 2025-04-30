@@ -1,4 +1,5 @@
 import 'package:capp_box/feature/login/view/new_passxord_view.dart';
+import 'package:capp_box/feature/profile/widgets/pinput_widget.dart';
 import 'package:capp_box/product/constants/color_cons.dart';
 import 'package:flutter/material.dart';
 
@@ -26,42 +27,11 @@ class _ChangePassword2State extends State<ChangePassword2> {
   }
 
   Widget _buildOTPBox(int index) {
-    return Container(
-      width: 75,
-      height: 76,
-      padding: const EdgeInsets.all(16),
-      decoration: ShapeDecoration(
-        color: const Color(0xFF282943),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12),
-        ),
-      ),
-      child: TextField(
-        controller: controllers[index],
-        focusNode: focusNodes[index],
-        autofocus: index == 0,
-        textAlign: TextAlign.center,
-        keyboardType: TextInputType.number,
-        maxLength: 1,
-        style: const TextStyle(
-          color: Color(0xFF737A7F),
-          fontSize: 24,
-          fontFamily: 'Inter',
-          fontWeight: FontWeight.w600,
-          height: 1.33,
-        ),
-        decoration: const InputDecoration(
-          counterText: "",
-          border: InputBorder.none,
-        ),
-        onChanged: (value) {
-          if (value.isNotEmpty && index < 3) {
-            focusNodes[index + 1].requestFocus();
-          } else if (value.isEmpty && index > 0) {
-            focusNodes[index - 1].requestFocus();
-          }
-        },
-      ),
+    return PinputWidget(
+      email: '',
+      onCompleted: (pin) {
+        // Handle pin completion
+      },
     );
   }
 
