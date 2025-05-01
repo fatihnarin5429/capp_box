@@ -21,6 +21,7 @@ import '../widgets/continue_button.dart';
 import '../widgets/media_selector_button.dart';
 import '../mixins/media_mixin.dart';
 import '../widgets/selected_media_preview.dart';
+import 'package:capp_box/feature/profile/widgets/file_validator.dart';
 
 class CreateCapsul2View extends StatefulWidget {
   final TextEditingController controller;
@@ -68,6 +69,9 @@ class _CreateCapsul2ViewState extends State<CreateCapsul2View> with MediaMixin {
   VideoPlayerController? _videoPlayerController;
   final TextEditingController _titleController = TextEditingController();
   final TextEditingController _messageController = TextEditingController();
+  int currentVideoCount = 0;
+  int currentImageCount = 0;
+  int currentAudioCount = 0;
 
   @override
   void initState() {
@@ -90,6 +94,78 @@ class _CreateCapsul2ViewState extends State<CreateCapsul2View> with MediaMixin {
         ..initialize().then((_) {
           setState(() {});
         });
+    }
+  }
+
+  Future<void> pickAndValidateFile(
+      BuildContext context, String sourceType) async {
+    File? selectedFile;
+
+    try {
+      if (sourceType == 'image') {
+        final XFile? image =
+            await ImagePicker().pickImage(source: ImageSource.gallery);
+        if (image != null) selectedFile = File(image.path);
+      } else if (sourceType == 'video') {
+        final XFile? video =
+            await ImagePicker().pickVideo(source: ImageSource.gallery);
+        if (video != null) selectedFile = File(video.path);
+      } else if (sourceType == 'audio') {
+        final result = await FilePicker.platform.pickFiles(
+          type: FileType.audio,
+          allowMultiple: false,
+        );
+        if (result != null && result.files.isNotEmpty) {
+          selectedFile = File(result.files.first.path!);
+        }
+      }
+
+      if (selectedFile == null) return;
+
+      final fileType = FileValidator.determineFileType(selectedFile);
+
+      if (fileType == null) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Desteklenmeyen dosya türü.')),
+        );
+        return;
+      }
+
+      if (!FileValidator.validateFileSize(selectedFile, context) ||
+          !FileValidator.validateFileType(selectedFile, fileType, context) ||
+          !FileValidator.validateFileCount(
+              fileType,
+              fileType == 'video'
+                  ? currentVideoCount
+                  : fileType == 'image'
+                      ? currentImageCount
+                      : currentAudioCount,
+              context)) {
+        return;
+      }
+
+      if (fileType == 'video') {
+        currentVideoCount++;
+        setState(() {
+          videoFile = selectedFile;
+          _initializeVideoPlayer();
+        });
+      } else if (fileType == 'image') {
+        currentImageCount++;
+        setState(() {
+          photoFile = selectedFile;
+        });
+      } else if (fileType == 'audio') {
+        currentAudioCount++;
+        setState(() {
+          audioFile = selectedFile;
+          selectedFileName = FileValidator.extractFileName(selectedFile!);
+        });
+      }
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Dosya seçilirken bir hata oluştu: $e')),
+      );
     }
   }
 
@@ -209,20 +285,11 @@ class _CreateCapsul2ViewState extends State<CreateCapsul2View> with MediaMixin {
                           type: widget.type!,
                           onTap: () {
                             if (widget.type == MediaType.photo) {
-                              pickImage(
-                                  (file) => setState(() => photoFile = file));
+                              pickAndValidateFile(context, 'image');
                             } else if (widget.type == MediaType.video) {
-                              pickVideo((file) => setState(() {
-                                    videoFile = file;
-                                    _initializeVideoPlayer();
-                                  }));
+                              pickAndValidateFile(context, 'video');
                             } else if (widget.type == MediaType.voice) {
-                              pickAudioFile(
-                                  context,
-                                  (file, name) => setState(() {
-                                        audioFile = file;
-                                        selectedFileName = name;
-                                      }));
+                              pickAndValidateFile(context, 'audio');
                             }
                           },
                         ),
