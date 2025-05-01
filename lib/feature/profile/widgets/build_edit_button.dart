@@ -1,21 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:capp_box/feature/profile/view/email_otp_view.dart';
 
 Widget buildEditButton(
-    BuildContext context, TextEditingController emailController,
-    {required Null Function() onPressed}) {
+  BuildContext context, {
+  required VoidCallback onPressed,
+  String buttonText = 'Düzenle',
+}) {
   return SizedBox(
     width: double.infinity,
     height: 60,
     child: ElevatedButton(
-      onPressed: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => EmailOtpView(email: emailController.text),
-          ),
-        );
-      },
+      onPressed: onPressed,
       style: ElevatedButton.styleFrom(
         backgroundColor: Colors.transparent,
         shadowColor: Colors.transparent,
@@ -33,10 +27,10 @@ Widget buildEditButton(
           ),
           borderRadius: BorderRadius.circular(100),
         ),
-        child: const Center(
+        child: Center(
           child: Text(
-            'Düzenle',
-            style: TextStyle(
+            buttonText,
+            style: const TextStyle(
               color: Color(0xFFE5E5E5),
               fontSize: 14,
               fontFamily: 'Urbanist',

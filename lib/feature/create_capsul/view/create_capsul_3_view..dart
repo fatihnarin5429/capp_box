@@ -93,6 +93,17 @@ class _CreateCapsul3ViewState extends State<CreateCapsul3View> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const Text(
+          'Teslim Alacak Kişinin;',
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 18,
+            fontFamily: 'Urbanist',
+            fontWeight: FontWeight.w500,
+            height: 1.40,
+          ),
+        ),
+        const SizedBox(height: 12),
+        const Text(
           'Ad Soyad',
           style: TextStyle(
             color: Colors.white,

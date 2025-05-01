@@ -1,1 +1,1 @@
-enum MediaType { text, photo, video, voice }
+enum MediaType { text, photo, video, voice, mail }

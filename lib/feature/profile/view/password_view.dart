@@ -1,5 +1,6 @@
 import 'package:capp_box/feature/create_capsul/widgets/back_button_widget.dart';
 import 'package:capp_box/feature/create_capsul/widgets/page_title.dart';
+import 'package:capp_box/feature/login/view/login_view.dart';
 import 'package:capp_box/feature/package/widgets/custom_text_field.dart';
 import 'package:capp_box/feature/package/widgets/success_dialog.dart';
 import 'package:capp_box/feature/profile/bloc/profile_bloc.dart';
@@ -27,7 +28,12 @@ class _PasswordViewState extends State<PasswordView> {
       context: context,
       message: 'Şifreniz başarıyla güncellendi!',
       imagePath: 'assets/images/image.png',
-      onComplete: () => Navigator.of(context).pop(),
+      onComplete: () => Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const LoginView(),
+        ),
+      ),
     );
   }
 

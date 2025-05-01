@@ -46,7 +46,6 @@ class _NameViewState extends State<NameView> {
                               fontSize: 18,
                               fontFamily: 'Urbanist',
                               fontWeight: FontWeight.w500,
-                              height: 1.40,
                             ),
                           ),
                         ),
@@ -98,7 +97,10 @@ class _NameViewState extends State<NameView> {
         context
             .read<ProfileBloc>()
             .add(ProfileChangeName(displayName: _nameController.text));
-        Navigator.of(context).pop();
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const ProfilView()),
+        );
       },
     );
   }

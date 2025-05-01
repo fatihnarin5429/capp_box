@@ -139,6 +139,8 @@ class _EmailOtpViewState extends State<EmailOtpView> {
                   ),
                   const SizedBox(height: 32),
                   PinputWidget(
+                    controller: controllers[0],
+                    focusNode: focusNodes[0],
                     email: widget.email,
                     onCompleted: (pin) {
                       context.read<ProfileBloc>().add(ProfileChangeEmail(

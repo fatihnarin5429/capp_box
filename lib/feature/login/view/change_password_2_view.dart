@@ -1,6 +1,9 @@
+import 'package:capp_box/feature/create_capsul/widgets/continue_button.dart';
 import 'package:capp_box/feature/login/view/new_passxord_view.dart';
 import 'package:capp_box/feature/profile/widgets/pinput_widget.dart';
 import 'package:capp_box/product/constants/color_cons.dart';
+import 'package:capp_box/product/utility/enums/mediaType_enum.dart';
+import 'package:capp_box/product/widgets/background_gradient.dart';
 import 'package:flutter/material.dart';
 
 class ChangePassword2 extends StatefulWidget {
@@ -11,101 +14,118 @@ class ChangePassword2 extends StatefulWidget {
 }
 
 class _ChangePassword2State extends State<ChangePassword2> {
-  final List<TextEditingController> controllers =
-      List.generate(4, (index) => TextEditingController());
-  final List<FocusNode> focusNodes = List.generate(4, (index) => FocusNode());
+  final TextEditingController _pinController = TextEditingController();
+  final FocusNode _focusNode = FocusNode();
+  final String _maskedEmail = 'erv****@gmail.com';
 
   @override
   void dispose() {
-    for (var controller in controllers) {
-      controller.dispose();
-    }
-    for (var node in focusNodes) {
-      node.dispose();
-    }
+    _pinController.dispose();
+    _focusNode.dispose();
     super.dispose();
   }
 
-  Widget _buildOTPBox(int index) {
-    return PinputWidget(
-      email: '',
-      onCompleted: (pin) {
-        // Handle pin completion
-      },
-    );
+  void _verifyOtpAndProceed() {
+    final enteredOtp = _pinController.text.trim();
+    if (enteredOtp.length == 4) {
+      // Gerçek doğrulama burada yapılmalı
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (_) => const NewPasswordView()),
+      );
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Lütfen 4 haneli kodu girin')),
+      );
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ColorConst.backgroundColor,
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const SizedBox(height: 120),
-            const Text(
-              'erv****@gmail.com e-postanıza bir OTP kodu gönderdik. Aşağıdaki kodu girin.',
-              style: TextStyle(
-                color: Color(0xFF84858E),
-                fontSize: 14,
-                fontFamily: 'Urbanist',
-                fontWeight: FontWeight.w400,
-              ),
-            ),
-            const SizedBox(height: 32),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: List.generate(4, (index) => _buildOTPBox(index)),
-            ),
-            const Spacer(),
-            Center(
-              child: Container(
-                height: 56,
-                decoration: BoxDecoration(
-                  gradient: const LinearGradient(
-                    begin: Alignment(1.00, 0.00),
-                    end: Alignment(-1, 0),
-                    colors: [Color(0xFFB224EF), Color(0xFF7579FF)],
-                  ),
-                  borderRadius: BorderRadius.circular(100),
-                ),
-                child: Center(
-                  child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => NewPasswordView(),
+      body: Stack(
+        children: [
+          const BackgroundGradient(),
+          SafeArea(
+            child: Padding(
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 24.0, vertical: 16.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const SizedBox(height: 40),
+                  Text(
+                    'Şifre Sıfırlama',
+                    style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
                         ),
-                      );
-                      // Telefon doğrulama işlemleri buraya gelecek
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.transparent,
-                      shadowColor: Colors.transparent,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(100),
-                      ),
-                    ),
-                    child: const Text(
-                      'Devam Et',
-                      style: TextStyle(
-                        color: Color(0xFFE5E5E5),
-                        fontSize: 14,
-                        fontFamily: 'Urbanist',
-                        fontWeight: FontWeight.w700,
-                      ),
+                  ),
+                  const SizedBox(height: 16),
+                  Text(
+                    '$_maskedEmail e-postanıza bir OTP kodu gönderdik. Aşağıdaki kodu girin.',
+                    style: const TextStyle(
+                      color: Color(0xFF84858E),
+                      fontSize: 14,
+                      fontFamily: 'Urbanist',
+                      fontWeight: FontWeight.w400,
                     ),
                   ),
-                ),
+                  const SizedBox(height: 32),
+                  PinputWidget(
+                    email: _maskedEmail,
+                    onCompleted: (_) => _verifyOtpAndProceed(),
+                    controller: _pinController,
+                    focusNode: _focusNode,
+                  ),
+                  const SizedBox(height: 24),
+                  _buildResendCodeSection(),
+                  const Spacer(),
+                  ContinueButton(
+                    displayNameController: _pinController,
+                    mailController: TextEditingController(),
+                    phoneController: TextEditingController(),
+                    secilenTip: MediaType.mail,
+                    onPressed: _verifyOtpAndProceed,
+                  ),
+                  const SizedBox(height: 32),
+                ],
               ),
             ),
-            const SizedBox(height: 50),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
+}
+
+Widget _buildResendCodeSection() {
+  return Row(
+    mainAxisAlignment: MainAxisAlignment.center,
+    children: [
+      const Text(
+        'Kod almadınız mı? ',
+        style: TextStyle(
+          color: Color(0xFF84858E),
+          fontSize: 14,
+          fontFamily: 'Urbanist',
+          fontWeight: FontWeight.w400,
+        ),
+      ),
+      TextButton(
+        onPressed: () {
+          // OTP yeniden gönderme işlemi yapılmalı
+        },
+        child: const Text(
+          'Yeniden Gönder',
+          style: TextStyle(
+            color: Color(0xFFB224EF),
+            fontSize: 14,
+            fontFamily: 'Urbanist',
+            fontWeight: FontWeight.w700,
+          ),
+        ),
+      ),
+    ],
+  );
 }

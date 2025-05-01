@@ -9,6 +9,8 @@ class PinputWidget extends StatelessWidget {
     Key? key,
     required this.onCompleted,
     required this.email,
+    required controller,
+    required focusNode,
   }) : super(key: key);
 
   @override
