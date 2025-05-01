@@ -2,6 +2,8 @@
 import 'dart:io';
 
 import 'package:capp_box/feature/create_capsul/bloc/create_capsule_bloc.dart';
+import 'package:capp_box/feature/create_capsul/nixin/capsule_review_mixin.dart'
+    show CapsuleReviewMixin;
 import 'package:capp_box/product/utility/enums/mediaType_enum.dart';
 import 'package:capp_box/product/widgets/background_gradient.dart';
 import 'package:flutter/material.dart';
@@ -41,7 +43,7 @@ class CapsuleReview extends StatefulWidget {
   State<CapsuleReview> createState() => _CapsuleReviewState();
 }
 
-class _CapsuleReviewState extends State<CapsuleReview> {
+class _CapsuleReviewState extends State<CapsuleReview> with CapsuleReviewMixin {
   bool _shareInfo = true;
   bool _sendSMS = true;
 
@@ -61,142 +63,17 @@ class _CapsuleReviewState extends State<CapsuleReview> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Stack(
-                          alignment: Alignment.center,
-                          children: [
-                            Align(
-                              alignment: Alignment.centerLeft,
-                              child: BackButtonWidget(),
-                            ),
-                            PageTitle(title: 'Gözden Geçir'),
-                          ],
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 32),
-                          child: CapsuleProgressBar(
-                              currentStep: widget.currentStep),
-                        ),
-                        CapsuleTitle(
-                          title: state.createCapsuleModel.title ?? '',
+                        buildHeader(),
+                        buildProgressBar(widget.currentStep),
+                        _buildCapsuleContent(state),
+                        buildNotificationOptions(
                           state: state,
-                        ),
-                        MediaPreview(
-                          type: state.createCapsuleModel.mediaType ??
-                              MediaType.text,
-                          photoFile: state.createCapsuleModel.mediaUrl,
-                          audioFile: state.createCapsuleModel.mediaType ==
-                                  MediaType.voice
-                              ? state.createCapsuleModel.mediaUrl
-                              : widget.audioFile,
-                          videoFile: state.createCapsuleModel.mediaType ==
-                                  MediaType.video
-                              ? state.createCapsuleModel.mediaUrl
-                              : widget.videoFile,
-                          selectedFileName:
-                              state.createCapsuleModel.mediaType ==
-                                      MediaType.voice
-                                  ? state.createCapsuleModel.mediaUrl?.path
-                                  : widget.selectedFileName,
-                        ),
-                        ReceiverInfo(state: state),
-                        CapsuleDateInfo(state: state),
-                        InfoSharingOptions(
                           shareInfo: _shareInfo,
+                          sendSMS: _sendSMS,
                           onShareInfoChanged: (value) =>
                               setState(() => _shareInfo = value),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 18),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              SMSNotificationOptions(
-                                sendSMS: _sendSMS,
-                                onSendSMSChanged: (value) =>
-                                    setState(() => _sendSMS = value),
-                              ),
-                              Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(vertical: 24),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    InkWell(
-                                      onTap: () {
-                                        context.read<CreateCapsuleBloc>().add(
-                                              CreateCapsuleAction(
-                                                createCapsuleModel: state
-                                                    .createCapsuleModel
-                                                    .copyWith(
-                                                  isSendInfoReceiver:
-                                                      _shareInfo,
-                                                  isSendInfoSms: _sendSMS,
-                                                ),
-                                              ),
-                                            );
-                                      },
-                                      child: const Text(
-                                        'Taslak Olarak Kaydet',
-                                        style: TextStyle(
-                                          color: Color(0xFF84858E),
-                                          fontSize: 14,
-                                          fontFamily: 'Urbanist',
-                                          fontWeight: FontWeight.w700,
-                                        ),
-                                      ),
-                                    ),
-                                    GestureDetector(
-                                      onTap: () {
-                                        context.read<CreateCapsuleBloc>().add(
-                                              CreateCapsuleAction(
-                                                createCapsuleModel: state
-                                                    .createCapsuleModel
-                                                    .copyWith(
-                                                  isSendInfoReceiver:
-                                                      _shareInfo,
-                                                  isSendInfoSms: _sendSMS,
-                                                ),
-                                              ),
-                                            );
-                                        CapsuleSuccessDialog.show(context);
-                                      },
-                                      child: Container(
-                                        width: 162,
-                                        height: 56,
-                                        decoration: ShapeDecoration(
-                                          gradient: const LinearGradient(
-                                            colors: [
-                                              Color(0xFFB224EF),
-                                              Color(0xFF7579FF)
-                                            ],
-                                            begin: Alignment.centerRight,
-                                            end: Alignment.centerLeft,
-                                          ),
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(100),
-                                          ),
-                                        ),
-                                        child: const Center(
-                                          child: Text(
-                                            'Gönder',
-                                            style: TextStyle(
-                                              color: Color(0xFFE5E5E5),
-                                              fontSize: 14,
-                                              fontFamily: 'Urbanist',
-                                              fontWeight: FontWeight.w700,
-                                              height: 1.70,
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
+                          onSendSMSChanged: (value) =>
+                              setState(() => _sendSMS = value),
                         ),
                       ],
                     ),
@@ -207,6 +84,39 @@ class _CapsuleReviewState extends State<CapsuleReview> {
           );
         },
       ),
+    );
+  }
+
+  /// Builds the main content of the capsule including title, media, receiver info, etc.
+  Widget _buildCapsuleContent(CreateCapsuleState state) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        CapsuleTitle(
+          title: state.createCapsuleModel.title ?? '',
+          state: state,
+        ),
+        MediaPreview(
+          type: state.createCapsuleModel.mediaType ?? MediaType.text,
+          photoFile: state.createCapsuleModel.mediaUrl,
+          audioFile: state.createCapsuleModel.mediaType == MediaType.voice
+              ? state.createCapsuleModel.mediaUrl
+              : widget.audioFile,
+          videoFile: state.createCapsuleModel.mediaType == MediaType.video
+              ? state.createCapsuleModel.mediaUrl
+              : widget.videoFile,
+          selectedFileName:
+              state.createCapsuleModel.mediaType == MediaType.voice
+                  ? state.createCapsuleModel.mediaUrl?.path
+                  : widget.selectedFileName,
+        ),
+        ReceiverInfo(state: state),
+        CapsuleDateInfo(state: state),
+        InfoSharingOptions(
+          shareInfo: _shareInfo,
+          onShareInfoChanged: (value) => setState(() => _shareInfo = value),
+        ),
+      ],
     );
   }
 }
