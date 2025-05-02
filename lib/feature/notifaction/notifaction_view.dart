@@ -14,16 +14,17 @@ class NotificationView extends StatefulWidget {
 
 class _NotificationViewState extends State<NotificationView>
     with NotificationViewModel {
-  late final List<Map<String, String>> notifications;
+  late List<Map<String, String>> notifications;
 
   @override
   void initState() {
     super.initState();
-    notifications = getNotifications();
   }
 
   @override
   Widget build(BuildContext context) {
+    notifications = getNotifications(context);
+
     return Scaffold(
       body: Stack(
         children: [

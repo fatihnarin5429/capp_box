@@ -1,12 +1,8 @@
 import 'package:capp_box/feature/create_capsul/widgets/back_button_widget.dart';
-import 'package:capp_box/feature/create_capsul/widgets/continue_button.dart';
 import 'package:capp_box/feature/create_capsul/widgets/page_title.dart';
 import 'package:capp_box/feature/package/widgets/custom_text_field.dart';
 import 'package:capp_box/feature/profile/view/phone_otp_view.dart';
-import 'package:capp_box/feature/profile/view/phone_view.dart'
-    as _phoneController;
-import 'package:capp_box/feature/profile/widgets/build_edit_button.dart'
-    show buildEditButton;
+import 'package:capp_box/feature/profile/widgets/build_edit_button.dart';
 import 'package:capp_box/product/widgets/background_gradient.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -112,16 +108,17 @@ class _PhoneViewState extends State<PhoneView> {
   }
 
   Widget _buildSaveButton(BuildContext context) {
-    return buildEditButton(
-      context,
-      _phoneController,
-      onPressed: () {
+    return BuilEditButton(
+      targetRouteOnpressed: () {
+        context
+            .read<ProfileBloc>()
+            .add(ProfileChangePhone(phone: _phoneController.text));
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) =>
-                PhoneOtpView(phoneNumber: _phoneController.text),
-          ),
+              builder: (context) => PhoneOtpView(
+                    phoneNumber: _phoneController.text,
+                  )),
         );
       },
     );

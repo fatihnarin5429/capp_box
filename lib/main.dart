@@ -1,4 +1,6 @@
 import 'package:bot_toast/bot_toast.dart';
+import 'package:capp_box/core/l10n/app_localizations.dart';
+import 'package:capp_box/core/service/language_service.dart';
 import 'package:capp_box/feature/create_capsul/bloc/create_capsule_bloc.dart';
 import 'package:capp_box/feature/create_capsul/view/create_capsul_view.dart';
 import 'package:capp_box/feature/home/view/capsules_view.dart';
@@ -11,27 +13,60 @@ import 'package:capp_box/feature/notifaction/notifaction_view.dart';
 import 'package:capp_box/feature/onboard/view/onboard1_view.dart';
 import 'package:capp_box/feature/profile/bloc/profile_bloc.dart';
 import 'package:capp_box/feature/profile/view/profil_view.dart';
+import 'package:capp_box/feature/settings/view/language_settings_view.dart';
+import 'package:capp_box/feature/create_capsul/view/capsule_buy_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
-void main() => runApp(MultiBlocProvider(
-      providers: [
-        BlocProvider(create: (context) => ProfileBloc()),
-        BlocProvider(create: (context) => LoginBloc()),
-        BlocProvider(create: (context) => CreateCapsuleBloc()),
-      ],
-      child: const MyApp(),
-    ));
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  // Initialize language service
+  final languageService = LanguageService();
+  await languageService.init();
+
+  runApp(MultiBlocProvider(
+    providers: [
+      BlocProvider(create: (context) => ProfileBloc()),
+      BlocProvider(create: (context) => LoginBloc()),
+      BlocProvider(create: (context) => CreateCapsuleBloc()),
+    ],
+    child: MyApp(languageService: languageService),
+  ));
+}
+
+class MyApp extends StatefulWidget {
+  final LanguageService languageService;
+
+  const MyApp({super.key, required this.languageService});
+
+  @override
+  State<MyApp> createState() => MyAppState();
+}
+
+class MyAppState extends State<MyApp> {
+  late Locale _currentLocale;
+
+  @override
+  void initState() {
+    super.initState();
+    _currentLocale = widget.languageService.currentLocale;
+  }
+
+  void setLocale(Locale locale) async {
+    await widget.languageService.setLocale(locale);
+    setState(() {
+      _currentLocale = locale;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Capp Box',
+      locale: _currentLocale,
       theme: ThemeData(
         primarySwatch: Colors.blue,
         brightness: Brightness.light,
@@ -44,14 +79,12 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       localizationsDelegates: const [
+        AppLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
       ],
-      supportedLocales: const [
-        Locale('en'),
-        Locale('tr'),
-      ],
+      supportedLocales: widget.languageService.supportedLocales,
       builder: BotToastInit(),
       navigatorObservers: [BotToastNavigatorObserver()],
       initialRoute: '/onboard1',
@@ -65,6 +98,7 @@ class MyApp extends StatelessWidget {
         '/profil_view': (context) => const ProfilView(),
         '/phone_login_view': (context) => const PhoneLoginView(),
         '/create_capsul_view': (context) => const CreateCapsulView(),
+        '/language_settings': (context) => const LanguageSettingsView(),
       },
     );
   }

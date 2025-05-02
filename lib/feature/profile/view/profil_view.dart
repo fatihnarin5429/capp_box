@@ -1,3 +1,4 @@
+import 'package:capp_box/core/l10n/app_localizations.dart';
 import 'package:capp_box/feature/package/widgets/custom_navigation_bar.dart';
 import 'package:capp_box/feature/package/widgets/profile_widgets.dart';
 import 'package:capp_box/feature/profile/bloc/profile_bloc.dart';
@@ -33,6 +34,8 @@ class _ProfilViewState extends State<ProfilView>
     with ProfileMixin, ImagePickerMixin, DialogMixin {
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context);
+
     return BlocBuilder<ProfileBloc, ProfileState>(
       builder: (context, state) {
         return Scaffold(
@@ -46,8 +49,9 @@ class _ProfilViewState extends State<ProfilView>
                       ProfileHeaderWidget(onImageTap: pickImage),
                       ProfileListTile(
                         leadingIcon: 'assets/icons/profile3.png',
-                        title: 'İsim Soyisim',
-                        subtitle: state.displayName ?? 'İsim Soyisim',
+                        title: localizations.translate('full_name'),
+                        subtitle: state.displayName ??
+                            localizations.translate('full_name'),
                         onTap: () => Navigator.push(
                             context,
                             MaterialPageRoute(
@@ -55,7 +59,7 @@ class _ProfilViewState extends State<ProfilView>
                       ),
                       ProfileListTile(
                         leadingIcon: 'assets/icons/mail.png',
-                        title: 'E-posta',
+                        title: localizations.translate('email'),
                         subtitle: state.email ?? 'example@gmail.com',
                         onTap: () => Navigator.push(
                             context,
@@ -64,7 +68,7 @@ class _ProfilViewState extends State<ProfilView>
                       ),
                       ProfileListTile(
                         leadingIcon: 'assets/icons/password.png',
-                        title: 'Şifre',
+                        title: localizations.translate('password'),
                         subtitle: state.password ?? '**********',
                         onTap: () => Navigator.push(
                             context,
@@ -73,7 +77,7 @@ class _ProfilViewState extends State<ProfilView>
                       ),
                       ProfileListTile(
                         leadingIcon: 'assets/icons/mail.png',
-                        title: 'Telefon',
+                        title: localizations.translate('phone'),
                         subtitle: state.phone ?? '+90 555 123 45 67',
                         onTap: () => Navigator.push(
                             context,

@@ -1,3 +1,4 @@
+import 'package:capp_box/core/extensions/localization_extension.dart';
 import 'package:flutter/material.dart';
 
 class NotificationHeader extends StatelessWidget {
@@ -10,9 +11,9 @@ class NotificationHeader extends StatelessWidget {
       child: Row(
         children: [
           const Spacer(),
-          const Text(
-            "Bildirimler",
-            style: TextStyle(
+          Text(
+            context.tr('notifications'),
+            style: const TextStyle(
               color: Colors.white,
               fontSize: 20,
               fontWeight: FontWeight.w600,

@@ -8,7 +8,13 @@ import 'package:capp_box/feature/profile/widgets/pinput_widget.dart';
 
 class EmailOtpView extends StatefulWidget {
   final String email;
-  const EmailOtpView({super.key, required this.email});
+  const EmailOtpView(
+      {super.key,
+      required this.email,
+      required bool isEmail,
+      required String name,
+      required String otp,
+      required String phone});
 
   @override
   State<EmailOtpView> createState() => _EmailOtpViewState();

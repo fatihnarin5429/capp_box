@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:capp_box/feature/create_capsul/bloc/create_capsule_bloc.dart';
 import 'package:capp_box/product/utility/enums/mediaType_enum.dart';
+import 'package:capp_box/product/constants/color_cons.dart';
+import 'package:capp_box/core/extensions/localization_extension.dart';
 import 'review_container.dart';
 
 class CapsuleTitle extends StatelessWidget {
@@ -87,7 +89,7 @@ class _ExpandableTextState extends State<ExpandableText> {
             });
           },
           child: Text(
-            isExpanded ? 'Daha Az Göster' : 'Daha Fazla Göster',
+            isExpanded ? context.tr('show_less') : context.tr('show_more'),
             style: widget.style.copyWith(
               color: Colors.white,
               fontWeight: FontWeight.bold,

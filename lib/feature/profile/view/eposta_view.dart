@@ -57,14 +57,24 @@ class _EpostaViewState extends State<EpostaView> {
                   child: Align(
                     alignment: Alignment.bottomCenter,
                     child: Padding(
-                      padding: const EdgeInsets.only(bottom: 24),
-                      child: buildEditButton(context, _emailController,
-                          onPressed: () {
-                        context.read<ProfileBloc>().add(
-                            ProfileChangeEmail(email: _emailController.text));
-                        Navigator.of(context).pop();
-                      }),
-                    ),
+                        padding: const EdgeInsets.only(bottom: 24),
+                        child: BuilEditButton(
+                          targetRouteOnpressed: () {
+                            context.read<ProfileBloc>().add(ProfileChangeEmail(
+                                email: _emailController.text));
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => EmailOtpView(
+                                        email: _emailController.text,
+                                        isEmail: true,
+                                        name: '',
+                                        otp: '',
+                                        phone: '',
+                                      )),
+                            );
+                          },
+                        )),
                   ),
                 ),
               ],

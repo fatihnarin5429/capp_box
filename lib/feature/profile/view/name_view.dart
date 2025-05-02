@@ -23,7 +23,7 @@ class _NameViewState extends State<NameView> {
   Widget build(BuildContext context) {
     return BlocBuilder<ProfileBloc, ProfileState>(
       builder: (context, state) {
-        _nameController = TextEditingController(text: state.displayName);
+        _nameController.text = state.displayName ?? "";
         return Scaffold(
           body: Stack(
             children: [
@@ -90,10 +90,8 @@ class _NameViewState extends State<NameView> {
   }
 
   Widget _buildEditButton(BuildContext context) {
-    return buildEditButton(
-      context,
-      _nameController,
-      onPressed: () {
+    return BuilEditButton(
+      targetRouteOnpressed: () {
         context
             .read<ProfileBloc>()
             .add(ProfileChangeName(displayName: _nameController.text));
@@ -103,5 +101,18 @@ class _NameViewState extends State<NameView> {
         );
       },
     );
+    // buildEditButton(
+    //   context,
+    //   _nameController,
+    //   onPressed: () {
+    //     context
+    //         .read<ProfileBloc>()
+    //         .add(ProfileChangeName(displayName: _nameController.text));
+    //     Navigator.push(
+    //       context,
+    //       MaterialPageRoute(builder: (context) => const ProfilView()),
+    //     );
+    //   },
+    // );
   }
 }

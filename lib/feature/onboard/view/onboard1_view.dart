@@ -1,3 +1,4 @@
+import 'package:capp_box/core/extensions/localization_extension.dart';
 import 'package:capp_box/feature/create_capsul/view/capsule_buy_view.dart';
 import 'package:capp_box/feature/onboard/mixin/onboard1_mixin.dart';
 import 'package:capp_box/feature/onboard/view/onboard2_view.dart';
@@ -48,12 +49,12 @@ class _Onboard1ViewState extends State<Onboard1View> with Onboard1Mixin {
                 Center(
                   child: isLoading
                       ? const CircularProgressIndicator()
-                      : const SizedBox(
+                      : SizedBox(
                           width: 322,
                           child: Text(
-                            'Cappbox ile sevdiklerinize özel zaman kapsülleri oluşturun ve unutulmaz bağlar kurun.',
+                            context.tr('onboard_welcome_text'),
                             textAlign: TextAlign.center,
-                            style: TextStyle(
+                            style: const TextStyle(
                               color: Colors.white,
                               fontSize: 24,
                               fontFamily: 'Urbanist',
@@ -64,12 +65,12 @@ class _Onboard1ViewState extends State<Onboard1View> with Onboard1Mixin {
                         ),
                 ),
                 const SizedBox(height: 92),
-                const SizedBox(
+                SizedBox(
                     width: 328,
                     child: Text(
-                      'Devam ederek Kullanım Koşullarımızı kabul etmiş olursunuz. Göz at: Gizlilik Sözleşmesi & Kullanım Koşulları',
+                      context.tr('terms_agreement_text'),
                       textAlign: TextAlign.center,
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: Colors.white,
                         fontSize: 10,
                         fontFamily: 'Urbanist',
@@ -100,14 +101,14 @@ class _Onboard1ViewState extends State<Onboard1View> with Onboard1Mixin {
                         ),
                       );
                     },
-                    child: const Row(
+                    child: Row(
                       mainAxisSize: MainAxisSize.min,
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Text(
-                          'Şimdi Başla',
-                          style: TextStyle(
+                          context.tr('get_started'),
+                          style: const TextStyle(
                             color: Color(0xFFE5E5E5),
                             fontSize: 14,
                             fontFamily: 'Urbanist',
@@ -135,9 +136,9 @@ class _Onboard1ViewState extends State<Onboard1View> with Onboard1Mixin {
                         ),
                       );
                     },
-                    child: const Text(
-                      'Cappbox hesabın var mı? Giriş Yap',
-                      style: TextStyle(
+                    child: Text(
+                      context.tr('already_have_account'),
+                      style: const TextStyle(
                         color: Colors.white,
                         fontSize: 14,
                         fontFamily: 'Urbanist',
