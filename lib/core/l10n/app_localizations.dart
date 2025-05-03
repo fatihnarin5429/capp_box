@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:capp_box/core/l10n/languages/en.dart';
 import 'package:capp_box/core/l10n/languages/tr.dart';
+import 'package:capp_box/core/l10n/languages/de.dart';
+import 'package:capp_box/core/l10n/languages/it.dart';
+import 'package:capp_box/core/l10n/languages/pt.dart';
+import 'package:capp_box/core/l10n/languages/hi.dart';
+import 'package:capp_box/core/l10n/languages/zh.dart';
+import 'package:capp_box/core/l10n/languages/ru.dart';
 
 class AppLocalizations {
   final Locale locale;
@@ -21,13 +27,45 @@ class AppLocalizations {
 
   // Load the language strings based on locale
   Future<bool> load() async {
-    _localizedStrings = locale.languageCode == 'tr' ? tr : en;
+    switch (locale.languageCode) {
+      case 'tr':
+        _localizedStrings = tr;
+        break;
+      case 'de':
+        _localizedStrings = de;
+        break;
+      case 'it':
+        _localizedStrings = it;
+        break;
+      case 'pt':
+        _localizedStrings = pt;
+        break;
+      case 'hi':
+        _localizedStrings = hi;
+        break;
+      case 'zh':
+        _localizedStrings = zh;
+        break;
+      case 'ru':
+        _localizedStrings = ru;
+        break;
+      default:
+        _localizedStrings = en;
+    }
     return true;
   }
 
   // Translate method to get the correct string based on the key
-  String translate(String key) {
-    return _localizedStrings[key] ?? key;
+  String translate(String key, {Map<String, dynamic>? args}) {
+    String text = _localizedStrings[key] ?? key;
+
+    if (args != null) {
+      args.forEach((argKey, argValue) {
+        text = text.replaceAll('{$argKey}', argValue.toString());
+      });
+    }
+
+    return text;
   }
 }
 
@@ -37,7 +75,8 @@ class _AppLocalizationsDelegate
 
   @override
   bool isSupported(Locale locale) {
-    return ['en', 'tr'].contains(locale.languageCode);
+    return ['en', 'tr', 'de', 'it', 'pt', 'hi', 'zh', 'ru']
+        .contains(locale.languageCode);
   }
 
   @override

@@ -1,3 +1,4 @@
+import 'package:capp_box/core/extensions/localization_extension.dart';
 import 'package:flutter/material.dart';
 
 class InfoSharingOptions extends StatelessWidget {
@@ -17,9 +18,9 @@ class InfoSharingOptions extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
-            'Bilgilerin karşı tarafa verilsin mi?',
-            style: TextStyle(
+          Text(
+            context.tr('share_info_message'),
+            style: const TextStyle(
               color: Colors.white,
               fontSize: 18,
               fontFamily: 'Urbanist',
@@ -62,9 +63,9 @@ class InfoSharingOptions extends StatelessWidget {
                 ),
               ),
               const SizedBox(width: 8),
-              const Text(
-                'Verilsin',
-                style: TextStyle(
+              Text(
+                context.tr('share_info'),
+                style: const TextStyle(
                   color: Colors.white,
                   fontSize: 16,
                   fontFamily: 'Urbanist',
@@ -109,9 +110,9 @@ class InfoSharingOptions extends StatelessWidget {
                 ),
               ),
               const SizedBox(width: 8),
-              const Text(
-                'Bilgilerim gizli kalsın',
-                style: TextStyle(
+              Text(
+                context.tr('info_sharing_options'),
+                style: const TextStyle(
                   color: Colors.white,
                   fontSize: 16,
                   fontFamily: 'Urbanist',

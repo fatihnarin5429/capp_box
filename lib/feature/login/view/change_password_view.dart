@@ -1,3 +1,4 @@
+import 'package:capp_box/core/extensions/localization_extension.dart';
 import 'package:capp_box/feature/login/view/change_password_2_view.dart';
 import 'package:capp_box/feature/package/widgets/custom_text_field.dart';
 import 'package:capp_box/product/constants/color_cons.dart';
@@ -26,7 +27,7 @@ class _ChangePasswordViewState extends State<ChangePasswordView> {
     return CustomTextField(
       textInputType: TextInputType.emailAddress,
       controller: _emailController,
-      hintText: 'E-posta',
+      hintText: context.tr('email_input', args: {}),
       isPassword: false,
       onChanged: (String value) {},
     );
@@ -57,9 +58,9 @@ class _ChangePasswordViewState extends State<ChangePasswordView> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text(
-                          'Şifre Yenileme',
-                          style: TextStyle(
+                        Text(
+                          context.tr('password_reset_title', args: {}),
+                          style: const TextStyle(
                             color: Colors.white,
                             fontSize: 32,
                             fontFamily: 'Urbanist',
@@ -67,9 +68,9 @@ class _ChangePasswordViewState extends State<ChangePasswordView> {
                           ),
                         ),
                         const SizedBox(height: 24),
-                        const Text(
-                          'Lütfen e-postanızı girin, bir sonraki adımda şifrenizi sıfırlamak için bir OTP kodu göndereceğiz.',
-                          style: TextStyle(
+                        Text(
+                          context.tr('password_reset_message', args: {}),
+                          style: const TextStyle(
                             color: Color(0xFF84858E),
                             fontSize: 14,
                             fontFamily: 'Urbanist',
@@ -77,9 +78,9 @@ class _ChangePasswordViewState extends State<ChangePasswordView> {
                           ),
                         ),
                         const SizedBox(height: 24),
-                        const Text(
-                          'E-posta',
-                          style: TextStyle(
+                        Text(
+                          context.tr('email_input', args: {}),
+                          style: const TextStyle(
                             color: Colors.white,
                             fontSize: 18,
                             fontFamily: 'Urbanist',
@@ -121,10 +122,10 @@ class _ChangePasswordViewState extends State<ChangePasswordView> {
                                   borderRadius: BorderRadius.circular(100),
                                 ),
                               ),
-                              child: const Center(
+                              child: Center(
                                   child: Text(
-                                'Devam Et',
-                                style: TextStyle(
+                                context.tr('continue_button', args: {}),
+                                style: const TextStyle(
                                   color: Color(0xFFE5E5E5),
                                   fontSize: 14,
                                   fontFamily: 'Urbanist',

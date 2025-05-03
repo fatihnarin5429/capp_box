@@ -1,3 +1,4 @@
+import 'package:capp_box/core/extensions/localization_extension.dart';
 import 'package:capp_box/feature/create_capsul/widgets/back_button_widget.dart';
 import 'package:capp_box/feature/create_capsul/widgets/page_title.dart';
 import 'package:capp_box/feature/package/widgets/custom_text_field.dart';
@@ -26,7 +27,7 @@ class _PasswordViewState extends State<PasswordView> {
   void _showSuccessDialog() {
     SuccessDialog.show(
         context: context,
-        message: 'Şifreniz başarıyla güncellendi!',
+        message: context.tr('password_updated', args: {}),
         imagePath: 'assets/images/image.png',
         onComplete: () {
           Navigator.of(context).pop();
@@ -48,13 +49,13 @@ class _PasswordViewState extends State<PasswordView> {
                   child: Column(
                     children: [
                       _buildHeader(context),
-                      const Align(
+                      Align(
                         alignment: Alignment.centerLeft,
                         child: Padding(
-                          padding: EdgeInsets.symmetric(vertical: 16),
+                          padding: const EdgeInsets.symmetric(vertical: 16),
                           child: Text(
-                            'Şifre Değiştir',
-                            style: TextStyle(
+                            context.tr('change_password', args: {}),
+                            style: const TextStyle(
                               color: Colors.white,
                               fontSize: 18,
                               fontFamily: 'Urbanist',
@@ -65,10 +66,13 @@ class _PasswordViewState extends State<PasswordView> {
                         ),
                       ),
                       _buildPasswordField(
-                          "Mevcut Şifre", _currentPasswordController),
-                      _buildPasswordField("Yeni Şifre", _newPasswordController),
+                          context.tr('current_password', args: {}),
+                          _currentPasswordController),
+                      _buildPasswordField(context.tr('new_password', args: {}),
+                          _newPasswordController),
                       _buildPasswordField(
-                          "Yeni Şifre (Tekrar)", _confirmPasswordController),
+                          context.tr('new_password_confirm', args: {}),
+                          _confirmPasswordController),
                       const SizedBox(height: 16),
                       Expanded(
                         child: Align(
@@ -93,10 +97,10 @@ class _PasswordViewState extends State<PasswordView> {
   Widget _buildHeader(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: const [
-        BackButtonWidget(),
+      children: [
+        const BackButtonWidget(),
         Expanded(
-          child: PageTitle(title: 'Şifre Değiştir'),
+          child: PageTitle(title: context.tr('change_password', args: {})),
         ),
       ],
     );

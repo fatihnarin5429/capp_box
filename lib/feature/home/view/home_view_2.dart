@@ -1,3 +1,5 @@
+import 'package:capp_box/core/extensions/localization_extension.dart';
+import 'package:capp_box/core/l10n/languages/tr.dart';
 import 'package:capp_box/feature/create_capsul/view/create_capsul_view.dart';
 import 'package:capp_box/feature/create_capsul/widgets/continue_button.dart';
 import 'package:capp_box/feature/package/widgets/custom_navigation_bar.dart';
@@ -73,7 +75,7 @@ class _HomeView2State extends State<HomeView2> {
                                 ),
                               ),
                               Text(
-                                'Fatih Narin',
+                                'Ahmet Yılmaz', // TODO: Replace with actual user name
                                 style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 16,
@@ -88,11 +90,11 @@ class _HomeView2State extends State<HomeView2> {
                     ),
                   ),
                   const SizedBox(height: 20),
-                  const Center(
+                  Center(
                     child: Column(
                       children: [
                         Text(
-                          "Anılarınızı geleceğe ",
+                          context.tr('remember_your_memories'),
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 20,
@@ -101,7 +103,7 @@ class _HomeView2State extends State<HomeView2> {
                           ),
                         ),
                         Text(
-                          "Taşıyın",
+                          context.tr('carry_to_future'),
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 20,
@@ -131,7 +133,7 @@ class _HomeView2State extends State<HomeView2> {
                           );
                         },
                         child: ContinueButton(
-                          text: 'İlk Kapsülü Oluştur!',
+                          text: context.tr('create_first_capsule'),
                           displayNameController: TextEditingController(),
                           mailController: TextEditingController(),
                           phoneController: TextEditingController(),

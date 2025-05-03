@@ -10,6 +10,13 @@ final Map<String, String> en = {
   'next': 'Next',
   'back': 'Back',
   'loading': 'Loading...',
+  'carry_to_future': 'Carry to Future',
+  'remember_your_memories': 'Remember your memories\n',
+  'create_first_capsule': 'Create Your First Capsule!',
+  'phone_number': 'Phone Number',
+  'mail_address': 'Mail Address',
+  'display_name': 'Display Name',
+  'mail_address_message': 'Your email address',
 
   // Login/Auth
   'login': 'Login',
@@ -31,6 +38,14 @@ final Map<String, String> en = {
   'accept_terms': 'I accept the Terms of Use',
   'connect_with_apple': 'Connect with Apple',
   'google': 'Connect with Google',
+  'continue_with_email': 'Continue with Email',
+  'continue_with_phone': 'Continue with Phone',
+  'continue_without_account': 'Continue without account',
+  'register': 'Register',
+  'devametmek': 'Enter your phone number to continue',
+  'confirm_photo': 'Confirm Photo',
+  'confirm_photo_message':
+      'Do you want to use the selected photo as your profile photo?',
 
   // Home
   'home': 'Home',
@@ -198,6 +213,14 @@ final Map<String, String> en = {
   'password_changed': 'Your password has been changed',
   'profile_updated_successfully': 'Your profile has been updated successfully',
 
+  // Password Reset
+  'password_reset': 'Password Reset',
+  'otp_code_sent':
+      'We have sent an OTP code to your email {email}. Please enter the code below.',
+  'enter_4_digit_code': 'Please enter the 4-digit code',
+  'did_not_receive_code': 'Didn\'t receive a code? ',
+  'resend': 'Resend',
+
   // UI Elements
   'show_more': 'Show More',
   'show_less': 'Show Less',
@@ -210,4 +233,126 @@ final Map<String, String> en = {
   'audio_file_selected': 'Audio file selected',
   'photo': 'photo',
   'audio': 'audio',
+  'all': 'All Capsules',
+  'coming_soon': 'Coming Soon ',
+  'ready_to_open': 'Ready to Open',
+  'my_created': 'My Created',
+  'add_message': 'Your Message',
+  'add_title': 'Add Title',
+  'add_date': 'Select Date',
+  'add_time': 'Select Time',
+  'add_media': 'Select Media',
+  'add_location': 'Select Location',
+  'file_selection_error': 'Error selecting file:',
+  'title': 'Title',
+  'message': 'Message',
+  'date': 'Date',
+  'time': 'Time',
+  'media': 'Media',
+  'location': 'Location',
+  'select_video': 'Select the video you want to upload',
+  'add_text': 'Add Text',
+  'add_voice': 'Add Voice',
+  'add_image': 'Add Image',
+  'add_video': 'Add Video',
+  'recipient_info': 'The recipient of the capsule is:',
+  'name_surname': 'Name Surname',
+  'email_address': 'Email Address',
+  'phone_number': 'Phone Number',
+  'capsule_history': 'Capsule History',
+  'capsule_history_message': 'When will the capsule open?',
+  'cancel_capsule_date': 'Cancel',
+  'confirm_capsule_date': 'Select Date',
+  'select_date': 'Tarih Seçiniz',
+
+  'select_time': 'Select Time',
+  'info_sharing_options': 'My information will be private',
+  'share_info': 'Share',
+  'yes': 'Yes,send',
+  'no': 'No,not send',
+  'sms_notification_options': 'SMS Notifications',
+  'share_info_message': 'Should my information be shared with the recipient?',
+  'sms_notification_message':
+      'Should the SMS notification about the capsule opening time be sent to the recipient?',
+  'save_draft': 'Save as Draft',
+  'send': 'Send',
+  'success_message':
+      'Congratulations! Your capsule has been created and will be sent on the specified date.',
+  'payment_message':
+      'Please wait. You are being redirected to the payment screen.',
+  'payment_title': 'Payment',
+  "card_number": 'Kart Numarası',
+  "card_number_message": '16 haneli kart numarasını giriniz',
+  "cvv": '3 haneli güvenlik kodu',
+  "expiration_date": 'Expiration Date',
+  "expiration_date_message": 'MM/YY',
+  "card_holder_name": 'Cardholder Name',
+  "card_holder_name_message": 'Name on card',
+  "card_number_error": 'Kart numarası hatalı',
+  "cvv_error": 'Card security code is incorrect',
+  "expiration_date_error": 'Expiration date is incorrect',
+  "card_holder_name_error": 'Cardholder name is incorrect',
+  "coming_soon_capsules_message": 'Yakında açılacak kapsül bulunmamaktadır',
+  "ready_to_open_capsules_message": 'Açılmaya hazır kapsül bulunmamaktadır',
+  "my_created_capsules_message": 'My Created Capsules',
+  "no_capsules_message": 'No capsules found',
+  "no_capsules_created_message": 'You have not created any capsules yet',
+
+  // Password Management
+  "password_reset_title": "Password Reset",
+  "password_reset_message":
+      "Please enter your email, we will send an OTP code to reset your password in the next step.",
+  "new_password": "New Password",
+  "new_password_confirm": "Confirm New Password",
+  "enter_password": "Enter your password",
+  "enter_password_again": "Enter your password again",
+  "password_reset_successful": "Password Reset Successful",
+  "redirecting_to_home":
+      "Please wait. You are being redirected to the home page",
+  "change_password": "Change Password",
+  "current_password": "Current Password",
+  "password_updated": "Your password has been successfully updated!",
+
+  // Login/Register Forms
+  "fullname": "Full Name",
+  "fullname_hint": "Your full name",
+  "email_input": "Email",
+  "email_hint": "Enter your email",
+  "create_password": "Create Password",
+  "password_hint": "Password",
+  "password_confirm_label": "Confirm Password",
+  "password_confirm_hint": "Confirm Password",
+  "login_button": "Login",
+  "register_button": "Register",
+  "continue_button": "Continue",
+  "fill_all_fields": "Please fill in all fields",
+  "passwords_not_matching": "Passwords do not match",
+  "forgot_password_short": "Forgot Password",
+  "privacy_title": "Privacy",
+
+  // Help Screen
+  "help_title": "Help",
+  "help_what_is": "What is Capp Box?",
+  "help_what_is_description":
+      "Capp Box is an innovative application that allows you to create digital capsules and share them with your loved ones. You can create special capsules containing photos, videos, messages, and more, and set them to open on a date you specify.",
+  "help_how_works": "How does Capp Box work?",
+  "help_how_works_description":
+      "1. Create a new capsule\n2. Add your content (photo, video, message)\n3. Set the opening date\n4. Choose recipients\n5. Your capsule is ready! Recipients will be able to see your capsule on the specified date.",
+  "help_contact": "Contact",
+  "help_contact_description":
+      "To reach us:\n\nEmail: support@cappbox.com\nPhone: +90 555 123 4567\nAddress: Istanbul, Turkey\n\nWorking hours: Weekdays 09:00 - 18:00",
+  "help_privacy_policy": "Privacy Policy",
+  "help_privacy_policy_description":
+      "At Capp Box, we value your privacy. Your personal data is protected under the Personal Data Protection Law. Your data is only used to improve our service quality and provide you with a better experience. For detailed information, you can review our privacy policy.",
+  "help_account": "Account",
+  "help_account_description":
+      "To manage your account:\n\n1. My Profile\n2. Settings\n3. Log Out",
+
+  // Capsule Options
+  "capsule_option_text": "Text",
+  "capsule_option_video": "Video",
+  "capsule_option_voice": "Voice Recording",
+  "capsule_option_photo": "Photo",
+  "capsule_option_free": "Free",
+  "premium_feature_indicator": "Premium",
 };

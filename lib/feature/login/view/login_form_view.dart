@@ -1,3 +1,4 @@
+import 'package:capp_box/core/extensions/localization_extension.dart';
 import 'package:capp_box/feature/home/view/home_view_2.dart';
 import 'package:capp_box/feature/login/mixin/login_mixin.dart';
 import 'package:capp_box/feature/login/view/change_password_view.dart';
@@ -42,9 +43,9 @@ class _LoginFormViewState extends State<LoginFormView> with LoginMixin {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const SizedBox(height: 40),
-            const Text(
-              'E-posta',
-              style: TextStyle(
+            Text(
+              context.tr('email_input', args: {}),
+              style: const TextStyle(
                 color: Colors.white,
                 fontSize: 18,
                 fontFamily: 'Urbanist',
@@ -55,16 +56,16 @@ class _LoginFormViewState extends State<LoginFormView> with LoginMixin {
             const SizedBox(height: 10),
             CustomTextField(
               controller: _emailController,
-              labelText: 'E-posta',
-              hintText: 'E-postanızı giriniz',
+              labelText: context.tr('email_input', args: {}),
+              hintText: context.tr('email_hint', args: {}),
               autofocus: true,
               textInputType: TextInputType.emailAddress,
               onChanged: (value) {},
             ),
             const SizedBox(height: 18),
-            const Text(
-              'Şifre ',
-              style: TextStyle(
+            Text(
+              context.tr('password', args: {}),
+              style: const TextStyle(
                 color: Colors.white,
                 fontSize: 18,
                 fontFamily: 'Urbanist',
@@ -75,8 +76,8 @@ class _LoginFormViewState extends State<LoginFormView> with LoginMixin {
             const SizedBox(height: 10),
             CustomTextField(
               controller: _passwordController,
-              labelText: 'Şifre',
-              hintText: 'Şifrenizi giriniz',
+              labelText: context.tr('password', args: {}),
+              hintText: context.tr('password_hint', args: {}),
               isPassword: true,
               isError: isPasswordError,
               textInputType: TextInputType.visiblePassword,
@@ -95,8 +96,8 @@ class _LoginFormViewState extends State<LoginFormView> with LoginMixin {
               Padding(
                 padding: const EdgeInsets.only(top: 8.0),
                 child: Text(
-                  'Girdiğiniz şifre hatalıdır',
-                  style: TextStyle(
+                  context.tr('invalid_credentials', args: {}),
+                  style: const TextStyle(
                     color: Colors.red,
                     fontSize: 12,
                     fontFamily: 'Urbanist',
@@ -114,9 +115,9 @@ class _LoginFormViewState extends State<LoginFormView> with LoginMixin {
                   ),
                 );
               },
-              child: const Text(
-                'Şifremi Unuttum',
-                style: TextStyle(
+              child: Text(
+                context.tr('forgot_password_short', args: {}),
+                style: const TextStyle(
                   color: Colors.white,
                   fontSize: 14,
                   fontFamily: 'Urbanist',
@@ -147,10 +148,10 @@ class _LoginFormViewState extends State<LoginFormView> with LoginMixin {
                     ),
                     borderRadius: BorderRadius.circular(100),
                   ),
-                  child: const Center(
+                  child: Center(
                     child: Text(
-                      'Giriş Yap',
-                      style: TextStyle(
+                      context.tr('login_button', args: {}),
+                      style: const TextStyle(
                         color: Color(0xFFE5E5E5),
                         fontSize: 14,
                         fontFamily: 'Urbanist',

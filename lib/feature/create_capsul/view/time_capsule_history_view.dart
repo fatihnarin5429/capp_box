@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:io';
 
+import 'package:capp_box/core/extensions/localization_extension.dart';
 import 'package:capp_box/feature/create_capsul/bloc/create_capsule_bloc.dart';
 import 'package:capp_box/product/utility/enums/mediaType_enum.dart';
 import 'package:flutter/material.dart';
@@ -166,15 +167,16 @@ class _TimeCapsuleHistoryViewState extends State<TimeCapsuleHistoryView> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         const BackButtonWidget(),
-                        const Expanded(
-                          child: PageTitle(title: 'Kapsül Tarihi'),
+                        Expanded(
+                          child:
+                              PageTitle(title: context.tr('capsule_history')),
                         ),
                       ],
                     ),
                     _buildStepIndicator(),
-                    const Text(
-                      'Kapsül ne zaman açılsın?',
-                      style: TextStyle(
+                    Text(
+                      context.tr('when_capsule_date'),
+                      style: const TextStyle(
                         color: Colors.white,
                         fontSize: 18,
                         fontFamily: 'Urbanist',
@@ -183,9 +185,9 @@ class _TimeCapsuleHistoryViewState extends State<TimeCapsuleHistoryView> {
                       ),
                     ),
                     const SizedBox(height: 16),
-                    const Text(
-                      'Açılma Tarihi',
-                      style: TextStyle(
+                    Text(
+                      context.tr('capsule_open_date'),
+                      style: const TextStyle(
                         color: Color(0xFFC4C4C4),
                         fontSize: 14,
                         fontFamily: 'Urbanist',
@@ -223,8 +225,8 @@ class _TimeCapsuleHistoryViewState extends State<TimeCapsuleHistoryView> {
           initialDate: selectedDate ?? DateTime.now(),
           firstDate: DateTime.now(),
           lastDate: DateTime(2100),
-          cancelText: 'İPTAL',
-          confirmText: 'TARİH SEÇ',
+          cancelText: context.tr('cancel_capsule_date'),
+          confirmText: context.tr('confirm_capsule_date'),
           builder: _datePickerTheme,
         );
         if (picked != null) {
@@ -249,7 +251,7 @@ class _TimeCapsuleHistoryViewState extends State<TimeCapsuleHistoryView> {
             Text(
               selectedDate != null
                   ? DateFormat('dd.MM.yyyy').format(selectedDate!)
-                  : 'Tarih Seçiniz',
+                  : context.tr('select_date'),
               style: TextStyle(
                 color: textColor,
                 fontSize: 16,
@@ -272,9 +274,9 @@ class _TimeCapsuleHistoryViewState extends State<TimeCapsuleHistoryView> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
-          'Açılma Saati',
-          style: TextStyle(
+        Text(
+          context.tr('capsule_open_time'),
+          style: const TextStyle(
             color: Color(0xFFC4C4C4),
             fontSize: 14,
             fontFamily: 'Urbanist',

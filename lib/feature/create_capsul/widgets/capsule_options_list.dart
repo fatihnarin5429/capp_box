@@ -1,3 +1,4 @@
+import 'package:capp_box/core/extensions/localization_extension.dart';
 import 'package:capp_box/feature/create_capsul/widgets/kapsul_secenek_card.dart';
 import 'package:capp_box/product/utility/enums/mediaType_enum.dart';
 import 'package:flutter/material.dart';
@@ -22,17 +23,17 @@ class CapsuleOptionsList extends StatelessWidget {
         const SizedBox(height: 30),
         KapsulSecenekCard(
           icon: 'assets/icons/write.png',
-          baslik: 'Yazı',
+          baslik: context.tr('capsule_option_text', args: {}),
           isPremium: false,
           premiumOdendi: premiumOdendi,
-          fiyat: 'Ücretsiz',
+          fiyat: context.tr('capsule_option_free', args: {}),
           secilenTip: secilenTip,
           onTap: () => onTipSecildi(MediaType.text),
           tip: MediaType.text,
         ),
         KapsulSecenekCard(
           icon: 'assets/icons/video.png',
-          baslik: 'Video',
+          baslik: context.tr('capsule_option_video', args: {}),
           isPremium: true,
           premiumOdendi: premiumOdendi,
           fiyat: '449.99 ₺',
@@ -42,7 +43,7 @@ class CapsuleOptionsList extends StatelessWidget {
         ),
         KapsulSecenekCard(
           icon: 'assets/icons/ses.png',
-          baslik: 'Ses Kaydı',
+          baslik: context.tr('capsule_option_voice', args: {}),
           isPremium: false,
           premiumOdendi: premiumOdendi,
           fiyat: '149.99 ₺',
@@ -52,7 +53,7 @@ class CapsuleOptionsList extends StatelessWidget {
         ),
         KapsulSecenekCard(
           icon: 'assets/icons/galeri.png',
-          baslik: 'Fotoğraf',
+          baslik: context.tr('capsule_option_photo', args: {}),
           isPremium: false,
           premiumOdendi: premiumOdendi,
           fiyat: '249.99 ₺',

@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:capp_box/feature/login/view/login_view.dart';
 import 'package:capp_box/feature/login/view/phone_login_view.dart';
+import 'package:capp_box/core/extensions/localization_extension.dart';
 
 mixin Onboard2Mixin<T extends StatefulWidget> on State<T> {
   bool isLoading = false;
@@ -32,7 +33,7 @@ mixin Onboard2Mixin<T extends StatefulWidget> on State<T> {
             //   BlendMode.srcIn,
             // ),
           ),
-          label: 'Apple ile bağlan',
+          label: context.tr('connect_with_apple', args: {}),
           isSelected: selectedButtonIndex == 0,
         ),
         const SizedBox(height: 12),
@@ -51,7 +52,7 @@ mixin Onboard2Mixin<T extends StatefulWidget> on State<T> {
             //   BlendMode.srcIn,
             // ),
           ),
-          label: 'Google ile bağlan',
+          label: context.tr('google', args: {}),
           isSelected: selectedButtonIndex == 1,
         ),
         const SizedBox(height: 12),
@@ -74,7 +75,7 @@ mixin Onboard2Mixin<T extends StatefulWidget> on State<T> {
             //   BlendMode.srcIn,
             // ),
           ),
-          label: 'E-posta ile devam et',
+          label: context.tr('continue_with_email', args: {}),
           isSelected: selectedButtonIndex == 2,
         ),
         const SizedBox(height: 12),
@@ -89,7 +90,7 @@ mixin Onboard2Mixin<T extends StatefulWidget> on State<T> {
             );
           },
           icon: const Icon(Icons.phone, color: Colors.white),
-          label: 'Telefon ile devam et',
+          label: context.tr('continue_with_phone', args: {}),
           isSelected: selectedButtonIndex == 3,
         ),
         const SizedBox(height: 12),
@@ -107,9 +108,9 @@ mixin Onboard2Mixin<T extends StatefulWidget> on State<T> {
               );
             }
           },
-          child: const Text(
-            'Üye olmadan devam et',
-            style: TextStyle(
+          child: Text(
+            context.tr('continue_without_account', args: {}),
+            style: const TextStyle(
               color: Color(0xFF84858E),
               fontSize: 14,
               fontFamily: 'Urbanist',
@@ -150,6 +151,8 @@ mixin Onboard2Mixin<T extends StatefulWidget> on State<T> {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(100),
         ),
+        padding: EdgeInsets.zero,
+        materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 32),
           child: Row(
@@ -205,6 +208,11 @@ mixin Onboard2Mixin<T extends StatefulWidget> on State<T> {
       ),
       child: MaterialButton(
         onPressed: onPressed,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(100),
+        ),
+        padding: EdgeInsets.zero,
+        materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 10),
           child: Row(

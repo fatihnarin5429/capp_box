@@ -1,3 +1,4 @@
+import 'package:capp_box/core/extensions/localization_extension.dart';
 import 'package:capp_box/feature/create_capsul/widgets/back_button_widget.dart';
 import 'package:capp_box/feature/create_capsul/widgets/page_title.dart';
 import 'package:capp_box/feature/package/widgets/custom_text_field.dart';
@@ -35,13 +36,13 @@ class _NameViewState extends State<NameView> {
                   child: Column(
                     children: [
                       _buildHeader(context),
-                      const Align(
+                      Align(
                         alignment: Alignment.centerLeft,
                         child: Padding(
                           padding: EdgeInsets.symmetric(vertical: 16),
                           child: Text(
-                            'Ad Soyad',
-                            style: TextStyle(
+                            context.tr('display_name', args: {}),
+                            style: const TextStyle(
                               color: Colors.white,
                               fontSize: 18,
                               fontFamily: 'Urbanist',
@@ -53,7 +54,7 @@ class _NameViewState extends State<NameView> {
                       CustomTextField(
                         textInputType: TextInputType.name,
                         controller: _nameController,
-                        hintText: "Ad-Soyad",
+                        hintText: context.tr('display_name', args: {}),
                         onChanged: (value) {},
                       ),
                       const SizedBox(height: 16),
@@ -80,10 +81,10 @@ class _NameViewState extends State<NameView> {
   Widget _buildHeader(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: const [
+      children: [
         BackButtonWidget(),
         Expanded(
-          child: PageTitle(title: 'İsim Soyisim'),
+          child: PageTitle(title: context.tr('name_title', args: {})),
         ),
       ],
     );

@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:capp_box/core/extensions/localization_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:capp_box/core/services/image_picker_service.dart';
@@ -20,10 +21,10 @@ mixin ImagePickerMixin<T extends StatefulWidget> on State<T> {
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(20),
             ),
-            title: const Text(
-              'Fotoğrafı Onayla',
+            title: Text(
+              context.tr('confirm_photo'),
               textAlign: TextAlign.center,
-              style: TextStyle(
+              style: const TextStyle(
                 color: Colors.white,
                 fontSize: 18,
                 fontFamily: 'Urbanist',
@@ -33,10 +34,10 @@ mixin ImagePickerMixin<T extends StatefulWidget> on State<T> {
             content: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                const Text(
-                  'Seçtiğiniz fotoğrafı profil fotoğrafı olarak kullanmak istiyor musunuz?',
+                Text(
+                  context.tr('confirm_photo_message'),
                   textAlign: TextAlign.center,
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: Colors.white,
                     fontSize: 14,
                     fontFamily: 'Urbanist',

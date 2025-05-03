@@ -1,3 +1,4 @@
+import 'package:capp_box/core/extensions/localization_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:capp_box/feature/profile/bloc/profile_bloc.dart';
@@ -57,11 +58,11 @@ class ProfileHeaderWidget extends StatelessWidget {
             ),
             GestureDetector(
               onTap: onImageTap,
-              child: const Padding(
-                padding: EdgeInsets.only(top: 10),
+              child: Padding(
+                padding: const EdgeInsets.only(top: 10),
                 child: Text(
-                  'Fotoğrafı Değiştir',
-                  style: TextStyle(
+                  context.tr('change_photo'),
+                  style: const TextStyle(
                     color: Color(0xFFE2A380),
                     fontSize: 14,
                     fontFamily: 'Urbanist',

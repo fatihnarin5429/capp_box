@@ -1,3 +1,4 @@
+import 'package:capp_box/core/extensions/localization_extension.dart';
 import 'package:capp_box/product/utility/enums/mediaType_enum.dart';
 import 'package:flutter/material.dart';
 
@@ -93,7 +94,7 @@ class KapsulSecenekCard extends StatelessWidget {
                 child: Text(
                   fiyat,
                   style: TextStyle(
-                    color: fiyat == 'Ücretsiz'
+                    color: fiyat == context.tr('capsule_option_free', args: {})
                         ? Colors.white
                         : const Color(0xFFFF15A2),
                     fontSize: 16,

@@ -1,3 +1,4 @@
+import 'package:capp_box/core/extensions/localization_extension.dart';
 import 'package:capp_box/feature/create_capsul/bloc/create_capsule_bloc.dart';
 import 'package:capp_box/feature/create_capsul/model/create_capsule_model.dart';
 import 'package:capp_box/feature/home/widgets/capsule_card.dart';
@@ -210,12 +211,12 @@ class _CapsuleViewState extends State<CapsuleView> {
                         padding: const EdgeInsets.symmetric(horizontal: 16),
                         child: Text(
                           _selectedIndex == 0
-                              ? 'Tüm Kapsüller'
+                              ? context.tr('all_capsules')
                               : _selectedIndex == 1
-                                  ? 'Yakında Açılacak Kapsüller'
+                                  ? context.tr('coming_soon_capsules')
                                   : _selectedIndex == 2
-                                      ? 'Açılmaya Hazır Kapsüller'
-                                      : 'Benim Oluşturduğum Kapsüller',
+                                      ? context.tr('ready_to_open_capsules')
+                                      : context.tr('my_created_capsules'),
                           style: const TextStyle(
                             color: Colors.white,
                             fontSize: 16,
@@ -226,11 +227,11 @@ class _CapsuleViewState extends State<CapsuleView> {
                       ),
                       const SizedBox(height: 16),
                       if (state.myCreatedCapsules.isEmpty)
-                        const Center(
+                        Center(
                           child: Padding(
                             padding: EdgeInsets.only(top: 32.0),
                             child: Text(
-                              'Henüz hiç kapsül oluşturmadınız',
+                              context.tr('no_capsules_created'),
                               style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 16,
@@ -246,12 +247,13 @@ class _CapsuleViewState extends State<CapsuleView> {
                             padding: const EdgeInsets.only(top: 32.0),
                             child: Text(
                               _selectedIndex == 1
-                                  ? 'Yakında açılacak kapsül bulunmamaktadır'
+                                  ? context.tr('coming_soon_capsules_message')
                                   : _selectedIndex == 2
-                                      ? 'Açılmaya hazır kapsül bulunmamaktadır'
+                                      ? context
+                                          .tr('ready_to_open_capsules_message')
                                       : _selectedIndex == 3
-                                          ? 'Henüz kapsül oluşturmadınız'
-                                          : 'Kapsül bulunmamaktadır',
+                                          ? context.tr('no_capsules_created')
+                                          : context.tr('no_capsules_message'),
                               style: const TextStyle(
                                 color: Colors.white,
                                 fontSize: 16,

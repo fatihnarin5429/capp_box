@@ -1,3 +1,4 @@
+import 'package:capp_box/core/extensions/localization_extension.dart';
 import 'package:flutter/material.dart';
 
 class AppBarWidget extends StatelessWidget {
@@ -19,9 +20,9 @@ class AppBarWidget extends StatelessWidget {
         },
       ),
       centerTitle: true,
-      title: const Text(
-        "Ödeme Yap",
-        style: TextStyle(
+      title: Text(
+        context.tr('payment_title'),
+        style: const TextStyle(
           color: Colors.white,
           fontWeight: FontWeight.w700,
           fontSize: 16,

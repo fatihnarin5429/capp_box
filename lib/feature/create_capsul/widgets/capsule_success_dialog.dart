@@ -1,3 +1,4 @@
+import 'package:capp_box/core/extensions/localization_extension.dart';
 import 'package:capp_box/feature/create_capsul/view/capsule_buy_view.dart';
 import 'package:flutter/material.dart';
 import 'package:capp_box/feature/package/payment_view.dart';
@@ -33,10 +34,10 @@ class CapsuleSuccessDialog extends StatelessWidget {
                 },
               ),
               const SizedBox(height: 16),
-              const Text(
-                'Tebrikler! Kapsülünüz başarıyla oluşturuldu ve belirtilen tarihte gönderilecektir.',
+              Text(
+                context.tr('success_message'),
                 textAlign: TextAlign.center,
-                style: TextStyle(
+                style: const TextStyle(
                   color: Colors.white,
                   fontSize: 24,
                   fontFamily: 'Inter',
@@ -44,10 +45,10 @@ class CapsuleSuccessDialog extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 16),
-              const Text(
-                'Lütfen bekleyin. Ödeme ekranına yönlendiriliyorsunuz.',
+              Text(
+                context.tr('payment_message'),
                 textAlign: TextAlign.center,
-                style: TextStyle(
+                style: const TextStyle(
                   color: Colors.white,
                   fontSize: 16,
                   fontFamily: 'Inter',

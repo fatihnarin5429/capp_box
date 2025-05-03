@@ -1,3 +1,4 @@
+import 'package:capp_box/core/extensions/localization_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:capp_box/feature/package/widgets/custom_text_field.dart';
 
@@ -18,9 +19,9 @@ class FormFields extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
-          'Ad Soyad',
-          style: TextStyle(
+        Text(
+          context.tr('display_name'),
+          style: const TextStyle(
             color: Colors.white,
             fontSize: 18,
             fontFamily: 'Urbanist',
@@ -31,13 +32,13 @@ class FormFields extends StatelessWidget {
         CustomTextField(
           textInputType: TextInputType.name,
           controller: displayNameController,
-          hintText: 'Ad Soyad',
+          hintText: context.tr('display_name'),
           onChanged: (value) {},
         ),
         const SizedBox(height: 24),
-        const Text(
-          'Mail Adresi',
-          style: TextStyle(
+        Text(
+          context.tr('mail_address'),
+          style: const TextStyle(
             color: Colors.white,
             fontSize: 18,
             fontFamily: 'Urbanist',
@@ -48,13 +49,13 @@ class FormFields extends StatelessWidget {
         CustomTextField(
           textInputType: TextInputType.emailAddress,
           controller: mailController,
-          hintText: 'Mail Adresi',
+          hintText: context.tr('mail_address'),
           onChanged: (value) {},
         ),
         const SizedBox(height: 24),
-        const Text(
-          'Telefon Numarası',
-          style: TextStyle(
+        Text(
+          context.tr('phone_number'),
+          style: const TextStyle(
             color: Colors.white,
             fontSize: 18,
             fontFamily: 'Urbanist',
@@ -65,7 +66,7 @@ class FormFields extends StatelessWidget {
         CustomTextField(
           textInputType: TextInputType.phone,
           controller: phoneController,
-          hintText: 'Telefon Numarası',
+          hintText: context.tr('phone_number'),
           onChanged: (value) {},
         ),
       ],

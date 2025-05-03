@@ -1,3 +1,4 @@
+import 'package:capp_box/core/extensions/localization_extension.dart';
 import 'package:capp_box/feature/create_capsul/bloc/create_capsule_bloc.dart';
 import 'package:capp_box/feature/create_capsul/model/create_capsule_model.dart';
 import 'package:capp_box/feature/create_capsul/view/create_capsul_view_2.dart';
@@ -36,8 +37,9 @@ class _CreateCapsulViewState extends State<CreateCapsulView> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       const BackButtonWidget(),
-                      const Expanded(
-                        child: PageTitle(title: 'Kapsül Oluştur'),
+                      Expanded(
+                        child: PageTitle(
+                            title: context.tr('create_capsule', args: {})),
                       ),
                     ],
                   ),

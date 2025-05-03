@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:capp_box/core/extensions/localization_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:capp_box/feature/create_capsul/bloc/create_capsule_bloc.dart';
@@ -76,7 +77,7 @@ class ContinueButton extends StatelessWidget {
             child: Container(
               alignment: Alignment.center,
               child: Text(
-                text ?? 'Devam Et',
+                text ?? context.tr('continue'),
                 style: const TextStyle(
                   color: Color(0xFFE5E5E5),
                   fontSize: 16,

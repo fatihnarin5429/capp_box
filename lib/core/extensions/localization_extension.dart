@@ -8,7 +8,8 @@ extension LocalizationExtension on BuildContext {
   AppLocalizations get loc => AppLocalizations.of(this);
 
   /// Metin çevirisi için kısa yol
-  String tr(String key) => loc.translate(key);
+  String tr(String key, {Map<String, dynamic>? args}) =>
+      loc.translate(key, args: args);
 
   /// Geçerli locale'i alma
   Locale get currentLocale => Localizations.localeOf(this);

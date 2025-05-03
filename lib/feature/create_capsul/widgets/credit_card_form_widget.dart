@@ -1,3 +1,4 @@
+import 'package:capp_box/core/extensions/localization_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_credit_card/flutter_credit_card.dart';
 
@@ -64,8 +65,8 @@ class CreditCardFormWidget extends StatelessWidget with CreditCardInfoMixin {
           fontWeight: FontWeight.w700,
         ),
         cardNumberDecoration: InputDecoration(
-          labelText: 'Kart Numarası',
-          hintText: '16 haneli kart numarasını giriniz',
+          labelText: context.tr('card_number'),
+          hintText: context.tr('card_number_message'),
           labelStyle: const TextStyle(
             color: Colors.white,
             fontSize: 14,
@@ -101,8 +102,8 @@ class CreditCardFormWidget extends StatelessWidget with CreditCardInfoMixin {
           ),
         ),
         cvvCodeDecoration: InputDecoration(
-          labelText: 'CVV',
-          hintText: '3 haneli güvenlik kodu',
+          labelText: context.tr('cvv'),
+          hintText: context.tr('cvv_message'),
           labelStyle: const TextStyle(
             color: Colors.white,
             fontSize: 14,
@@ -138,8 +139,8 @@ class CreditCardFormWidget extends StatelessWidget with CreditCardInfoMixin {
           ),
         ),
         expiryDateDecoration: InputDecoration(
-          labelText: 'Son Kullanma Tarihi',
-          hintText: 'AA/YY',
+          labelText: context.tr('expiration_date'),
+          hintText: context.tr('expiration_date_message'),
           labelStyle: const TextStyle(
             color: Colors.white,
             fontSize: 14,
@@ -175,8 +176,8 @@ class CreditCardFormWidget extends StatelessWidget with CreditCardInfoMixin {
           ),
         ),
         cardHolderDecoration: InputDecoration(
-          labelText: 'Kart Üzerindeki İsim',
-          hintText: 'Kart sahibinin adı',
+          labelText: context.tr('card_holder_name'),
+          hintText: context.tr('card_holder_name_message'),
           labelStyle: const TextStyle(
             color: Colors.white,
             fontSize: 14,

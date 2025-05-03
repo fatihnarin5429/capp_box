@@ -1,3 +1,4 @@
+import 'package:capp_box/core/extensions/localization_extension.dart';
 import 'package:flutter/material.dart';
 
 class SMSNotificationOptions extends StatelessWidget {
@@ -15,9 +16,9 @@ class SMSNotificationOptions extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
-          'Kapsülün açılma zamanı hakkında bilgi içeren SMS şu anda karşı tarafa gönderilsin mi?',
-          style: TextStyle(
+        Text(
+          context.tr('sms_notification_message'),
+          style: const TextStyle(
             color: Colors.white,
             fontSize: 18,
             fontFamily: 'Urbanist',
@@ -60,9 +61,9 @@ class SMSNotificationOptions extends StatelessWidget {
               ),
             ),
             const SizedBox(width: 8),
-            const Text(
-              'Evet, gönderilsin',
-              style: TextStyle(
+            Text(
+              context.tr('yes'),
+              style: const TextStyle(
                 color: Colors.white,
                 fontSize: 16,
                 fontFamily: 'Urbanist',
@@ -107,9 +108,9 @@ class SMSNotificationOptions extends StatelessWidget {
               ),
             ),
             const SizedBox(width: 8),
-            const Text(
-              'Hayır, gönderilmesin',
-              style: TextStyle(
+            Text(
+              context.tr('no'),
+              style: const TextStyle(
                 color: Colors.white,
                 fontSize: 16,
                 fontFamily: 'Urbanist',

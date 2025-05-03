@@ -14,8 +14,14 @@ class LanguageService {
 
   // Supported locales
   final List<Locale> supportedLocales = const [
-    Locale('en'),
-    Locale('tr'),
+    Locale('en'), // English
+    Locale('tr'), // Turkish
+    Locale('de'), // German
+    Locale('it'), // Italian
+    Locale('pt'), // Portuguese
+    Locale('hi'), // Hindi
+    Locale('zh'), // Chinese
+    Locale('ru'), // Russian
   ];
 
   // Get current locale
@@ -32,11 +38,14 @@ class LanguageService {
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
     if (prefs.getString(_languageCodeKey) == null) {
-      if (deviceLocale.languageCode != 'tr') {
-        // If device language is not Turkish, set English as default
-        await setLocale(const Locale('en'));
+      // Check if device language is supported
+      String deviceLanguage = deviceLocale.languageCode;
+      if (supportedLocales
+          .any((locale) => locale.languageCode == deviceLanguage)) {
+        await setLocale(Locale(deviceLanguage));
       } else {
-        await setLocale(const Locale('tr'));
+        // If device language is not supported, set English as default
+        await setLocale(const Locale('en'));
       }
     } else {
       await setLocale(Locale(prefs.getString(_languageCodeKey)!));

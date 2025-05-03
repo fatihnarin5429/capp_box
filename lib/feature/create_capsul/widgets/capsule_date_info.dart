@@ -1,3 +1,4 @@
+import 'package:capp_box/core/extensions/localization_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:capp_box/feature/create_capsul/bloc/create_capsule_bloc.dart';
 import 'package:intl/intl.dart';
@@ -22,11 +23,12 @@ class CapsuleDateInfo extends StatelessWidget {
             width: 330,
             child: Center(
               child: Text(
-                'Kapsül Açılış Tarihi: '
-                '${state.createCapsuleModel.openedDate == null ? '' : DateFormat('dd.MM.yyyy').format(
-                    DateTime.fromMillisecondsSinceEpoch(
-                        int.parse(state.createCapsuleModel.openedDate!)),
-                  )}',
+                context.tr('capsule_open_date') +
+                    ': '
+                        '${state.createCapsuleModel.openedDate == null ? '' : DateFormat('dd.MM.yyyy').format(
+                            DateTime.fromMillisecondsSinceEpoch(int.parse(
+                                state.createCapsuleModel.openedDate!)),
+                          )}',
                 style: const TextStyle(
                   color: Colors.white,
                   fontSize: 16,
@@ -44,11 +46,12 @@ class CapsuleDateInfo extends StatelessWidget {
             width: 330,
             child: Center(
               child: Text(
-                'Kapsül Açılış Tarihi : '
-                '${state.createCapsuleModel.openedDate == null ? '' : DateFormat('HH.mm').format(
-                    DateTime.fromMillisecondsSinceEpoch(
-                        int.parse(state.createCapsuleModel.openedDate!)),
-                  )}',
+                context.tr('capsule_open_time') +
+                    ': '
+                        '${state.createCapsuleModel.openedDate == null ? '' : DateFormat('HH.mm').format(
+                            DateTime.fromMillisecondsSinceEpoch(int.parse(
+                                state.createCapsuleModel.openedDate!)),
+                          )}',
                 style: const TextStyle(
                   color: Colors.white,
                   fontSize: 16,

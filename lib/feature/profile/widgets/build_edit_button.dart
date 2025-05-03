@@ -1,3 +1,4 @@
+import 'package:capp_box/core/extensions/localization_extension.dart';
 import 'package:flutter/material.dart';
 
 class BuilEditButton extends StatefulWidget {
@@ -33,10 +34,10 @@ class _BuilEditButtonState extends State<BuilEditButton> {
             ),
             borderRadius: BorderRadius.circular(100),
           ),
-          child: const Center(
+          child: Center(
             child: Text(
-              'Düzenle',
-              style: TextStyle(
+              context.tr('edit'),
+              style: const TextStyle(
                 color: Color(0xFFE5E5E5),
                 fontSize: 14,
                 fontFamily: 'Urbanist',

@@ -1,3 +1,4 @@
+import 'package:capp_box/core/extensions/localization_extension.dart';
 import 'package:capp_box/feature/login/mixin/build_password_field.dart';
 import 'package:capp_box/product/constants/color_cons.dart';
 import 'package:capp_box/product/widgets/background_gradient.dart';
@@ -25,9 +26,9 @@ class _NewPasswordViewState extends State<NewPasswordView>
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const SizedBox(height: 120),
-                  const Text(
-                    'Yeni Şifre',
-                    style: TextStyle(
+                  Text(
+                    context.tr('new_password', args: {}),
+                    style: const TextStyle(
                       color: Colors.white,
                       fontSize: 18,
                       fontFamily: 'Urbanist',
@@ -35,11 +36,11 @@ class _NewPasswordViewState extends State<NewPasswordView>
                     ),
                   ),
                   const SizedBox(height: 5),
-                  buildPasswordField('Şifrenizi giriniz'),
+                  buildPasswordField(context.tr('enter_password', args: {})),
                   const SizedBox(height: 35),
-                  const Text(
-                    'Yeni Şifre Tekrar',
-                    style: TextStyle(
+                  Text(
+                    context.tr('new_password_confirm', args: {}),
+                    style: const TextStyle(
                       color: Colors.white,
                       fontSize: 18,
                       fontFamily: 'Urbanist',
@@ -47,7 +48,8 @@ class _NewPasswordViewState extends State<NewPasswordView>
                     ),
                   ),
                   const SizedBox(height: 5),
-                  buildPasswordField('Şifrenizi tekrar giriniz'),
+                  buildPasswordField(
+                      context.tr('enter_password_again', args: {})),
                   const SizedBox(height: 8),
                   const Expanded(child: SizedBox()),
                   Center(
@@ -90,10 +92,11 @@ class _NewPasswordViewState extends State<NewPasswordView>
                                         ),
                                       ),
                                       const SizedBox(height: 18),
-                                      const Text(
-                                        'Şifre Sıfırlama Başarılı',
+                                      Text(
+                                        context.tr('password_reset_successful',
+                                            args: {}),
                                         textAlign: TextAlign.center,
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                           color: Colors.white,
                                           fontSize: 24,
                                           fontFamily: 'Inter',
@@ -101,10 +104,11 @@ class _NewPasswordViewState extends State<NewPasswordView>
                                         ),
                                       ),
                                       const SizedBox(height: 8),
-                                      const Text(
-                                        'Lütfen bekleyin.    Ana sayfaya yönlendirileceksiniz',
+                                      Text(
+                                        context.tr('redirecting_to_home',
+                                            args: {}),
                                         textAlign: TextAlign.center,
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                           color: Colors.white,
                                           fontSize: 16,
                                           fontFamily: 'Inter',
@@ -135,10 +139,10 @@ class _NewPasswordViewState extends State<NewPasswordView>
                             borderRadius: BorderRadius.circular(100),
                           ),
                         ),
-                        child: const Center(
+                        child: Center(
                           child: Text(
-                            'Devam Et',
-                            style: TextStyle(
+                            context.tr('continue_button', args: {}),
+                            style: const TextStyle(
                               color: Color(0xFFE5E5E5),
                               fontSize: 14,
                               fontFamily: 'Urbanist',

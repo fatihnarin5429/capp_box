@@ -1,3 +1,5 @@
+import 'package:capp_box/core/extensions/localization_extension.dart';
+import 'package:capp_box/core/l10n/app_localizations.dart';
 import 'package:capp_box/feature/create_capsul/view/my_created_capsules_view.dart';
 import 'package:flutter/material.dart';
 
@@ -29,9 +31,9 @@ class CapsuleTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Text(
-      'Kapsüllerim',
-      style: TextStyle(
+    return Text(
+      context.tr('capsules'),
+      style: const TextStyle(
         color: Colors.white,
         fontSize: 20,
         fontFamily: 'Urbanist',
@@ -61,28 +63,28 @@ class CapsuleFilterButtons extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           FilterButton(
-            text: '📮 Tümü',
+            text: context.tr('all'),
             isSelected: selectedIndex == 0,
             width: 180,
             onTap: () => onFilterSelected(0),
           ),
           const SizedBox(width: 12),
           FilterButton(
-            text: '📦 Kapsüllerim',
+            text: context.tr('my_created'),
             isSelected: selectedIndex == 3,
             width: 180,
             onTap: () => onFilterSelected(3),
           ),
           const SizedBox(width: 12),
           FilterButton(
-            text: '⏳ Yakında',
+            text: context.tr('coming_soon'),
             isSelected: selectedIndex == 1,
             width: 180,
             onTap: () => onFilterSelected(1),
           ),
           const SizedBox(width: 12),
           FilterButton(
-            text: '🔓 Hazır',
+            text: context.tr('ready_to_open'),
             isSelected: selectedIndex == 2,
             width: 180,
             onTap: () => onFilterSelected(2),

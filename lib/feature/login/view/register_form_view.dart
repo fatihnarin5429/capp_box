@@ -1,3 +1,4 @@
+import 'package:capp_box/core/extensions/localization_extension.dart';
 import 'package:capp_box/feature/home/view/home_view_2.dart';
 import 'package:capp_box/feature/login/bloc/login_bloc.dart';
 import 'package:capp_box/feature/package/widgets/custom_text_field.dart';
@@ -34,44 +35,44 @@ class RegisterFormView extends StatelessWidget {
               children: [
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 20),
-                  child: _buildLabel('Ad - Soyad'),
+                  child: _buildLabel(context, 'fullname'),
                 ),
                 CustomTextField(
                   textInputType: TextInputType.name,
                   controller: nameController,
-                  hintText: 'Adınız-Soyadınız',
+                  hintText: context.tr('fullname_hint', args: {}),
                   style: const TextStyle(color: Colors.white),
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 20),
-                  child: _buildLabel('E-posta'),
+                  child: _buildLabel(context, 'email_input'),
                 ),
                 CustomTextField(
                   textInputType: TextInputType.emailAddress,
                   controller: emailController,
-                  hintText: 'E-posta',
+                  hintText: context.tr('email_input', args: {}),
                   keyboardType: TextInputType.emailAddress,
                   style: const TextStyle(color: Colors.white),
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 20),
-                  child: _buildLabel('Şifre Oluştur'),
+                  child: _buildLabel(context, 'create_password'),
                 ),
                 CustomTextField(
                   textInputType: TextInputType.visiblePassword,
                   controller: passwordController,
-                  hintText: 'Şifre',
+                  hintText: context.tr('password_hint', args: {}),
                   obscureText: true,
                   style: const TextStyle(color: Colors.white),
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 20),
-                  child: _buildLabel('Şifre Tekrar'),
+                  child: _buildLabel(context, 'password_confirm_label'),
                 ),
                 CustomTextField(
                   textInputType: TextInputType.visiblePassword,
                   controller: passwordConfirmController,
-                  hintText: 'Şifre Tekrar',
+                  hintText: context.tr('password_confirm_hint', args: {}),
                   obscureText: true,
                   style: const TextStyle(color: Colors.white),
                 ),
@@ -87,9 +88,9 @@ class RegisterFormView extends StatelessWidget {
     );
   }
 
-  Widget _buildLabel(String text) {
+  Widget _buildLabel(BuildContext context, String key) {
     return Text(
-      text,
+      context.tr(key, args: {}),
       style: const TextStyle(
         color: Colors.white,
         fontSize: 18,
@@ -107,13 +108,14 @@ class RegisterFormView extends StatelessWidget {
             passwordController.text.isEmpty ||
             passwordConfirmController.text.isEmpty) {
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('Lütfen tüm alanları doldurun')),
+            SnackBar(content: Text(context.tr('fill_all_fields', args: {}))),
           );
           return;
         }
         if (passwordController.text != passwordConfirmController.text) {
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('Şifreler eşleşmiyor')),
+            SnackBar(
+                content: Text(context.tr('passwords_not_matching', args: {}))),
           );
           return;
         }
@@ -149,10 +151,10 @@ class RegisterFormView extends StatelessWidget {
           ),
           borderRadius: BorderRadius.circular(100),
         ),
-        child: const Center(
+        child: Center(
           child: Text(
-            'Kayıt Ol',
-            style: TextStyle(
+            context.tr('register_button', args: {}),
+            style: const TextStyle(
               color: Color(0xFFE5E5E5),
               fontSize: 14,
               fontFamily: 'Urbanist',

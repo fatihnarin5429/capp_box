@@ -1,3 +1,4 @@
+import 'package:capp_box/core/extensions/localization_extension.dart';
 import 'package:flutter/material.dart';
 
 class PageTitle extends StatelessWidget {
@@ -14,7 +15,7 @@ class PageTitle extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
       child: Center(
         child: Text(
-          title,
+          context.tr(title),
           textAlign: TextAlign.center,
           style: const TextStyle(
             color: Colors.white,

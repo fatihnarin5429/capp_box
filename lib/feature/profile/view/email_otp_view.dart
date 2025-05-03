@@ -1,3 +1,4 @@
+import 'package:capp_box/core/extensions/localization_extension.dart';
 import 'package:capp_box/feature/profile/bloc/profile_bloc.dart';
 import 'package:capp_box/product/widgets/background_gradient.dart';
 import 'package:flutter/material.dart';
@@ -69,7 +70,7 @@ class _EmailOtpViewState extends State<EmailOtpView> {
     if (!mounted) return;
     SuccessDialog.show(
       context: context,
-      message: 'E-posta adresiniz başarıyla doğrulandı.',
+      message: context.tr('email_verified', args: {}),
       onComplete: () {
         if (!mounted) return;
         Navigator.of(context).pushNamedAndRemoveUntil(
@@ -117,9 +118,9 @@ class _EmailOtpViewState extends State<EmailOtpView> {
                           ),
                         ),
                       ),
-                      const Expanded(
+                      Expanded(
                         child: Text(
-                          'E-Posta Doğrulama',
+                          context.tr('email_verification_title', args: {}),
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             color: Colors.white,
@@ -134,7 +135,8 @@ class _EmailOtpViewState extends State<EmailOtpView> {
                   ),
                   const SizedBox(height: 32),
                   Text(
-                    'E-posta adresinize OTP kodu gönderdik\n${widget.email}\nLütfen kodu giriniz.',
+                    context.tr('email_verification_message',
+                        args: {'email': widget.email}),
                     textAlign: TextAlign.center,
                     style: const TextStyle(
                       color: Colors.white,
@@ -171,8 +173,8 @@ class _EmailOtpViewState extends State<EmailOtpView> {
       onPressed: _remainingTime <= 0 ? startTimer : null,
       child: Text(
         _remainingTime <= 0
-            ? 'Kodu Tekrar Gönder'
-            : 'Kodu $_remainingTime saniye sonra tekrar gönderebilirsiniz',
+            ? context.tr('resend_code', args: {})
+            : context.tr('resend_code_message', args: {'time': _remainingTime}),
         style: TextStyle(
           color: _remainingTime <= 0 ? Colors.blue : Colors.white,
           fontSize: 14,

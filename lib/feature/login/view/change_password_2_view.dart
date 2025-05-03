@@ -1,3 +1,4 @@
+import 'package:capp_box/core/extensions/localization_extension.dart';
 import 'package:capp_box/feature/create_capsul/widgets/continue_button.dart';
 import 'package:capp_box/feature/login/view/new_passxord_view.dart';
 import 'package:capp_box/feature/profile/widgets/pinput_widget.dart';
@@ -35,7 +36,7 @@ class _ChangePassword2State extends State<ChangePassword2> {
       );
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Lütfen 4 haneli kodu girin')),
+        SnackBar(content: Text(context.tr('enter_4_digit_code', args: {}))),
       );
     }
   }
@@ -55,7 +56,7 @@ class _ChangePassword2State extends State<ChangePassword2> {
                 children: [
                   const SizedBox(height: 40),
                   Text(
-                    'Şifre Sıfırlama',
+                    context.tr('password_reset', args: {}),
                     style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                           fontWeight: FontWeight.bold,
                           color: Colors.white,
@@ -63,7 +64,7 @@ class _ChangePassword2State extends State<ChangePassword2> {
                   ),
                   const SizedBox(height: 16),
                   Text(
-                    '$_maskedEmail e-postanıza bir OTP kodu gönderdik. Aşağıdaki kodu girin.',
+                    context.tr('otp_code_sent', args: {'email': _maskedEmail}),
                     style: const TextStyle(
                       color: Color(0xFF84858E),
                       fontSize: 14,
@@ -79,7 +80,7 @@ class _ChangePassword2State extends State<ChangePassword2> {
                     focusNode: _focusNode,
                   ),
                   const SizedBox(height: 24),
-                  _buildResendCodeSection(),
+                  _buildResendCodeSection(context),
                   const Spacer(),
                   ContinueButton(
                     displayNameController: _pinController,
@@ -99,13 +100,13 @@ class _ChangePassword2State extends State<ChangePassword2> {
   }
 }
 
-Widget _buildResendCodeSection() {
+Widget _buildResendCodeSection(BuildContext context) {
   return Row(
     mainAxisAlignment: MainAxisAlignment.center,
     children: [
-      const Text(
-        'Kod almadınız mı? ',
-        style: TextStyle(
+      Text(
+        context.tr('did_not_receive_code', args: {}),
+        style: const TextStyle(
           color: Color(0xFF84858E),
           fontSize: 14,
           fontFamily: 'Urbanist',
@@ -116,9 +117,9 @@ Widget _buildResendCodeSection() {
         onPressed: () {
           // OTP yeniden gönderme işlemi yapılmalı
         },
-        child: const Text(
-          'Yeniden Gönder',
-          style: TextStyle(
+        child: Text(
+          context.tr('resend', args: {}),
+          style: const TextStyle(
             color: Color(0xFFB224EF),
             fontSize: 14,
             fontFamily: 'Urbanist',

@@ -1,3 +1,4 @@
+import 'package:capp_box/core/extensions/localization_extension.dart';
 import 'package:capp_box/feature/package/widgets/custom_text_field.dart';
 import 'package:capp_box/feature/profile/bloc/profile_bloc.dart';
 import 'package:capp_box/feature/profile/view/email_otp_view.dart';
@@ -30,12 +31,12 @@ class _EpostaViewState extends State<EpostaView> {
             child: Column(
               children: [
                 _buildHeader(context),
-                const Align(
+                Align(
                   alignment: Alignment.centerLeft,
                   child: Padding(
                     padding: EdgeInsets.symmetric(vertical: 16),
                     child: Text(
-                      'E-Posta Adresi',
+                      context.tr('mail_address'),
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 18,
@@ -49,7 +50,7 @@ class _EpostaViewState extends State<EpostaView> {
                 CustomTextField(
                   textInputType: TextInputType.emailAddress,
                   controller: _emailController,
-                  hintText: "E-posta adresiniz",
+                  hintText: context.tr('mail_address_message'),
                   onChanged: (value) {},
                 ),
                 const SizedBox(height: 16),
@@ -88,10 +89,10 @@ class _EpostaViewState extends State<EpostaView> {
   Widget _buildHeader(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: const [
+      children: [
         BackButtonWidget(),
         Expanded(
-          child: PageTitle(title: 'E-Posta'),
+          child: PageTitle(title: context.tr('mail_address')),
         ),
       ],
     );

@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:bot_toast/bot_toast.dart';
+import 'package:capp_box/core/extensions/localization_extension.dart';
 import 'package:capp_box/feature/create_capsul/bloc/create_capsule_bloc.dart';
 import 'package:capp_box/feature/create_capsul/model/create_capsule_model.dart';
 import 'package:capp_box/feature/create_capsul/view/create_capsul_3_view..dart';
@@ -126,7 +127,7 @@ class _CreateCapsul2ViewState extends State<CreateCapsul2View> with MediaMixin {
 
       if (fileType == null) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Desteklenmeyen dosya türü.')),
+          SnackBar(content: Text(context.tr('unsupported_file_type'))),
         );
         return;
       }
@@ -164,7 +165,7 @@ class _CreateCapsul2ViewState extends State<CreateCapsul2View> with MediaMixin {
       }
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Dosya seçilirken bir hata oluştu: $e')),
+        SnackBar(content: Text(context.tr('file_selection_error'))),
       );
     }
   }
@@ -191,17 +192,17 @@ class _CreateCapsul2ViewState extends State<CreateCapsul2View> with MediaMixin {
                               alignment: Alignment.centerLeft,
                               child: BackButtonWidget(),
                             ),
-                            const PageTitle(title: 'Kapsül Oluştur'),
+                            PageTitle(title: context.tr('create_capsule')),
                           ],
                         ),
 
                         // Progress indicator
                         StepIndicator(currentStep: currentStep),
 
-                        const Align(
+                        Align(
                           alignment: Alignment.centerLeft,
                           child: Text(
-                            'Başlık Ekleyin',
+                            context.tr('add_title'),
                             style: TextStyle(
                               color: Colors.white,
                               fontSize: 18,
@@ -214,15 +215,15 @@ class _CreateCapsul2ViewState extends State<CreateCapsul2View> with MediaMixin {
                         const SizedBox(height: 12),
                         CustomTextField(
                           onChanged: (value) {},
-                          hintText: 'Başlık',
+                          hintText: context.tr('title'),
                           controller: _titleController,
                           textInputType: TextInputType.name,
                         ),
                         const SizedBox(height: 24),
-                        const Align(
+                        Align(
                           alignment: Alignment.centerLeft,
                           child: Text(
-                            'Mesajınız',
+                            context.tr('message'),
                             style: TextStyle(
                               color: Colors.white,
                               fontSize: 18,
@@ -236,7 +237,7 @@ class _CreateCapsul2ViewState extends State<CreateCapsul2View> with MediaMixin {
                         CustomTextField(
                           textInputType: TextInputType.text,
                           controller: _messageController,
-                          hintText: widget.hintText ?? 'Mesajınızı yazın...',
+                          hintText: context.tr('message'),
                           maxLines: null,
                           height: 278,
                           onChanged: (value) {
@@ -251,10 +252,10 @@ class _CreateCapsul2ViewState extends State<CreateCapsul2View> with MediaMixin {
                           alignment: Alignment.centerLeft,
                           child: Text(
                             widget.type == MediaType.text
-                                ? 'Yazı Ekle'
+                                ? context.tr('add_text')
                                 : widget.type == MediaType.voice
-                                    ? "Ses Ekle"
-                                    : "Medya Ekle",
+                                    ? context.tr('add_voice')
+                                    : context.tr('add_media'),
                             style: const TextStyle(
                               color: Colors.white,
                               fontSize: 18,
@@ -266,10 +267,10 @@ class _CreateCapsul2ViewState extends State<CreateCapsul2View> with MediaMixin {
                         ),
                         widget.type == MediaType.photo
                             ? const SizedBox()
-                            : const Align(
+                            : Align(
                                 alignment: Alignment.centerLeft,
                                 child: Text(
-                                  'Yüklemek istediğiniz videoyu seçiniz',
+                                  context.tr('select_video'),
                                   style: TextStyle(
                                     color: Colors.white,
                                     fontSize: 12,

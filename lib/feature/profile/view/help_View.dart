@@ -1,3 +1,4 @@
+import 'package:capp_box/core/extensions/localization_extension.dart';
 import 'package:capp_box/feature/create_capsul/widgets/back_button_widget.dart';
 import 'package:capp_box/feature/create_capsul/widgets/page_title.dart'
     show PageTitle;
@@ -12,36 +13,31 @@ class HelpView extends StatefulWidget {
 }
 
 class _HelpViewState extends State<HelpView> {
-  final List<Map<String, String>> helpItems = [
-    {
-      'title': 'Capp Box nedir?',
-      'description':
-          'Capp Box, dijital kapsüller oluşturmanıza ve bunları sevdiklerinizle paylaşmanıza olanak tanıyan yenilikçi bir uygulamadır. Fotoğraflar, videolar, mesajlar ve daha fazlasını içeren özel kapsüller oluşturabilir, bunları belirlediğiniz tarihte açılacak şekilde ayarlayabilirsiniz.'
-    },
-    {
-      'title': 'Capp Box nasıl çalışır?',
-      'description':
-          '1. Yeni bir kapsül oluşturun\n2. İçeriğinizi ekleyin (fotoğraf, video, mesaj)\n3. Açılma tarihini belirleyin\n4. Alıcıları seçin\n5. Kapsülünüz hazır! Belirlenen tarihte alıcılar kapsülünüzü görebilecek.'
-    },
-    {
-      'title': 'İletişim',
-      'description':
-          'Bize ulaşmak için:\n\nE-posta: support@cappbox.com\nTelefon: +90 555 123 4567\nAdres: İstanbul, Türkiye\n\nÇalışma saatleri: Hafta içi 09:00 - 18:00'
-    },
-    {
-      'title': 'Gizlilik Politikası',
-      'description':
-          'Capp Box olarak gizliliğinize önem veriyoruz. Kişisel verileriniz 6698 sayılı KVKK kapsamında korunmaktadır. Verileriniz sadece hizmet kalitemizi artırmak ve size daha iyi deneyim sunmak için kullanılmaktadır. Detaylı bilgi için gizlilik politikamızı inceleyebilirsiniz.'
-    },
-    {
-      'title': 'Hesap',
-      'description':
-          'Hesabınızı yönetmek için:\n\n1. Profilim\n2. Ayarlar\n3. Çıkış Yap'
-    },
-  ];
-
   @override
   Widget build(BuildContext context) {
+    final List<Map<String, String>> helpItems = [
+      {
+        'title': context.tr('help_what_is', args: {}),
+        'description': context.tr('help_what_is_description', args: {}),
+      },
+      {
+        'title': context.tr('help_how_works', args: {}),
+        'description': context.tr('help_how_works_description', args: {}),
+      },
+      {
+        'title': context.tr('help_contact', args: {}),
+        'description': context.tr('help_contact_description', args: {}),
+      },
+      {
+        'title': context.tr('help_privacy_policy', args: {}),
+        'description': context.tr('help_privacy_policy_description', args: {}),
+      },
+      {
+        'title': context.tr('help_account', args: {}),
+        'description': context.tr('help_account_description', args: {}),
+      },
+    ];
+
     return Scaffold(
       body: Stack(
         children: [
@@ -54,14 +50,14 @@ class _HelpViewState extends State<HelpView> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Stack(
+                    Stack(
                       alignment: Alignment.center,
                       children: [
-                        Align(
+                        const Align(
                           alignment: Alignment.centerLeft,
                           child: BackButtonWidget(),
                         ),
-                        PageTitle(title: 'Yardım'),
+                        PageTitle(title: context.tr('help_title', args: {})),
                       ],
                     ),
                     Padding(

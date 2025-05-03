@@ -10,11 +10,24 @@ final Map<String, String> tr = {
   'next': 'İleri',
   'back': 'Geri',
   'loading': 'Yükleniyor...',
+  'carry_to_future': 'Taşıyın',
+  'remember_your_memories': 'Anılarınızı geleceğe\n',
+  'phone_number': 'Telefon Numarası',
+  'mail_address': 'E-posta Adresi',
+  'mail_address_message': 'E-posta adresiniz',
+  'display_name': 'Ad Soyad',
+  'email_verified': 'E-posta adresiniz başarıyla doğrulandı.',
+  'email_verification_title': 'E-Posta Doğrulama',
+  'email_verification_message':
+      'E-posta adresinize OTP kodu gönderdik\n}\nLütfen kodu giriniz.',
+  'resend_code': 'Kodu Tekrar Gönder',
+  'resend_code_message': 'Kodu {time} saniye sonra tekrar gönderebilirsiniz',
 
   // Login/Auth
   'login': 'Giriş Yap',
   'register': 'Kayıt Ol',
   'email': 'E-posta',
+
   'password': 'Şifre',
   'forgot_password': 'Şifremi Unuttum?',
   'login_with_phone': 'Telefon Numarası ile Giriş',
@@ -29,8 +42,13 @@ final Map<String, String> tr = {
   'login_to_account': 'Hesabınıza giriş yapın',
   'create_account': 'Hesap oluşturun',
   'accept_terms': 'Kullanım Koşullarını kabul ediyorum',
-  'connect_with_apple': 'Apple ile bağla',
+  'connect_with_apple': 'Apple ile bağlan',
   'google': 'Google ile bağlan',
+  'continue_with_email': 'E-posta ile devam et',
+  'continue_with_phone': 'Telefon ile devam et',
+  'continue_without_account': 'Üye olmadan devam et',
+  'register': 'Kayıt ol',
+  "devametmek": "Devam etmek için telefon numaranızı girin.",
 
   // Home
   'home': 'Ana Sayfa',
@@ -49,7 +67,7 @@ final Map<String, String> tr = {
   'image_capsule': 'Fotoğraf',
   'premium_feature': 'Premium Özellik',
   'capsule_creation_date': 'Oluşturulma Tarihi',
-  'capsule_open_date': 'Açılış Tarihi',
+
   'capsule_recipient': 'Alıcı',
   'capsule_status': 'Durum',
   'capsule_view': 'Görüntüle',
@@ -100,6 +118,9 @@ final Map<String, String> tr = {
   'logout_button': 'Çıkış Yap',
   'cancel_button': 'İptal',
   'change_photo': 'Fotoğrafı değiştir',
+  'confirm_photo': 'Fotoğrafı Onayla',
+  'confirm_photo_message':
+      'Seçtiğiniz fotoğrafı profil fotoğrafı olarak kullanmak istiyor musunuz?',
   'phone': 'Telefon',
   'account': 'Hesap',
   'privacy_security': 'Gizlilik & Güvenlik',
@@ -197,6 +218,14 @@ final Map<String, String> tr = {
   'password_changed': 'Şifreniz değiştirildi',
   'profile_updated_successfully': 'Profiliniz başarıyla güncellendi',
 
+  // Password Reset
+  'password_reset': 'Şifre Sıfırlama',
+  'otp_code_sent':
+      '{email} e-postanıza bir OTP kodu gönderdik. Aşağıdaki kodu girin.',
+  'enter_4_digit_code': 'Lütfen 4 haneli kodu girin',
+  'did_not_receive_code': 'Kod almadınız mı? ',
+  'resend': 'Yeniden Gönder',
+
   // UI Elements
   'show_more': 'Daha Fazla Göster',
   'show_less': 'Daha Az Göster',
@@ -209,4 +238,130 @@ final Map<String, String> tr = {
   'audio_file_selected': 'Ses dosyası seçildi',
   'photo': 'fotograf',
   'audio': 'ses',
+  'all': 'Tümü',
+  'coming_soon': 'Yakında',
+
+  'ready_to_open': 'Açılmaya Hazır',
+  'my_created': 'Benim Oluşturduğum',
+  'add_title': 'Başlık Ekleyin',
+  'add_message': 'Mesajınız',
+
+  'add_date': 'Tarih Seç',
+  'select_date': 'Tarih Seçiniz',
+  'add_time': 'Saat Seç',
+  'select_time': 'Saat Seçiniz',
+  'add_media': 'Medya Seç',
+  'add_location': 'Konum Seç',
+  'title': 'Başlık',
+  'message': 'Mesaj',
+  'date': 'Tarih',
+  'time': 'Saat',
+  'media': 'Medya',
+  'location': 'Konum',
+  'file_selection_error': 'Dosya seçilirken bir hata oluştu:',
+  'add_text': 'Yazı Ekle',
+  'add_voice': 'Ses Ekle',
+  'add_image': 'Fotoğraf Ekle',
+  'add_video': 'Video Ekle',
+  'select_video': 'Yüklemek istediğiniz videoyu seçiniz',
+  'recipient_info': 'Teslim Alacak Kişinin;',
+  'name_surname': 'Ad Soyad',
+  'email_address': 'E-posta Adresi',
+  'phone_number': 'Telefon Numarası',
+  'when_capsule_opens': 'Kapsül ne zaman açılsın?',
+  'capsule_open_date': 'Açılma Tarihi',
+  'capsule_open_time': 'Açılma Saati',
+  "capsule_history": "Kapsül Tarihi",
+  "capsule_history_message": "Kapsül ne zaman açılsın?",
+  "cancel_capsule_date": "İPTAL",
+  "confirm_capsule_date": "TARİH SEÇ",
+
+  "info_sharing_options": "Bilgilerim gizli kalsın",
+  "share_info": "Verilsin",
+  "share_info_message": "Bilgilerin karşı tarafa verilsin mi?",
+  "yes": "Evet,gönderilsin",
+  "no": "Hayır,gönderilmesin",
+  "save_draft": "Taslak Olarak Kaydet",
+  "send": "Gönder",
+  "payment_title": "Ödeme Yap",
+  "payment_message": "Lütfen bekleyin. Ödeme ekranına yönlendiriliyorsunuz.",
+  "success_message":
+      "Tebrikler! Kapsülünüz başarıyla oluşturuldu ve belirtilen tarihte gönderilecektir.",
+  "sms_notification_message":
+      "Kapsülün açılma zamanı hakkında bilgi içeren SMS şu anda karşı tarafa gönderilsin mi?",
+
+  "card_number": 'Kart Numarası',
+  "card_number_message": '16 haneli kart numarasını giriniz',
+  "cvv": '3 haneli güvenlik kodu',
+  "expiration_date": 'Son Kullanma Tarihi',
+  "expiration_date_message": 'AA/YY',
+  "card_holder_name": 'Kart Üzerindeki İsim',
+  "card_holder_name_message": 'Kart sahibinin adı',
+  "card_number_error": 'Kart numarası hatalı',
+  "cvv_error": 'Güvenlik kodu hatalı',
+  "expiration_date_error": 'Son kullanma tarihi hatalı',
+  "card_holder_name_error": 'Kart üzerindeki isim hatalı',
+
+  "coming_soon_capsules_message": 'Yakında açılacak kapsül bulunmamaktadır',
+  "ready_to_open_capsules_message": 'Açılmaya hazır kapsül bulunmamaktadır',
+  "my_created_capsules_message": 'Benim Oluşturduğum Kapsüller',
+  "no_capsules_message": 'Kapsül bulunmamaktadır',
+  "no_capsules_created_message": 'Henüz kapsül oluşturmadınız',
+
+  // Password Management
+  "password_reset_title": "Şifre Yenileme",
+  "password_reset_message":
+      "Lütfen e-postanızı girin, bir sonraki adımda şifrenizi sıfırlamak için bir OTP kodu göndereceğiz.",
+  "new_password": "Yeni Şifre",
+  "new_password_confirm": "Yeni Şifre Tekrar",
+  "enter_password": "Şifrenizi giriniz",
+  "enter_password_again": "Şifrenizi tekrar giriniz",
+  "password_reset_successful": "Şifre Sıfırlama Başarılı",
+  "redirecting_to_home": "Lütfen bekleyin. Ana sayfaya yönlendirileceksiniz",
+  "change_password": "Şifre Değiştir",
+  "current_password": "Mevcut Şifre",
+  "password_updated": "Şifreniz başarıyla güncellendi!",
+
+  // Login/Register Forms
+  "fullname": "Ad - Soyad",
+  "fullname_hint": "Adınız-Soyadınız",
+  "email_input": "E-posta",
+  "email_hint": "E-postanızı giriniz",
+  "create_password": "Şifre Oluştur",
+  "password_hint": "Şifre",
+  "password_confirm_label": "Şifre Tekrar",
+  "password_confirm_hint": "Şifre Tekrar",
+  "login_button": "Giriş Yap",
+  "register_button": "Kayıt Ol",
+  "continue_button": "Devam Et",
+  "fill_all_fields": "Lütfen tüm alanları doldurun",
+  "passwords_not_matching": "Şifreler eşleşmiyor",
+  "forgot_password_short": "Şifremi Unuttum",
+  "privacy_title": "Gizlilik",
+
+  // Help Screen
+  "help_title": "Yardım",
+  "help_what_is": "Capp Box nedir?",
+  "help_what_is_description":
+      "Capp Box, dijital kapsüller oluşturmanıza ve bunları sevdiklerinizle paylaşmanıza olanak tanıyan yenilikçi bir uygulamadır. Fotoğraflar, videolar, mesajlar ve daha fazlasını içeren özel kapsüller oluşturabilir, bunları belirlediğiniz tarihte açılacak şekilde ayarlayabilirsiniz.",
+  "help_how_works": "Capp Box nasıl çalışır?",
+  "help_how_works_description":
+      "1. Yeni bir kapsül oluşturun\n2. İçeriğinizi ekleyin (fotoğraf, video, mesaj)\n3. Açılma tarihini belirleyin\n4. Alıcıları seçin\n5. Kapsülünüz hazır! Belirlenen tarihte alıcılar kapsülünüzü görebilecek.",
+  "help_contact": "İletişim",
+  "help_contact_description":
+      "Bize ulaşmak için:\n\nE-posta: support@cappbox.com\nTelefon: +90 555 123 4567\nAdres: İstanbul, Türkiye\n\nÇalışma saatleri: Hafta içi 09:00 - 18:00",
+  "help_privacy_policy": "Gizlilik Politikası",
+  "help_privacy_policy_description":
+      "Capp Box olarak gizliliğinize önem veriyoruz. Kişisel verileriniz 6698 sayılı KVKK kapsamında korunmaktadır. Verileriniz sadece hizmet kalitemizi artırmak ve size daha iyi deneyim sunmak için kullanılmaktadır. Detaylı bilgi için gizlilik politikamızı inceleyebilirsiniz.",
+  "help_account": "Hesap",
+  "help_account_description":
+      "Hesabınızı yönetmek için:\n\n1. Profilim\n2. Ayarlar\n3. Çıkış Yap",
+
+  // Capsule Options
+  "capsule_option_text": "Yazı",
+  "capsule_option_video": "Video",
+  "capsule_option_voice": "Ses Kaydı",
+  "capsule_option_photo": "Fotoğraf",
+  "capsule_option_free": "Ücretsiz",
+  "premium_feature_indicator": "Premium",
 };

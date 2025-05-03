@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:capp_box/core/extensions/localization_extension.dart';
 import 'package:capp_box/feature/create_capsul/bloc/create_capsule_bloc.dart';
 import 'package:capp_box/feature/create_capsul/widgets/back_button_widget.dart';
 import 'package:capp_box/feature/create_capsul/widgets/page_title.dart';
@@ -61,12 +62,11 @@ class _CreateCapsul3ViewState extends State<CreateCapsul3View> {
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    Row(
                       children: [
-                        BackButtonWidget(),
+                        const BackButtonWidget(),
                         Expanded(
-                          child: PageTitle(title: 'Kapsül Oluştur'),
+                          child: PageTitle(title: context.tr('create_capsule')),
                         ),
                       ],
                     ),
@@ -92,9 +92,9 @@ class _CreateCapsul3ViewState extends State<CreateCapsul3View> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
-          'Teslim Alacak Kişinin;',
-          style: TextStyle(
+        Text(
+          context.tr('recipient_info'),
+          style: const TextStyle(
             color: Colors.white,
             fontSize: 18,
             fontFamily: 'Urbanist',
@@ -103,9 +103,9 @@ class _CreateCapsul3ViewState extends State<CreateCapsul3View> {
           ),
         ),
         const SizedBox(height: 12),
-        const Text(
-          'Ad Soyad',
-          style: TextStyle(
+        Text(
+          context.tr('name_surname'),
+          style: const TextStyle(
             color: Colors.white,
             fontSize: 18,
             fontFamily: 'Urbanist',
@@ -115,14 +115,14 @@ class _CreateCapsul3ViewState extends State<CreateCapsul3View> {
         const SizedBox(height: 12),
         CustomTextField(
           controller: _displayNameController,
-          hintText: 'Ad Soyad',
+          hintText: context.tr('name_surname'),
           onChanged: (value) {},
           textInputType: TextInputType.name,
         ),
         const SizedBox(height: 24),
-        const Text(
-          'Mail Adresi',
-          style: TextStyle(
+        Text(
+          context.tr('email_address'),
+          style: const TextStyle(
             color: Colors.white,
             fontSize: 18,
             fontFamily: 'Urbanist',
@@ -132,14 +132,14 @@ class _CreateCapsul3ViewState extends State<CreateCapsul3View> {
         const SizedBox(height: 12),
         CustomTextField(
           controller: _mailController,
-          hintText: 'Mail Adresi',
+          hintText: context.tr('email_address'),
           onChanged: (value) {},
           textInputType: TextInputType.emailAddress,
         ),
         const SizedBox(height: 24),
-        const Text(
-          'Telefon Numarası',
-          style: TextStyle(
+        Text(
+          context.tr('phone_number'),
+          style: const TextStyle(
             color: Colors.white,
             fontSize: 18,
             fontFamily: 'Urbanist',
@@ -149,7 +149,7 @@ class _CreateCapsul3ViewState extends State<CreateCapsul3View> {
         const SizedBox(height: 12),
         CustomTextField(
           controller: _phoneController,
-          hintText: 'Telefon Numarası',
+          hintText: context.tr('phone_number'),
           onChanged: (value) {},
           textInputType: TextInputType.phone,
         ),

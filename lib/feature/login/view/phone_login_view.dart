@@ -1,3 +1,4 @@
+import 'package:capp_box/core/extensions/localization_extension.dart';
 import 'package:capp_box/feature/create_capsul/widgets/back_button_widget.dart';
 import 'package:capp_box/feature/create_capsul/widgets/continue_button.dart';
 import 'package:capp_box/feature/home/widgets/capsule_title.dart';
@@ -59,10 +60,10 @@ class _PhoneLoginViewState extends State<PhoneLoginView> {
                         Row(
                           children: [
                             const BackButtonWidget(),
-                            const Expanded(
+                            Expanded(
                               child: Center(
                                 child: CapsuleTitle(
-                                  title: 'Kayıt Ol',
+                                  title: context.tr('register'),
                                 ),
                               ),
                             ),
@@ -75,11 +76,11 @@ class _PhoneLoginViewState extends State<PhoneLoginView> {
                             ),
                           ],
                         ),
-                        const Padding(
-                          padding: EdgeInsets.only(top: 24),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 24),
                           child: Text(
-                            'Hoşgeldiniz',
-                            style: TextStyle(
+                            context.tr('welcome'),
+                            style: const TextStyle(
                               color: Colors.white,
                               fontSize: 32,
                               fontFamily: 'Urbanist',
@@ -87,11 +88,11 @@ class _PhoneLoginViewState extends State<PhoneLoginView> {
                             ),
                           ),
                         ),
-                        const Padding(
-                          padding: EdgeInsets.only(top: 16),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 16),
                           child: Text(
-                            'Devam etmek için telefon numaranızı girin.',
-                            style: TextStyle(
+                            context.tr("Enter your phone number to continue"),
+                            style: const TextStyle(
                               color: Colors.white,
                               fontSize: 16,
                               fontFamily: 'Urbanist',
@@ -178,9 +179,9 @@ class _PhoneLoginViewState extends State<PhoneLoginView> {
                                     ),
                                     child: Container(
                                       alignment: Alignment.center,
-                                      child: const Text(
-                                        'Devam Et',
-                                        style: TextStyle(
+                                      child: Text(
+                                        context.tr('continue'),
+                                        style: const TextStyle(
                                           color: Color(0xFFE5E5E5),
                                           fontSize: 16,
                                           fontFamily: 'Urbanist',

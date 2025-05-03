@@ -35,26 +35,22 @@ class _LanguageSettingsViewState extends State<LanguageSettingsView> {
   }
 
   Future<void> _changeLanguage(String languageCode) async {
-    final currentContext = context;
     final locale = Locale(languageCode);
     await _languageService.setLocale(locale);
 
-    setState(() {
-      _currentLanguageCode = languageCode;
-    });
-
-    // Update app locale
-    if (currentContext.mounted) {
-      final state = currentContext.findAncestorStateOfType<MyAppState>();
+    if (mounted) {
+      final state = context.findAncestorStateOfType<MyAppState>();
       if (state != null) {
         state.setLocale(locale);
 
-        // Show success message
         BotToast.showText(
-          text:
-              AppLocalizations.of(currentContext).translate('language_changed'),
+          text: AppLocalizations.of(context).translate('language_changed'),
           duration: const Duration(seconds: 2),
         );
+
+        setState(() {
+          _currentLanguageCode = languageCode;
+        });
       }
     }
   }
@@ -163,20 +159,70 @@ class _LanguageSettingsViewState extends State<LanguageSettingsView> {
                   ),
                 ),
                 const SizedBox(height: 24),
-                _buildLanguageOption(
-                  context,
-                  'English',
-                  localizations.translate('english'),
-                  'en',
+                Expanded(
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        _buildLanguageOption(
+                          context,
+                          'English',
+                          localizations.translate('english'),
+                          'en',
+                        ),
+                        const SizedBox(height: 16),
+                        _buildLanguageOption(
+                          context,
+                          'Türkçe',
+                          localizations.translate('turkish'),
+                          'tr',
+                        ),
+                        const SizedBox(height: 16),
+                        _buildLanguageOption(
+                          context,
+                          'Deutsch',
+                          localizations.translate('german'),
+                          'de',
+                        ),
+                        const SizedBox(height: 16),
+                        _buildLanguageOption(
+                          context,
+                          'Italiano',
+                          localizations.translate('italian'),
+                          'it',
+                        ),
+                        const SizedBox(height: 16),
+                        _buildLanguageOption(
+                          context,
+                          'Português',
+                          localizations.translate('portuguese'),
+                          'pt',
+                        ),
+                        const SizedBox(height: 16),
+                        _buildLanguageOption(
+                          context,
+                          'हिन्दी',
+                          localizations.translate('hindi'),
+                          'hi',
+                        ),
+                        const SizedBox(height: 16),
+                        _buildLanguageOption(
+                          context,
+                          '中文',
+                          localizations.translate('chinese'),
+                          'zh',
+                        ),
+                        const SizedBox(height: 16),
+                        _buildLanguageOption(
+                          context,
+                          'Русский',
+                          localizations.translate('russian'),
+                          'ru',
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
-                const SizedBox(height: 16),
-                _buildLanguageOption(
-                  context,
-                  'Türkçe',
-                  localizations.translate('turkish'),
-                  'tr',
-                ),
-                const SizedBox(height: 40),
+                const SizedBox(height: 24),
                 Center(
                   child: ElevatedButton(
                     onPressed: () => Navigator.pop(context),
@@ -230,9 +276,7 @@ class _LanguageSettingsViewState extends State<LanguageSettingsView> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    languageCode == 'en'
-                        ? localizations.translate('english')
-                        : localizations.translate('turkish'),
+                    _getLanguageText(localizations, languageCode),
                     style: const TextStyle(
                       color: Colors.white,
                       fontSize: 18,
@@ -264,5 +308,28 @@ class _LanguageSettingsViewState extends State<LanguageSettingsView> {
         ),
       ),
     );
+  }
+
+  String _getLanguageText(AppLocalizations localizations, String languageCode) {
+    switch (languageCode) {
+      case 'en':
+        return localizations.translate('English');
+      case 'tr':
+        return localizations.translate('Turkish');
+      case 'de':
+        return localizations.translate('German');
+      case 'it':
+        return localizations.translate('Italian');
+      case 'pt':
+        return localizations.translate('Portuguese');
+      case 'hi':
+        return localizations.translate('Hindi');
+      case 'zh':
+        return localizations.translate('Chinese');
+      case 'ru':
+        return localizations.translate('Russian');
+      default:
+        return localizations.translate('English');
+    }
   }
 }

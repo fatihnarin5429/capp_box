@@ -1,5 +1,6 @@
 // lib/feature/create_capsul/mixin/capsule_review_mixin.dart
 
+import 'package:capp_box/core/extensions/localization_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../bloc/create_capsule_bloc.dart';
@@ -73,9 +74,9 @@ mixin CapsuleReviewMixin<T extends StatefulWidget> on State<T> {
       CreateCapsuleState state, bool shareInfo, bool sendSMS) {
     return InkWell(
       onTap: () => _handleCreateCapsuleAction(state, shareInfo, sendSMS),
-      child: const Text(
-        'Taslak Olarak Kaydet',
-        style: TextStyle(
+      child: Text(
+        context.tr('save_draft'),
+        style: const TextStyle(
           color: Color(0xFF84858E),
           fontSize: 14,
           fontFamily: 'Urbanist',
@@ -106,10 +107,10 @@ mixin CapsuleReviewMixin<T extends StatefulWidget> on State<T> {
             borderRadius: BorderRadius.circular(100),
           ),
         ),
-        child: const Center(
+        child: Center(
           child: Text(
-            'Gönder',
-            style: TextStyle(
+            context.tr('send'),
+            style: const TextStyle(
               color: Color(0xFFE5E5E5),
               fontSize: 14,
               fontFamily: 'Urbanist',
