@@ -348,6 +348,8 @@ class _CreateCapsul2ViewState extends State<CreateCapsul2View> with MediaMixin {
                                   ),
                                 ),
                               );
+                              print(
+                                  'state1: ${state.myCreatedCapsules} and ${state.createCapsuleModel}');
                             },
                           ),
                         ),

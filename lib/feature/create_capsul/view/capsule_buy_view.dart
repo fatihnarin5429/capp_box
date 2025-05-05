@@ -2,6 +2,7 @@ import 'package:capp_box/feature/create_capsul/bloc/create_capsule_bloc.dart';
 import 'package:capp_box/feature/create_capsul/model/create_capsule_model.dart';
 import 'package:capp_box/feature/create_capsul/widgets/continue_button.dart';
 import 'package:capp_box/feature/home/view/capsules_view.dart';
+import 'package:capp_box/feature/home/view/home_page.dart';
 import 'package:capp_box/feature/home/view/home_view_2.dart';
 import 'package:capp_box/product/constants/color_cons.dart';
 import 'package:flutter/material.dart';
@@ -99,15 +100,24 @@ class _CapsuleBuyViewState extends State<CapsuleBuyView>
                                         createCapsuleModel:
                                             state.createCapsuleModel,
                                       ));
+                                  print(
+                                      'state1: ${state.myCreatedCapsules} and ${state.createCapsuleModel}');
                                   context.read<CreateCapsuleBloc>().add(
                                         ResetCreateCapsuleModel(),
                                       );
-                                  Navigator.push(
+                                  print(
+                                      'state2: ${state.myCreatedCapsules} and ${state.createCapsuleModel}');
+                                  Navigator.pushAndRemoveUntil(
                                     context,
                                     MaterialPageRoute(
-                                      builder: (context) => const CapsuleView(),
+                                      builder: (context) => HomePage(
+                                        initialIndex: 1,
+                                      ),
                                     ),
+                                    (route) => false,
                                   );
+                                  print(
+                                      'state3: ${state.myCreatedCapsules} and ${state.createCapsuleModel}');
                                 },
                               ),
                             ),

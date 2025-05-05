@@ -32,6 +32,7 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
     const CapsuleView(),
     const NotificationView(),
     const ProfilView(),
+    const HomeView(),
   ];
 
   void _onItemTapped(int index) {

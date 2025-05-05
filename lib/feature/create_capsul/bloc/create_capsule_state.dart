@@ -22,13 +22,13 @@ final class CreateCapsuleState extends Equatable {
 
   CreateCapsuleState copyWith({
     CreateCapsuleModel? createCapsuleModel,
-    List<CreateCapsuleModel>? createdCapsules,
+    List<CreateCapsuleModel>? myCreatedCapsules,
     List<CreateCapsuleModel>? filteredCapsules,
     List<CreateCapsuleModel>? receivedCapsules,
   }) {
     return CreateCapsuleState(
       createCapsuleModel: createCapsuleModel ?? this.createCapsuleModel,
-      myCreatedCapsules: createdCapsules ?? this.myCreatedCapsules,
+      myCreatedCapsules: myCreatedCapsules ?? this.myCreatedCapsules,
       filteredCapsules: filteredCapsules ?? this.filteredCapsules,
       receivedCapsules: receivedCapsules ?? this.receivedCapsules,
     );

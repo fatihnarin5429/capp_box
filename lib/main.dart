@@ -5,6 +5,7 @@ import 'package:capp_box/feature/create_capsul/bloc/create_capsule_bloc.dart';
 import 'package:capp_box/feature/create_capsul/view/create_capsul_view.dart';
 import 'package:capp_box/feature/home/view/capsules_view.dart';
 import 'package:capp_box/feature/home/view/home_page.dart';
+import 'package:capp_box/feature/home/view/home_view.dart';
 import 'package:capp_box/feature/home/view/home_view_2.dart';
 import 'package:capp_box/feature/login/bloc/login_bloc.dart';
 import 'package:capp_box/feature/login/view/login_view.dart';
@@ -91,7 +92,8 @@ class MyAppState extends State<MyApp> {
       routes: {
         '/onboard1': (context) => const Onboard1View(),
         '/': (context) => const HomePage(),
-        '/home_view': (context) => const HomeView2(),
+        '/home_view': (context) => const HomeView(),
+        '/home_view_2': (context) => const HomeView2(),
         '/capsule_view': (context) => const CapsuleView(),
         '/login': (context) => const LoginView(),
         '/notifaction_view': (context) => const NotificationView(),

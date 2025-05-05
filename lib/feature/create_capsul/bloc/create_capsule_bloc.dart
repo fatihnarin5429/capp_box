@@ -30,13 +30,13 @@ class CreateCapsuleBloc extends Bloc<CreateCapsuleEvent, CreateCapsuleState> {
     AddCreatedCapsules event,
     Emitter<CreateCapsuleState> emit,
   ) async {
-    final updatedCapsules = [
+    List<CreateCapsuleModel> updatedCapsules = [
       ...state.myCreatedCapsules,
       event.createCapsuleModel
     ];
     emit(
       state.copyWith(
-        createdCapsules: updatedCapsules,
+        myCreatedCapsules: updatedCapsules,
         filteredCapsules: updatedCapsules, // Also update filtered capsules
       ),
     );

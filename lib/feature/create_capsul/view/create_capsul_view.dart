@@ -24,65 +24,69 @@ class _CreateCapsulViewState extends State<CreateCapsulView> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Stack(
-        children: [
-          const BackgroundGradient(),
-          SafeArea(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
-              child: Column(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      const BackButtonWidget(),
-                      Expanded(
-                        child: PageTitle(
-                            title: context.tr('create_capsule', args: {})),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 24),
-                  Expanded(
-                    child: SingleChildScrollView(
-                      physics: const BouncingScrollPhysics(),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          CapsuleOptionsList(
-                            secilenTip: secilenTip,
-                            premiumOdendi: premiumOdendi,
-                            onTipSecildi: (tip) =>
-                                setState(() => secilenTip = tip),
-                          ),
-                          ContinueButton(
-                            secilenTip: secilenTip,
-                            displayNameController: TextEditingController(),
-                            mailController: TextEditingController(),
-                            phoneController: TextEditingController(),
-                            onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => CreateCapsul2View(
-                                    controller: TextEditingController(),
-                                    onChanged: (value) {},
-                                    type: secilenTip,
+    return Material(
+      type: MaterialType.transparency,
+      child: Scaffold(
+        body: Stack(
+          children: [
+            const BackgroundGradient(),
+            SafeArea(
+              child: Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
+                child: Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const BackButtonWidget(),
+                        Expanded(
+                          child: PageTitle(
+                              title: context.tr('create_capsule', args: {})),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 24),
+                    Expanded(
+                      child: SingleChildScrollView(
+                        physics: const BouncingScrollPhysics(),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            CapsuleOptionsList(
+                              secilenTip: secilenTip,
+                              premiumOdendi: premiumOdendi,
+                              onTipSecildi: (tip) =>
+                                  setState(() => secilenTip = tip),
+                            ),
+                            ContinueButton(
+                              secilenTip: secilenTip,
+                              displayNameController: TextEditingController(),
+                              mailController: TextEditingController(),
+                              phoneController: TextEditingController(),
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => CreateCapsul2View(
+                                      controller: TextEditingController(),
+                                      onChanged: (value) {},
+                                      type: secilenTip,
+                                    ),
                                   ),
-                                ),
-                              );
-                            },
-                          ),
-                        ],
+                                );
+                              },
+                            ),
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
