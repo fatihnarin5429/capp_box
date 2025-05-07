@@ -1,3 +1,4 @@
+import 'package:capp_box/core/extensions/localization_extension.dart';
 import 'package:capp_box/feature/create_capsul/view/create_capsul_view.dart';
 import 'package:capp_box/feature/create_capsul/widgets/continue_button.dart';
 import 'package:capp_box/feature/package/widgets/custom_navigation_bar.dart';
@@ -58,11 +59,11 @@ class HomeView extends StatelessWidget {
                               ),
                             ),
                             const SizedBox(width: 10),
-                            const Column(
+                            Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  'Hoş Geldin',
+                                  context.tr('welcome', args: {}),
                                   style: TextStyle(
                                     color: Colors.white,
                                     fontSize: 14,
@@ -86,12 +87,12 @@ class HomeView extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 20),
-                    const Center(
+                    Center(
                       child: Column(
                         children: [
                           Text(
-                            "Anılarınızı geleceğe ",
-                            style: TextStyle(
+                            context.tr('remember_your_memories', args: {}),
+                            style: const TextStyle(
                               color: Colors.white,
                               fontSize: 20,
                               fontFamily: 'Urbanist',
@@ -99,8 +100,8 @@ class HomeView extends StatelessWidget {
                             ),
                           ),
                           Text(
-                            "Taşıyın",
-                            style: TextStyle(
+                            context.tr('carry_to_future', args: {}),
+                            style: const TextStyle(
                               color: Colors.white,
                               fontSize: 20,
                               fontFamily: 'Urbanist',

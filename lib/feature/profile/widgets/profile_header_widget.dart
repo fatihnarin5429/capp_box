@@ -19,9 +19,9 @@ class ProfileHeaderWidget extends StatelessWidget {
         return Column(
           children: [
             const SizedBox(height: 20),
-            const Text(
-              'Profil',
-              style: TextStyle(
+            Text(
+              context.tr('profile', args: {}),
+              style: const TextStyle(
                 color: Colors.white,
                 fontSize: 20,
                 fontFamily: 'Urbanist',

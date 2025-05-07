@@ -1,3 +1,4 @@
+import 'package:capp_box/core/extensions/localization_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:capp_box/feature/package/widgets/custom_dialog.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -35,10 +36,10 @@ mixin DialogMixin<T extends StatefulWidget> on State<T> {
     showCustomDialog(
       context: context,
       imagePath: 'assets/images/sil.png',
-      title: 'Hesabınızı silmek istediğinizden emin misiniz?',
-      description: 'Bu işlem geri alınamaz.',
-      confirmButtonText: 'Hesabımı Sil',
-      cancelButtonText: 'İptal Et',
+      title: context.tr('delete_account', args: {}),
+      description: context.tr('delete_account_description', args: {}),
+      confirmButtonText: context.tr('delete_account_button', args: {}),
+      cancelButtonText: context.tr('cancel_button', args: {}),
       onConfirm: () {
         context.read<ProfileBloc>().add(
               ProfileDelete(password: '', email: ''),
@@ -52,10 +53,10 @@ mixin DialogMixin<T extends StatefulWidget> on State<T> {
     showCustomDialog(
       context: context,
       imagePath: 'assets/images/cikis.png',
-      title: 'Çıkış yapmak istediğinizden emin misiniz?',
-      description: 'Hesabınızdan çıkış yapılacaktır.',
-      confirmButtonText: 'Çıkış Yap',
-      cancelButtonText: 'İptal Et',
+      title: context.tr('logout_confirmation', args: {}),
+      description: context.tr('logout_confirmation_description', args: {}),
+      confirmButtonText: context.tr('logout_button', args: {}),
+      cancelButtonText: context.tr('cancel_button', args: {}),
       onConfirm: () {
         context.read<ProfileBloc>().add(
               ProfileLogout(email: '', password: ''),

@@ -110,13 +110,13 @@ class CreateCapsuleModel extends Equatable {
   // Yardımcı method (enum'u string'den dönüştürmek için)
   static MediaType? _mediaTypeFromString(String? type) {
     switch (type) {
-      case 'text':
+      case 'Text':
         return MediaType.text;
-      case 'video':
+      case 'Video':
         return MediaType.video;
-      case 'audio':
+      case 'Audio':
         return MediaType.voice;
-      case 'photo':
+      case 'Photo':
         return MediaType.photo;
       default:
         return null;

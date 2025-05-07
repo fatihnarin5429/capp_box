@@ -1,6 +1,7 @@
 import 'package:capp_box/core/extensions/localization_extension.dart';
 import 'package:capp_box/feature/create_capsul/widgets/back_button_widget.dart';
 import 'package:capp_box/feature/create_capsul/widgets/page_title.dart';
+import 'package:capp_box/feature/home/view/home_page.dart';
 import 'package:capp_box/feature/package/widgets/custom_text_field.dart';
 import 'package:capp_box/feature/profile/bloc/profile_bloc.dart';
 
@@ -96,24 +97,14 @@ class _NameViewState extends State<NameView> {
         context
             .read<ProfileBloc>()
             .add(ProfileChangeName(displayName: _nameController.text));
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => const ProfilView()),
+        Navigator.of(context).pushNamedAndRemoveUntil('/', (route) => false);
+        // HomePage'i ProfileView seçili olarak aç
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => const HomePage(initialIndex: 3),
+          ),
         );
       },
     );
-    // buildEditButton(
-    //   context,
-    //   _nameController,
-    //   onPressed: () {
-    //     context
-    //         .read<ProfileBloc>()
-    //         .add(ProfileChangeName(displayName: _nameController.text));
-    //     Navigator.push(
-    //       context,
-    //       MaterialPageRoute(builder: (context) => const ProfilView()),
-    //     );
-    //   },
-    // );
   }
 }

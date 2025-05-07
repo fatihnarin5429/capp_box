@@ -11,7 +11,7 @@ final Map<String, String> tr = {
   'back': 'Geri',
   'loading': 'Yükleniyor...',
   'carry_to_future': 'Taşıyın',
-  'remember_your_memories': 'Anılarınızı geleceğe\n',
+  'remember_your_memories': 'Anılarınızı geleceğe',
   'phone_number': 'Telefon Numarası',
   'mail_address': 'E-posta Adresi',
   'mail_address_message': 'E-posta adresiniz',
@@ -233,6 +233,7 @@ final Map<String, String> tr = {
   'capsule_title_example': 'Unutmadım',
   'capsule_message_example': 'Unutamam',
   'recipient': 'Alıcı:',
+  'recipient_name': 'Alıcı Adı',
   'mail': 'Mail:',
   'email_not_provided': 'E-posta sağlanmadı',
   'audio_file_selected': 'Ses dosyası seçildi',
@@ -245,7 +246,7 @@ final Map<String, String> tr = {
   'my_created': 'Benim Oluşturduğum',
   'add_title': 'Başlık Ekleyin',
   'add_message': 'Mesajınız',
-
+  'Review': 'Gözden Geçir',
   'add_date': 'Tarih Seç',
   'select_date': 'Tarih Seçiniz',
   'add_time': 'Saat Seç',
@@ -292,7 +293,8 @@ final Map<String, String> tr = {
 
   "card_number": 'Kart Numarası',
   "card_number_message": '16 haneli kart numarasını giriniz',
-  "cvv": '3 haneli güvenlik kodu',
+  "cvv": 'CVV',
+  "cvv_message": '3 haneli güvenlik kodu',
   "expiration_date": 'Son Kullanma Tarihi',
   "expiration_date_message": 'AA/YY',
   "card_holder_name": 'Kart Üzerindeki İsim',
@@ -358,10 +360,62 @@ final Map<String, String> tr = {
       "Hesabınızı yönetmek için:\n\n1. Profilim\n2. Ayarlar\n3. Çıkış Yap",
 
   // Capsule Options
-  "capsule_option_text": "Yazı",
-  "capsule_option_video": "Video",
-  "capsule_option_voice": "Ses Kaydı",
-  "capsule_option_photo": "Fotoğraf",
-  "capsule_option_free": "Ücretsiz",
+  "Write": "Yazı",
+  "Video": "Video",
+  "Voice": "Ses Kaydı",
+  "Photo": "Fotoğraf",
+  "Free": "Ücretsiz",
   "premium_feature_indicator": "Premium",
+  'Sender': 'Gönderen',
+
+  // Capsule Mock Data
+  'birthday_memories': 'Doğum Günü Anıları',
+  'birthday_memories_content': 'Bu yılki doğum günü partimden hatıralar',
+  'graduation_video': 'Mezuniyet Videosu',
+  'graduation_video_content': 'Üniversite mezuniyet töreninin videosu',
+  'lover_message': 'Sevgiliye Mesaj',
+  'lover_message_content': 'Sevgiliye özel ses kaydı',
+  'vacation_photos': 'Tatil Fotoğrafları',
+  'vacation_photos_content': 'Yaz tatilinden anılar',
+
+  // Home View
+  'hello': 'Merhaba',
+  'What_to_create_today': 'Bugün ne oluşturmak istersin?',
+  'Text': 'Yazı',
+  'Video': 'Video',
+  'Audio': 'Ses',
+  'Photo': 'Fotoğraf',
+  'Free': 'Ücretsiz',
+  'Premium': 'Premium',
+  'Your_Created_Capsules': 'Oluşturduğun Kapsüller',
+  'No_Capsules_Created_Yet': 'Henüz oluşturduğun kapsül bulunmuyor',
+  'Date_Unknown': 'Tarih Belirsiz',
+  'soon_to_open': 'Yakında Açılacak',
+  'anonymous': 'Anonim',
+
+  // Select
+  'select': 'Seç',
+
+  // Pricing
+  'price_text_capsule': 'Ücretsiz',
+  'price_video_capsule': '249.99 ₺',
+  'price_audio_capsule': '149.99 ₺',
+  'price_photo_capsule': '99.99 ₺',
+
+  // Fatura Bilgileri
+  "billing_information": "Fatura Bilgileri",
+
+  "full_name_hint": "Adınız Soyadınız",
+  "address": "Adres",
+  "address_hint": "Sokak adı, bina no, daire no",
+  "city": "İl",
+  "city_hint": "İl adını girin",
+  "state": "İlçe",
+  "state_hint": "İlçe adını girin",
+  "postal_code": "Posta Kodu",
+  "postal_code_hint": "5 haneli posta kodu",
+  "country": "Ülke",
+  "country_hint": "Ülke adını girin",
+
+  "phone_number_hint": "Telefon numaranızı girin",
 };

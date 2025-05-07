@@ -1,12 +1,172 @@
 import 'package:flutter/material.dart';
+import 'dart:async';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:capp_box/feature/create_capsul/bloc/create_capsule_bloc.dart';
 
-class TimerDisplayWidget extends StatelessWidget {
-  const TimerDisplayWidget({super.key});
+class TimerDisplayWidget extends StatefulWidget {
+  final String? openDate;
+  final bool isCompact;
+
+  const TimerDisplayWidget({
+    super.key,
+    this.openDate,
+    this.isCompact = false,
+  });
+
+  @override
+  State<TimerDisplayWidget> createState() => _TimerDisplayWidgetState();
+}
+
+class _TimerDisplayWidgetState extends State<TimerDisplayWidget> {
+  int _remainingTimeInSeconds = 0;
+  late Timer _timer;
+  late DateTime _targetDate;
+  bool _isLoaded = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _initializeTimer();
+  }
+
+  void _initializeTimer() {
+    try {
+      if (widget.openDate != null) {
+        // If openDate is directly provided to the widget
+        int openDateMillis = int.parse(widget.openDate!);
+        _targetDate = DateTime.fromMillisecondsSinceEpoch(openDateMillis);
+        _calculateRemainingTime();
+        _startTimer();
+        _isLoaded = true;
+      } else {
+        // Get the current capsule model from the bloc if openDate is not provided
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          final capsuleBloc = context.read<CreateCapsuleBloc>();
+          final openDateStr = capsuleBloc.state.createCapsuleModel.openedDate;
+
+          if (openDateStr != null && openDateStr.isNotEmpty) {
+            int openDateMillis = int.parse(openDateStr);
+            _targetDate = DateTime.fromMillisecondsSinceEpoch(openDateMillis);
+            _calculateRemainingTime();
+            _startTimer();
+            setState(() {
+              _isLoaded = true;
+            });
+          } else {
+            // Fallback to default date (1 hour from now)
+            _targetDate = DateTime.now().add(const Duration(hours: 1));
+            _calculateRemainingTime();
+            _startTimer();
+            setState(() {
+              _isLoaded = true;
+            });
+          }
+        });
+      }
+    } catch (e) {
+      // Fallback to default date (1 hour from now) on any error
+      _targetDate = DateTime.now().add(const Duration(hours: 1));
+      _calculateRemainingTime();
+      _startTimer();
+      setState(() {
+        _isLoaded = true;
+      });
+    }
+  }
+
+  void _calculateRemainingTime() {
+    final now = DateTime.now();
+    final difference = _targetDate.difference(now);
+
+    if (difference.isNegative) {
+      _remainingTimeInSeconds = 0; // Already expired
+    } else {
+      _remainingTimeInSeconds = difference.inSeconds;
+    }
+  }
+
+  void _startTimer() {
+    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      setState(() {
+        if (_remainingTimeInSeconds > 0) {
+          _remainingTimeInSeconds--;
+        } else {
+          _timer.cancel();
+        }
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    if (_isLoaded) {
+      _timer.cancel();
+    }
+    super.dispose();
+  }
+
+  String get hours =>
+      (_remainingTimeInSeconds ~/ 3600).toString().padLeft(1, '0');
+  String get minutes =>
+      ((_remainingTimeInSeconds % 3600) ~/ 60).toString().padLeft(2, '0');
+  String get seconds =>
+      (_remainingTimeInSeconds % 60).toString().padLeft(2, '0');
 
   @override
   Widget build(BuildContext context) {
-    return const Padding(
-      padding: EdgeInsets.only(bottom: 10),
+    if (!_isLoaded) {
+      return const Center(
+        child: SizedBox(
+          width: 20,
+          height: 20,
+          child: CircularProgressIndicator(
+            color: Color(0xFF80B0C4),
+            strokeWidth: 2,
+          ),
+        ),
+      );
+    }
+
+    // Compact version for capsule cards (like in the image)
+    if (widget.isCompact) {
+      return Container(
+        padding: const EdgeInsets.symmetric(vertical: 3, horizontal: 6),
+        decoration: BoxDecoration(
+          color: const Color(0xFF1A1B30).withOpacity(0.5),
+          borderRadius: BorderRadius.circular(6),
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              '$hours:$minutes:$seconds',
+              style: const TextStyle(
+                color: Color(0xFF80B0C4),
+                fontSize: 10,
+                fontFamily: 'Open Sans',
+                fontWeight: FontWeight.w500,
+                letterSpacing: 0.3,
+              ),
+            ),
+            const SizedBox(height: 1),
+            const Text(
+              'Saat • Dakika • Saniye',
+              style: TextStyle(
+                color: Color(0xFF80B0C4),
+                fontSize: 5,
+                fontFamily: 'Open Sans',
+                fontWeight: FontWeight.w300,
+              ),
+            ),
+          ],
+        ),
+      );
+    }
+
+    // Original version for larger displays
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 10),
       child: Align(
         alignment: Alignment.center,
         child: Row(
@@ -16,8 +176,8 @@ class TimerDisplayWidget extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Text(
-                  '1:',
-                  style: TextStyle(
+                  '$hours:',
+                  style: const TextStyle(
                     color: Color(0xFF80B0C4),
                     fontSize: 12.33,
                     fontFamily: 'Open Sans',
@@ -26,11 +186,11 @@ class TimerDisplayWidget extends StatelessWidget {
                     letterSpacing: 0.12,
                   ),
                 ),
-                Text(
+                const Text(
                   'Saat',
                   style: TextStyle(
                     color: Color(0xFF80B0C4),
-                    fontSize: 4.24,
+                    fontSize: 3,
                     fontFamily: 'Open Sans',
                     fontWeight: FontWeight.w400,
                   ),
@@ -41,21 +201,20 @@ class TimerDisplayWidget extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Text(
-                  '59:',
-                  style: TextStyle(
+                  '$minutes:',
+                  style: const TextStyle(
                     color: Color(0xFF80B0C4),
-                    fontSize: 12.33,
+                    fontSize: 10.33,
                     fontFamily: 'Open Sans',
                     fontWeight: FontWeight.w700,
-                    height: 1,
                     letterSpacing: 0.12,
                   ),
                 ),
-                Text(
+                const Text(
                   'Dakika',
                   style: TextStyle(
                     color: Color(0xFF80B0C4),
-                    fontSize: 4.24,
+                    fontSize: 3,
                     fontFamily: 'Open Sans',
                     fontWeight: FontWeight.w400,
                   ),
@@ -66,21 +225,20 @@ class TimerDisplayWidget extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Text(
-                  '50',
-                  style: TextStyle(
+                  seconds,
+                  style: const TextStyle(
                     color: Color(0xFF80B0C4),
-                    fontSize: 12.33,
+                    fontSize: 10.33,
                     fontFamily: 'Open Sans',
                     fontWeight: FontWeight.w700,
-                    height: 1,
                     letterSpacing: 0.12,
                   ),
                 ),
-                Text(
+                const Text(
                   'Saniye',
                   style: TextStyle(
                     color: Color(0xFF80B0C4),
-                    fontSize: 4.24,
+                    fontSize: 3,
                     fontFamily: 'Open Sans',
                     fontWeight: FontWeight.w400,
                   ),

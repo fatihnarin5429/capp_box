@@ -1,3 +1,4 @@
+import 'package:capp_box/core/extensions/localization_extension.dart';
 import 'package:capp_box/feature/create_capsul/widgets/review_container.dart';
 import 'package:flutter/material.dart';
 import 'package:capp_box/feature/create_capsul/bloc/create_capsule_bloc.dart';
@@ -19,9 +20,9 @@ class ReceiverInfo extends StatelessWidget {
         children: [
           Row(
             children: [
-              const Text(
-                'Alıcı: ',
-                style: TextStyle(
+              Text(
+                context.tr('recipient', args: {}),
+                style: const TextStyle(
                   color: Colors.white,
                   fontSize: 18,
                   fontFamily: 'Urbanist',
@@ -29,7 +30,8 @@ class ReceiverInfo extends StatelessWidget {
                 ),
               ),
               Text(
-                state.createCapsuleModel.displayName ?? 'Alıcı Adı',
+                state.createCapsuleModel.displayName ??
+                    context.tr('recipient_name', args: {}),
                 style: const TextStyle(
                   color: Colors.white,
                   fontSize: 16,
@@ -41,9 +43,9 @@ class ReceiverInfo extends StatelessWidget {
           ),
           Row(
             children: [
-              const Text(
-                'Mail: ',
-                style: TextStyle(
+              Text(
+                context.tr('mail', args: {}),
+                style: const TextStyle(
                   color: Colors.white,
                   fontSize: 18,
                   fontFamily: 'Urbanist',

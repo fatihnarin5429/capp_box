@@ -1,3 +1,4 @@
+import 'package:capp_box/core/extensions/localization_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_credit_card/flutter_credit_card.dart';
 
@@ -26,14 +27,16 @@ class CreditCardDisplay extends StatelessWidget with CreditCardInfoMixin {
       cardNumber: cardNumber,
       bankName: 'Capp Box',
       expiryDate: expiryDate,
-      cardHolderName: cardHolderName == "" ? "İsim Soyisim" : cardHolderName,
+      cardHolderName: cardHolderName == ""
+          ? context.tr('full_name', args: {})
+          : cardHolderName,
       cvvCode: cvvCode,
       showBackView: isCvvFocused,
       obscureCardNumber: false,
       obscureCardCvv: false,
       isHolderNameVisible: true,
       glassmorphismConfig: Glassmorphism.defaultConfig(),
-      labelValidThru: 'SKT',
+      labelValidThru: context.tr('SKT', args: {}),
       frontCardBorder: Border.all(
         color: Colors.white,
         width: 1,

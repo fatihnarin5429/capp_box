@@ -1,6 +1,8 @@
-import 'package:capp_box/core/extensions/localization_extension.dart';
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:flutter_credit_card/flutter_credit_card.dart';
+
+import 'package:capp_box/core/extensions/localization_extension.dart';
 
 mixin CreditCardInfoMixin {
   String cardNumber = '';
@@ -23,7 +25,10 @@ mixin CreditCardInfoMixin {
 class CreditCardFormWidget extends StatelessWidget with CreditCardInfoMixin {
   final GlobalKey<FormState> formKey;
 
-  CreditCardFormWidget({required this.formKey});
+  CreditCardFormWidget({
+    Key? key,
+    required this.formKey,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -65,8 +70,8 @@ class CreditCardFormWidget extends StatelessWidget with CreditCardInfoMixin {
           fontWeight: FontWeight.w700,
         ),
         cardNumberDecoration: InputDecoration(
-          labelText: context.tr('card_number'),
-          hintText: context.tr('card_number_message'),
+          labelText: context.tr('card_number', args: {}),
+          hintText: context.tr('card_number_message', args: {}),
           labelStyle: const TextStyle(
             color: Colors.white,
             fontSize: 14,
@@ -102,8 +107,8 @@ class CreditCardFormWidget extends StatelessWidget with CreditCardInfoMixin {
           ),
         ),
         cvvCodeDecoration: InputDecoration(
-          labelText: context.tr('cvv'),
-          hintText: context.tr('cvv_message'),
+          labelText: context.tr('cvv', args: {}),
+          hintText: context.tr('cvv_message', args: {}),
           labelStyle: const TextStyle(
             color: Colors.white,
             fontSize: 14,
@@ -139,8 +144,8 @@ class CreditCardFormWidget extends StatelessWidget with CreditCardInfoMixin {
           ),
         ),
         expiryDateDecoration: InputDecoration(
-          labelText: context.tr('expiration_date'),
-          hintText: context.tr('expiration_date_message'),
+          labelText: context.tr('expiration_date', args: {}),
+          hintText: context.tr('expiration_date_message', args: {}),
           labelStyle: const TextStyle(
             color: Colors.white,
             fontSize: 14,
@@ -176,8 +181,8 @@ class CreditCardFormWidget extends StatelessWidget with CreditCardInfoMixin {
           ),
         ),
         cardHolderDecoration: InputDecoration(
-          labelText: context.tr('card_holder_name'),
-          hintText: context.tr('card_holder_name_message'),
+          labelText: context.tr('card_holder_name', args: {}),
+          hintText: context.tr('card_holder_name_message', args: {}),
           labelStyle: const TextStyle(
             color: Colors.white,
             fontSize: 14,

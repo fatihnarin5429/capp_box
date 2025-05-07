@@ -249,4 +249,34 @@ final Map<String, String> zh = {
   'message': '消息',
   'date': '日期',
   'time': '时间',
+  'when_capsule_opens': '胶囊何时打开？',
+
+  'capsule_open_time': '打开时间',
+  'hello': '你好',
+  'soon_to_open': '即将打开',
+  'anonymous': '匿名',
+
+  'capsule_history': '胶囊历史',
+  'capsule_history_message': '胶囊应该在什么时候打开？',
+
+  'Text': '文字',
+  'Video': '视频',
+  'Audio': '音频',
+  'Photo': '照片',
+  'Free': '免费',
+  'Premium': '高级',
+  'Your_Created_Capsules': '你创建的胶囊',
+  'No_Capsules_Created_Yet': '尚未创建胶囊',
+  'Date_Unknown': '日期未知',
+  'What_to_create_today': '今天你想创建什么？',
+
+  // Select
+  'select': '选择',
+
+  // Pricing
+  'price_text_capsule': '免费',
+  'price_video_capsule': '¥169.99',
+  'price_audio_capsule': '¥99.99',
+
+  'price_photo_capsule': '¥69.99',
 };

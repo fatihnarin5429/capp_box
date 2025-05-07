@@ -175,7 +175,7 @@ class _TimeCapsuleHistoryViewState extends State<TimeCapsuleHistoryView> {
                     ),
                     _buildStepIndicator(),
                     Text(
-                      context.tr('when_capsule_date'),
+                      context.tr('capsule_history_message', args: {}),
                       style: const TextStyle(
                         color: Colors.white,
                         fontSize: 18,
@@ -186,7 +186,7 @@ class _TimeCapsuleHistoryViewState extends State<TimeCapsuleHistoryView> {
                     ),
                     const SizedBox(height: 16),
                     Text(
-                      context.tr('capsule_open_date'),
+                      context.tr('capsule_open_date', args: {}),
                       style: const TextStyle(
                         color: Color(0xFFC4C4C4),
                         fontSize: 14,
@@ -251,7 +251,7 @@ class _TimeCapsuleHistoryViewState extends State<TimeCapsuleHistoryView> {
             Text(
               selectedDate != null
                   ? DateFormat('dd.MM.yyyy').format(selectedDate!)
-                  : context.tr('select_date'),
+                  : context.tr('select_date', args: {}),
               style: TextStyle(
                 color: textColor,
                 fontSize: 16,

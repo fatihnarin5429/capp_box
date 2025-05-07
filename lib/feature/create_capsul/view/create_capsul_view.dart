@@ -6,6 +6,7 @@ import 'package:capp_box/feature/create_capsul/widgets/back_button_widget.dart';
 import 'package:capp_box/feature/create_capsul/widgets/capsule_options_list.dart';
 import 'package:capp_box/feature/create_capsul/widgets/continue_button.dart';
 import 'package:capp_box/feature/create_capsul/widgets/page_title.dart';
+import 'package:capp_box/product/constants/color_cons.dart';
 import 'package:capp_box/product/utility/enums/mediaType_enum.dart';
 import 'package:capp_box/product/widgets/background_gradient.dart';
 import 'package:flutter/material.dart';
@@ -65,16 +66,27 @@ class _CreateCapsulViewState extends State<CreateCapsulView> {
                               mailController: TextEditingController(),
                               phoneController: TextEditingController(),
                               onPressed: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => CreateCapsul2View(
-                                      controller: TextEditingController(),
-                                      onChanged: (value) {},
-                                      type: secilenTip,
+                                if (secilenTip == null) {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(
+                                        content: Text('Lütfen bir tip seçin'),
+                                        duration: Duration(seconds: 1),
+                                        behavior: SnackBarBehavior.fixed,
+                                        backgroundColor:
+                                            ColorConst.backgroundPurple1),
+                                  );
+                                } else {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => CreateCapsul2View(
+                                        controller: TextEditingController(),
+                                        onChanged: (value) {},
+                                        type: secilenTip,
+                                      ),
                                     ),
-                                  ),
-                                );
+                                  );
+                                }
                               },
                             ),
                           ],

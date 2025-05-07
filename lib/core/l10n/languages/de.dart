@@ -257,5 +257,31 @@ final Map<String, String> de = {
   'title': 'Titel',
   'message': 'Nachricht',
   'date': 'Datum',
-  'time': 'Uhrzeit',
+  'time': 'Zeit',
+  'when_capsule_opens': 'Wann soll die Kapsel geöffnet werden?',
+  'capsule_open_time': 'Öffnungszeit',
+  'capsule_history': 'Kapselverlauf',
+  'capsule_history_message': 'Wann soll die Kapsel geöffnet werden?',
+  'Text': 'Text',
+  'Video': 'Video',
+  'Audio': 'Audio',
+  'Photo': 'Foto',
+  'Free': 'Kostenlos',
+  'Premium': 'Premium',
+  'Your_Created_Capsules': 'Deine erstellten Kapseln',
+  'No_Capsules_Created_Yet': 'Noch keine Kapseln erstellt',
+  'Date_Unknown': 'Datum unbekannt',
+  'What_to_create_today': 'Was möchtest du heute erstellen?',
+  'hello': 'Hallo',
+  'soon_to_open': 'Bald öffnen',
+  'anonymous': 'Anonym',
+
+  // Select
+  'select': 'Auswählen',
+
+  // Pricing
+  'price_text_capsule': 'Kostenlos',
+  'price_video_capsule': '24,99 €',
+  'price_audio_capsule': '14,99 €',
+  'price_photo_capsule': '9,99 €',
 };

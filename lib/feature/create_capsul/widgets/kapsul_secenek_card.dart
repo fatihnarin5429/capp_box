@@ -75,7 +75,7 @@ class KapsulSecenekCard extends StatelessWidget {
                   TextSpan(
                     children: [
                       TextSpan(
-                        text: '$baslik ',
+                        text: '${baslik} ',
                         style: TextStyle(
                           color: isPremium && !premiumOdendi
                               ? const Color(0xFF5D5E72)

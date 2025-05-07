@@ -41,7 +41,7 @@ final Map<String, String> ru = {
   'continue_with_email': 'Продолжить с эл. почтой',
   'continue_with_phone': 'Продолжить с телефоном',
   'continue_without_account': 'Продолжить без аккаунта',
-  'register': 'Зарегистрироваться',
+
   'devametmek': 'Введите номер телефона, чтобы продолжить',
   'confirm_photo': 'Подтвердить фото',
   'confirm_photo_message':
@@ -56,7 +56,7 @@ final Map<String, String> ru = {
   'welcome': 'Добро пожаловать',
   'carry_memories_to_future': 'Перенесите свои воспоминания',
   'carry': 'в будущее',
-  'create_first_capsule': 'Создайте свою первую капсулу!',
+
   'capsule_options': 'Параметры капсулы',
   'video_capsule': 'Видео',
   'audio_capsule': 'Аудио',
@@ -254,4 +254,30 @@ final Map<String, String> ru = {
   'message': 'Сообщение',
   'date': 'Дата',
   'time': 'Время',
+  'when_capsule_opens': 'Когда должна открыться капсула?',
+  'capsule_open_time': 'Время открытия',
+  'capsule_history': 'История капсулы',
+  'capsule_history_message': 'Когда должна открыться капсула?',
+  'Text': 'Текст',
+  'Video': 'Видео',
+  'Audio': 'Аудио',
+  'Photo': 'Фото',
+  'Free': 'Бесплатно',
+  'Premium': 'Премиум',
+  'Your_Created_Capsules': 'Ваши созданные капсулы',
+  'No_Capsules_Created_Yet': 'Капсулы еще не созданы',
+  'Date_Unknown': 'Дата неизвестна',
+  'What_to_create_today': 'Что вы хотите создать сегодня?',
+  'hello': 'Привет',
+  'soon_to_open': 'Скоро откроется',
+  'anonymous': 'Аноним',
+
+  // Select
+  'select': 'Выбрать',
+
+  // Pricing
+  'price_text_capsule': 'Бесплатно',
+  'price_video_capsule': '1999 ₽',
+  'price_audio_capsule': '1199 ₽',
+  'price_photo_capsule': '799 ₽',
 };

@@ -143,7 +143,7 @@ final Map<String, String> it = {
   'faq': 'FAQ',
   'feedback': 'Feedback',
   'privacy_text':
-      '1. Dati raccolti\n\nCappbox può raccogliere i seguenti dati per migliorare l\'esperienza utente e fornire servizi di capsule:\n• Nome, cognome, email, numero di telefono\n• Foto del profilo (opzionale)\n• Contenuti delle capsule (video, foto, testo, audio)\n• Informazioni sul dispositivo e analisi dell\'utilizzo (nell\'ambito della policy sulla privacy)\n\n2. Scopo dell\'utilizzo dei dati\n\n• Per eseguire operazioni di creazione e programmazione delle capsule\n• Per fornire notifiche tempestive e consegna dei contenuti ai destinatari\n• Per garantire la sicurezza dei contenuti (crittografia, ecc.)\n• Per fornire consigli sui contenuti specifici per l\'utente (basati su AI)\n\n3. Condivisione con terze parti\n\nI dati degli utenti possono essere condivisi con terze parti solo nei seguenti casi:\n• Con autorità ufficiali nell\'ambito degli obblighi legali\n• Con il consenso esplicito dell\'utente\n• Con fornitori di supporto tecnico per la fornitura del servizio\n\n4. Sicurezza dei dati\n\n• I dati sono archiviati crittografati secondo gli standard del settore.\n• Vengono utilizzati sistemi di controllo degli accessi e firewall.\n• I contenuti vengono aperti solo a date e destinatari specificati.\n\n5. Diritti degli utenti\n\nGli utenti hanno il diritto di:\n• Accedere ai propri dati\n• Correggere i propri dati\n• Cancellare i propri dati\n• Opporsi al trattamento dei dati.\n\n6. Politica dei cookie\n\nNell\'applicazione possono essere utilizzati cookie analitici per migliorare l\'esperienza utente. Le autorizzazioni vengono ottenute esplicitamente dall\'utente.',
+      '1. Dati raccolti\n\nCappbox può raccogliere i seguenti dati per migliorare l\'esperienza utente e fornire servizi di capsules:\n• Nome, cognome, email, numero di telefono\n• Foto del profilo (opzionale)\n• Contenuti delle capsules (video, foto, testo, audio)\n• Informazioni sul dispositivo e analisi dell\'utilizzo (nell\'ambito della policy sulla privacy)\n\n2. Scopo dell\'utilizzo dei dati\n\n• Per eseguire operazioni di creazione e programmazione delle capsules\n• Per fornire notifiche tempestive e consegna dei contenuti ai destinatari\n• Per garantire la sicurezza dei contenuti (crittografia, ecc.)\n• Per fornire consigli sui contenuti specifici per l\'utente (basati su AI)\n\n3. Condivisione con terze parti\n\nI dati degli utenti possono essere condivisi con terze parti solo nei seguenti casi:\n• Con autorità ufficiali nell\'ambito degli obblighi legali\n• Con il consenso esplicito dell\'utente\n• Con fornitori di supporto tecnico per la fornitura del servizio\n\n4. Sicurezza dei dati\n\n• I dati sono archiviati crittografati secondo gli standard del settore.\n• Vengono utilizzati sistemi di controllo degli accessi e firewall.\n• I contenuti vengono aperti solo a date e destinatari specificati.\n\n5. Diritti degli utenti\n\nGli utenti hanno il diritto di:\n• Accedere ai propri dati\n• Correggere i propri dati\n• Cancellare i propri dati\n• Opporsi al trattamento dei dati.\n\n6. Politica dei cookie\n\nNell\'applicazione possono essere utilizzati cookie analitici per migliorare l\'esperienza utente. Le autorizzazioni vengono ottenute esplicitamente dall\'utente.',
 
   // Language Settings
   'language_settings': 'Impostazioni lingua',
@@ -174,7 +174,7 @@ final Map<String, String> it = {
 
   // Onboarding
   'onboard_welcome_text':
-      'Crea capsule temporali speciali per i tuoi cari con Cappbox e stabilisci legami indimenticabili.',
+      'Crea capsules temporali speciali per i tuoi cari con Cappbox e stabilisci legami indimenticabili.',
   'terms_agreement_text':
       'Continuando, accetti i nostri Termini di utilizzo. Consulta: Informativa sulla privacy e Termini di utilizzo',
   'get_started': 'Inizia',
@@ -243,7 +243,7 @@ final Map<String, String> it = {
   'audio_file_selected': 'File audio selezionato',
   'photo': 'foto',
   'audio': 'audio',
-  'all': 'Tutte le capsule',
+  'all': 'Tutte le capsules',
   'coming_soon': 'In arrivo',
   'ready_to_open': 'Pronte da aprire',
   'my_created': 'Create da me',
@@ -258,4 +258,23 @@ final Map<String, String> it = {
   'message': 'Messaggio',
   'date': 'Data',
   'time': 'Ora',
+  'when_capsule_opens': 'Quando dovrebbe aprirsi la capsula?',
+
+  'capsule_open_time': 'Ora di apertura',
+  'capsule_history': 'Cronologia capsule',
+  'capsule_history_message': 'Quando dovrebbe aprirsi la capsula?',
+
+  'What_to_create_today': 'Cosa vuoi creare oggi?',
+  'hello': 'Ciao',
+  'soon_to_open': 'Pronte da aprire',
+  'anonymous': 'Anonimo',
+
+  // Select
+  'select': 'Seleziona',
+
+  // Pricing
+  'price_text_capsule': 'Gratuito',
+  'price_video_capsule': '24,99 €',
+  'price_audio_capsule': '14,99 €',
+  'price_photo_capsule': '9,99 €',
 };

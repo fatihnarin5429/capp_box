@@ -1,3 +1,4 @@
+import 'package:capp_box/core/extensions/localization_extension.dart';
 import 'package:capp_box/feature/create_capsul/widgets/review_container.dart';
 import 'package:capp_box/product/widgets/background_gradient.dart';
 import 'package:flutter/material.dart';
@@ -213,9 +214,11 @@ class _OpenedCapsulesViewState extends State<OpenedCapsulesView> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          _buildLabelValue('Alıcı:', 'Hande Kobal'),
+          _buildLabelValue(
+              context.tr('recipient_name', args: {}), 'Hande Kobal'),
           const SizedBox(height: 8),
-          _buildLabelValue('Mail:', email ?? 'E-posta sağlanmadı'),
+          _buildLabelValue(
+              context.tr('mail', args: {}), email ?? 'E-posta sağlanmadı'),
         ],
       ),
     );

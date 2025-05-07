@@ -23,17 +23,17 @@ class CapsuleOptionsList extends StatelessWidget {
         const SizedBox(height: 30),
         KapsulSecenekCard(
           icon: 'assets/icons/write.png',
-          baslik: context.tr('capsule_option_text', args: {}),
+          baslik: context.tr('Write', args: {}),
           isPremium: false,
           premiumOdendi: premiumOdendi,
-          fiyat: context.tr('capsule_option_free', args: {}),
+          fiyat: context.tr('Free', args: {}),
           secilenTip: secilenTip,
           onTap: () => onTipSecildi(MediaType.text),
           tip: MediaType.text,
         ),
         KapsulSecenekCard(
           icon: 'assets/icons/video.png',
-          baslik: context.tr('capsule_option_video', args: {}),
+          baslik: context.tr('Video', args: {}),
           isPremium: true,
           premiumOdendi: premiumOdendi,
           fiyat: '449.99 ₺',
@@ -43,7 +43,7 @@ class CapsuleOptionsList extends StatelessWidget {
         ),
         KapsulSecenekCard(
           icon: 'assets/icons/ses.png',
-          baslik: context.tr('capsule_option_voice', args: {}),
+          baslik: context.tr('Voice', args: {}),
           isPremium: false,
           premiumOdendi: premiumOdendi,
           fiyat: '149.99 ₺',
@@ -53,7 +53,7 @@ class CapsuleOptionsList extends StatelessWidget {
         ),
         KapsulSecenekCard(
           icon: 'assets/icons/galeri.png',
-          baslik: context.tr('capsule_option_photo', args: {}),
+          baslik: context.tr('Photo', args: {}),
           isPremium: false,
           premiumOdendi: premiumOdendi,
           fiyat: '249.99 ₺',

@@ -254,4 +254,31 @@ final Map<String, String> hi = {
   'message': 'संदेश',
   'date': 'तिथि',
   'time': 'समय',
+  'when_capsule_opens': 'कैप्सूल कब खुलेगा?',
+  'capsule_open_date': 'खुलने की तारीख',
+  'capsule_open_time': 'खुलने का समय',
+  'capsule_history': 'कैप्सूल इतिहास',
+  'capsule_history_message': 'कैप्सूल कब खुलना चाहिए?',
+  'Text': 'पाठ',
+  'Video': 'वीडियो',
+  'Audio': 'ऑडियो',
+  'Photo': 'फोटो',
+  'Free': 'नि:शुल्क',
+  'Premium': 'प्रीमियम',
+  'Your_Created_Capsules': 'आपके द्वारा बनाई गई कैप्सूल',
+  'No_Capsules_Created_Yet': 'अभी तक कोई कैप्सूल नहीं बनाई गई',
+  'Date_Unknown': 'तारीख अज्ञात',
+  'What_to_create_today': 'आज आप क्या बनाना चाहेंगे?',
+  'hello': 'नमस्ते',
+  'soon_to_open': 'जल्द खोलने वाला',
+  'anonymous': 'अनाम',
+
+  // Select
+  'select': 'चुनें',
+
+  // Pricing
+  'price_text_capsule': 'मुफ़्त',
+  'price_video_capsule': '₹1,999',
+  'price_audio_capsule': '₹1,199',
+  'price_photo_capsule': '₹799',
 };

@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>CADisableMinimumFrameDurationOnPhone</key>
+	<true/>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
@@ -24,6 +26,22 @@
 	<string>$(FLUTTER_BUILD_NUMBER)</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>LSSupportsOpeningDocumentsInPlace</key>
+	<true/>
+	<key>NSAppleMusicUsageDescription</key>
+	<string>Ses dosyası seçmek için izin gerekiyor</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Profil fotoğrafı çekebilmeniz için kamera erişim izni gerekiyor.</string>
+	<key>NSDocumentsUsageDescription</key>
+	<string>Ses dosyalarına erişim için izin gerekiyor</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Profil fotoğrafı çekerken ses kaydı için mikrofon erişim izni gerekiyor.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Profil fotoğrafı seçebilmeniz için fotoğraf galerinize erişim izni gerekiyor.</string>
+	<key>UIApplicationSupportsIndirectInputEvents</key>
+	<true/>
+	<key>UIFileSharingEnabled</key>
+	<true/>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
@@ -41,23 +59,5 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-	<key>CADisableMinimumFrameDurationOnPhone</key>
-	<true/>
-	<key>UIApplicationSupportsIndirectInputEvents</key>
-	<true/>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Profil fotoğrafı seçebilmeniz için fotoğraf galerinize erişim izni gerekiyor.</string>
-	<key>NSCameraUsageDescription</key>
-	<string>Profil fotoğrafı çekebilmeniz için kamera erişim izni gerekiyor.</string>
-	<key>NSMicrophoneUsageDescription</key>
-	<string>Profil fotoğrafı çekerken ses kaydı için mikrofon erişim izni gerekiyor.</string>
-	<key>NSAppleMusicUsageDescription</key>
-	<string>Ses dosyası seçmek için izin gerekiyor</string>
-	<key>UIFileSharingEnabled</key>
-	<true/>
-	<key>LSSupportsOpeningDocumentsInPlace</key>
-	<true/>
-	<key>NSDocumentsUsageDescription</key>
-	<string>Ses dosyalarına erişim için izin gerekiyor</string>
 </dict>
 </plist>

@@ -1,5 +1,6 @@
 import 'package:capp_box/feature/create_capsul/bloc/create_capsule_bloc.dart';
 import 'package:capp_box/feature/create_capsul/model/create_capsule_model.dart';
+import 'package:capp_box/feature/create_capsul/widgets/billing_info_form_widget.dart';
 import 'package:capp_box/feature/create_capsul/widgets/continue_button.dart';
 import 'package:capp_box/feature/home/view/capsules_view.dart';
 import 'package:capp_box/feature/home/view/home_page.dart';
@@ -43,7 +44,15 @@ class CapsuleBuyView extends StatefulWidget {
 
 class _CapsuleBuyViewState extends State<CapsuleBuyView>
     with CreditCardInfoMixin {
-  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> cardFormKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> billingFormKey = GlobalKey<FormState>();
+  bool isBillingInfoValid = false;
+
+  void _onBillingInfoValidityChanged(bool isValid) {
+    setState(() {
+      isBillingInfoValid = isValid;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -71,14 +80,11 @@ class _CapsuleBuyViewState extends State<CapsuleBuyView>
                         padding: const EdgeInsets.symmetric(horizontal: 20),
                         child: Column(
                           children: [
-                            CreditCardFormWidget(formKey: formKey),
-                            Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(vertical: 20.0),
-                              child: Container(
-                                color: Colors.white.withOpacity(0.15),
-                                width: MediaQuery.of(context).size.width * 0.85,
-                              ),
+                            CreditCardFormWidget(formKey: cardFormKey),
+                            _buildSeparator(),
+                            BillingInfoFormWidget(
+                              formKey: billingFormKey,
+                              onValidityChanged: _onBillingInfoValidityChanged,
                             ),
                             Padding(
                               padding:
@@ -94,30 +100,34 @@ class _CapsuleBuyViewState extends State<CapsuleBuyView>
                                 selectedFileName: null,
                                 secilenTip: null,
                                 onPressed: () {
-                                  context
-                                      .read<CreateCapsuleBloc>()
-                                      .add(AddCreatedCapsules(
-                                        createCapsuleModel:
-                                            state.createCapsuleModel,
-                                      ));
-                                  print(
-                                      'state1: ${state.myCreatedCapsules} and ${state.createCapsuleModel}');
-                                  context.read<CreateCapsuleBloc>().add(
-                                        ResetCreateCapsuleModel(),
-                                      );
-                                  print(
-                                      'state2: ${state.myCreatedCapsules} and ${state.createCapsuleModel}');
-                                  Navigator.pushAndRemoveUntil(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => HomePage(
-                                        initialIndex: 1,
+                                  // Form doğrulamasını kontrol et
+                                  final isCardFormValid =
+                                      cardFormKey.currentState?.validate() ??
+                                          false;
+                                  final isBillingFormValid =
+                                      billingFormKey.currentState?.validate() ??
+                                          false;
+
+                                  if (isCardFormValid && isBillingInfoValid) {
+                                    context
+                                        .read<CreateCapsuleBloc>()
+                                        .add(AddCreatedCapsules(
+                                          createCapsuleModel:
+                                              state.createCapsuleModel,
+                                        ));
+                                    context.read<CreateCapsuleBloc>().add(
+                                          ResetCreateCapsuleModel(),
+                                        );
+                                    Navigator.pushAndRemoveUntil(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => HomePage(
+                                          initialIndex: 1,
+                                        ),
                                       ),
-                                    ),
-                                    (route) => false,
-                                  );
-                                  print(
-                                      'state3: ${state.myCreatedCapsules} and ${state.createCapsuleModel}');
+                                      (route) => false,
+                                    );
+                                  }
                                 },
                               ),
                             ),
@@ -131,6 +141,22 @@ class _CapsuleBuyViewState extends State<CapsuleBuyView>
             ],
           );
         },
+      ),
+    );
+  }
+
+  Widget _buildSeparator() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 20.0),
+      child: Column(
+        children: [
+          Container(
+            height: 1,
+            color: Colors.white.withOpacity(0.15),
+            width: MediaQuery.of(context).size.width * 0.85,
+          ),
+          const SizedBox(height: 20),
+        ],
       ),
     );
   }

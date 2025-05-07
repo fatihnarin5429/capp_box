@@ -254,4 +254,33 @@ final Map<String, String> pt = {
   'message': 'Mensagem',
   'date': 'Data',
   'time': 'Hora',
+  'when_capsule_opens': 'Quando a cápsula deve abrir?',
+
+  'capsule_open_time': 'Hora de abertura',
+
+  'capsule_history': 'Histórico da cápsula',
+  'capsule_history_message': 'Quando a cápsula deve abrir?',
+
+  'Text': 'Texto',
+  'Video': 'Vídeo',
+  'Audio': 'Áudio',
+  'Photo': 'Foto',
+  'Free': 'Grátis',
+  'Premium': 'Premium',
+  'Your_Created_Capsules': 'Suas cápsulas criadas',
+  'No_Capsules_Created_Yet': 'Nenhuma cápsula criada ainda',
+  'Date_Unknown': 'Data desconhecida',
+  'What_to_create_today': 'O que você quer criar hoje?',
+  'hello': 'Olá',
+  'soon_to_open': 'Pronta para abrir',
+  'anonymous': 'Anônimo',
+
+  // Select
+  'select': 'Selecionar',
+
+  // Pricing
+  'price_text_capsule': 'Grátis',
+  'price_video_capsule': 'R\$ 124,99',
+  'price_audio_capsule': 'R\$ 74,99',
+  'price_photo_capsule': 'R\$ 49,99',
 };

@@ -1,4 +1,5 @@
 import 'package:bot_toast/bot_toast.dart';
+import 'package:capp_box/core/extensions/localization_extension.dart';
 import 'package:capp_box/core/l10n/app_localizations.dart';
 import 'package:capp_box/core/service/language_service.dart';
 import 'package:capp_box/main.dart';
@@ -237,7 +238,7 @@ class _LanguageSettingsViewState extends State<LanguageSettingsView> {
                       elevation: 0,
                     ),
                     child: Text(
-                      localizations.translate('ok'),
+                      context.tr('ok', args: {}),
                       style: const TextStyle(
                           fontSize: 16, fontWeight: FontWeight.bold),
                     ),

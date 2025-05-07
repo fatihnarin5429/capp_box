@@ -1,3 +1,4 @@
+import 'package:capp_box/core/extensions/localization_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:capp_box/product/utility/enums/mediaType_enum.dart';
 
@@ -44,9 +45,9 @@ class MediaSelectorButton extends StatelessWidget {
                         },
                       ),
                       const SizedBox(width: 8),
-                      const Text(
-                        'Seçiniz',
-                        style: TextStyle(
+                      Text(
+                        context.tr('select', args: {}),
+                        style: const TextStyle(
                           color: Colors.white,
                           fontSize: 14,
                           fontFamily: 'Urbanist',

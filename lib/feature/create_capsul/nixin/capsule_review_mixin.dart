@@ -17,14 +17,14 @@ import '../widgets/capsule_success_dialog.dart';
 mixin CapsuleReviewMixin<T extends StatefulWidget> on State<T> {
   /// Builds the header section with back button and page title
   Widget buildHeader() {
-    return const Stack(
+    return Stack(
       alignment: Alignment.center,
       children: [
         Align(
           alignment: Alignment.centerLeft,
           child: BackButtonWidget(),
         ),
-        PageTitle(title: 'Gözden Geçir'),
+        PageTitle(title: context.tr('Review', args: {})),
       ],
     );
   }

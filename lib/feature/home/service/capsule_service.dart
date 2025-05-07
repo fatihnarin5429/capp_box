@@ -1,4 +1,6 @@
 import 'package:capp_box/feature/home/model/capsule_model.dart';
+import 'package:capp_box/core/extensions/localization_extension.dart';
+import 'package:flutter/material.dart';
 
 class CapsuleService {
   // Firebase kullanımı veya mock data için örnek
@@ -56,41 +58,45 @@ class CapsuleService {
   }
 
   // Örnek veriler - gerçek uygulamada kaldırılacak
-  final List<Capsule> _mockCapsules = [
-    Capsule(
-      id: '1',
-      title: 'Doğum Günü Anıları',
-      content: 'Bu yılki doğum günü partimden hatıralar',
-      creationDate: DateTime.now().subtract(const Duration(days: 60)),
-      openingDate: DateTime.now().add(const Duration(days: 5)),
-      mediaType: 'yazı',
-    ),
-    Capsule(
-      id: '2',
-      title: 'Mezuniyet Videosu',
-      content: 'Üniversite mezuniyet töreninin videosu',
-      creationDate: DateTime.now().subtract(const Duration(days: 90)),
-      openingDate: DateTime.now().add(const Duration(days: 12)),
-      mediaType: 'video',
-      mediaUrl: 'https://example.com/video1.mp4',
-    ),
-    Capsule(
-      id: '3',
-      title: 'Sevgiliye Mesaj',
-      content: 'Sevgiliye özel ses kaydı',
-      creationDate: DateTime.now().subtract(const Duration(days: 30)),
-      openingDate: DateTime.now().add(const Duration(days: 25)),
-      mediaType: 'ses',
-      mediaUrl: 'https://example.com/audio1.mp3',
-    ),
-    Capsule(
-      id: '4',
-      title: 'Tatil Fotoğrafları',
-      content: 'Yaz tatilinden anılar',
-      creationDate: DateTime.now().subtract(const Duration(days: 120)),
-      openingDate: DateTime.now().add(const Duration(days: 1)),
-      mediaType: 'fotoğraf',
-      mediaUrl: 'https://example.com/photo1.jpg',
-    ),
-  ];
+  List<Capsule> _mockCapsules = [];
+
+  void initializeMockData(BuildContext context) {
+    _mockCapsules = [
+      Capsule(
+        id: '1',
+        title: context.tr('birthday_memories'),
+        content: context.tr('birthday_memories_content'),
+        creationDate: DateTime.now().subtract(const Duration(days: 60)),
+        openingDate: DateTime.now().add(const Duration(days: 5)),
+        mediaType: 'yazı',
+      ),
+      Capsule(
+        id: '2',
+        title: context.tr('graduation_video'),
+        content: context.tr('graduation_video_content'),
+        creationDate: DateTime.now().subtract(const Duration(days: 90)),
+        openingDate: DateTime.now().add(const Duration(days: 12)),
+        mediaType: 'video',
+        mediaUrl: 'https://example.com/video1.mp4',
+      ),
+      Capsule(
+        id: '3',
+        title: context.tr('lover_message'),
+        content: context.tr('lover_message_content'),
+        creationDate: DateTime.now().subtract(const Duration(days: 30)),
+        openingDate: DateTime.now().add(const Duration(days: 25)),
+        mediaType: 'ses',
+        mediaUrl: 'https://example.com/audio1.mp3',
+      ),
+      Capsule(
+        id: '4',
+        title: context.tr('vacation_photos'),
+        content: context.tr('vacation_photos_content'),
+        creationDate: DateTime.now().subtract(const Duration(days: 120)),
+        openingDate: DateTime.now().add(const Duration(days: 1)),
+        mediaType: 'fotoğraf',
+        mediaUrl: 'https://example.com/photo1.jpg',
+      ),
+    ];
+  }
 }
