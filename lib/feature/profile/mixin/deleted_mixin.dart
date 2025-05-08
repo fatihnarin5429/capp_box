@@ -14,7 +14,6 @@ mixin ProfileMixin {
           imageWidth: 219.48,
           imageHeight: 170.49,
           title: context.tr('delete_account', args: {}),
-          description: context.tr('delete_account_description', args: {}),
           confirmButtonText: context.tr('delete_account_button', args: {}),
           cancelButtonText: context.tr('cancel_button', args: {}),
           onConfirm: () {
@@ -38,7 +37,6 @@ mixin ProfileMixin {
           imageWidth: 219.48,
           imageHeight: 170.49,
           title: context.tr('logout_confirmation', args: {}),
-          description: context.tr('logout_confirmation_description', args: {}),
           confirmButtonText: context.tr('logout_button', args: {}),
           cancelButtonText: context.tr('cancel_button', args: {}),
           onConfirm: () {

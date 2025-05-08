@@ -3,32 +3,29 @@ import 'package:flutter/material.dart';
 import 'package:capp_box/feature/package/widgets/custom_text_field.dart';
 
 mixin BillingInfoMixin {
-  String fullName = '';
   String address = '';
   String city = '';
   String state = '';
   String postalCode = '';
   String country = '';
-  String phoneNumber = '';
+
+  // UI güncellemesi için fonksiyon
+  Function(Function())? updateState;
 
   // Getters to check if fields are valid
-  bool get isFullNameValid => fullName.isNotEmpty;
   bool get isAddressValid => address.isNotEmpty;
   bool get isCityValid => city.isNotEmpty;
   bool get isStateValid => state.isNotEmpty;
   bool get isPostalCodeValid => postalCode.isNotEmpty;
   bool get isCountryValid => country.isNotEmpty;
-  bool get isPhoneNumberValid => phoneNumber.isNotEmpty;
 
   // Check if all billing info is valid
   bool get isBillingInfoValid =>
-      isFullNameValid &&
       isAddressValid &&
       isCityValid &&
       isStateValid &&
       isPostalCodeValid &&
-      isCountryValid &&
-      isPhoneNumberValid;
+      isCountryValid;
 }
 
 class BillingInfoFormWidget extends StatefulWidget {
@@ -47,13 +44,11 @@ class BillingInfoFormWidget extends StatefulWidget {
 
 class _BillingInfoFormWidgetState extends State<BillingInfoFormWidget>
     with BillingInfoMixin {
-  final TextEditingController _fullNameController = TextEditingController();
   final TextEditingController _addressController = TextEditingController();
   final TextEditingController _cityController = TextEditingController();
   final TextEditingController _stateController = TextEditingController();
   final TextEditingController _postalCodeController = TextEditingController();
   final TextEditingController _countryController = TextEditingController();
-  final TextEditingController _phoneNumberController = TextEditingController();
 
   void _updateValidity() {
     if (widget.onValidityChanged != null) {
@@ -65,12 +60,8 @@ class _BillingInfoFormWidgetState extends State<BillingInfoFormWidget>
   void initState() {
     super.initState();
 
-    _fullNameController.addListener(() {
-      setState(() {
-        fullName = _fullNameController.text;
-        _updateValidity();
-      });
-    });
+    // updateState fonksiyonunu tanımla
+    updateState = setState;
 
     _addressController.addListener(() {
       setState(() {
@@ -106,24 +97,15 @@ class _BillingInfoFormWidgetState extends State<BillingInfoFormWidget>
         _updateValidity();
       });
     });
-
-    _phoneNumberController.addListener(() {
-      setState(() {
-        phoneNumber = _phoneNumberController.text;
-        _updateValidity();
-      });
-    });
   }
 
   @override
   void dispose() {
-    _fullNameController.dispose();
     _addressController.dispose();
     _cityController.dispose();
     _stateController.dispose();
     _postalCodeController.dispose();
     _countryController.dispose();
-    _phoneNumberController.dispose();
     super.dispose();
   }
 
@@ -141,17 +123,7 @@ class _BillingInfoFormWidgetState extends State<BillingInfoFormWidget>
               fontSize: 18,
               fontFamily: 'Urbanist',
               fontWeight: FontWeight.w700,
-              height: 1.40,
             ),
-          ),
-          const SizedBox(height: 16),
-          _buildFieldLabel(context, 'name_surname', args: {}),
-          const SizedBox(height: 8),
-          CustomTextField(
-            textInputType: TextInputType.name,
-            controller: _fullNameController,
-            hintText: context.tr('full_name_hint', args: {}),
-            onChanged: (value) {},
           ),
           const SizedBox(height: 16),
           _buildFieldLabel(context, 'address', args: {}),
@@ -234,15 +206,6 @@ class _BillingInfoFormWidgetState extends State<BillingInfoFormWidget>
                 ),
               ),
             ],
-          ),
-          const SizedBox(height: 16),
-          _buildFieldLabel(context, 'phone_number', args: {}),
-          const SizedBox(height: 8),
-          CustomTextField(
-            textInputType: TextInputType.phone,
-            controller: _phoneNumberController,
-            hintText: context.tr('phone_number_hint'),
-            onChanged: (value) {},
           ),
         ],
       ),

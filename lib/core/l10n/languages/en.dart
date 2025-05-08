@@ -119,6 +119,7 @@ final Map<String, String> en = {
   'account': 'Account',
   'privacy_security': 'Privacy & Security',
   'delete_account': 'Delete My Account',
+  'delete_account_button': 'Delete My Account',
   'delete_account_confirmation':
       'Are you sure you want to delete your account?',
   'account_deleted': 'Your account has been deleted',

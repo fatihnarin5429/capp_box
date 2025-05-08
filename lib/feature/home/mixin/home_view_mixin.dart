@@ -51,21 +51,22 @@ mixin HomeViewMixin<T extends StatefulWidget> on State<T> {
           context.tr('Date_Unknown', args: {}),
           style: const TextStyle(
             color: Colors.white,
-            fontSize: 12,
-            fontWeight: FontWeight.bold,
+            fontSize: 8,
+            fontWeight: FontWeight.w400,
           ),
         ),
       );
     }
 
     // Kapsülün tam ortasında zamanlayıcı
-    return Center(
-      child: SizedBox(
-        width: 90,
-        height: 30,
+    return SizedBox(
+      width: 90,
+      height: 30,
+      child: Center(
         child: TimerDisplayWidget(
           openDate: capsule.openedDate,
           isCompact: true,
+          fontSize: 10, // Küçük kapsüller için küçük font
         ),
       ),
     );

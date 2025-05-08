@@ -5,7 +5,7 @@ class CustomDialog extends StatelessWidget {
   final double imageWidth;
   final double imageHeight;
   final String title;
-  final String description;
+
   final String confirmButtonText;
   final String cancelButtonText;
   final VoidCallback onConfirm;
@@ -19,7 +19,6 @@ class CustomDialog extends StatelessWidget {
     required this.imageWidth,
     required this.imageHeight,
     required this.title,
-    required this.description,
     required this.confirmButtonText,
     required this.cancelButtonText,
     required this.onConfirm,
@@ -27,6 +26,20 @@ class CustomDialog extends StatelessWidget {
     this.confirmButtonTextColor = const Color(0xFF2B2B2B),
     this.cancelButtonTextColor = const Color(0xFFCC2A2A),
   });
+
+  // Factory constructor for creating a simple dialog without requiring all parameters
+  factory CustomDialog.simple() {
+    return CustomDialog(
+      imagePath: 'assets/images/cikis.png',
+      imageWidth: 219.48,
+      imageHeight: 170.49,
+      title: 'Dialog Title',
+      confirmButtonText: 'Confirm',
+      cancelButtonText: 'Cancel',
+      onConfirm: () {},
+      onCancel: () {},
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -73,21 +86,6 @@ class CustomDialog extends StatelessWidget {
                         fontFamily: 'Inter',
                         fontWeight: FontWeight.w600,
                         height: 1.33,
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 8),
-                  SizedBox(
-                    width: 310,
-                    child: Text(
-                      description,
-                      textAlign: TextAlign.center,
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 14,
-                        fontFamily: 'Inter',
-                        fontWeight: FontWeight.w600,
-                        height: 2.29,
                       ),
                     ),
                   ),

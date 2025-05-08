@@ -115,6 +115,7 @@ final Map<String, String> tr = {
   'settings': 'Ayarlar',
   'help': 'Yardım',
   'logout_confirmation': 'Çıkış yapmak istediğinize emin misiniz?',
+
   'logout_button': 'Çıkış Yap',
   'cancel_button': 'İptal',
   'change_photo': 'Fotoğrafı değiştir',
@@ -125,6 +126,7 @@ final Map<String, String> tr = {
   'account': 'Hesap',
   'privacy_security': 'Gizlilik & Güvenlik',
   'delete_account': 'Hesabımı Sil',
+  'delete_account_button': 'Hesabımı Sil',
   'delete_account_confirmation': 'Hesabınızı silmek istediğinize emin misiniz?',
   'account_deleted': 'Hesabınız silindi',
   'profile_updated': 'Profiliniz güncellendi',

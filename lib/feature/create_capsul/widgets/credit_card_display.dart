@@ -9,6 +9,9 @@ mixin CreditCardInfoMixin {
   String cvvCode = '';
   bool isCvvFocused = false;
 
+  // UI güncellemesi için fonksiyon
+  Function(Function())? updateState;
+
   void onCreditCardModelChange(CreditCardModel? model) {
     if (model != null) {
       cardNumber = model.cardNumber;
@@ -16,11 +19,28 @@ mixin CreditCardInfoMixin {
       cardHolderName = model.cardHolderName;
       cvvCode = model.cvvCode;
       isCvvFocused = model.isCvvFocused;
+
+      // updateState fonksiyonu varsa çağır
+      updateState?.call(() {});
     }
   }
 }
 
-class CreditCardDisplay extends StatelessWidget with CreditCardInfoMixin {
+class CreditCardDisplay extends StatefulWidget {
+  const CreditCardDisplay({Key? key}) : super(key: key);
+
+  @override
+  State<CreditCardDisplay> createState() => _CreditCardDisplayState();
+}
+
+class _CreditCardDisplayState extends State<CreditCardDisplay>
+    with CreditCardInfoMixin {
+  @override
+  void initState() {
+    super.initState();
+    updateState = setState;
+  }
+
   @override
   Widget build(BuildContext context) {
     return CreditCardWidget(

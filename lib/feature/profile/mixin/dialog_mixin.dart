@@ -9,7 +9,6 @@ mixin DialogMixin<T extends StatefulWidget> on State<T> {
     required BuildContext context,
     required String imagePath,
     required String title,
-    required String description,
     required String confirmButtonText,
     required String cancelButtonText,
     required VoidCallback onConfirm,
@@ -22,7 +21,6 @@ mixin DialogMixin<T extends StatefulWidget> on State<T> {
           imageWidth: 219.48,
           imageHeight: 170.49,
           title: title,
-          description: description,
           confirmButtonText: confirmButtonText,
           cancelButtonText: cancelButtonText,
           onConfirm: onConfirm,
@@ -37,7 +35,6 @@ mixin DialogMixin<T extends StatefulWidget> on State<T> {
       context: context,
       imagePath: 'assets/images/sil.png',
       title: context.tr('delete_account', args: {}),
-      description: context.tr('delete_account_description', args: {}),
       confirmButtonText: context.tr('delete_account_button', args: {}),
       cancelButtonText: context.tr('cancel_button', args: {}),
       onConfirm: () {
@@ -54,7 +51,6 @@ mixin DialogMixin<T extends StatefulWidget> on State<T> {
       context: context,
       imagePath: 'assets/images/cikis.png',
       title: context.tr('logout_confirmation', args: {}),
-      description: context.tr('logout_confirmation_description', args: {}),
       confirmButtonText: context.tr('logout_button', args: {}),
       cancelButtonText: context.tr('cancel_button', args: {}),
       onConfirm: () {

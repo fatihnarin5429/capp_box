@@ -1,6 +1,9 @@
 // lib/feature/create_capsul/mixin/capsule_review_mixin.dart
 
 import 'package:capp_box/core/extensions/localization_extension.dart';
+import 'package:capp_box/feature/create_capsul/view/capsule_buy_view.dart';
+import 'package:capp_box/feature/home/view/home_view.dart';
+import 'package:capp_box/feature/home/view/capsules_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../bloc/create_capsule_bloc.dart';
@@ -93,6 +96,15 @@ mixin CapsuleReviewMixin<T extends StatefulWidget> on State<T> {
       onTap: () {
         _handleCreateCapsuleAction(state, shareInfo, sendSMS);
         CapsuleSuccessDialog.show(context);
+
+        // CapsuleSuccessDialog gösterildikten sonra CapsuleView'a yönlendirilecek
+        Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const CapsuleBuyView(),
+          ),
+          (route) => false, // Tüm navigasyon geçmişini temizle
+        );
       },
       child: Container(
         width: 162,

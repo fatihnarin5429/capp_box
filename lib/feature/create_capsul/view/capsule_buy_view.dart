@@ -100,34 +100,27 @@ class _CapsuleBuyViewState extends State<CapsuleBuyView>
                                 selectedFileName: null,
                                 secilenTip: null,
                                 onPressed: () {
-                                  // Form doğrulamasını kontrol et
-                                  final isCardFormValid =
-                                      cardFormKey.currentState?.validate() ??
-                                          false;
-                                  final isBillingFormValid =
-                                      billingFormKey.currentState?.validate() ??
-                                          false;
+                                  // Hiçbir doğrulama yapmadan devam et
+                                  context
+                                      .read<CreateCapsuleBloc>()
+                                      .add(AddCreatedCapsules(
+                                        createCapsuleModel:
+                                            state.createCapsuleModel,
+                                      ));
+                                  context.read<CreateCapsuleBloc>().add(
+                                        ResetCreateCapsuleModel(),
+                                      );
 
-                                  if (isCardFormValid && isBillingInfoValid) {
-                                    context
-                                        .read<CreateCapsuleBloc>()
-                                        .add(AddCreatedCapsules(
-                                          createCapsuleModel:
-                                              state.createCapsuleModel,
-                                        ));
-                                    context.read<CreateCapsuleBloc>().add(
-                                          ResetCreateCapsuleModel(),
-                                        );
-                                    Navigator.pushAndRemoveUntil(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => HomePage(
-                                          initialIndex: 1,
-                                        ),
+                                  // Direkt olarak HomePage'e git
+                                  Navigator.pushAndRemoveUntil(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => const HomePage(
+                                        initialIndex: 0,
                                       ),
-                                      (route) => false,
-                                    );
-                                  }
+                                    ),
+                                    (route) => false,
+                                  );
                                 },
                               ),
                             ),

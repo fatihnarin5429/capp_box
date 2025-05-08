@@ -76,7 +76,7 @@ class CapsuleSuccessDialog extends StatelessWidget {
           Navigator.pushAndRemoveUntil(
             context,
             MaterialPageRoute(
-              builder: (context) => CapsuleBuyView(),
+              builder: (context) => const CapsuleBuyView(),
             ),
             (route) => false,
           );

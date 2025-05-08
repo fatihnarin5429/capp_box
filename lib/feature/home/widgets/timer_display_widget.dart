@@ -6,11 +6,13 @@ import 'package:capp_box/feature/create_capsul/bloc/create_capsule_bloc.dart';
 class TimerDisplayWidget extends StatefulWidget {
   final String? openDate;
   final bool isCompact;
+  final double? fontSize;
 
   const TimerDisplayWidget({
     super.key,
     this.openDate,
     this.isCompact = false,
+    this.fontSize,
   });
 
   @override
@@ -129,37 +131,26 @@ class _TimerDisplayWidgetState extends State<TimerDisplayWidget> {
 
     // Compact version for capsule cards (like in the image)
     if (widget.isCompact) {
-      return Container(
-        padding: const EdgeInsets.symmetric(vertical: 3, horizontal: 6),
-        decoration: BoxDecoration(
-          color: const Color(0xFF1A1B30).withOpacity(0.5),
-          borderRadius: BorderRadius.circular(6),
-        ),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              '$hours:$minutes:$seconds',
-              style: const TextStyle(
-                color: Color(0xFF80B0C4),
-                fontSize: 10,
-                fontFamily: 'Open Sans',
-                fontWeight: FontWeight.w500,
-                letterSpacing: 0.3,
-              ),
+      // Get font size based on widget parameter or default
+      final double textSize = widget.fontSize ?? 20;
+
+      return Center(
+        child: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+          decoration: BoxDecoration(
+            color: const Color(0xFF000000).withOpacity(0.6),
+            borderRadius: BorderRadius.circular(4),
+          ),
+          child: Text(
+            '$hours:$minutes:$seconds',
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: textSize,
+              fontFamily: 'Urbanist',
+              fontWeight: FontWeight.w700,
+              letterSpacing: 0.6,
             ),
-            const SizedBox(height: 1),
-            const Text(
-              'Saat • Dakika • Saniye',
-              style: TextStyle(
-                color: Color(0xFF80B0C4),
-                fontSize: 5,
-                fontFamily: 'Open Sans',
-                fontWeight: FontWeight.w300,
-              ),
-            ),
-          ],
+          ),
         ),
       );
     }

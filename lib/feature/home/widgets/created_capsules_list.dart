@@ -103,6 +103,7 @@ class CreatedCapsulesList extends StatelessWidget {
               timerWidget: buildTimeWidget(capsule),
               controller: gradientController,
               isReadyToOpen: isCapsuleReadyToOpen(capsule),
+              cardSize: CapsuleCardSize.small,
             ),
           );
         },

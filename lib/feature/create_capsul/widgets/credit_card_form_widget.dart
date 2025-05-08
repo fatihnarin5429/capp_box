@@ -11,6 +11,9 @@ mixin CreditCardInfoMixin {
   String cvvCode = '';
   bool isCvvFocused = false;
 
+  // UI güncellemesi için fonksiyon
+  Function(Function())? updateState;
+
   void onCreditCardModelChange(CreditCardModel? model) {
     if (model != null) {
       cardNumber = model.cardNumber;
@@ -18,24 +21,40 @@ mixin CreditCardInfoMixin {
       cardHolderName = model.cardHolderName;
       cvvCode = model.cvvCode;
       isCvvFocused = model.isCvvFocused;
+
+      // updateState fonksiyonu varsa çağır
+      updateState?.call(() {});
     }
   }
 }
 
-class CreditCardFormWidget extends StatelessWidget with CreditCardInfoMixin {
+class CreditCardFormWidget extends StatefulWidget {
   final GlobalKey<FormState> formKey;
 
-  CreditCardFormWidget({
+  const CreditCardFormWidget({
     Key? key,
     required this.formKey,
   }) : super(key: key);
 
   @override
+  State<CreditCardFormWidget> createState() => _CreditCardFormWidgetState();
+}
+
+class _CreditCardFormWidgetState extends State<CreditCardFormWidget>
+    with CreditCardInfoMixin {
+  @override
+  void initState() {
+    super.initState();
+    // updateState fonksiyonunu burada tanımla
+    updateState = setState;
+  }
+
+  @override
   Widget build(BuildContext context) {
     return CreditCardForm(
-      formKey: formKey,
-      obscureCvv: false,
-      obscureNumber: false,
+      formKey: widget.formKey,
+      obscureCvv: true,
+      obscureNumber: true,
       cardNumber: cardNumber,
       cvvCode: cvvCode,
       isHolderNameVisible: true,
@@ -43,7 +62,13 @@ class CreditCardFormWidget extends StatelessWidget with CreditCardInfoMixin {
       isExpiryDateVisible: true,
       cardHolderName: cardHolderName,
       expiryDate: expiryDate,
+      // Her zaman null döndür = doğrulama yok
+      expiryDateValidator: (_) => null,
+      cardNumberValidator: (_) => null,
+      cvvValidator: (_) => null,
+      cardHolderValidator: (_) => null,
       onCreditCardModelChange: onCreditCardModelChange,
+      dateValidationMessage: '',
       inputConfiguration: InputConfiguration(
         cardNumberTextStyle: const TextStyle(
           color: Colors.white,
