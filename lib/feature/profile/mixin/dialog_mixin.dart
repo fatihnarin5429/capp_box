@@ -1,4 +1,5 @@
 import 'package:capp_box/core/extensions/localization_extension.dart';
+import 'package:capp_box/feature/onboard/view/onboard1_view.dart';
 import 'package:flutter/material.dart';
 import 'package:capp_box/feature/package/widgets/custom_dialog.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -57,7 +58,11 @@ mixin DialogMixin<T extends StatefulWidget> on State<T> {
         context.read<ProfileBloc>().add(
               ProfileLogout(email: '', password: ''),
             );
-        Navigator.pop(context);
+        Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(builder: (context) => const Onboard1View()),
+          (route) => false,
+        );
       },
     );
   }

@@ -1,4 +1,9 @@
+import 'dart:developer';
+
+import 'package:capp_box/feature/onboard/view/onboard1_view.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'dart:io';
 
 class CustomDialog extends StatelessWidget {
   final String imagePath;
@@ -27,17 +32,21 @@ class CustomDialog extends StatelessWidget {
     this.cancelButtonTextColor = const Color(0xFFCC2A2A),
   });
 
-  // Factory constructor for creating a simple dialog without requiring all parameters
-  factory CustomDialog.simple() {
+  // Factory constructor for exit dialog
+  factory CustomDialog.exit(BuildContext context) {
     return CustomDialog(
       imagePath: 'assets/images/cikis.png',
       imageWidth: 219.48,
       imageHeight: 170.49,
-      title: 'Dialog Title',
-      confirmButtonText: 'Confirm',
-      cancelButtonText: 'Cancel',
+      title: 'Çıkış yapmak istediğinize emin misiniz?',
+      confirmButtonText: 'Çıkış Yap',
+      confirmButtonTextColor: const Color(0xFF2B2B2B),
+      cancelButtonText: 'İptal',
+      cancelButtonTextColor: const Color(0xFFCC2A2A),
       onConfirm: () {},
-      onCancel: () {},
+      onCancel: () {
+        Navigator.pop(context);
+      },
     );
   }
 

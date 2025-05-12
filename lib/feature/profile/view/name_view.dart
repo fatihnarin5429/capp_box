@@ -85,7 +85,7 @@ class _NameViewState extends State<NameView> {
       children: [
         BackButtonWidget(),
         Expanded(
-          child: PageTitle(title: context.tr('name_title', args: {})),
+          child: PageTitle(title: context.tr('name_surname', args: {})),
         ),
       ],
     );
