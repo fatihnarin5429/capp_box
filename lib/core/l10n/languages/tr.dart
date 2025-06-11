@@ -22,6 +22,7 @@ final Map<String, String> tr = {
       'E-posta adresinize OTP kodu gönderdik\n}\nLütfen kodu giriniz.',
   'resend_code': 'Kodu Tekrar Gönder',
   'resend_code_message': 'Kodu {time} saniye sonra tekrar gönderebilirsiniz',
+  
 
   // Login/Auth
   'login': 'Giriş Yap',
