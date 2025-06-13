@@ -56,8 +56,10 @@ class _CreateCapsul3ViewState extends State<CreateCapsul3View> {
             child: SingleChildScrollView(
               physics: const BouncingScrollPhysics(),
               child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 24,
+                  vertical: 24,
+                ),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -172,13 +174,14 @@ class _CreateCapsul3ViewState extends State<CreateCapsul3View> {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => TimeCapsuleHistoryView(
-              videoFile: widget.videoFile,
-              photoFile: widget.photoFile,
-              audioFile: widget.audioFile,
-              type: widget.type,
-              selectedFileName: widget.selectedFileName,
-            ),
+            builder:
+                (context) => TimeCapsuleHistoryView(
+                  videoFile: widget.videoFile,
+                  photoFile: widget.photoFile,
+                  audioFile: widget.audioFile,
+                  type: widget.type,
+                  selectedFileName: widget.selectedFileName,
+                ),
           ),
         );
       },

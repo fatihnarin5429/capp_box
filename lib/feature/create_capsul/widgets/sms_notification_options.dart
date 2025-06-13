@@ -36,28 +36,19 @@ class SMSNotificationOptions extends StatelessWidget {
                 height: 24,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  gradient: sendSMS
-                      ? const LinearGradient(
-                          colors: [
-                            Color(0xFFE0AEEC),
-                            Color(0xFF445BD1),
-                          ],
-                        )
-                      : null,
-                  border: sendSMS
-                      ? null
-                      : Border.all(
-                          color: Colors.grey,
-                          width: 2,
-                        ),
+                  gradient:
+                      sendSMS
+                          ? const LinearGradient(
+                            colors: [Color(0xFFE0AEEC), Color(0xFF445BD1)],
+                          )
+                          : null,
+                  border:
+                      sendSMS ? null : Border.all(color: Colors.grey, width: 2),
                 ),
-                child: sendSMS
-                    ? const Icon(
-                        Icons.check,
-                        size: 16,
-                        color: Colors.white,
-                      )
-                    : null,
+                child:
+                    sendSMS
+                        ? const Icon(Icons.check, size: 16, color: Colors.white)
+                        : null,
               ),
             ),
             const SizedBox(width: 8),
@@ -70,7 +61,7 @@ class SMSNotificationOptions extends StatelessWidget {
                 fontWeight: FontWeight.w700,
                 height: 1.40,
               ),
-            )
+            ),
           ],
         ),
         const SizedBox(height: 8),
@@ -83,28 +74,21 @@ class SMSNotificationOptions extends StatelessWidget {
                 height: 24,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  gradient: !sendSMS
-                      ? const LinearGradient(
-                          colors: [
-                            Color(0xFFE0AEEC),
-                            Color(0xFF445BD1),
-                          ],
-                        )
-                      : null,
-                  border: !sendSMS
-                      ? null
-                      : Border.all(
-                          color: Colors.grey,
-                          width: 2,
-                        ),
+                  gradient:
+                      !sendSMS
+                          ? const LinearGradient(
+                            colors: [Color(0xFFE0AEEC), Color(0xFF445BD1)],
+                          )
+                          : null,
+                  border:
+                      !sendSMS
+                          ? null
+                          : Border.all(color: Colors.grey, width: 2),
                 ),
-                child: !sendSMS
-                    ? const Icon(
-                        Icons.check,
-                        size: 16,
-                        color: Colors.white,
-                      )
-                    : null,
+                child:
+                    !sendSMS
+                        ? const Icon(Icons.check, size: 16, color: Colors.white)
+                        : null,
               ),
             ),
             const SizedBox(width: 8),
@@ -117,7 +101,7 @@ class SMSNotificationOptions extends StatelessWidget {
                 fontWeight: FontWeight.w700,
                 height: 1.40,
               ),
-            )
+            ),
           ],
         ),
       ],

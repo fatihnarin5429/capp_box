@@ -27,14 +27,16 @@ void main() async {
   final languageService = LanguageService();
   await languageService.init();
 
-  runApp(MultiBlocProvider(
-    providers: [
-      BlocProvider(create: (context) => ProfileBloc()),
-      BlocProvider(create: (context) => LoginBloc()),
-      BlocProvider(create: (context) => CreateCapsuleBloc()),
-    ],
-    child: MyApp(languageService: languageService),
-  ));
+  runApp(
+    MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (context) => ProfileBloc()),
+        BlocProvider(create: (context) => LoginBloc()),
+        BlocProvider(create: (context) => CreateCapsuleBloc()),
+      ],
+      child: MyApp(languageService: languageService),
+    ),
+  );
 }
 
 class MyApp extends StatefulWidget {

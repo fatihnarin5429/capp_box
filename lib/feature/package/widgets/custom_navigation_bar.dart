@@ -76,11 +76,7 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
           ),
           borderRadius: BorderRadius.circular(25),
         ),
-        child: const Icon(
-          Icons.add,
-          color: Colors.white,
-          size: 30,
-        ),
+        child: const Icon(Icons.add, color: Colors.white, size: 30),
       ),
     );
   }
