@@ -1,9 +1,9 @@
-part of 'capsule_bloc.dart';
+part of 'home_bloc.dart';
 
 enum CapsuleStatus { initial, loading, loaded, error }
 
-class CapsuleState extends Equatable {
-  const CapsuleState({
+class HomeState extends Equatable {
+  const HomeState({
     this.status = CapsuleStatus.initial,
     this.capsules = const [],
     this.filteredCapsules = const [],
@@ -25,17 +25,17 @@ class CapsuleState extends Equatable {
 
   @override
   List<Object?> get props => [
-        status,
-        capsules,
-        filteredCapsules,
-        searchQuery,
-        filterType,
-        sortBy,
-        selectedCapsuleId,
-        error,
-      ];
+    status,
+    capsules,
+    filteredCapsules,
+    searchQuery,
+    filterType,
+    sortBy,
+    selectedCapsuleId,
+    error,
+  ];
 
-  CapsuleState copyWith({
+  HomeState copyWith({
     CapsuleStatus? status,
     List<dynamic>? capsules,
     List<dynamic>? filteredCapsules,
@@ -45,7 +45,7 @@ class CapsuleState extends Equatable {
     String? selectedCapsuleId,
     String? error,
   }) {
-    return CapsuleState(
+    return HomeState(
       status: status ?? this.status,
       capsules: capsules ?? this.capsules,
       filteredCapsules: filteredCapsules ?? this.filteredCapsules,

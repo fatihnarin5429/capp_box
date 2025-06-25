@@ -6,7 +6,7 @@ import 'package:capp_box/feature/create_capsul/bloc/create_capsule_bloc.dart';
 import 'package:capp_box/feature/create_capsul/view/time_capsule_history_view.dart';
 import 'package:capp_box/product/utility/enums/mediaType_enum.dart';
 import 'package:capp_box/feature/create_capsul/model/create_capsule_model.dart';
-import 'package:capp_box/feature/create_capsul/view/create_capsul_3_view..dart';
+import 'package:capp_box/feature/create_capsul/view/create_capsul_3_view.dart';
 
 class ContinueButton extends StatelessWidget {
   final TextEditingController displayNameController;
@@ -44,7 +44,8 @@ class ContinueButton extends StatelessWidget {
         height: 60,
         child: ElevatedButton(
           onPressed: () {
-            context.read<CreateCapsuleBloc>().add(CreateCapsuleAction(
+            context.read<CreateCapsuleBloc>().add(
+              CreateCapsuleAction(
                 createCapsuleModel: context
                     .read<CreateCapsuleBloc>()
                     .state
@@ -54,7 +55,9 @@ class ContinueButton extends StatelessWidget {
                       email: mailController.text,
                       phoneNumber: phoneController.text,
                       mediaType: secilenTip,
-                    )));
+                    ),
+              ),
+            );
             onPressed();
           },
           style: ElevatedButton.styleFrom(

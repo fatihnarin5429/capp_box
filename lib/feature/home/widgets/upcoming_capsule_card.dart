@@ -1,17 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:capp_box/feature/home/model/capsule_model.dart';
+import 'package:capp_box/feature/home/service/model/capsule_model.dart';
 import 'package:capp_box/product/constants/color_cons.dart';
 
 class UpcomingCapsuleCard extends StatelessWidget {
   final Capsule capsule;
   final VoidCallback? onTap;
 
-  const UpcomingCapsuleCard({
-    Key? key,
-    required this.capsule,
-    this.onTap,
-  }) : super(key: key);
+  const UpcomingCapsuleCard({Key? key, required this.capsule, this.onTap})
+    : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -64,11 +61,7 @@ class UpcomingCapsuleCard extends StatelessWidget {
                   color: cardColor,
                   borderRadius: BorderRadius.circular(10),
                 ),
-                child: Icon(
-                  mediaIcon,
-                  color: Colors.white,
-                  size: 24,
-                ),
+                child: Icon(mediaIcon, color: Colors.white, size: 24),
               ),
               const SizedBox(width: 16),
               // Kapsül bilgileri
@@ -102,8 +95,10 @@ class UpcomingCapsuleCard extends StatelessWidget {
               ),
               // Kalan gün
               Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 12,
+                  vertical: 6,
+                ),
                 decoration: BoxDecoration(
                   color: Colors.white.withOpacity(0.1),
                   borderRadius: BorderRadius.circular(12),

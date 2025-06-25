@@ -1,11 +1,12 @@
 import 'package:capp_box/feature/create_capsul/view/create_capsul_view.dart';
+import 'package:capp_box/feature/home/bloc/home_bloc.dart';
 import 'package:capp_box/feature/home/view/home_view.dart';
 import 'package:capp_box/feature/package/widgets/custom_navigation_bar.dart';
 import 'package:capp_box/product/constants/color_cons.dart';
 import 'package:capp_box/product/widgets/background_gradient.dart';
 import 'package:flutter/material.dart';
 import 'package:capp_box/feature/home/view/home_view_2.dart';
-import 'package:capp_box/feature/home/view/capsules_view.dart';
+import 'package:capp_box/feature/home/view/capsules_view.dart' as capsules_view;
 import 'package:capp_box/feature/notifaction/notifaction_view.dart';
 import 'package:capp_box/feature/profile/view/profil_view.dart';
 import 'package:capp_box/feature/create_capsul/bloc/create_capsule_bloc.dart';
@@ -34,6 +35,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     _currentIndex = widget.initialIndex;
+    context.read<HomeBloc>().add(const HomeGetCapsules());
     super.initState();
   }
 
@@ -48,10 +50,10 @@ class _HomePageState extends State<HomePage> {
             print('state6: ${state.myCreatedCapsules}');
 
             _pages = [
-              state.myCreatedCapsules.isNotEmpty
+              context.read<HomeBloc>().state.capsules.isNotEmpty
                   ? const HomeView2()
                   : const HomeView(),
-              const CapsuleView(),
+              const capsules_view.CapsuleView(),
               const NotificationView(),
               const ProfilView(),
             ];

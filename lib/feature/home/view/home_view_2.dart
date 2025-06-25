@@ -1,5 +1,3 @@
-import 'package:capp_box/core/extensions/localization_extension.dart';
-import 'package:capp_box/feature/home/service/capsule_service.dart';
 import 'package:capp_box/feature/home/mixin/home_view_mixin.dart';
 import 'package:capp_box/feature/home/widgets/created_capsules_list.dart';
 import 'package:capp_box/feature/home/widgets/media_options_grid.dart';
@@ -9,7 +7,6 @@ import 'package:capp_box/product/widgets/background_gradient.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:capp_box/feature/create_capsul/bloc/create_capsule_bloc.dart';
-import 'package:mesh_gradient/mesh_gradient.dart';
 
 /// The main home screen of the application.
 ///
@@ -49,8 +46,6 @@ class _HomeView2ContentState extends State<_HomeView2Content>
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    final capsuleService = CapsuleService();
-    capsuleService.initializeMockData(context);
   }
 
   @override

@@ -3,6 +3,7 @@ import 'package:capp_box/core/l10n/app_localizations.dart';
 import 'package:capp_box/core/service/language_service.dart';
 import 'package:capp_box/feature/create_capsul/bloc/create_capsule_bloc.dart';
 import 'package:capp_box/feature/create_capsul/view/create_capsul_view.dart';
+import 'package:capp_box/feature/home/bloc/home_bloc.dart' as home_bloc;
 import 'package:capp_box/feature/home/view/capsules_view.dart';
 import 'package:capp_box/feature/home/view/home_page.dart';
 import 'package:capp_box/feature/home/view/home_view.dart';
@@ -15,14 +16,14 @@ import 'package:capp_box/feature/onboard/view/onboard1_view.dart';
 import 'package:capp_box/feature/profile/bloc/profile_bloc.dart';
 import 'package:capp_box/feature/profile/view/profil_view.dart';
 import 'package:capp_box/feature/settings/view/language_settings_view.dart';
-import 'package:capp_box/feature/create_capsul/view/capsule_buy_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
+  await dotenv.load(fileName: ".env.cappbox");
   // Initialize language service
   final languageService = LanguageService();
   await languageService.init();
@@ -33,6 +34,7 @@ void main() async {
         BlocProvider(create: (context) => ProfileBloc()),
         BlocProvider(create: (context) => LoginBloc()),
         BlocProvider(create: (context) => CreateCapsuleBloc()),
+        BlocProvider(create: (context) => home_bloc.HomeBloc()),
       ],
       child: MyApp(languageService: languageService),
     ),

@@ -32,17 +32,17 @@ class CreateCapsuleModel extends Equatable {
 
   @override
   List<Object?> get props => [
-        title,
-        message,
-        displayName,
-        openedDate,
-        email,
-        phoneNumber,
-        mediaType,
-        isSendInfoReceiver,
-        isSendInfoSms,
-        isCreatedByMe,
-      ];
+    title,
+    message,
+    displayName,
+    openedDate,
+    email,
+    phoneNumber,
+    mediaType,
+    isSendInfoReceiver,
+    isSendInfoSms,
+    isCreatedByMe,
+  ];
 
   // JSON'dan nesne oluşturma
   factory CreateCapsuleModel.fromJson(Map<String, dynamic> json) {

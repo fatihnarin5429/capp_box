@@ -1,21 +1,25 @@
-part of 'capsule_bloc.dart';
+part of 'home_bloc.dart';
 
-sealed class CapsuleEvent extends Equatable {
-  const CapsuleEvent();
+sealed class HomeEvent extends Equatable {
+  const HomeEvent();
 
   @override
   List<Object> get props => [];
 }
 
-class CapsuleLoad extends CapsuleEvent {
+class HomeGetCapsules extends HomeEvent {
+  const HomeGetCapsules();
+}
+
+class CapsuleLoad extends HomeEvent {
   const CapsuleLoad();
 }
 
-class CapsuleRefresh extends CapsuleEvent {
+class CapsuleRefresh extends HomeEvent {
   const CapsuleRefresh();
 }
 
-class CapsuleSearch extends CapsuleEvent {
+class CapsuleSearch extends HomeEvent {
   final String searchQuery;
   const CapsuleSearch({required this.searchQuery});
 
@@ -23,7 +27,7 @@ class CapsuleSearch extends CapsuleEvent {
   List<Object> get props => [searchQuery];
 }
 
-class CapsuleFilter extends CapsuleEvent {
+class CapsuleFilter extends HomeEvent {
   final String filterType;
   const CapsuleFilter({required this.filterType});
 
@@ -31,7 +35,7 @@ class CapsuleFilter extends CapsuleEvent {
   List<Object> get props => [filterType];
 }
 
-class CapsuleSort extends CapsuleEvent {
+class CapsuleSort extends HomeEvent {
   final String sortBy;
   const CapsuleSort({required this.sortBy});
 
@@ -39,7 +43,7 @@ class CapsuleSort extends CapsuleEvent {
   List<Object> get props => [sortBy];
 }
 
-class CapsuleFavorite extends CapsuleEvent {
+class CapsuleFavorite extends HomeEvent {
   final String capsuleId;
   final bool isFavorite;
   const CapsuleFavorite({required this.capsuleId, required this.isFavorite});
@@ -48,7 +52,7 @@ class CapsuleFavorite extends CapsuleEvent {
   List<Object> get props => [capsuleId, isFavorite];
 }
 
-class CapsuleDelete extends CapsuleEvent {
+class CapsuleDelete extends HomeEvent {
   final String capsuleId;
   const CapsuleDelete({required this.capsuleId});
 
@@ -56,7 +60,7 @@ class CapsuleDelete extends CapsuleEvent {
   List<Object> get props => [capsuleId];
 }
 
-class CapsuleView extends CapsuleEvent {
+class CapsuleView extends HomeEvent {
   final String capsuleId;
   const CapsuleView({required this.capsuleId});
 
