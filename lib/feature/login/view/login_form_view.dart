@@ -6,10 +6,11 @@ import 'package:capp_box/feature/package/widgets/custom_text_field.dart';
 import 'package:flutter/material.dart';
 
 class LoginFormView extends StatefulWidget {
-  const LoginFormView(
-      {super.key,
-      required TextEditingController emailController,
-      required TextEditingController passwordController});
+  const LoginFormView({
+    super.key,
+    required TextEditingController emailController,
+    required TextEditingController passwordController,
+  });
 
   @override
   State<LoginFormView> createState() => _LoginFormViewState();
@@ -130,9 +131,7 @@ class _LoginFormViewState extends State<LoginFormView> with LoginMixin {
                 checkPassword(_passwordController.text);
                 Navigator.push(
                   context,
-                  MaterialPageRoute(
-                    builder: (context) => const HomeView2(),
-                  ),
+                  MaterialPageRoute(builder: (context) => const HomeView2()),
                 );
               },
               child: Padding(
@@ -167,5 +166,12 @@ class _LoginFormViewState extends State<LoginFormView> with LoginMixin {
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
   }
 }

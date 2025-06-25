@@ -4,7 +4,7 @@ import 'package:bot_toast/bot_toast.dart';
 import 'package:capp_box/core/extensions/localization_extension.dart';
 import 'package:capp_box/feature/create_capsul/bloc/create_capsule_bloc.dart';
 import 'package:capp_box/feature/create_capsul/model/create_capsule_model.dart';
-import 'package:capp_box/feature/create_capsul/view/create_capsul_3_view..dart';
+import 'package:capp_box/feature/create_capsul/view/create_capsul_3_view.dart';
 import 'package:capp_box/feature/package/widgets/custom_text_field.dart';
 import 'package:capp_box/product/utility/enums/mediaType_enum.dart';
 
@@ -86,6 +86,8 @@ class _CreateCapsul2ViewState extends State<CreateCapsul2View> with MediaMixin {
   @override
   void dispose() {
     _videoPlayerController?.dispose();
+    _titleController.dispose();
+    _messageController.dispose();
     super.dispose();
   }
 
@@ -99,17 +101,21 @@ class _CreateCapsul2ViewState extends State<CreateCapsul2View> with MediaMixin {
   }
 
   Future<void> pickAndValidateFile(
-      BuildContext context, String sourceType) async {
+    BuildContext context,
+    String sourceType,
+  ) async {
     File? selectedFile;
 
     try {
       if (sourceType == 'image') {
-        final XFile? image =
-            await ImagePicker().pickImage(source: ImageSource.gallery);
+        final XFile? image = await ImagePicker().pickImage(
+          source: ImageSource.gallery,
+        );
         if (image != null) selectedFile = File(image.path);
       } else if (sourceType == 'video') {
-        final XFile? video =
-            await ImagePicker().pickVideo(source: ImageSource.gallery);
+        final XFile? video = await ImagePicker().pickVideo(
+          source: ImageSource.gallery,
+        );
         if (video != null) selectedFile = File(video.path);
       } else if (sourceType == 'audio') {
         final result = await FilePicker.platform.pickFiles(
@@ -135,13 +141,14 @@ class _CreateCapsul2ViewState extends State<CreateCapsul2View> with MediaMixin {
       if (!FileValidator.validateFileSize(selectedFile, context) ||
           !FileValidator.validateFileType(selectedFile, fileType, context) ||
           !FileValidator.validateFileCount(
-              fileType,
-              fileType == 'video'
-                  ? currentVideoCount
-                  : fileType == 'image'
-                      ? currentImageCount
-                      : currentAudioCount,
-              context)) {
+            fileType,
+            fileType == 'video'
+                ? currentVideoCount
+                : fileType == 'image'
+                ? currentImageCount
+                : currentAudioCount,
+            context,
+          )) {
         return;
       }
 
@@ -182,7 +189,9 @@ class _CreateCapsul2ViewState extends State<CreateCapsul2View> with MediaMixin {
                 return SingleChildScrollView(
                   child: Padding(
                     padding: const EdgeInsets.symmetric(
-                        horizontal: 24, vertical: 24),
+                      horizontal: 24,
+                      vertical: 24,
+                    ),
                     child: Column(
                       children: [
                         Stack(
@@ -254,8 +263,8 @@ class _CreateCapsul2ViewState extends State<CreateCapsul2View> with MediaMixin {
                             widget.type == MediaType.text
                                 ? context.tr('add_text')
                                 : widget.type == MediaType.voice
-                                    ? context.tr('add_voice')
-                                    : context.tr('add_media'),
+                                ? context.tr('add_voice')
+                                : context.tr('add_media'),
                             style: const TextStyle(
                               color: Colors.white,
                               fontSize: 18,
@@ -268,19 +277,19 @@ class _CreateCapsul2ViewState extends State<CreateCapsul2View> with MediaMixin {
                         widget.type == MediaType.photo
                             ? const SizedBox()
                             : Align(
-                                alignment: Alignment.centerLeft,
-                                child: Text(
-                                  context.tr('select_video'),
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 12,
-                                    fontFamily: 'Urbanist',
-                                    fontWeight: FontWeight.w400,
-                                    height: 1.70,
-                                    letterSpacing: -0.50,
-                                  ),
+                              alignment: Alignment.centerLeft,
+                              child: Text(
+                                context.tr('select_video'),
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 12,
+                                  fontFamily: 'Urbanist',
+                                  fontWeight: FontWeight.w400,
+                                  height: 1.70,
+                                  letterSpacing: -0.50,
                                 ),
                               ),
+                            ),
                         const SizedBox(height: 12),
                         MediaSelectorButton(
                           type: widget.type!,
@@ -302,15 +311,17 @@ class _CreateCapsul2ViewState extends State<CreateCapsul2View> with MediaMixin {
                           selectedFileName: selectedFileName,
                           videoPlayerController: _videoPlayerController,
                           onRemovePhoto: () => setState(() => photoFile = null),
-                          onRemoveVideo: () => setState(() {
-                            videoFile = null;
-                            _videoPlayerController?.dispose();
-                            _videoPlayerController = null;
-                          }),
-                          onRemoveAudio: () => setState(() {
-                            audioFile = null;
-                            selectedFileName = null;
-                          }),
+                          onRemoveVideo:
+                              () => setState(() {
+                                videoFile = null;
+                                _videoPlayerController?.dispose();
+                                _videoPlayerController = null;
+                              }),
+                          onRemoveAudio:
+                              () => setState(() {
+                                audioFile = null;
+                                selectedFileName = null;
+                              }),
                         ),
                         Padding(
                           padding: const EdgeInsets.symmetric(vertical: 32.0),
@@ -326,30 +337,33 @@ class _CreateCapsul2ViewState extends State<CreateCapsul2View> with MediaMixin {
                             secilenTip: widget.type!,
                             onPressed: () {
                               context.read<CreateCapsuleBloc>().add(
-                                    CreateCapsuleAction(
-                                      createCapsuleModel: CreateCapsuleModel(
-                                        title: _titleController.text,
-                                        message: _messageController.text,
-                                        mediaType: widget.type!,
-                                        mediaUrl: widget.type == MediaType.photo
+                                CreateCapsuleAction(
+                                  createCapsuleModel: CreateCapsuleModel(
+                                    title: _titleController.text,
+                                    message: _messageController.text,
+                                    mediaType: widget.type!,
+                                    mediaUrl:
+                                        widget.type == MediaType.photo
                                             ? photoFile
                                             : widget.type == MediaType.video
-                                                ? videoFile
-                                                : audioFile,
-                                      ),
-                                    ),
-                                  );
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => CreateCapsul3View(
-                                    controller: _titleController,
-                                    onChanged: widget.onChanged,
+                                            ? videoFile
+                                            : audioFile,
                                   ),
                                 ),
                               );
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder:
+                                      (context) => CreateCapsul3View(
+                                        controller: _titleController,
+                                        onChanged: widget.onChanged,
+                                      ),
+                                ),
+                              );
                               print(
-                                  'state1: ${state.myCreatedCapsules} and ${state.createCapsuleModel}');
+                                'state1: ${state.myCreatedCapsules} and ${state.createCapsuleModel}',
+                              );
                             },
                           ),
                         ),

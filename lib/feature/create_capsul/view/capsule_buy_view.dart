@@ -70,10 +70,7 @@ class _CapsuleBuyViewState extends State<CapsuleBuyView>
                     AppBarWidget(),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 20),
-                      child: SizedBox(
-                        height: 200,
-                        child: CreditCardDisplay(),
-                      ),
+                      child: SizedBox(height: 200, child: CreditCardDisplay()),
                     ),
                     Expanded(
                       child: SingleChildScrollView(
@@ -87,8 +84,9 @@ class _CapsuleBuyViewState extends State<CapsuleBuyView>
                               onValidityChanged: _onBillingInfoValidityChanged,
                             ),
                             Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(vertical: 32.0),
+                              padding: const EdgeInsets.symmetric(
+                                vertical: 32.0,
+                              ),
                               child: ContinueButton(
                                 displayNameController: TextEditingController(),
                                 mailController: TextEditingController(),
@@ -101,23 +99,23 @@ class _CapsuleBuyViewState extends State<CapsuleBuyView>
                                 secilenTip: null,
                                 onPressed: () {
                                   // Hiçbir doğrulama yapmadan devam et
-                                  context
-                                      .read<CreateCapsuleBloc>()
-                                      .add(AddCreatedCapsules(
-                                        createCapsuleModel:
-                                            state.createCapsuleModel,
-                                      ));
                                   context.read<CreateCapsuleBloc>().add(
-                                        ResetCreateCapsuleModel(),
-                                      );
+                                    AddCreatedCapsules(
+                                      createCapsuleModel:
+                                          state.createCapsuleModel,
+                                    ),
+                                  );
+                                  context.read<CreateCapsuleBloc>().add(
+                                    ResetCreateCapsuleModel(),
+                                  );
 
                                   // Direkt olarak HomePage'e git
                                   Navigator.pushAndRemoveUntil(
                                     context,
                                     MaterialPageRoute(
-                                      builder: (context) => const HomePage(
-                                        initialIndex: 0,
-                                      ),
+                                      builder:
+                                          (context) =>
+                                              const HomePage(initialIndex: 0),
                                     ),
                                     (route) => false,
                                   );

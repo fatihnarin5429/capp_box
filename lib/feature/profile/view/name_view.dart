@@ -32,8 +32,10 @@ class _NameViewState extends State<NameView> {
               const BackgroundGradient(),
               SafeArea(
                 child: Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 24,
+                    vertical: 24,
+                  ),
                   child: Column(
                     children: [
                       _buildHeader(context),
@@ -84,9 +86,7 @@ class _NameViewState extends State<NameView> {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         BackButtonWidget(),
-        Expanded(
-          child: PageTitle(title: context.tr('name_surname', args: {})),
-        ),
+        Expanded(child: PageTitle(title: context.tr('name_surname', args: {}))),
       ],
     );
   }
@@ -94,9 +94,9 @@ class _NameViewState extends State<NameView> {
   Widget _buildEditButton(BuildContext context) {
     return BuilEditButton(
       targetRouteOnpressed: () {
-        context
-            .read<ProfileBloc>()
-            .add(ProfileChangeName(displayName: _nameController.text));
+        context.read<ProfileBloc>().add(
+          ProfileChangeName(displayName: _nameController.text),
+        );
         Navigator.of(context).pushNamedAndRemoveUntil('/', (route) => false);
         // HomePage'i ProfileView seçili olarak aç
         Navigator.of(context).push(
@@ -106,5 +106,11 @@ class _NameViewState extends State<NameView> {
         );
       },
     );
+  }
+
+  @override
+  void dispose() {
+    _nameController.dispose();
+    super.dispose();
   }
 }

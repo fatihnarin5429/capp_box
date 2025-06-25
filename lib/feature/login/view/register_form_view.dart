@@ -115,27 +115,26 @@ class RegisterFormView extends StatelessWidget {
         if (passwordController.text != passwordConfirmController.text) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-                content: Text(context.tr('passwords_not_matching', args: {}))),
+              content: Text(context.tr('passwords_not_matching', args: {})),
+            ),
           );
           return;
         }
         context.read<LoginBloc>().add(
-              RegisterAction(
-                phone: context.read<LoginBloc>().state.phone,
-                user: context.read<LoginBloc>().state.user!.copyWith(
-                      password: passwordController.text,
-                      email: emailController.text,
-                      name: nameController.text,
-                      createdAt: DateTime.now(),
-                      isEmailVerified: false,
-                    ),
-              ),
-            );
+          RegisterAction(
+            phone: context.read<LoginBloc>().state.phone,
+            user: context.read<LoginBloc>().state.user!.copyWith(
+              password: passwordController.text,
+              email: emailController.text,
+              name: nameController.text,
+              createdAt: DateTime.now(),
+              isEmailVerified: false,
+            ),
+          ),
+        );
         Navigator.push(
           context,
-          MaterialPageRoute(
-            builder: (context) => const HomeView2(),
-          ),
+          MaterialPageRoute(builder: (context) => const HomeView2()),
         );
         onRegisterSuccess();
       },

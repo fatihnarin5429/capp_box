@@ -47,6 +47,14 @@ class _CreateCapsul3ViewState extends State<CreateCapsul3View> {
   final TextEditingController _phoneController = TextEditingController();
 
   @override
+  void dispose() {
+    _displayNameController.dispose();
+    _mailController.dispose();
+    _phoneController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(

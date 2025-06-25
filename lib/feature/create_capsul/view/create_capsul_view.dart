@@ -33,8 +33,10 @@ class _CreateCapsulViewState extends State<CreateCapsulView> {
             const BackgroundGradient(),
             SafeArea(
               child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 24,
+                  vertical: 24,
+                ),
                 child: Column(
                   children: [
                     Row(
@@ -43,7 +45,8 @@ class _CreateCapsulViewState extends State<CreateCapsulView> {
                         const BackButtonWidget(),
                         Expanded(
                           child: PageTitle(
-                              title: context.tr('create_capsule', args: {})),
+                            title: context.tr('create_capsule', args: {}),
+                          ),
                         ),
                       ],
                     ),
@@ -57,8 +60,8 @@ class _CreateCapsulViewState extends State<CreateCapsulView> {
                             CapsuleOptionsList(
                               secilenTip: secilenTip,
                               premiumOdendi: premiumOdendi,
-                              onTipSecildi: (tip) =>
-                                  setState(() => secilenTip = tip),
+                              onTipSecildi:
+                                  (tip) => setState(() => secilenTip = tip),
                             ),
                             ContinueButton(
                               secilenTip: secilenTip,
@@ -69,21 +72,23 @@ class _CreateCapsulViewState extends State<CreateCapsulView> {
                                 if (secilenTip == null) {
                                   ScaffoldMessenger.of(context).showSnackBar(
                                     const SnackBar(
-                                        content: Text('Lütfen bir tip seçin'),
-                                        duration: Duration(seconds: 1),
-                                        behavior: SnackBarBehavior.fixed,
-                                        backgroundColor:
-                                            ColorConst.backgroundPurple1),
+                                      content: Text('Lütfen bir tip seçin'),
+                                      duration: Duration(seconds: 1),
+                                      behavior: SnackBarBehavior.fixed,
+                                      backgroundColor:
+                                          ColorConst.backgroundPurple1,
+                                    ),
                                   );
                                 } else {
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                      builder: (context) => CreateCapsul2View(
-                                        controller: TextEditingController(),
-                                        onChanged: (value) {},
-                                        type: secilenTip,
-                                      ),
+                                      builder:
+                                          (context) => CreateCapsul2View(
+                                            controller: TextEditingController(),
+                                            onChanged: (value) {},
+                                            type: secilenTip,
+                                          ),
                                     ),
                                   );
                                 }

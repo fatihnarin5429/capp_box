@@ -212,8 +212,11 @@ class _BillingInfoFormWidgetState extends State<BillingInfoFormWidget>
     );
   }
 
-  Widget _buildFieldLabel(BuildContext context, String key,
-      {Map<String, String>? args}) {
+  Widget _buildFieldLabel(
+    BuildContext context,
+    String key, {
+    Map<String, String>? args,
+  }) {
     return Text(
       context.tr(key, args: args),
       style: const TextStyle(

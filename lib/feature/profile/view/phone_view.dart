@@ -21,8 +21,9 @@ class _PhoneViewState extends State<PhoneView> {
   @override
   void initState() {
     super.initState();
-    _phoneController =
-        TextEditingController(text: context.read<ProfileBloc>().state.phone);
+    _phoneController = TextEditingController(
+      text: context.read<ProfileBloc>().state.phone,
+    );
   }
 
   @override
@@ -42,8 +43,10 @@ class _PhoneViewState extends State<PhoneView> {
               const BackgroundGradient(),
               SafeArea(
                 child: Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 24,
+                    vertical: 24,
+                  ),
                   child: Column(
                     children: [
                       _buildHeader(context),
@@ -69,9 +72,9 @@ class _PhoneViewState extends State<PhoneView> {
                         hintText: "5XX XXX XX XX",
                         keyboardType: TextInputType.phone,
                         onChanged: (value) {
-                          context
-                              .read<ProfileBloc>()
-                              .add(ProfileChangePhone(phone: value));
+                          context.read<ProfileBloc>().add(
+                            ProfileChangePhone(phone: value),
+                          );
                         },
                       ),
                       const SizedBox(height: 16),
@@ -100,9 +103,7 @@ class _PhoneViewState extends State<PhoneView> {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: const [
         BackButtonWidget(),
-        Expanded(
-          child: PageTitle(title: 'Telefon Numarası'),
-        ),
+        Expanded(child: PageTitle(title: 'Telefon Numarası')),
       ],
     );
   }
@@ -110,15 +111,15 @@ class _PhoneViewState extends State<PhoneView> {
   Widget _buildSaveButton(BuildContext context) {
     return BuilEditButton(
       targetRouteOnpressed: () {
-        context
-            .read<ProfileBloc>()
-            .add(ProfileChangePhone(phone: _phoneController.text));
+        context.read<ProfileBloc>().add(
+          ProfileChangePhone(phone: _phoneController.text),
+        );
         Navigator.push(
           context,
           MaterialPageRoute(
-              builder: (context) => PhoneOtpView(
-                    phoneNumber: _phoneController.text,
-                  )),
+            builder:
+                (context) => PhoneOtpView(phoneNumber: _phoneController.text),
+          ),
         );
       },
     );

@@ -22,68 +22,73 @@ class _EpostaViewState extends State<EpostaView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Stack(
-      children: [
-        const BackgroundGradient(),
-        SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
-            child: Column(
-              children: [
-                _buildHeader(context),
-                Align(
-                  alignment: Alignment.centerLeft,
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(vertical: 16),
-                    child: Text(
-                      context.tr('mail_address'),
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 18,
-                        fontFamily: 'Urbanist',
-                        fontWeight: FontWeight.w500,
-                        height: 1.40,
+      body: Stack(
+        children: [
+          const BackgroundGradient(),
+          SafeArea(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
+              child: Column(
+                children: [
+                  _buildHeader(context),
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(vertical: 16),
+                      child: Text(
+                        context.tr('mail_address'),
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 18,
+                          fontFamily: 'Urbanist',
+                          fontWeight: FontWeight.w500,
+                          height: 1.40,
+                        ),
                       ),
                     ),
                   ),
-                ),
-                CustomTextField(
-                  textInputType: TextInputType.emailAddress,
-                  controller: _emailController,
-                  hintText: context.tr('mail_address_message'),
-                  onChanged: (value) {},
-                ),
-                const SizedBox(height: 16),
-                Expanded(
-                  child: Align(
-                    alignment: Alignment.bottomCenter,
-                    child: Padding(
+                  CustomTextField(
+                    textInputType: TextInputType.emailAddress,
+                    controller: _emailController,
+                    hintText: context.tr('mail_address_message'),
+                    onChanged: (value) {},
+                  ),
+                  const SizedBox(height: 16),
+                  Expanded(
+                    child: Align(
+                      alignment: Alignment.bottomCenter,
+                      child: Padding(
                         padding: const EdgeInsets.only(bottom: 24),
                         child: BuilEditButton(
                           targetRouteOnpressed: () {
-                            context.read<ProfileBloc>().add(ProfileChangeEmail(
-                                email: _emailController.text));
+                            context.read<ProfileBloc>().add(
+                              ProfileChangeEmail(email: _emailController.text),
+                            );
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => EmailOtpView(
-                                        email: _emailController.text,
-                                        isEmail: true,
-                                        name: '',
-                                        otp: '',
-                                        phone: '',
-                                      )),
+                                builder:
+                                    (context) => EmailOtpView(
+                                      email: _emailController.text,
+                                      isEmail: true,
+                                      name: '',
+                                      otp: '',
+                                      phone: '',
+                                    ),
+                              ),
                             );
                           },
-                        )),
+                        ),
+                      ),
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
-        ),
-      ],
-    ));
+        ],
+      ),
+    );
   }
 
   Widget _buildHeader(BuildContext context) {
@@ -91,10 +96,14 @@ class _EpostaViewState extends State<EpostaView> {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         BackButtonWidget(),
-        Expanded(
-          child: PageTitle(title: context.tr('mail_address')),
-        ),
+        Expanded(child: PageTitle(title: context.tr('mail_address'))),
       ],
     );
+  }
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    super.dispose();
   }
 }

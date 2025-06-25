@@ -25,8 +25,9 @@ class _PhoneLoginViewState extends State<PhoneLoginView> {
   @override
   void initState() {
     super.initState();
-    _phoneController =
-        TextEditingController(text: context.read<LoginBloc>().state.phone);
+    _phoneController = TextEditingController(
+      text: context.read<LoginBloc>().state.phone,
+    );
   }
 
   @override
@@ -52,7 +53,9 @@ class _PhoneLoginViewState extends State<PhoneLoginView> {
                 SafeArea(
                   child: Padding(
                     padding: const EdgeInsets.symmetric(
-                        horizontal: 16, vertical: 32),
+                      horizontal: 16,
+                      vertical: 32,
+                    ),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -111,31 +114,36 @@ class _PhoneLoginViewState extends State<PhoneLoginView> {
                             hintText: "0XXX XXX XX XX",
                             onChanged: (value) {
                               if (value.isEmpty || value[0] == '0') {
-                                context
-                                    .read<LoginBloc>()
-                                    .add(LoginChangePhone(phone: value));
+                                context.read<LoginBloc>().add(
+                                  LoginChangePhone(phone: value),
+                                );
                                 return;
                               }
 
                               String formattedPhone = '0$value';
                               if (formattedPhone.length > 10) {
-                                formattedPhone =
-                                    formattedPhone.substring(0, 10);
+                                formattedPhone = formattedPhone.substring(
+                                  0,
+                                  10,
+                                );
                               }
                               if (formattedPhone.length < 10) {
-                                formattedPhone =
-                                    formattedPhone.padRight(10, '0');
+                                formattedPhone = formattedPhone.padRight(
+                                  10,
+                                  '0',
+                                );
                               }
 
                               _phoneController.value = TextEditingValue(
                                 text: formattedPhone,
                                 selection: TextSelection.collapsed(
-                                    offset: formattedPhone.length),
+                                  offset: formattedPhone.length,
+                                ),
                               );
 
-                              context
-                                  .read<LoginBloc>()
-                                  .add(LoginChangePhone(phone: formattedPhone));
+                              context.read<LoginBloc>().add(
+                                LoginChangePhone(phone: formattedPhone),
+                              );
                             },
                           ),
                         ),
@@ -152,8 +160,10 @@ class _PhoneLoginViewState extends State<PhoneLoginView> {
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                        builder: (context) => PhoneLoginOtpView(
-                                            phoneNumber: state.phone),
+                                        builder:
+                                            (context) => PhoneLoginOtpView(
+                                              phoneNumber: state.phone,
+                                            ),
                                       ),
                                     );
                                   },
@@ -172,7 +182,7 @@ class _PhoneLoginViewState extends State<PhoneLoginView> {
                                         end: Alignment(-1, 0),
                                         colors: [
                                           Color(0xFFB224EF),
-                                          Color(0xFF7579FF)
+                                          Color(0xFF7579FF),
                                         ],
                                       ),
                                       borderRadius: BorderRadius.circular(100),

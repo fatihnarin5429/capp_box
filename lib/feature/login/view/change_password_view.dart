@@ -23,6 +23,12 @@ class _ChangePasswordViewState extends State<ChangePasswordView> {
     _emailController = TextEditingController();
   }
 
+  @override
+  void dispose() {
+    _emailController.dispose();
+    super.dispose();
+  }
+
   Widget _buildTextField() {
     return CustomTextField(
       textInputType: TextInputType.emailAddress,
@@ -110,8 +116,8 @@ class _ChangePasswordViewState extends State<ChangePasswordView> {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) =>
-                                        const ChangePassword2(),
+                                    builder:
+                                        (context) => const ChangePassword2(),
                                   ),
                                 );
                               },
@@ -123,15 +129,16 @@ class _ChangePasswordViewState extends State<ChangePasswordView> {
                                 ),
                               ),
                               child: Center(
-                                  child: Text(
-                                context.tr('continue_button', args: {}),
-                                style: const TextStyle(
-                                  color: Color(0xFFE5E5E5),
-                                  fontSize: 14,
-                                  fontFamily: 'Urbanist',
-                                  fontWeight: FontWeight.w700,
+                                child: Text(
+                                  context.tr('continue_button', args: {}),
+                                  style: const TextStyle(
+                                    color: Color(0xFFE5E5E5),
+                                    fontSize: 14,
+                                    fontFamily: 'Urbanist',
+                                    fontWeight: FontWeight.w700,
+                                  ),
                                 ),
-                              )),
+                              ),
                             ),
                           ),
                         ),
