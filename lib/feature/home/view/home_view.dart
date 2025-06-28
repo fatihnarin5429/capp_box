@@ -1,8 +1,7 @@
 import 'package:capp_box/core/extensions/localization_extension.dart';
 import 'package:capp_box/feature/create_capsul/view/create_capsul_view.dart';
 import 'package:capp_box/feature/create_capsul/widgets/continue_button.dart';
-import 'package:capp_box/feature/package/widgets/custom_navigation_bar.dart';
-import 'package:capp_box/product/constants/color_cons.dart';
+
 import 'package:capp_box/product/widgets/background_gradient.dart';
 import 'package:flutter/material.dart';
 
@@ -11,7 +10,6 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print('home view');
     return Material(
       type: MaterialType.transparency,
       child: Scaffold(
@@ -26,10 +24,14 @@ class HomeView extends StatelessWidget {
                   children: [
                     Padding(
                       padding: const EdgeInsets.symmetric(
-                          horizontal: 16, vertical: 16),
+                        horizontal: 16,
+                        vertical: 16,
+                      ),
                       child: Container(
                         padding: const EdgeInsets.symmetric(
-                            horizontal: 16, vertical: 16),
+                          horizontal: 16,
+                          vertical: 16,
+                        ),
                         decoration: BoxDecoration(
                           color: Colors.white.withOpacity(0.03),
                           borderRadius: BorderRadius.circular(30),
@@ -142,8 +144,8 @@ class HomeView extends StatelessWidget {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) =>
-                                      const CreateCapsulView(),
+                                  builder:
+                                      (context) => const CreateCapsulView(),
                                 ),
                               );
                             },

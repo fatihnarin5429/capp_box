@@ -67,7 +67,7 @@ mixin CapsuleViewMixin<T extends StatefulWidget> on State<T> {
                   end: Alignment.bottomRight,
                   colors: [
                     const Color(0xFF10101C),
-                    const Color(0xFF262742).withOpacity(0.1),
+                    const Color(0xFF262742).withValues(alpha: 0.1),
                   ],
                 ),
                 borderRadius: BorderRadius.circular(30),
@@ -145,7 +145,7 @@ mixin CapsuleViewMixin<T extends StatefulWidget> on State<T> {
                         : 'Kapsülün açılma tarihi belirlenmemiş.',
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                      color: Colors.white.withOpacity(0.7),
+                      color: Colors.white.withValues(alpha: 0.7),
                       fontSize: 16,
                       fontFamily: 'Urbanist',
                       fontWeight: FontWeight.w500,
@@ -166,7 +166,7 @@ mixin CapsuleViewMixin<T extends StatefulWidget> on State<T> {
                           end: const Alignment(-1, 0),
                           colors: [
                             const Color(0xFFB224EF),
-                            const Color(0xFF7579FF).withOpacity(0.8),
+                            const Color(0xFF7579FF).withValues(alpha: 0.8),
                           ],
                         ),
                         borderRadius: BorderRadius.circular(50),

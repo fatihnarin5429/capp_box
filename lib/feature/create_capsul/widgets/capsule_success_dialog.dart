@@ -1,7 +1,6 @@
 import 'package:capp_box/core/extensions/localization_extension.dart';
 import 'package:capp_box/feature/create_capsul/view/capsule_buy_view.dart';
 import 'package:flutter/material.dart';
-import 'package:capp_box/feature/package/payment_view.dart';
 
 class CapsuleSuccessDialog extends StatelessWidget {
   const CapsuleSuccessDialog({Key? key}) : super(key: key);
@@ -75,9 +74,7 @@ class CapsuleSuccessDialog extends StatelessWidget {
         Future.delayed(const Duration(seconds: 3), () {
           Navigator.pushAndRemoveUntil(
             context,
-            MaterialPageRoute(
-              builder: (context) => const CapsuleBuyView(),
-            ),
+            MaterialPageRoute(builder: (context) => const CapsuleBuyView()),
             (route) => false,
           );
         });

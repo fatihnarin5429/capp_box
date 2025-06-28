@@ -1,21 +1,18 @@
 import 'package:capp_box/core/l10n/app_localizations.dart';
-import 'package:capp_box/feature/package/widgets/custom_navigation_bar.dart';
+
 import 'package:capp_box/feature/package/widgets/profile_widgets.dart';
 import 'package:capp_box/feature/profile/bloc/profile_bloc.dart';
 import 'package:capp_box/feature/profile/view/eposta_view.dart';
-import 'package:capp_box/feature/profile/view/gizlilik_view.dart';
-import 'package:capp_box/feature/profile/view/help_View.dart';
+
 import 'package:capp_box/feature/profile/view/name_view.dart';
 import 'package:capp_box/feature/profile/view/password_view.dart';
 import 'package:capp_box/feature/profile/view/phone_view.dart';
-import 'package:capp_box/product/constants/color_cons.dart';
+
 import 'package:capp_box/product/widgets/background_gradient.dart';
 import 'package:flutter/material.dart';
 
-import 'dart:io';
-import 'package:capp_box/core/services/image_picker_service.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:capp_box/feature/package/widgets/custom_dialog.dart';
+
 import 'package:capp_box/feature/profile/mixin/deleted_mixin.dart';
 import 'package:capp_box/feature/profile/mixin/image_picker_mixin.dart';
 import 'package:capp_box/feature/profile/mixin/dialog_mixin.dart';
@@ -50,39 +47,52 @@ class _ProfilViewState extends State<ProfilView>
                       ProfileListTile(
                         leadingIcon: 'assets/icons/profile3.png',
                         title: localizations.translate('full_name'),
-                        subtitle: state.displayName ??
+                        subtitle:
+                            state.displayName ??
                             localizations.translate('full_name'),
-                        onTap: () => Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (_) => const NameView())),
+                        onTap:
+                            () => Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (_) => const NameView(),
+                              ),
+                            ),
                       ),
                       ProfileListTile(
                         leadingIcon: 'assets/icons/mail.png',
                         title: localizations.translate('email'),
                         subtitle: state.email ?? 'example@gmail.com',
-                        onTap: () => Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (_) => const EpostaView())),
+                        onTap:
+                            () => Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (_) => const EpostaView(),
+                              ),
+                            ),
                       ),
                       ProfileListTile(
                         leadingIcon: 'assets/icons/password.png',
                         title: localizations.translate('password'),
                         subtitle: state.password ?? '**********',
-                        onTap: () => Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (_) => const PasswordView())),
+                        onTap:
+                            () => Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (_) => const PasswordView(),
+                              ),
+                            ),
                       ),
                       ProfileListTile(
                         leadingIcon: 'assets/icons/mail.png',
                         title: localizations.translate('phone'),
-                        subtitle: state.phone ?? '+90 555 123 45 67',
-                        onTap: () => Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (_) => const PhoneView())),
+                        subtitle: state.phone,
+                        onTap:
+                            () => Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (_) => const PhoneView(),
+                              ),
+                            ),
                       ),
                       const PrivacySectionWidget(),
                       const AccountSectionWidget(),

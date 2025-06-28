@@ -143,7 +143,7 @@ class _LoginViewState extends State<LoginView> with TickerProviderStateMixin {
             passwordConfirmController: _passwordConfirmController,
             nameController: _nameController,
             onRegisterSuccess: () {
-              Navigator.pushReplacementNamed(context, '/package');
+              print('işlem başarılı');
             },
           ),
         ),

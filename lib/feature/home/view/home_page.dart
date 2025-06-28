@@ -1,9 +1,7 @@
-import 'package:capp_box/feature/create_capsul/view/create_capsul_view.dart';
 import 'package:capp_box/feature/home/bloc/home_bloc.dart';
 import 'package:capp_box/feature/home/view/home_view.dart';
 import 'package:capp_box/feature/package/widgets/custom_navigation_bar.dart';
-import 'package:capp_box/product/constants/color_cons.dart';
-import 'package:capp_box/product/widgets/background_gradient.dart';
+
 import 'package:flutter/material.dart';
 import 'package:capp_box/feature/home/view/home_view_2.dart';
 import 'package:capp_box/feature/home/view/capsules_view.dart' as capsules_view;

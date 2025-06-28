@@ -2,7 +2,7 @@ import 'package:capp_box/core/extensions/localization_extension.dart';
 import 'package:capp_box/feature/create_capsul/widgets/continue_button.dart';
 import 'package:capp_box/feature/login/view/new_passxord_view.dart';
 import 'package:capp_box/feature/profile/widgets/pinput_widget.dart';
-import 'package:capp_box/product/constants/color_cons.dart';
+
 import 'package:capp_box/product/utility/enums/mediaType_enum.dart';
 import 'package:capp_box/product/widgets/background_gradient.dart';
 import 'package:flutter/material.dart';
@@ -49,8 +49,10 @@ class _ChangePassword2State extends State<ChangePassword2> {
           const BackgroundGradient(),
           SafeArea(
             child: Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 24.0, vertical: 16.0),
+              padding: const EdgeInsets.symmetric(
+                horizontal: 24.0,
+                vertical: 16.0,
+              ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -58,9 +60,9 @@ class _ChangePassword2State extends State<ChangePassword2> {
                   Text(
                     context.tr('password_reset', args: {}),
                     style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                        ),
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
                   ),
                   const SizedBox(height: 16),
                   Text(

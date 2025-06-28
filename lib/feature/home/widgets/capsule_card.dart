@@ -13,7 +13,7 @@ enum CapsuleCardSize {
   standard,
 
   /// Larger size for detailed views
-  large
+  large,
 }
 
 class CapsuleCard extends StatelessWidget {
@@ -35,9 +35,9 @@ class CapsuleCard extends StatelessWidget {
     this.cardSize = CapsuleCardSize.standard,
     super.key,
   }) : assert(
-          (timerWidget != null) || (remainingTime != null) || isReadyToOpen,
-          'Either provide a custom timerWidget, remainingTime, or set isReadyToOpen to true',
-        );
+         (timerWidget != null) || (remainingTime != null) || isReadyToOpen,
+         'Either provide a custom timerWidget, remainingTime, or set isReadyToOpen to true',
+       );
 
   @override
   Widget build(BuildContext context) {
@@ -66,7 +66,6 @@ class CapsuleCard extends StatelessWidget {
         borderRadius = 14;
         break;
       case CapsuleCardSize.standard:
-      default:
         cardHeight = screenSize.height * 0.28;
         imageSize = 1.0;
         senderImageRadius = 20;
@@ -83,7 +82,7 @@ class CapsuleCard extends StatelessWidget {
         decoration: BoxDecoration(
           color: const Color(0xFF262742),
           borderRadius: BorderRadius.circular(borderRadius),
-          border: Border.all(color: Colors.white.withOpacity(0.1)),
+          border: Border.all(color: Colors.white.withValues(alpha: 0.1)),
         ),
         child: Stack(
           children: [
@@ -114,17 +113,20 @@ class CapsuleCard extends StatelessWidget {
                 // Sender information
                 Padding(
                   padding: EdgeInsets.all(
-                      cardSize == CapsuleCardSize.small ? 8 : 12),
+                    cardSize == CapsuleCardSize.small ? 8 : 12,
+                  ),
                   child: Row(
                     children: [
                       CircleAvatar(
                         radius: senderImageRadius,
                         backgroundImage: NetworkImage(imageUrl),
-                        onBackgroundImageError: (_, __) =>
-                            const Icon(Icons.error, color: Colors.red),
+                        onBackgroundImageError:
+                            (_, __) =>
+                                const Icon(Icons.error, color: Colors.red),
                       ),
                       SizedBox(
-                          width: cardSize == CapsuleCardSize.small ? 8 : 12),
+                        width: cardSize == CapsuleCardSize.small ? 8 : 12,
+                      ),
                       Expanded(
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.start,
@@ -146,16 +148,17 @@ class CapsuleCard extends StatelessWidget {
                               style: TextStyle(
                                 color: Colors.white,
                                 fontWeight: FontWeight.w800,
-                                fontSize: cardSize == CapsuleCardSize.small
-                                    ? 12
-                                    : null,
+                                fontSize:
+                                    cardSize == CapsuleCardSize.small
+                                        ? 12
+                                        : null,
                               ),
                               minFontSize: 8,
                               maxFontSize:
                                   cardSize == CapsuleCardSize.large ? 18 : 14,
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
-                            )
+                            ),
                           ],
                         ),
                       ),
@@ -188,12 +191,14 @@ class CapsuleCard extends StatelessWidget {
                         Center(
                           child: Transform.scale(
                             scale: timerScale,
-                            child: timerWidget ??
+                            child:
+                                timerWidget ??
                                 CapsuleTimer(
                                   remainingTime: remainingTime!,
-                                  fontSize: cardSize == CapsuleCardSize.small
-                                      ? 14
-                                      : 18,
+                                  fontSize:
+                                      cardSize == CapsuleCardSize.small
+                                          ? 14
+                                          : 18,
                                 ),
                           ),
                         ),
@@ -232,7 +237,7 @@ class CapsuleTimer extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
       decoration: BoxDecoration(
-        color: const Color(0xFF000000).withOpacity(0.4),
+        color: const Color(0xFF000000).withValues(alpha: 0.4),
         borderRadius: BorderRadius.circular(2),
       ),
       child: Text(

@@ -22,7 +22,6 @@ final Map<String, String> tr = {
       'E-posta adresinize OTP kodu gönderdik\n}\nLütfen kodu giriniz.',
   'resend_code': 'Kodu Tekrar Gönder',
   'resend_code_message': 'Kodu {time} saniye sonra tekrar gönderebilirsiniz',
-  
 
   // Login/Auth
   'login': 'Giriş Yap',
@@ -48,7 +47,7 @@ final Map<String, String> tr = {
   'continue_with_email': 'E-posta ile devam et',
   'continue_with_phone': 'Telefon ile devam et',
   'continue_without_account': 'Üye olmadan devam et',
-  'register': 'Kayıt ol',
+
   "devametmek": "Devam etmek için telefon numaranızı girin.",
 
   // Home
@@ -271,7 +270,7 @@ final Map<String, String> tr = {
   'recipient_info': 'Teslim Alacak Kişinin;',
   'name_surname': 'Ad Soyad',
   'email_address': 'E-posta Adresi',
-  'phone_number': 'Telefon Numarası',
+
   'when_capsule_opens': 'Kapsül ne zaman açılsın?',
   'capsule_open_date': 'Açılma Tarihi',
   'capsule_open_time': 'Açılma Saati',
@@ -385,10 +384,9 @@ final Map<String, String> tr = {
   'hello': 'Merhaba',
   'What_to_create_today': 'Bugün ne oluşturmak istersin?',
   'Text': 'Yazı',
-  'Video': 'Video',
+
   'Audio': 'Ses',
-  'Photo': 'Fotoğraf',
-  'Free': 'Ücretsiz',
+
   'Premium': 'Premium',
   'Your_Created_Capsules': 'Oluşturduğun Kapsüller',
   'No_Capsules_Created_Yet': 'Henüz oluşturduğun kapsül bulunmuyor',

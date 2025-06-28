@@ -16,6 +16,7 @@ import 'package:capp_box/feature/onboard/view/onboard1_view.dart';
 import 'package:capp_box/feature/profile/bloc/profile_bloc.dart';
 import 'package:capp_box/feature/profile/view/profil_view.dart';
 import 'package:capp_box/feature/settings/view/language_settings_view.dart';
+import 'package:chucker_flutter/chucker_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -27,7 +28,7 @@ void main() async {
   // Initialize language service
   final languageService = LanguageService();
   await languageService.init();
-
+  ChuckerFlutter.showOnRelease = true;
   runApp(
     MultiBlocProvider(
       providers: [
@@ -91,7 +92,10 @@ class MyAppState extends State<MyApp> {
       ],
       supportedLocales: widget.languageService.supportedLocales,
       builder: BotToastInit(),
-      navigatorObservers: [BotToastNavigatorObserver()],
+      navigatorObservers: [
+        BotToastNavigatorObserver(),
+        ChuckerFlutter.navigatorObserver,
+      ],
       initialRoute: '/onboard1',
       routes: {
         '/onboard1': (context) => const Onboard1View(),

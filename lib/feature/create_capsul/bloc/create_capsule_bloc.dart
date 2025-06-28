@@ -23,7 +23,6 @@ class CreateCapsuleBloc extends Bloc<CreateCapsuleEvent, CreateCapsuleState> {
     Emitter<CreateCapsuleState> emit,
   ) {
     emit(state.copyWith(createCapsuleModel: event.createCapsuleModel));
-    print(state.createCapsuleModel);
   }
 
   Future<void> _onAddCreatedCapsules(
@@ -32,7 +31,7 @@ class CreateCapsuleBloc extends Bloc<CreateCapsuleEvent, CreateCapsuleState> {
   ) async {
     List<CreateCapsuleModel> updatedCapsules = [
       ...state.myCreatedCapsules,
-      event.createCapsuleModel
+      event.createCapsuleModel,
     ];
     emit(
       state.copyWith(
@@ -40,7 +39,6 @@ class CreateCapsuleBloc extends Bloc<CreateCapsuleEvent, CreateCapsuleState> {
         filteredCapsules: updatedCapsules, // Also update filtered capsules
       ),
     );
-    print('created capsuless${state.myCreatedCapsules}');
   }
 
   void _onResetCreateCapsuleModel(
@@ -59,30 +57,34 @@ class CreateCapsuleBloc extends Bloc<CreateCapsuleEvent, CreateCapsuleState> {
     switch (event.filterIndex) {
       case 0: // Tümü
         // Hem gönderilen hem oluşturulan tüm kapsüller
-        emit(state.copyWith(
-          filteredCapsules: [
-            ...state.receivedCapsules,
-            ...state.myCreatedCapsules
-          ],
-        ));
+        emit(
+          state.copyWith(
+            filteredCapsules: [
+              ...state.receivedCapsules,
+              ...state.myCreatedCapsules,
+            ],
+          ),
+        );
         break;
 
       case 1: // Yakında
         // Sadece bana gönderilen ve açılma tarihi gelecekte olan kapsüller
-        final soonToOpen = state.receivedCapsules.where((capsule) {
-          final openDate = int.tryParse(capsule.openedDate ?? '');
-          return openDate != null && openDate > now;
-        }).toList();
+        final soonToOpen =
+            state.receivedCapsules.where((capsule) {
+              final openDate = int.tryParse(capsule.openedDate ?? '');
+              return openDate != null && openDate > now;
+            }).toList();
 
         emit(state.copyWith(filteredCapsules: soonToOpen));
         break;
 
       case 2: // Hazır
         // Sadece bana gönderilen ve açılma tarihi geçmiş olan kapsüller
-        final readyToOpen = state.receivedCapsules.where((capsule) {
-          final openDate = int.tryParse(capsule.openedDate ?? '');
-          return openDate != null && openDate <= now;
-        }).toList();
+        final readyToOpen =
+            state.receivedCapsules.where((capsule) {
+              final openDate = int.tryParse(capsule.openedDate ?? '');
+              return openDate != null && openDate <= now;
+            }).toList();
 
         emit(state.copyWith(filteredCapsules: readyToOpen));
         break;

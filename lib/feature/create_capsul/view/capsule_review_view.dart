@@ -9,16 +9,11 @@ import 'package:capp_box/product/widgets/background_gradient.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../widgets/capsule_progress_bar.dart';
 import '../widgets/media_preview.dart';
 import '../widgets/info_sharing_options.dart';
-import '../widgets/sms_notification_options.dart';
-import '../widgets/capsule_success_dialog.dart';
 import '../widgets/receiver_info.dart';
 import '../widgets/capsule_date_info.dart';
 import '../widgets/capsule_title.dart';
-import '../widgets/back_button_widget.dart';
-import '../widgets/page_title.dart';
 
 class CapsuleReview extends StatefulWidget {
   final int currentStep;
@@ -59,7 +54,9 @@ class _CapsuleReviewState extends State<CapsuleReview> with CapsuleReviewMixin {
                 child: SingleChildScrollView(
                   child: Padding(
                     padding: const EdgeInsets.symmetric(
-                        horizontal: 24, vertical: 24),
+                      horizontal: 24,
+                      vertical: 24,
+                    ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -70,10 +67,10 @@ class _CapsuleReviewState extends State<CapsuleReview> with CapsuleReviewMixin {
                           state: state,
                           shareInfo: _shareInfo,
                           sendSMS: _sendSMS,
-                          onShareInfoChanged: (value) =>
-                              setState(() => _shareInfo = value),
-                          onSendSMSChanged: (value) =>
-                              setState(() => _sendSMS = value),
+                          onShareInfoChanged:
+                              (value) => setState(() => _shareInfo = value),
+                          onSendSMSChanged:
+                              (value) => setState(() => _sendSMS = value),
                         ),
                       ],
                     ),
@@ -92,19 +89,18 @@ class _CapsuleReviewState extends State<CapsuleReview> with CapsuleReviewMixin {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        CapsuleTitle(
-          title: state.createCapsuleModel.title ?? '',
-          state: state,
-        ),
+        CapsuleTitle(title: state.createCapsuleModel.title ?? '', state: state),
         MediaPreview(
           type: state.createCapsuleModel.mediaType ?? MediaType.text,
           photoFile: state.createCapsuleModel.mediaUrl,
-          audioFile: state.createCapsuleModel.mediaType == MediaType.voice
-              ? state.createCapsuleModel.mediaUrl
-              : widget.audioFile,
-          videoFile: state.createCapsuleModel.mediaType == MediaType.video
-              ? state.createCapsuleModel.mediaUrl
-              : widget.videoFile,
+          audioFile:
+              state.createCapsuleModel.mediaType == MediaType.voice
+                  ? state.createCapsuleModel.mediaUrl
+                  : widget.audioFile,
+          videoFile:
+              state.createCapsuleModel.mediaType == MediaType.video
+                  ? state.createCapsuleModel.mediaUrl
+                  : widget.videoFile,
           selectedFileName:
               state.createCapsuleModel.mediaType == MediaType.voice
                   ? state.createCapsuleModel.mediaUrl?.path

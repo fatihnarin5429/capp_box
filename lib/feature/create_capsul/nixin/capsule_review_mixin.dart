@@ -2,8 +2,6 @@
 
 import 'package:capp_box/core/extensions/localization_extension.dart';
 import 'package:capp_box/feature/create_capsul/view/capsule_buy_view.dart';
-import 'package:capp_box/feature/home/view/home_view.dart';
-import 'package:capp_box/feature/home/view/capsules_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../bloc/create_capsule_bloc.dart';
@@ -23,10 +21,7 @@ mixin CapsuleReviewMixin<T extends StatefulWidget> on State<T> {
     return Stack(
       alignment: Alignment.center,
       children: [
-        Align(
-          alignment: Alignment.centerLeft,
-          child: BackButtonWidget(),
-        ),
+        Align(alignment: Alignment.centerLeft, child: BackButtonWidget()),
         PageTitle(title: context.tr('Review', args: {})),
       ],
     );
@@ -74,7 +69,10 @@ mixin CapsuleReviewMixin<T extends StatefulWidget> on State<T> {
 
   /// Creates a button to save the capsule as a draft
   Widget _buildSaveDraftButton(
-      CreateCapsuleState state, bool shareInfo, bool sendSMS) {
+    CreateCapsuleState state,
+    bool shareInfo,
+    bool sendSMS,
+  ) {
     return InkWell(
       onTap: () => _handleCreateCapsuleAction(state, shareInfo, sendSMS),
       child: Text(
@@ -91,7 +89,10 @@ mixin CapsuleReviewMixin<T extends StatefulWidget> on State<T> {
 
   /// Creates a button to send the capsule
   Widget _buildSendButton(
-      CreateCapsuleState state, bool shareInfo, bool sendSMS) {
+    CreateCapsuleState state,
+    bool shareInfo,
+    bool sendSMS,
+  ) {
     return GestureDetector(
       onTap: () {
         _handleCreateCapsuleAction(state, shareInfo, sendSMS);
@@ -100,9 +101,7 @@ mixin CapsuleReviewMixin<T extends StatefulWidget> on State<T> {
         // CapsuleSuccessDialog gösterildikten sonra CapsuleView'a yönlendirilecek
         Navigator.pushAndRemoveUntil(
           context,
-          MaterialPageRoute(
-            builder: (context) => const CapsuleBuyView(),
-          ),
+          MaterialPageRoute(builder: (context) => const CapsuleBuyView()),
           (route) => false, // Tüm navigasyon geçmişini temizle
         );
       },
@@ -137,14 +136,17 @@ mixin CapsuleReviewMixin<T extends StatefulWidget> on State<T> {
 
   /// Handles the action of creating or updating a capsule
   void _handleCreateCapsuleAction(
-      CreateCapsuleState state, bool shareInfo, bool sendSMS) {
+    CreateCapsuleState state,
+    bool shareInfo,
+    bool sendSMS,
+  ) {
     context.read<CreateCapsuleBloc>().add(
-          CreateCapsuleAction(
-            createCapsuleModel: state.createCapsuleModel.copyWith(
-              isSendInfoReceiver: shareInfo,
-              isSendInfoSms: sendSMS,
-            ),
-          ),
-        );
+      CreateCapsuleAction(
+        createCapsuleModel: state.createCapsuleModel.copyWith(
+          isSendInfoReceiver: shareInfo,
+          isSendInfoSms: sendSMS,
+        ),
+      ),
+    );
   }
 }

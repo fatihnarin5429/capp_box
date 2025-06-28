@@ -4,8 +4,6 @@ import 'package:capp_box/feature/create_capsul/widgets/page_title.dart';
 import 'package:capp_box/feature/home/view/home_page.dart';
 import 'package:capp_box/feature/package/widgets/custom_text_field.dart';
 import 'package:capp_box/feature/profile/bloc/profile_bloc.dart';
-
-import 'package:capp_box/feature/profile/view/profil_view.dart';
 import 'package:capp_box/feature/profile/widgets/build_edit_button.dart';
 import 'package:capp_box/product/widgets/background_gradient.dart';
 import 'package:flutter/material.dart';
@@ -19,7 +17,7 @@ class NameView extends StatefulWidget {
 }
 
 class _NameViewState extends State<NameView> {
-  TextEditingController _nameController = TextEditingController();
+  final TextEditingController _nameController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {

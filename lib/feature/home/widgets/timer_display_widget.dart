@@ -138,7 +138,7 @@ class _TimerDisplayWidgetState extends State<TimerDisplayWidget> {
         child: Container(
           padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
           decoration: BoxDecoration(
-            color: const Color(0xFF000000).withOpacity(0.6),
+            color: const Color(0xFF000000).withValues(alpha: 0.6),
             borderRadius: BorderRadius.circular(4),
           ),
           child: Text(

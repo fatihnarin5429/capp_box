@@ -41,7 +41,7 @@ final Map<String, String> en = {
   'continue_with_email': 'Continue with Email',
   'continue_with_phone': 'Continue with Phone',
   'continue_without_account': 'Continue without account',
-  'register': 'Register',
+
   'devametmek': 'Enter your phone number to continue',
   'confirm_photo': 'Confirm Photo',
   'confirm_photo_message':
@@ -56,7 +56,7 @@ final Map<String, String> en = {
   'welcome': 'Welcome',
   'carry_memories_to_future': 'Carry your memories',
   'carry': 'to the future',
-  'create_first_capsule': 'Create Your First Capsule!',
+
   'capsule_options': 'Capsule Options',
   'video_capsule': 'Video',
   'audio_capsule': 'Audio',
@@ -250,7 +250,7 @@ final Map<String, String> en = {
   'date': 'Date',
   'time': 'Time',
   'when_capsule_opens': 'When should the capsule open?',
-  'capsule_open_date': 'Opening Date',
+
   'capsule_open_time': 'Opening Time',
   'media': 'Media',
   'location': 'Location',
@@ -262,7 +262,7 @@ final Map<String, String> en = {
   'recipient_info': 'The recipient of the capsule is:',
   'name_surname': 'Name Surname',
   'email_address': 'Email Address',
-  'phone_number': 'Phone Number',
+
   'capsule_history': 'Capsule History',
   'capsule_history_message': 'When should the capsule open?',
   'cancel_capsule_date': 'Cancel',
@@ -396,6 +396,6 @@ final Map<String, String> en = {
   "postal_code_hint": "Enter postal code",
   "country": "Country",
   "country_hint": "Enter country name",
-  "phone_number": "Phone Number",
+
   "phone_number_hint": "Enter your phone number",
 };

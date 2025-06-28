@@ -45,8 +45,10 @@ class _HelpViewState extends State<HelpView> {
           SafeArea(
             child: SingleChildScrollView(
               child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 24,
+                  vertical: 24,
+                ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -66,9 +68,8 @@ class _HelpViewState extends State<HelpView> {
                         shrinkWrap: true,
                         physics: const NeverScrollableScrollPhysics(),
                         itemCount: helpItems.length,
-                        separatorBuilder: (context, index) => const SizedBox(
-                          height: 10,
-                        ),
+                        separatorBuilder:
+                            (context, index) => const SizedBox(height: 10),
                         itemBuilder: (context, index) {
                           return Padding(
                             padding: const EdgeInsets.only(top: 20),
@@ -89,12 +90,14 @@ class _HelpViewState extends State<HelpView> {
                                   initiallyExpanded: false,
                                   maintainState: true,
                                   shape: const RoundedRectangleBorder(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(10)),
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(10),
+                                    ),
                                   ),
                                   collapsedShape: const RoundedRectangleBorder(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(10)),
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(10),
+                                    ),
                                   ),
                                   title: Text(
                                     helpItems[index]['title']!,
@@ -110,11 +113,13 @@ class _HelpViewState extends State<HelpView> {
                                       width: double.infinity,
                                       padding: const EdgeInsets.all(16),
                                       decoration: ShapeDecoration(
-                                        color: const Color(0xFF24223D)
-                                            .withOpacity(0.5),
+                                        color: const Color(
+                                          0xFF24223D,
+                                        ).withValues(alpha: 0.5),
                                         shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(12),
+                                          borderRadius: BorderRadius.circular(
+                                            12,
+                                          ),
                                         ),
                                       ),
                                       child: Text(

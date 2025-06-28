@@ -41,7 +41,7 @@ final Map<String, String> zh = {
   'continue_with_email': '使用电子邮箱继续',
   'continue_with_phone': '使用电话继续',
   'continue_without_account': '不创建账号继续',
-  'register': '注册',
+
   'devametmek': '输入您的电话号码以继续',
   'confirm_photo': '确认照片',
   'confirm_photo_message': '您要使用所选照片作为个人资料照片吗？',
@@ -55,7 +55,7 @@ final Map<String, String> zh = {
   'welcome': '欢迎',
   'carry_memories_to_future': '将你的回忆',
   'carry': '带入未来',
-  'create_first_capsule': '创建你的第一个胶囊！',
+
   'capsule_options': '胶囊选项',
   'video_capsule': '视频',
   'audio_capsule': '音频',

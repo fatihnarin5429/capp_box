@@ -1,26 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:capp_box/feature/create_capsul/bloc/create_capsule_bloc.dart';
 import 'package:capp_box/product/utility/enums/mediaType_enum.dart';
-import 'package:capp_box/product/constants/color_cons.dart';
 import 'package:capp_box/core/extensions/localization_extension.dart';
 import 'review_container.dart';
 
 class CapsuleTitle extends StatelessWidget {
   final CreateCapsuleState state;
 
-  const CapsuleTitle({
-    Key? key,
-    required this.state,
-    required String title,
-  }) : super(key: key);
+  const CapsuleTitle({Key? key, required this.state, required String title})
+    : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return ReviewContainer(
       child: Column(
-        mainAxisAlignment: state.createCapsuleModel.mediaType == MediaType.text
-            ? MainAxisAlignment.center
-            : MainAxisAlignment.start,
+        mainAxisAlignment:
+            state.createCapsuleModel.mediaType == MediaType.text
+                ? MainAxisAlignment.center
+                : MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(

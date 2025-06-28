@@ -26,7 +26,7 @@ class NetworkClient {
 
   RetryInterceptor _buildRetryInterceptor() => RetryInterceptor(
     dio: dio,
-    logPrint: print,
+    logPrint: (Object? object) {},
     retries: 3,
     retryDelays: const [
       Duration(seconds: 1),

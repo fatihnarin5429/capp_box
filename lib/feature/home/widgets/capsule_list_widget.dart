@@ -2,7 +2,7 @@ import 'package:capp_box/core/extensions/localization_extension.dart';
 import 'package:capp_box/feature/create_capsul/bloc/create_capsule_bloc.dart';
 import 'package:capp_box/feature/create_capsul/model/create_capsule_model.dart';
 import 'package:capp_box/feature/home/widgets/capsule_card.dart';
-import 'package:capp_box/feature/home/widgets/timer_display_widget.dart';
+
 import 'package:flutter/material.dart';
 import 'package:mesh_gradient/mesh_gradient.dart';
 import 'dart:async';
@@ -15,7 +15,7 @@ class CapsuleListWidget extends StatefulWidget {
   final CreateCapsuleState state;
   final AnimatedMeshGradientController controller;
   final void Function(BuildContext, {required CreateCapsuleModel capsule})
-      onCapsuleTap;
+  onCapsuleTap;
 
   const CapsuleListWidget({
     Key? key,
@@ -57,14 +57,16 @@ class _CapsuleListWidgetState extends State<CapsuleListWidget> {
 
   void _updateAllTimers() {
     setState(() {
-      final capsules = widget.selectedIndex == 3
-          ? widget.state.myCreatedCapsules
-          : widget.state.filteredCapsules;
+      final capsules =
+          widget.selectedIndex == 3
+              ? widget.state.myCreatedCapsules
+              : widget.state.filteredCapsules;
 
       for (var capsule in capsules) {
         if (capsule.openedDate != null) {
-          _timerValues[capsule.openedDate!] =
-              _calculateTimeRemaining(capsule.openedDate);
+          _timerValues[capsule.openedDate!] = _calculateTimeRemaining(
+            capsule.openedDate,
+          );
         }
       }
     });
@@ -77,8 +79,9 @@ class _CapsuleListWidgetState extends State<CapsuleListWidget> {
 
     try {
       final int openDateMillis = int.parse(openDateStr);
-      final DateTime openDate =
-          DateTime.fromMillisecondsSinceEpoch(openDateMillis);
+      final DateTime openDate = DateTime.fromMillisecondsSinceEpoch(
+        openDateMillis,
+      );
       final Duration remaining = openDate.difference(DateTime.now());
 
       if (remaining.isNegative) {
@@ -120,10 +123,10 @@ class _CapsuleListWidgetState extends State<CapsuleListWidget> {
             widget.selectedIndex == 1
                 ? context.tr('coming_soon_capsules_message')
                 : widget.selectedIndex == 2
-                    ? context.tr('ready_to_open_capsules_message')
-                    : widget.selectedIndex == 3
-                        ? context.tr('no_capsules_created')
-                        : context.tr('no_capsules_message'),
+                ? context.tr('ready_to_open_capsules_message')
+                : widget.selectedIndex == 3
+                ? context.tr('no_capsules_created')
+                : context.tr('no_capsules_message'),
             style: const TextStyle(
               color: Colors.white,
               fontSize: 16,
@@ -139,20 +142,24 @@ class _CapsuleListWidgetState extends State<CapsuleListWidget> {
         child: PageView.builder(
           padEnds: false,
           controller: widget.pageController,
-          itemCount: widget.selectedIndex == 3
-              ? widget.state.myCreatedCapsules.length
-              : widget.state.filteredCapsules.length,
+          itemCount:
+              widget.selectedIndex == 3
+                  ? widget.state.myCreatedCapsules.length
+                  : widget.state.filteredCapsules.length,
           onPageChanged: widget.onPageChanged,
           itemBuilder: (context, index) {
-            final capsule = widget.selectedIndex == 3
-                ? widget.state.myCreatedCapsules[index]
-                : widget.state.filteredCapsules[index];
+            final capsule =
+                widget.selectedIndex == 3
+                    ? widget.state.myCreatedCapsules[index]
+                    : widget.state.filteredCapsules[index];
 
             final isCurrent = index == widget.currentPage;
 
-            final int? openedDateMillis =
-                int.tryParse(capsule.openedDate ?? '');
-            final isReadyToOpen = openedDateMillis != null &&
+            final int? openedDateMillis = int.tryParse(
+              capsule.openedDate ?? '',
+            );
+            final isReadyToOpen =
+                openedDateMillis != null &&
                 openedDateMillis <= DateTime.now().millisecondsSinceEpoch;
 
             return Padding(

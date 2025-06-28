@@ -1,6 +1,4 @@
 import 'package:capp_box/feature/home/view/home_page.dart';
-import 'package:capp_box/feature/home/view/home_view.dart';
-import 'package:capp_box/feature/home/view/home_view_2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:capp_box/feature/login/view/login_view.dart';
@@ -135,22 +133,22 @@ mixin Onboard2Mixin<T extends StatefulWidget> on State<T> {
         gradient: LinearGradient(
           begin: Alignment.centerRight,
           end: Alignment.centerLeft,
-          colors: isSelected
-              ? [const Color(0xFFB224EF), const Color(0xFF7579FF)]
-              : [const Color(0xFF1C1D31), const Color(0xFF1C1D31)],
+          colors:
+              isSelected
+                  ? [const Color(0xFFB224EF), const Color(0xFF7579FF)]
+                  : [const Color(0xFF1C1D31), const Color(0xFF1C1D31)],
         ),
         shape: RoundedRectangleBorder(
           side: BorderSide(
-              width: 1,
-              color: isSelected ? Colors.transparent : const Color(0xFFB2B2B2)),
+            width: 1,
+            color: isSelected ? Colors.transparent : const Color(0xFFB2B2B2),
+          ),
           borderRadius: BorderRadius.circular(100),
         ),
       ),
       child: MaterialButton(
         onPressed: onPressed,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(100),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)),
         padding: EdgeInsets.zero,
         materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
         child: Padding(
@@ -159,17 +157,15 @@ mixin Onboard2Mixin<T extends StatefulWidget> on State<T> {
             mainAxisAlignment: MainAxisAlignment.center,
             mainAxisSize: MainAxisSize.min,
             children: [
-              SizedBox(
-                width: 24,
-                child: Center(child: icon),
-              ),
+              SizedBox(width: 24, child: Center(child: icon)),
               const SizedBox(width: 8),
               Text(
                 label,
                 style: TextStyle(
-                  color: isSelected
-                      ? const Color(0xFFE5E5E5)
-                      : const Color(0xFF84858E),
+                  color:
+                      isSelected
+                          ? const Color(0xFFE5E5E5)
+                          : const Color(0xFF84858E),
                   fontSize: 14,
                   fontFamily: 'Urbanist',
                   fontWeight: FontWeight.w700,
@@ -195,22 +191,22 @@ mixin Onboard2Mixin<T extends StatefulWidget> on State<T> {
         gradient: LinearGradient(
           begin: Alignment.centerRight,
           end: Alignment.centerLeft,
-          colors: isSelected
-              ? [const Color(0xFFB224EF), const Color(0xFF7579FF)]
-              : [const Color(0xFF1C1D31), const Color(0xFF1C1D31)],
+          colors:
+              isSelected
+                  ? [const Color(0xFFB224EF), const Color(0xFF7579FF)]
+                  : [const Color(0xFF1C1D31), const Color(0xFF1C1D31)],
         ),
         shape: RoundedRectangleBorder(
           side: BorderSide(
-              width: 1,
-              color: isSelected ? Colors.transparent : const Color(0xFFB2B2B2)),
+            width: 1,
+            color: isSelected ? Colors.transparent : const Color(0xFFB2B2B2),
+          ),
           borderRadius: BorderRadius.circular(100),
         ),
       ),
       child: MaterialButton(
         onPressed: onPressed,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(100),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)),
         padding: EdgeInsets.zero,
         materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
         child: Padding(
@@ -219,11 +215,7 @@ mixin Onboard2Mixin<T extends StatefulWidget> on State<T> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              SizedBox(
-                width: 24,
-                height: 24,
-                child: Center(child: icon),
-              ),
+              SizedBox(width: 24, height: 24, child: Center(child: icon)),
               const SizedBox(width: 8),
               SizedBox(
                 width: 150,
@@ -231,9 +223,10 @@ mixin Onboard2Mixin<T extends StatefulWidget> on State<T> {
                   label,
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    color: isSelected
-                        ? const Color(0xFFE5E5E5)
-                        : const Color(0xFF84858E),
+                    color:
+                        isSelected
+                            ? const Color(0xFFE5E5E5)
+                            : const Color(0xFF84858E),
                     fontSize: 14,
                     fontFamily: 'Urbanist',
                     fontWeight: FontWeight.w700,

@@ -4,7 +4,7 @@ import 'package:capp_box/feature/create_capsul/widgets/page_title.dart';
 import 'package:capp_box/feature/package/widgets/custom_text_field.dart';
 import 'package:capp_box/feature/package/widgets/success_dialog.dart';
 import 'package:capp_box/feature/profile/bloc/profile_bloc.dart';
-import 'package:capp_box/feature/profile/view/profil_view.dart';
+
 import 'package:capp_box/feature/profile/widgets/build_edit_button.dart';
 import 'package:capp_box/product/widgets/background_gradient.dart';
 import 'package:flutter/material.dart';
@@ -26,12 +26,13 @@ class _PasswordViewState extends State<PasswordView> {
 
   void _showSuccessDialog() {
     SuccessDialog.show(
-        context: context,
-        message: context.tr('password_updated', args: {}),
-        imagePath: 'assets/images/image.png',
-        onComplete: () {
-          Navigator.of(context).pop();
-        });
+      context: context,
+      message: context.tr('password_updated', args: {}),
+      imagePath: 'assets/images/image.png',
+      onComplete: () {
+        Navigator.of(context).pop();
+      },
+    );
   }
 
   @override
@@ -44,8 +45,10 @@ class _PasswordViewState extends State<PasswordView> {
               const BackgroundGradient(),
               SafeArea(
                 child: Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 24,
+                    vertical: 24,
+                  ),
                   child: Column(
                     children: [
                       _buildHeader(context),
@@ -66,13 +69,17 @@ class _PasswordViewState extends State<PasswordView> {
                         ),
                       ),
                       _buildPasswordField(
-                          context.tr('current_password', args: {}),
-                          _currentPasswordController),
-                      _buildPasswordField(context.tr('new_password', args: {}),
-                          _newPasswordController),
+                        context.tr('current_password', args: {}),
+                        _currentPasswordController,
+                      ),
                       _buildPasswordField(
-                          context.tr('new_password_confirm', args: {}),
-                          _confirmPasswordController),
+                        context.tr('new_password', args: {}),
+                        _newPasswordController,
+                      ),
+                      _buildPasswordField(
+                        context.tr('new_password_confirm', args: {}),
+                        _confirmPasswordController,
+                      ),
                       const SizedBox(height: 16),
                       Expanded(
                         child: Align(
@@ -107,7 +114,9 @@ class _PasswordViewState extends State<PasswordView> {
   }
 
   Widget _buildPasswordField(
-      String hintText, TextEditingController controller) {
+    String hintText,
+    TextEditingController controller,
+  ) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8),
       child: CustomTextField(

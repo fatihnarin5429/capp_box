@@ -1,5 +1,5 @@
 import 'package:capp_box/core/extensions/localization_extension.dart';
-import 'package:capp_box/feature/create_capsul/view/capsule_buy_view.dart';
+
 import 'package:capp_box/feature/onboard/mixin/onboard1_mixin.dart';
 import 'package:capp_box/feature/onboard/view/onboard2_view.dart';
 import 'package:flutter/material.dart';
@@ -27,10 +27,7 @@ class _Onboard1ViewState extends State<Onboard1View> with Onboard1Mixin {
       body: Container(
         decoration: const BoxDecoration(
           gradient: LinearGradient(
-            colors: [
-              Color(0xFF1C1D31),
-              Color(0xFF1C1D31),
-            ],
+            colors: [Color(0xFF1C1D31), Color(0xFF1C1D31)],
           ),
         ),
         child: SafeArea(
@@ -47,42 +44,46 @@ class _Onboard1ViewState extends State<Onboard1View> with Onboard1Mixin {
                 ),
                 const SizedBox(height: 40),
                 Center(
-                  child: isLoading
-                      ? const CircularProgressIndicator()
-                      : SizedBox(
-                          width: 322,
-                          child: Text(
-                            context.tr('onboard_welcome_text'),
-                            textAlign: TextAlign.center,
-                            style: const TextStyle(
-                              color: Colors.white,
-                              fontSize: 24,
-                              fontFamily: 'Urbanist',
-                              fontWeight: FontWeight.w700,
-                              height: 1.50,
+                  child:
+                      isLoading
+                          ? const CircularProgressIndicator()
+                          : SizedBox(
+                            width: 322,
+                            child: Text(
+                              context.tr('onboard_welcome_text'),
+                              textAlign: TextAlign.center,
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 24,
+                                fontFamily: 'Urbanist',
+                                fontWeight: FontWeight.w700,
+                                height: 1.50,
+                              ),
                             ),
                           ),
-                        ),
                 ),
                 const SizedBox(height: 92),
                 SizedBox(
-                    width: 328,
-                    child: Text(
-                      context.tr('terms_agreement_text'),
-                      textAlign: TextAlign.center,
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 10,
-                        fontFamily: 'Urbanist',
-                        fontWeight: FontWeight.w400,
-                      ),
-                    )),
+                  width: 328,
+                  child: Text(
+                    context.tr('terms_agreement_text'),
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 10,
+                      fontFamily: 'Urbanist',
+                      fontWeight: FontWeight.w400,
+                    ),
+                  ),
+                ),
                 const SizedBox(height: 8),
                 Container(
                   width: 327,
                   height: 56,
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 24,
+                    vertical: 16,
+                  ),
                   decoration: ShapeDecoration(
                     gradient: const LinearGradient(
                       begin: Alignment(1.00, 0.00),

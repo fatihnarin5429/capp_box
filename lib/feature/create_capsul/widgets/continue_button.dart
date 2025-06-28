@@ -3,10 +3,7 @@ import 'package:capp_box/core/extensions/localization_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:capp_box/feature/create_capsul/bloc/create_capsule_bloc.dart';
-import 'package:capp_box/feature/create_capsul/view/time_capsule_history_view.dart';
 import 'package:capp_box/product/utility/enums/mediaType_enum.dart';
-import 'package:capp_box/feature/create_capsul/model/create_capsule_model.dart';
-import 'package:capp_box/feature/create_capsul/view/create_capsul_3_view.dart';
 
 class ContinueButton extends StatelessWidget {
   final TextEditingController displayNameController;

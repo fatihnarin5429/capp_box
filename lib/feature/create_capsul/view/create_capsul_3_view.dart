@@ -1,6 +1,5 @@
 import 'dart:io';
 import 'package:capp_box/core/extensions/localization_extension.dart';
-import 'package:capp_box/feature/create_capsul/bloc/create_capsule_bloc.dart';
 import 'package:capp_box/feature/create_capsul/widgets/back_button_widget.dart';
 import 'package:capp_box/feature/create_capsul/widgets/page_title.dart';
 import 'package:capp_box/product/utility/enums/mediaType_enum.dart';
@@ -8,7 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:capp_box/product/widgets/background_gradient.dart';
 import 'package:capp_box/feature/package/widgets/custom_text_field.dart';
 import 'package:capp_box/feature/create_capsul/view/time_capsule_history_view.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:capp_box/feature/create_capsul/widgets/step_indicator.dart';
 import 'package:capp_box/feature/create_capsul/widgets/continue_button.dart';
 

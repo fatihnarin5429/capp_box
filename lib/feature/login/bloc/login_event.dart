@@ -8,31 +8,31 @@ abstract class LoginEvent extends Equatable {
 }
 
 class LoginAction extends LoginEvent {
-  final User user;
   final String phone;
 
-  const LoginAction({
-    required this.user,
-    required this.phone,
-  });
+  const LoginAction({required this.phone});
 
   @override
-  List<Object?> get props => [user, phone];
+  List<Object?> get props => [phone];
 }
 
 class LogoutAction extends LoginEvent {}
 
 class RegisterAction extends LoginEvent {
-  final User user;
+  final String name;
+  final String email;
   final String phone;
+  final String password;
 
   const RegisterAction({
-    required this.user,
+    required this.name,
+    required this.email,
     required this.phone,
+    required this.password,
   });
 
   @override
-  List<Object?> get props => [user, phone];
+  List<Object?> get props => [name, email, phone, password];
 }
 
 class LoginChangePhone extends LoginEvent {

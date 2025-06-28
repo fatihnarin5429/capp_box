@@ -41,7 +41,7 @@ final Map<String, String> hi = {
   'continue_with_email': 'ईमेल के साथ जारी रखें',
   'continue_with_phone': 'फोन के साथ जारी रखें',
   'continue_without_account': 'खाता के बिना जारी रखें',
-  'register': 'रजिस्टर करें',
+
   'devametmek': 'जारी रखने के लिए अपना फोन नंबर दर्ज करें',
   'confirm_photo': 'फोटो की पुष्टि करें',
   'confirm_photo_message':
@@ -56,7 +56,7 @@ final Map<String, String> hi = {
   'welcome': 'स्वागत है',
   'carry_memories_to_future': 'अपनी यादों को',
   'carry': 'भविष्य में ले जाएं',
-  'create_first_capsule': 'अपना पहला कैप्सूल बनाएं!',
+
   'capsule_options': 'कैप्सूल विकल्प',
   'video_capsule': 'वीडियो',
   'audio_capsule': 'ऑडियो',
@@ -255,7 +255,7 @@ final Map<String, String> hi = {
   'date': 'तिथि',
   'time': 'समय',
   'when_capsule_opens': 'कैप्सूल कब खुलेगा?',
-  'capsule_open_date': 'खुलने की तारीख',
+
   'capsule_open_time': 'खुलने का समय',
   'capsule_history': 'कैप्सूल इतिहास',
   'capsule_history_message': 'कैप्सूल कब खुलना चाहिए?',

@@ -41,7 +41,7 @@ final Map<String, String> it = {
   'continue_with_email': 'Continua con email',
   'continue_with_phone': 'Continua con telefono',
   'continue_without_account': 'Continua senza account',
-  'register': 'Registrati',
+
   'devametmek': 'Inserisci il tuo numero di telefono per continuare',
   'confirm_photo': 'Conferma foto',
   'confirm_photo_message':
@@ -56,7 +56,7 @@ final Map<String, String> it = {
   'welcome': 'Benvenuto',
   'carry_memories_to_future': 'Porta i tuoi ricordi',
   'carry': 'nel futuro',
-  'create_first_capsule': 'Crea la tua prima capsula!',
+
   'capsule_options': 'Opzioni capsula',
   'video_capsule': 'Video',
   'audio_capsule': 'Audio',

@@ -32,10 +32,7 @@ class NotificationItem extends StatelessWidget {
                 color: Colors.white,
                 shape: BoxShape.circle,
               ),
-              child: Image.network(
-                image,
-                fit: BoxFit.cover,
-              ),
+              child: Image.network(image, fit: BoxFit.cover),
             ),
             const SizedBox(width: 10),
             Expanded(
@@ -101,7 +98,7 @@ class NotificationItem extends StatelessWidget {
               shape: RoundedRectangleBorder(
                 side: BorderSide(
                   width: 1,
-                  color: Colors.white.withOpacity(0.1),
+                  color: Colors.white.withValues(alpha: 0.1),
                 ),
               ),
             ),

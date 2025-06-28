@@ -2,7 +2,7 @@ import 'package:capp_box/core/extensions/localization_extension.dart';
 import 'package:capp_box/feature/home/view/home_view_2.dart';
 import 'package:capp_box/feature/login/bloc/login_bloc.dart';
 import 'package:capp_box/feature/package/widgets/custom_text_field.dart';
-import 'package:capp_box/feature/create_capsul/widgets/back_button_widget.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -122,20 +122,16 @@ class RegisterFormView extends StatelessWidget {
         }
         context.read<LoginBloc>().add(
           RegisterAction(
-            phone: context.read<LoginBloc>().state.phone,
-            user: context.read<LoginBloc>().state.user!.copyWith(
-              password: passwordController.text,
-              email: emailController.text,
-              name: nameController.text,
-              createdAt: DateTime.now(),
-              isEmailVerified: false,
-            ),
+            name: nameController.text,
+            email: emailController.text,
+            phone: '5426165975',
+            password: passwordController.text,
           ),
         );
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => const HomeView2()),
-        );
+        // Navigator.push(
+        //   context,
+        //   MaterialPageRoute(builder: (context) => const HomeView2()),
+        // );
         onRegisterSuccess();
       },
       child: Container(

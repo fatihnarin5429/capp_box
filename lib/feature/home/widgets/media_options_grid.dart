@@ -99,9 +99,7 @@ class MediaOptionsGrid extends StatelessWidget {
   void _navigateToCreateCapsule(BuildContext context) {
     Navigator.push(
       context,
-      MaterialPageRoute(
-        builder: (context) => const CreateCapsulView(),
-      ),
+      MaterialPageRoute(builder: (context) => const CreateCapsulView()),
     );
   }
 
@@ -156,10 +154,7 @@ class MediaOptionsGrid extends StatelessWidget {
                 ),
                 child: Padding(
                   padding: const EdgeInsets.all(12.0),
-                  child: Image.asset(
-                    icon,
-                    color: Colors.white,
-                  ),
+                  child: Image.asset(icon, color: Colors.white),
                 ),
               ),
               const SizedBox(height: 12),

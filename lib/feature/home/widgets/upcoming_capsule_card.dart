@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:capp_box/feature/home/service/model/capsule_model.dart';
-import 'package:capp_box/product/constants/color_cons.dart';
 
 class UpcomingCapsuleCard extends StatelessWidget {
   final Capsule capsule;

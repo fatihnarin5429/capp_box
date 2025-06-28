@@ -1,10 +1,9 @@
 import 'package:capp_box/core/extensions/localization_extension.dart';
 import 'package:capp_box/feature/login/view/change_password_2_view.dart';
 import 'package:capp_box/feature/package/widgets/custom_text_field.dart';
-import 'package:capp_box/product/constants/color_cons.dart';
+
 import 'package:capp_box/product/widgets/background_gradient.dart';
 
-import 'package:capp_box/product/widgets/login_background_gradient.dart';
 import 'package:flutter/material.dart';
 
 class ChangePasswordView extends StatefulWidget {

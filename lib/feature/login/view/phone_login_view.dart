@@ -1,12 +1,11 @@
 import 'package:capp_box/core/extensions/localization_extension.dart';
 import 'package:capp_box/feature/create_capsul/widgets/back_button_widget.dart';
-import 'package:capp_box/feature/create_capsul/widgets/continue_button.dart';
+
 import 'package:capp_box/feature/home/widgets/capsule_title.dart';
 import 'package:capp_box/feature/login/bloc/login_bloc.dart';
-import 'package:capp_box/feature/login/model/user_model.dart';
+
 import 'package:capp_box/feature/login/view/phone_login_otp_view.dart';
 import 'package:capp_box/product/widgets/background_gradient.dart';
-import 'package:capp_box/product/utility/enums/mediaType_enum.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

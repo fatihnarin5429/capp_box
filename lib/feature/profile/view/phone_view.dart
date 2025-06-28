@@ -99,9 +99,9 @@ class _PhoneViewState extends State<PhoneView> {
   }
 
   Widget _buildHeader(BuildContext context) {
-    return Row(
+    return const Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: const [
+      children: [
         BackButtonWidget(),
         Expanded(child: PageTitle(title: 'Telefon Numarası')),
       ],

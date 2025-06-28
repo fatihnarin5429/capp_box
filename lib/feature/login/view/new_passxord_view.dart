@@ -1,6 +1,6 @@
 import 'package:capp_box/core/extensions/localization_extension.dart';
 import 'package:capp_box/feature/login/mixin/build_password_field.dart';
-import 'package:capp_box/product/constants/color_cons.dart';
+
 import 'package:capp_box/product/widgets/background_gradient.dart';
 import 'package:flutter/material.dart';
 
@@ -49,7 +49,8 @@ class _NewPasswordViewState extends State<NewPasswordView>
                   ),
                   const SizedBox(height: 5),
                   buildPasswordField(
-                      context.tr('enter_password_again', args: {})),
+                    context.tr('enter_password_again', args: {}),
+                  ),
                   const SizedBox(height: 8),
                   const Expanded(child: SizedBox()),
                   Center(
@@ -93,8 +94,10 @@ class _NewPasswordViewState extends State<NewPasswordView>
                                       ),
                                       const SizedBox(height: 18),
                                       Text(
-                                        context.tr('password_reset_successful',
-                                            args: {}),
+                                        context.tr(
+                                          'password_reset_successful',
+                                          args: {},
+                                        ),
                                         textAlign: TextAlign.center,
                                         style: const TextStyle(
                                           color: Colors.white,
@@ -105,8 +108,10 @@ class _NewPasswordViewState extends State<NewPasswordView>
                                       ),
                                       const SizedBox(height: 8),
                                       Text(
-                                        context.tr('redirecting_to_home',
-                                            args: {}),
+                                        context.tr(
+                                          'redirecting_to_home',
+                                          args: {},
+                                        ),
                                         textAlign: TextAlign.center,
                                         style: const TextStyle(
                                           color: Colors.white,

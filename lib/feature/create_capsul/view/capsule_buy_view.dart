@@ -1,16 +1,15 @@
 import 'package:capp_box/feature/create_capsul/bloc/create_capsule_bloc.dart';
-import 'package:capp_box/feature/create_capsul/model/create_capsule_model.dart';
+
 import 'package:capp_box/feature/create_capsul/widgets/billing_info_form_widget.dart';
 import 'package:capp_box/feature/create_capsul/widgets/continue_button.dart';
-import 'package:capp_box/feature/home/view/capsules_view.dart';
+
 import 'package:capp_box/feature/home/view/home_page.dart';
-import 'package:capp_box/feature/home/view/home_view_2.dart';
-import 'package:capp_box/product/constants/color_cons.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_credit_card/flutter_credit_card.dart';
 import 'package:capp_box/product/widgets/background_gradient.dart';
-import 'package:mesh_gradient/mesh_gradient.dart';
+
 import 'package:capp_box/feature/create_capsul/widgets/credit_card_display.dart';
 import 'package:capp_box/feature/create_capsul/widgets/credit_card_form_widget.dart';
 import 'package:capp_box/feature/create_capsul/widgets/app_bar_widget.dart';

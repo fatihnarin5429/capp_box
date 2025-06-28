@@ -1,6 +1,6 @@
 mixin Onboard1Mixin {
   void init() {
-    print('init');
+    // print('init');
   }
 
   bool isLoading = false;

@@ -55,51 +55,55 @@ class _MediaPreviewState extends State<MediaPreview> {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.symmetric(
-          vertical: widget.type == MediaType.text ? 8 : 24),
-      child: widget.type != MediaType.text
-          ? ReviewContainer(
-              width: 340,
-              padding: 0,
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Container(
-                    width: double.infinity,
-                    decoration: ShapeDecoration(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(24),
+        vertical: widget.type == MediaType.text ? 8 : 24,
+      ),
+      child:
+          widget.type != MediaType.text
+              ? ReviewContainer(
+                width: 340,
+                padding: 0,
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                      width: double.infinity,
+                      decoration: ShapeDecoration(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(24),
+                        ),
                       ),
+                      child:
+                          widget.type == MediaType.photo &&
+                                  widget.photoFile != null
+                              ? ClipRRect(
+                                borderRadius: BorderRadius.circular(16),
+                                child: Image.file(
+                                  widget.photoFile!,
+                                  width: double.infinity,
+                                  height: 250,
+                                  fit: BoxFit.cover,
+                                ),
+                              )
+                              : widget.type != MediaType.text &&
+                                  context
+                                          .read<CreateCapsuleBloc>()
+                                          .state
+                                          .createCapsuleModel
+                                          .mediaType ==
+                                      MediaType.voice
+                              ? _buildAudioPreview()
+                              : _videoPlayerController != null &&
+                                  _videoPlayerController!.value.isInitialized
+                              ? _buildVideoPreview()
+                              : const Center(
+                                child: CircularProgressIndicator(),
+                              ),
                     ),
-                    child: widget.type == MediaType.photo &&
-                            widget.photoFile != null
-                        ? ClipRRect(
-                            borderRadius: BorderRadius.circular(16),
-                            child: Image.file(
-                              widget.photoFile!,
-                              width: double.infinity,
-                              height: 250,
-                              fit: BoxFit.cover,
-                            ),
-                          )
-                        : widget.type != MediaType.text &&
-                                context
-                                        .read<CreateCapsuleBloc>()
-                                        .state
-                                        .createCapsuleModel
-                                        .mediaType ==
-                                    MediaType.voice
-                            ? _buildAudioPreview()
-                            : _videoPlayerController != null &&
-                                    _videoPlayerController!.value.isInitialized
-                                ? _buildVideoPreview()
-                                : const Center(
-                                    child: CircularProgressIndicator()),
-                  ),
-                ],
-              ),
-            )
-          : const SizedBox.shrink(),
+                  ],
+                ),
+              )
+              : const SizedBox.shrink(),
     );
   }
 
@@ -108,8 +112,8 @@ class _MediaPreviewState extends State<MediaPreview> {
       margin: const EdgeInsets.symmetric(vertical: 16),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16),
-        color: Colors.black.withOpacity(0.3),
-        border: Border.all(color: Colors.white.withOpacity(0.2)),
+        color: Colors.black.withValues(alpha: 0.3),
+        border: Border.all(color: Colors.white.withValues(alpha: 0.2)),
       ),
       child: Container(
         padding: const EdgeInsets.all(20),
@@ -177,15 +181,10 @@ class _MediaPreviewState extends State<MediaPreview> {
             borderRadius: BorderRadius.circular(12),
             child: AspectRatio(
               aspectRatio: _videoPlayerController!.value.aspectRatio,
-              child: VideoPlayer(
-                _videoPlayerController!..setLooping(true),
-              ),
+              child: VideoPlayer(_videoPlayerController!..setLooping(true)),
             ),
           ),
-          Icon(
-            size: 48,
-            isPlaying ? null : Icons.play_arrow,
-          ),
+          Icon(size: 48, isPlaying ? null : Icons.play_arrow),
         ],
       ),
     );
