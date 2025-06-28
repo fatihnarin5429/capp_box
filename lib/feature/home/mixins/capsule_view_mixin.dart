@@ -19,7 +19,7 @@ mixin CapsuleViewMixin<T extends StatefulWidget> on State<T> {
 
   @override
   void initState() {
-    context.read<HomeBloc>().add(HomeGetCapsules());
+    context.read<HomeBloc>().add(const HomeGetCapsules());
     controller.start();
     super.initState();
   }

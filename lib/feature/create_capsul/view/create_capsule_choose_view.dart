@@ -1,5 +1,6 @@
 import 'package:capp_box/core/extensions/localization_extension.dart';
-import 'package:capp_box/feature/create_capsul/view/create_capsul_view_2.dart';
+import 'package:capp_box/feature/create_capsul/view/create_capsul_content_view.dart';
+
 import 'package:capp_box/feature/create_capsul/widgets/back_button_widget.dart';
 import 'package:capp_box/feature/create_capsul/widgets/capsule_options_list.dart';
 import 'package:capp_box/feature/create_capsul/widgets/continue_button.dart';
@@ -9,14 +10,15 @@ import 'package:capp_box/product/utility/enums/mediaType_enum.dart';
 import 'package:capp_box/product/widgets/background_gradient.dart';
 import 'package:flutter/material.dart';
 
-class CreateCapsulView extends StatefulWidget {
-  const CreateCapsulView({super.key});
+class CreateCapsuleChooseView extends StatefulWidget {
+  const CreateCapsuleChooseView({super.key});
 
   @override
-  State<CreateCapsulView> createState() => _CreateCapsulViewState();
+  State<CreateCapsuleChooseView> createState() =>
+      _CreateCapsuleChooseViewState();
 }
 
-class _CreateCapsulViewState extends State<CreateCapsulView> {
+class _CreateCapsuleChooseViewState extends State<CreateCapsuleChooseView> {
   MediaType? secilenTip;
   bool premiumOdendi = true; // Bu değer ödeme durumuna göre yönetilmeli
 
@@ -81,7 +83,7 @@ class _CreateCapsulViewState extends State<CreateCapsulView> {
                                     context,
                                     MaterialPageRoute(
                                       builder:
-                                          (context) => CreateCapsul2View(
+                                          (context) => CreateCapsulContentView(
                                             controller: TextEditingController(),
                                             onChanged: (value) {},
                                             type: secilenTip,

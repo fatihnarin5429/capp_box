@@ -18,23 +18,33 @@ class CreateCapsuleAction extends CreateCapsuleEvent {
 
 class AddCreatedCapsules extends CreateCapsuleEvent {
   final CreateCapsuleModel createCapsuleModel;
-
   const AddCreatedCapsules({required this.createCapsuleModel});
-
   @override
   List<Object?> get props => [createCapsuleModel];
 }
 
-class ResetCreateCapsuleModel extends CreateCapsuleEvent {
+class RegisterAction extends CreateCapsuleEvent {
+  final String title;
+  final String message;
+  final String email;
+  final String phone;
+  final String price;
+
+  const RegisterAction({
+    required this.title,
+    required this.message,
+    required this.email,
+    required this.phone,
+    required this.price,
+  });
+
   @override
-  List<Object?> get props => [];
+  List<Object?> get props => [title, message, email, phone, price];
 }
 
-class FilterCapsules extends CreateCapsuleEvent {
-  final int filterIndex;
-
-  const FilterCapsules({required this.filterIndex});
+class ResetCreateCapsuleModel extends CreateCapsuleEvent {
+  const ResetCreateCapsuleModel();
 
   @override
-  List<Object?> get props => [filterIndex];
+  List<Object?> get props => [];
 }

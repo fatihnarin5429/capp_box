@@ -10,7 +10,7 @@ import 'package:capp_box/feature/create_capsul/view/time_capsule_history_view.da
 import 'package:capp_box/feature/create_capsul/widgets/step_indicator.dart';
 import 'package:capp_box/feature/create_capsul/widgets/continue_button.dart';
 
-class CreateCapsul3View extends StatefulWidget {
+class CreateCapsulInformationView extends StatefulWidget {
   final TextEditingController controller;
   final String? hintText;
   final Function(String) onChanged;
@@ -21,7 +21,7 @@ class CreateCapsul3View extends StatefulWidget {
   final MediaType? type;
   final String? selectedFileName;
 
-  const CreateCapsul3View({
+  const CreateCapsulInformationView({
     Key? key,
     required this.controller,
     this.hintText,
@@ -35,10 +35,12 @@ class CreateCapsul3View extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<CreateCapsul3View> createState() => _CreateCapsul3ViewState();
+  State<CreateCapsulInformationView> createState() =>
+      _CreateCapsulInformationViewState();
 }
 
-class _CreateCapsul3ViewState extends State<CreateCapsul3View> {
+class _CreateCapsulInformationViewState
+    extends State<CreateCapsulInformationView> {
   bool hasText = false;
   final TextEditingController _displayNameController = TextEditingController();
   final TextEditingController _mailController = TextEditingController();

@@ -21,7 +21,7 @@ mixin CapsuleReviewMixin<T extends StatefulWidget> on State<T> {
     return Stack(
       alignment: Alignment.center,
       children: [
-        Align(alignment: Alignment.centerLeft, child: BackButtonWidget()),
+        const Align(alignment: Alignment.centerLeft, child: BackButtonWidget()),
         PageTitle(title: context.tr('Review', args: {})),
       ],
     );

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:capp_box/core/extensions/localization_extension.dart';
-import 'package:capp_box/feature/create_capsul/view/create_capsul_view.dart';
+import 'package:capp_box/feature/create_capsul/view/create_capsule_choose_view.dart';
 
 /// A widget that displays the grid of media type options for creating new capsules.
 class MediaOptionsGrid extends StatelessWidget {
@@ -99,7 +99,7 @@ class MediaOptionsGrid extends StatelessWidget {
   void _navigateToCreateCapsule(BuildContext context) {
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => const CreateCapsulView()),
+      MaterialPageRoute(builder: (context) => const CreateCapsuleChooseView()),
     );
   }
 
