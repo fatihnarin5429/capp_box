@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:capp_box/core/extensions/localization_extension.dart';
 import 'package:capp_box/feature/create_capsul/bloc/create_capsule_bloc.dart';
 import 'package:capp_box/feature/create_capsul/model/create_capsule_model.dart';
-import 'package:capp_box/feature/create_capsul/view/create_capsul_3_view.dart';
+import 'package:capp_box/feature/create_capsul/view/create_capsul_information_view.dart';
 import 'package:capp_box/feature/package/widgets/custom_text_field.dart';
 import 'package:capp_box/product/utility/enums/mediaType_enum.dart';
 
@@ -22,7 +22,7 @@ import '../mixins/media_mixin.dart';
 import '../widgets/selected_media_preview.dart';
 import 'package:capp_box/feature/profile/widgets/file_validator.dart';
 
-class CreateCapsul2View extends StatefulWidget {
+class CreateCapsulContentView extends StatefulWidget {
   final TextEditingController controller;
   final bool autofocus;
   final bool isPassword;
@@ -36,7 +36,7 @@ class CreateCapsul2View extends StatefulWidget {
   final String? errorText;
   final MediaType? type;
   final String? email;
-  const CreateCapsul2View({
+  const CreateCapsulContentView({
     super.key,
     required this.controller,
     this.autofocus = false,
@@ -54,10 +54,12 @@ class CreateCapsul2View extends StatefulWidget {
   });
 
   @override
-  State<CreateCapsul2View> createState() => _CreateCapsul2ViewState();
+  State<CreateCapsulContentView> createState() =>
+      _CreateCapsulContentViewState();
 }
 
-class _CreateCapsul2ViewState extends State<CreateCapsul2View> with MediaMixin {
+class _CreateCapsulContentViewState extends State<CreateCapsulContentView>
+    with MediaMixin {
   bool hasText = false;
   final int currentStep = 0;
   File? photoFile;
@@ -353,7 +355,7 @@ class _CreateCapsul2ViewState extends State<CreateCapsul2View> with MediaMixin {
                                 context,
                                 MaterialPageRoute(
                                   builder:
-                                      (context) => CreateCapsul3View(
+                                      (context) => CreateCapsulInformationView(
                                         controller: _titleController,
                                         onChanged: widget.onChanged,
                                       ),

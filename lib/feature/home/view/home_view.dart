@@ -1,5 +1,5 @@
 import 'package:capp_box/core/extensions/localization_extension.dart';
-import 'package:capp_box/feature/create_capsul/view/create_capsul_view.dart';
+import 'package:capp_box/feature/create_capsul/view/create_capsule_choose_view.dart';
 import 'package:capp_box/feature/create_capsul/widgets/continue_button.dart';
 
 import 'package:capp_box/product/widgets/background_gradient.dart';
@@ -127,7 +127,9 @@ class HomeView extends StatelessWidget {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => const CreateCapsulView(),
+                                builder:
+                                    (context) =>
+                                        const CreateCapsuleChooseView(),
                               ),
                             );
                           },
@@ -145,7 +147,8 @@ class HomeView extends StatelessWidget {
                                 context,
                                 MaterialPageRoute(
                                   builder:
-                                      (context) => const CreateCapsulView(),
+                                      (context) =>
+                                          const CreateCapsuleChooseView(),
                                 ),
                               );
                             },

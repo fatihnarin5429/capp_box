@@ -18,9 +18,7 @@ class CapsuleBackground extends StatelessWidget {
             ),
           ),
         ),
-        Container(
-          color: Colors.black.withOpacity(0.1),
-        ),
+        Container(color: Colors.black.withValues(alpha: 0.1)),
       ],
     );
   }
@@ -38,7 +36,6 @@ class CapsuleTitle extends StatelessWidget {
         fontSize: 20,
         fontFamily: 'Urbanist',
         fontWeight: FontWeight.w600,
-        height: 1.40,
       ),
     );
   }

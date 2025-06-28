@@ -1,28 +1,55 @@
 // create_capsule_bloc.dart
 
+import 'dart:math';
+
 import 'package:bloc/bloc.dart';
+import 'package:capp_box/product/database/hive/core/hive_database_manager.dart';
 import 'package:equatable/equatable.dart';
 import 'package:capp_box/feature/create_capsul/model/create_capsule_model.dart';
+import 'package:capp_box/feature/create_capsul/services/model/create_capsule_datasources.dart';
+import 'package:capp_box/feature/create_capsul/services/model/create_capsule_repository.dart';
+import 'package:capp_box/feature/create_capsul/services/model/create_capsules_usecases.dart';
 
 part 'create_capsule_event.dart';
 part 'create_capsule_state.dart';
 
 class CreateCapsuleBloc extends Bloc<CreateCapsuleEvent, CreateCapsuleState> {
-  CreateCapsuleBloc() : super(CreateCapsuleState()) {
+  final CreateCapsulesRemoteDatasource createCapsuleRemoteDatasource;
+  late final CreateCapsulesUsecase createCapsuleUsecase;
+
+  CreateCapsuleBloc()
+    : createCapsuleRemoteDatasource = CreateCapsulesRemoteDatasource(),
+
+      super(const CreateCapsuleState()) {
+    createCapsuleUsecase = CreateCapsulesUsecase(createCapsuleRemoteDatasource);
     on<CreateCapsuleAction>(_onCreateCapsuleAction);
     on<AddCreatedCapsules>(_onAddCreatedCapsules);
     on<ResetCreateCapsuleModel>(_onResetCreateCapsuleModel);
-    on<FilterCapsules>(_onFilterCapsules);
-
-    // Initialize filtered capsules with all capsules
-    add(const FilterCapsules(filterIndex: 0));
   }
-
-  void _onCreateCapsuleAction(
+  HiveDatabaseManager hiveDatabaseManager = HiveDatabaseManager();
+  Future<void> _onCreateCapsuleAction(
     CreateCapsuleAction event,
     Emitter<CreateCapsuleState> emit,
-  ) {
-    emit(state.copyWith(createCapsuleModel: event.createCapsuleModel));
+  ) async {
+    try {
+      emit(state.copyWith(createCapsuleModel: event.createCapsuleModel));
+      // Usecase ile kapsül oluştur
+      final result = await createCapsuleUsecase.createCapsule(
+        event.createCapsuleModel,
+        title: event.createCapsuleModel.title ?? '',
+        message: event.createCapsuleModel.message ?? '',
+        email: event.createCapsuleModel.email ?? '',
+        phone: event.createCapsuleModel.phoneNumber ?? '',
+        price: event.createCapsuleModel.price ?? '',
+      );
+
+      // Local database'e kaydet
+      hiveDatabaseManager.saveCapsuleModel(result);
+      emit(state.copyWith(createCapsuleModel: result));
+    } catch (e) {
+      // Hata durumunda state güncelle
+      emit(state.copyWith());
+    }
   }
 
   Future<void> _onAddCreatedCapsules(
@@ -46,52 +73,5 @@ class CreateCapsuleBloc extends Bloc<CreateCapsuleEvent, CreateCapsuleState> {
     Emitter<CreateCapsuleState> emit,
   ) {
     emit(state.copyWith(createCapsuleModel: const CreateCapsuleModel()));
-  }
-
-  void _onFilterCapsules(
-    FilterCapsules event,
-    Emitter<CreateCapsuleState> emit,
-  ) {
-    final now = DateTime.now().millisecondsSinceEpoch;
-
-    switch (event.filterIndex) {
-      case 0: // Tümü
-        // Hem gönderilen hem oluşturulan tüm kapsüller
-        emit(
-          state.copyWith(
-            filteredCapsules: [
-              ...state.receivedCapsules,
-              ...state.myCreatedCapsules,
-            ],
-          ),
-        );
-        break;
-
-      case 1: // Yakında
-        // Sadece bana gönderilen ve açılma tarihi gelecekte olan kapsüller
-        final soonToOpen =
-            state.receivedCapsules.where((capsule) {
-              final openDate = int.tryParse(capsule.openedDate ?? '');
-              return openDate != null && openDate > now;
-            }).toList();
-
-        emit(state.copyWith(filteredCapsules: soonToOpen));
-        break;
-
-      case 2: // Hazır
-        // Sadece bana gönderilen ve açılma tarihi geçmiş olan kapsüller
-        final readyToOpen =
-            state.receivedCapsules.where((capsule) {
-              final openDate = int.tryParse(capsule.openedDate ?? '');
-              return openDate != null && openDate <= now;
-            }).toList();
-
-        emit(state.copyWith(filteredCapsules: readyToOpen));
-        break;
-
-      case 3: // Kapsüllerim
-        // Zaten view'da myCreatedCapsules kullanılıyor
-        break;
-    }
   }
 }

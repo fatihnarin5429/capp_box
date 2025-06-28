@@ -2,7 +2,7 @@
 import 'dart:io';
 
 import 'package:capp_box/feature/create_capsul/bloc/create_capsule_bloc.dart';
-import 'package:capp_box/feature/create_capsul/nixin/capsule_review_mixin.dart'
+import 'package:capp_box/feature/create_capsul/mixin/capsule_review_mixin.dart'
     show CapsuleReviewMixin;
 import 'package:capp_box/product/utility/enums/mediaType_enum.dart';
 import 'package:capp_box/product/widgets/background_gradient.dart';

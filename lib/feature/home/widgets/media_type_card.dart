@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:capp_box/feature/create_capsul/view/create_capsul_view_2.dart';
+import 'package:capp_box/feature/create_capsul/view/create_capsul_content_view.dart';
 import 'package:capp_box/product/utility/enums/mediaType_enum.dart';
 
 class MediaTypeCard extends StatelessWidget {
@@ -31,11 +31,12 @@ class MediaTypeCard extends StatelessWidget {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => CreateCapsul2View(
-                  controller: TextEditingController(),
-                  onChanged: (String) {},
-                  type: type,
-                ),
+                builder:
+                    (context) => CreateCapsulContentView(
+                      controller: TextEditingController(),
+                      onChanged: (String) {},
+                      type: type,
+                    ),
               ),
             );
           });
@@ -58,10 +59,7 @@ class MediaTypeCard extends StatelessWidget {
                   color: iconBackgroundColor,
                   borderRadius: BorderRadius.circular(5),
                 ),
-                child: Image.asset(
-                  assetPath,
-                  color: iconColor,
-                ),
+                child: Image.asset(assetPath, color: iconColor),
               ),
               const SizedBox(height: 20),
               Column(

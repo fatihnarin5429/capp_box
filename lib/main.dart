@@ -2,7 +2,7 @@ import 'package:bot_toast/bot_toast.dart';
 import 'package:capp_box/core/l10n/app_localizations.dart';
 import 'package:capp_box/core/service/language_service.dart';
 import 'package:capp_box/feature/create_capsul/bloc/create_capsule_bloc.dart';
-import 'package:capp_box/feature/create_capsul/view/create_capsul_view.dart';
+import 'package:capp_box/feature/create_capsul/view/create_capsule_choose_view.dart';
 import 'package:capp_box/feature/home/bloc/home_bloc.dart' as home_bloc;
 import 'package:capp_box/feature/home/view/capsules_view.dart';
 import 'package:capp_box/feature/home/view/home_page.dart';
@@ -110,7 +110,7 @@ class MyAppState extends State<MyApp> {
         '/notifaction_view': (context) => const NotificationView(),
         '/profil_view': (context) => const ProfilView(),
         '/phone_login_view': (context) => const PhoneLoginView(),
-        '/create_capsul_view': (context) => const CreateCapsulView(),
+        '/create_capsul_view': (context) => const CreateCapsuleChooseView(),
         '/language_settings': (context) => const LanguageSettingsView(),
         '/landing_view': (context) => const LandingView(),
       },
