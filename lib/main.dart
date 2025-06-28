@@ -8,6 +8,8 @@ import 'package:capp_box/feature/home/view/capsules_view.dart';
 import 'package:capp_box/feature/home/view/home_page.dart';
 import 'package:capp_box/feature/home/view/home_view.dart';
 import 'package:capp_box/feature/home/view/home_view_2.dart';
+import 'package:capp_box/feature/landing/bloc/landing_bloc.dart';
+import 'package:capp_box/feature/landing/view/landing_view.dart';
 import 'package:capp_box/feature/login/bloc/login_bloc.dart';
 import 'package:capp_box/feature/login/view/login_view.dart';
 import 'package:capp_box/feature/login/view/phone_login_view.dart';
@@ -36,6 +38,7 @@ void main() async {
         BlocProvider(create: (context) => LoginBloc()),
         BlocProvider(create: (context) => CreateCapsuleBloc()),
         BlocProvider(create: (context) => home_bloc.HomeBloc()),
+        BlocProvider(create: (context) => LandingBloc()),
       ],
       child: MyApp(languageService: languageService),
     ),
@@ -52,27 +55,27 @@ class MyApp extends StatefulWidget {
 }
 
 class MyAppState extends State<MyApp> {
-  late Locale _currentLocale;
+  // late Locale _currentLocale;
 
-  @override
-  void initState() {
-    super.initState();
-    _currentLocale = widget.languageService.currentLocale;
-  }
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   _currentLocale = widget.languageService.currentLocale;
+  // }
 
-  void setLocale(Locale locale) async {
-    await widget.languageService.setLocale(locale);
-    setState(() {
-      _currentLocale = locale;
-    });
-  }
+  // void setLocale(Locale locale) async {
+  //   await widget.languageService.setLocale(locale);
+  //   setState(() {
+  //     _currentLocale = locale;
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Capp Box',
-      locale: _currentLocale,
+      // locale: _currentLocale,
       theme: ThemeData(
         primarySwatch: Colors.blue,
         brightness: Brightness.light,
@@ -96,7 +99,7 @@ class MyAppState extends State<MyApp> {
         BotToastNavigatorObserver(),
         ChuckerFlutter.navigatorObserver,
       ],
-      initialRoute: '/onboard1',
+      initialRoute: '/landing_view',
       routes: {
         '/onboard1': (context) => const Onboard1View(),
         '/': (context) => const HomePage(),
@@ -109,6 +112,7 @@ class MyAppState extends State<MyApp> {
         '/phone_login_view': (context) => const PhoneLoginView(),
         '/create_capsul_view': (context) => const CreateCapsulView(),
         '/language_settings': (context) => const LanguageSettingsView(),
+        '/landing_view': (context) => const LandingView(),
       },
     );
   }

@@ -42,7 +42,7 @@ class _LanguageSettingsViewState extends State<LanguageSettingsView> {
     if (mounted) {
       final state = context.findAncestorStateOfType<MyAppState>();
       if (state != null) {
-        state.setLocale(locale);
+        // state.setLocale(locale);
 
         BotToast.showText(
           text: AppLocalizations.of(context).translate('language_changed'),

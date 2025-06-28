@@ -33,7 +33,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     _currentIndex = widget.initialIndex;
-    context.read<HomeBloc>().add(const HomeGetCapsules());
+    // context.read<HomeBloc>().add(const HomeGetCapsules());
     super.initState();
   }
 

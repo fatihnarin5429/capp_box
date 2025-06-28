@@ -33,8 +33,10 @@ class LoginRegisterRemoteDatasource {
         ),
       );
       final map = res.data;
-      return RegisterResponseModel.fromJson(map?['data'] ?? {});
+      print('API Response: $map'); // Debug için
+      return RegisterResponseModel.fromJson(map ?? {});
     } catch (e) {
+      print('Network error: $e'); // Debug için
       throw Exception('Kayıt işlemi sırasında bir hata oluştu: $e');
     }
   }

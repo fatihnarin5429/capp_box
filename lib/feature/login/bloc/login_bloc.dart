@@ -46,6 +46,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   }
 
   void _onRegisterAction(RegisterAction event, Emitter<LoginState> emit) async {
+    print('buraya girdi');
     try {
       final response = await loginRegisterUsecase.register(
         name: event.name,
@@ -53,14 +54,24 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         phone: event.phone,
         password: event.password,
       );
-      if (response.success) {
-        hiveDatabaseManager.saveUserModel(
+      print('value: $response');
+      print('response.success: ${response.success}');
+      print('response.token: ${response.token}');
+      
+      if (response.success == true && response.token.isNotEmpty) {
+        await hiveDatabaseManager.saveUserModel(
           UserModel(name: event.name, token: response.token),
         );
+        print('user model saved');
+        print('user model: ${hiveDatabaseManager.getUserModel()}');
+        await hiveDatabaseManager.setFirst();
+        emit(state.copyWith(isAuthenticated: true));
+      } else {
+        print('register failed - success: ${response.success}, token: ${response.token}');
+        emit(state.copyWith(isAuthenticated: false));
       }
-      hiveDatabaseManager.setFirst();
-      emit(state.copyWith(isAuthenticated: true));
     } catch (e) {
+      print('register error: $e');
       emit(state.copyWith(isAuthenticated: false));
     }
   }

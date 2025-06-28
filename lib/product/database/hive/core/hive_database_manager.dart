@@ -26,10 +26,21 @@ final class HiveDatabaseManager {
   }
 
   Future<void> setFirst() async {
-    await userModelBoxHive.put(
-      HiveDatabaseConstants.userModel,
-      UserModel(isFirst: true),
-    );
+    // Mevcut user modelini al
+    final existingUser = getUserModel();
+    if (existingUser != null) {
+      // Mevcut user bilgilerini koruyarak sadece isFirst'ü güncelle
+      final updatedUser = existingUser.copyWith(isFirst: true);
+      await userModelBoxHive.put(HiveDatabaseConstants.userModel, updatedUser);
+      print('Updated existing user with isFirst: true');
+    } else {
+      // Eğer user yoksa sadece isFirst ile yeni bir model oluştur
+      await userModelBoxHive.put(
+        HiveDatabaseConstants.userModel,
+        UserModel(isFirst: true),
+      );
+      print('Created new user with isFirst: true');
+    }
   }
 
   Future<void> saveUserModel(UserModel userModel) async {
@@ -37,7 +48,18 @@ final class HiveDatabaseManager {
   }
 
   UserModel? getUserModel() {
-    return userModelBoxHive.get(HiveDatabaseConstants.userModel);
+    try {
+      print('Getting user model from Hive...');
+      final user = userModelBoxHive.get(HiveDatabaseConstants.userModel);
+      print('User retrieved: ${user != null}');
+      if (user != null) {
+        print('User details: name=${user.name}, token=${user.token}');
+      }
+      return user;
+    } catch (e) {
+      print('Error getting user model: $e');
+      return null;
+    }
   }
 
   Future<void> deleteUserModel() async {
