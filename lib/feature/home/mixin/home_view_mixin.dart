@@ -28,12 +28,12 @@ mixin HomeViewMixin<T extends StatefulWidget> on State<T> {
   /// Determines if a capsule is ready to be opened based on its openedDate.
   bool isCapsuleReadyToOpen(CreateCapsuleResponseModel capsule) {
     // Açılma tarihi geçmiş mi kontrolü
-    if (capsule.data?.capsule?.openDate == null) return false;
+    if (capsule.data.capsule.openDate == null) return false;
 
     // openedDate bir String olduğu için DateTime'a çevirip kontrol etmemiz gerekiyor
     try {
       final openDateMillis = int.tryParse(
-        capsule.data?.capsule?.openDate.toString() ?? '',
+        capsule.data.capsule.openDate.toString(),
       );
       if (openDateMillis == null) return false;
 
@@ -47,7 +47,7 @@ mixin HomeViewMixin<T extends StatefulWidget> on State<T> {
   /// Builds a timer widget for a capsule based on its openedDate.
   Widget buildTimeWidget(CreateCapsuleResponseModel capsule) {
     // Kapsülün açılma tarihine kalan süreyi gösteren widget
-    if (capsule.data?.capsule?.openDate == null) {
+    if (capsule.data.capsule.openDate == null) {
       return Center(
         child: Text(
           context.tr('Date_Unknown', args: {}),

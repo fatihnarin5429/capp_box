@@ -37,14 +37,14 @@ mixin CapsuleViewMixin<T extends StatefulWidget> on State<T> {
     required CreateCapsuleResponseModel capsule,
   }) {
     final isReadyToOpen =
-        capsule.data?.capsule?.openDate != null &&
-        int.parse(capsule.data?.capsule?.openDate.toString() ?? '0') <=
+        capsule.data.capsule.openDate != null &&
+        int.parse(capsule.data.capsule.openDate.toString()) <=
             DateTime.now().millisecondsSinceEpoch;
 
     final openDate =
-        capsule.data?.capsule?.openDate != null
+        capsule.data.capsule.openDate != null
             ? DateTime.fromMillisecondsSinceEpoch(
-              int.parse(capsule.data?.capsule?.openDate.toString() ?? '0'),
+              int.parse(capsule.data.capsule.openDate.toString()),
             )
             : null;
 

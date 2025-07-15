@@ -27,7 +27,7 @@ class ReceiverInfo extends StatelessWidget {
                 ),
               ),
               Text(
-                state.createCapsuleResponseModel.data?.capsule.recipientUser ??
+                state.createCapsuleResponseModel.data.capsule.recipientUser ??
                     context.tr('recipient_name', args: {}),
                 style: const TextStyle(
                   color: Colors.white,
