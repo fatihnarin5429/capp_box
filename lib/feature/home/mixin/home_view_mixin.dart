@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:capp_box/feature/create_capsul/model/create_capsule_model.dart';
+import 'package:capp_box/feature/create_capsul/model/create_capsule_response_model.dart';
 import 'package:capp_box/core/extensions/localization_extension.dart';
 import 'package:mesh_gradient/mesh_gradient.dart';
 import 'package:capp_box/feature/home/widgets/timer_display_widget.dart';
@@ -26,13 +26,15 @@ mixin HomeViewMixin<T extends StatefulWidget> on State<T> {
   }
 
   /// Determines if a capsule is ready to be opened based on its openedDate.
-  bool isCapsuleReadyToOpen(CreateCapsuleModel capsule) {
+  bool isCapsuleReadyToOpen(CreateCapsuleResponseModel capsule) {
     // Açılma tarihi geçmiş mi kontrolü
-    if (capsule.openedDate == null) return false;
+    if (capsule.data?.capsule?.openDate == null) return false;
 
     // openedDate bir String olduğu için DateTime'a çevirip kontrol etmemiz gerekiyor
     try {
-      final openDateMillis = int.tryParse(capsule.openedDate!);
+      final openDateMillis = int.tryParse(
+        capsule.data?.capsule?.openDate.toString() ?? '',
+      );
       if (openDateMillis == null) return false;
 
       final openDate = DateTime.fromMillisecondsSinceEpoch(openDateMillis);
@@ -43,9 +45,9 @@ mixin HomeViewMixin<T extends StatefulWidget> on State<T> {
   }
 
   /// Builds a timer widget for a capsule based on its openedDate.
-  Widget buildTimeWidget(CreateCapsuleModel capsule) {
+  Widget buildTimeWidget(CreateCapsuleResponseModel capsule) {
     // Kapsülün açılma tarihine kalan süreyi gösteren widget
-    if (capsule.openedDate == null) {
+    if (capsule.data?.capsule?.openDate == null) {
       return Center(
         child: Text(
           context.tr('Date_Unknown', args: {}),
@@ -64,7 +66,7 @@ mixin HomeViewMixin<T extends StatefulWidget> on State<T> {
       height: 30,
       child: Center(
         child: TimerDisplayWidget(
-          openDate: capsule.openedDate,
+          openDate: capsule.data.capsule.openDate.toString(),
           isCompact: true,
           fontSize: 10, // Küçük kapsüller için küçük font
         ),

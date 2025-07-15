@@ -15,13 +15,14 @@ class CapsuleTitle extends StatelessWidget {
     return ReviewContainer(
       child: Column(
         mainAxisAlignment:
-            state.createCapsuleModel.mediaType == MediaType.text
+            state.createCapsuleResponseModel.data.capsule.mediaType ==
+                    MediaType.text
                 ? MainAxisAlignment.center
                 : MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            state.createCapsuleModel.title ?? '',
+            state.createCapsuleResponseModel.data.capsule.title,
             style: const TextStyle(
               color: Colors.white,
               fontSize: 24,
@@ -32,7 +33,7 @@ class CapsuleTitle extends StatelessWidget {
           ),
           const SizedBox(height: 8),
           ExpandableText(
-            text: state.createCapsuleModel.message ?? '',
+            text: state.createCapsuleResponseModel.data.capsule.message,
             collapsedLines: 2,
             style: const TextStyle(
               color: Colors.white,

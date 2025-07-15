@@ -20,8 +20,9 @@ class FileValidator {
     if (file.lengthSync() > maxFileSize) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content:
-              Text('Dosya boyutu çok büyük. Maksimum 10MB yükleyebilirsiniz.'),
+          content: Text(
+            'Dosya boyutu çok büyük. Maksimum 10MB yükleyebilirsiniz.',
+          ),
         ),
       );
       return false;
@@ -37,7 +38,8 @@ class FileValidator {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text(
-              'Sadece MP4, WebM ve OGG video formatları desteklenmektedir.'),
+            'Sadece MP4, WebM ve OGG video formatları desteklenmektedir.',
+          ),
         ),
       );
       return false;
@@ -45,15 +47,17 @@ class FileValidator {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text(
-              'Sadece JPEG, PNG ve GIF resim formatları desteklenmektedir.'),
+            'Sadece JPEG, PNG ve GIF resim formatları desteklenmektedir.',
+          ),
         ),
       );
       return false;
     } else if (type == 'audio' && !allowedAudioTypes.contains(fileExtension)) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content:
-              Text('Sadece MP3, WAV ve OGG ses formatları desteklenmektedir.'),
+          content: Text(
+            'Sadece MP3, WAV ve OGG ses formatları desteklenmektedir.',
+          ),
         ),
       );
       return false;
@@ -63,26 +67,30 @@ class FileValidator {
 
   // Dosya sayısını kontrol eder
   static bool validateFileCount(
-      String type, int currentCount, BuildContext context) {
+    String type,
+    int currentCount,
+    BuildContext context,
+  ) {
     if (type == 'video' && currentCount >= maxVideoCount) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
+        const SnackBar(
           content: Text('En fazla $maxVideoCount video yükleyebilirsiniz.'),
         ),
       );
       return false;
     } else if (type == 'image' && currentCount >= maxImageCount) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
+        const SnackBar(
           content: Text('En fazla $maxImageCount fotoğraf yükleyebilirsiniz.'),
         ),
       );
       return false;
     } else if (type == 'audio' && currentCount >= maxAudioCount) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content:
-              Text('En fazla $maxAudioCount ses dosyası yükleyebilirsiniz.'),
+        const SnackBar(
+          content: Text(
+            'En fazla $maxAudioCount ses dosyası yükleyebilirsiniz.',
+          ),
         ),
       );
       return false;

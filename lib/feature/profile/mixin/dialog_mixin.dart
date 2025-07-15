@@ -40,8 +40,8 @@ mixin DialogMixin<T extends StatefulWidget> on State<T> {
       cancelButtonText: context.tr('cancel_button', args: {}),
       onConfirm: () {
         context.read<ProfileBloc>().add(
-              ProfileDelete(password: '', email: ''),
-            );
+          const ProfileDelete(password: '', email: ''),
+        );
         Navigator.pop(context);
       },
     );
@@ -56,8 +56,8 @@ mixin DialogMixin<T extends StatefulWidget> on State<T> {
       cancelButtonText: context.tr('cancel_button', args: {}),
       onConfirm: () {
         context.read<ProfileBloc>().add(
-              ProfileLogout(email: '', password: ''),
-            );
+          const ProfileLogout(email: '', password: ''),
+        );
         Navigator.pushAndRemoveUntil(
           context,
           MaterialPageRoute(builder: (context) => const Onboard1View()),

@@ -34,7 +34,7 @@ class _EpostaViewState extends State<EpostaView> {
                   Align(
                     alignment: Alignment.centerLeft,
                     child: Padding(
-                      padding: EdgeInsets.symmetric(vertical: 16),
+                      padding: const EdgeInsets.symmetric(vertical: 16),
                       child: Text(
                         context.tr('mail_address'),
                         style: const TextStyle(
@@ -95,7 +95,7 @@ class _EpostaViewState extends State<EpostaView> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        BackButtonWidget(),
+        const BackButtonWidget(),
         Expanded(child: PageTitle(title: context.tr('mail_address'))),
       ],
     );

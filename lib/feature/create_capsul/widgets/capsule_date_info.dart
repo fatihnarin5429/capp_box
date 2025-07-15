@@ -7,10 +7,7 @@ import 'review_container.dart';
 class CapsuleDateInfo extends StatelessWidget {
   final CreateCapsuleState state;
 
-  const CapsuleDateInfo({
-    Key? key,
-    required this.state,
-  }) : super(key: key);
+  const CapsuleDateInfo({Key? key, required this.state}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -21,14 +18,10 @@ class CapsuleDateInfo extends StatelessWidget {
           child: ReviewContainer(
             height: 50,
             width: 330,
+
             child: Center(
               child: Text(
-                context.tr('capsule_open_date') +
-                    ': '
-                        '${state.createCapsuleModel.openedDate == null ? '' : DateFormat('dd.MM.yyyy').format(
-                            DateTime.fromMillisecondsSinceEpoch(int.parse(
-                                state.createCapsuleModel.openedDate!)),
-                          )}',
+                '${context.tr('capsule_open_date')}: ${DateFormat('dd.MM.yyyy').format(DateTime.fromMillisecondsSinceEpoch(int.parse(state.createCapsuleResponseModel.data.capsule.openDate.toString())))}',
                 style: const TextStyle(
                   color: Colors.white,
                   fontSize: 16,
@@ -46,12 +39,7 @@ class CapsuleDateInfo extends StatelessWidget {
             width: 330,
             child: Center(
               child: Text(
-                context.tr('capsule_open_time') +
-                    ': '
-                        '${state.createCapsuleModel.openedDate == null ? '' : DateFormat('HH.mm').format(
-                            DateTime.fromMillisecondsSinceEpoch(int.parse(
-                                state.createCapsuleModel.openedDate!)),
-                          )}',
+                '${context.tr('capsule_open_time')}: ${state.createCapsuleResponseModel.data.capsule.openDate == null ? '' : DateFormat('HH.mm').format(DateTime.fromMillisecondsSinceEpoch(int.parse(state.createCapsuleResponseModel.data.capsule.openDate.toString())))}',
                 style: const TextStyle(
                   color: Colors.white,
                   fontSize: 16,

@@ -7,7 +7,7 @@ final class ProfileState extends Equatable {
     this.currentPassword = '',
     this.newPassword = '',
     this.phone = '',
-    this.error = null,
+    this.error,
     this.name = '',
     this.password = '',
     this.imagePath,
@@ -28,16 +28,16 @@ final class ProfileState extends Equatable {
   final bool isDeleted;
   @override
   List<Object?> get props => [
-        displayName,
-        email,
-        phone,
-        error,
-        name,
-        password,
-        imagePath,
-        isLoggedIn,
-        isDeleted,
-      ];
+    displayName,
+    email,
+    phone,
+    error,
+    name,
+    password,
+    imagePath,
+    isLoggedIn,
+    isDeleted,
+  ];
 
   ProfileState copyWith({
     String? displayName,

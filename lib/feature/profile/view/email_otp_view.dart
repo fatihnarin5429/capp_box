@@ -9,21 +9,24 @@ import 'package:capp_box/feature/profile/widgets/pinput_widget.dart';
 
 class EmailOtpView extends StatefulWidget {
   final String email;
-  const EmailOtpView(
-      {super.key,
-      required this.email,
-      required bool isEmail,
-      required String name,
-      required String otp,
-      required String phone});
+  const EmailOtpView({
+    super.key,
+    required this.email,
+    required bool isEmail,
+    required String name,
+    required String otp,
+    required String phone,
+  });
 
   @override
   State<EmailOtpView> createState() => _EmailOtpViewState();
 }
 
 class _EmailOtpViewState extends State<EmailOtpView> {
-  List<TextEditingController> controllers =
-      List.generate(4, (index) => TextEditingController());
+  List<TextEditingController> controllers = List.generate(
+    4,
+    (index) => TextEditingController(),
+  );
   List<FocusNode> focusNodes = List.generate(4, (index) => FocusNode());
   Timer? _timer;
   int _remainingTime = 59;
@@ -73,10 +76,9 @@ class _EmailOtpViewState extends State<EmailOtpView> {
       message: context.tr('email_verified', args: {}),
       onComplete: () {
         if (!mounted) return;
-        Navigator.of(context).pushNamedAndRemoveUntil(
-          '/profil_view',
-          (route) => false,
-        );
+        Navigator.of(
+          context,
+        ).pushNamedAndRemoveUntil('/profil_view', (route) => false);
       },
     );
   }
@@ -122,7 +124,7 @@ class _EmailOtpViewState extends State<EmailOtpView> {
                         child: Text(
                           context.tr('email_verification_title', args: {}),
                           textAlign: TextAlign.center,
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: Colors.white,
                             fontSize: 16,
                             fontFamily: 'Urbanist',
@@ -135,8 +137,10 @@ class _EmailOtpViewState extends State<EmailOtpView> {
                   ),
                   const SizedBox(height: 32),
                   Text(
-                    context.tr('email_verification_message',
-                        args: {'email': widget.email}),
+                    context.tr(
+                      'email_verification_message',
+                      args: {'email': widget.email},
+                    ),
                     textAlign: TextAlign.center,
                     style: const TextStyle(
                       color: Colors.white,
@@ -151,9 +155,9 @@ class _EmailOtpViewState extends State<EmailOtpView> {
                     focusNode: focusNodes[0],
                     email: widget.email,
                     onCompleted: (pin) {
-                      context.read<ProfileBloc>().add(ProfileChangeEmail(
-                            email: widget.email,
-                          ));
+                      context.read<ProfileBloc>().add(
+                        ProfileChangeEmail(email: widget.email),
+                      );
                       verifyOtp();
                     },
                   ),

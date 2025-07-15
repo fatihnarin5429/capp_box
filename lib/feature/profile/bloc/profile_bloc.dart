@@ -6,7 +6,7 @@ part 'profile_event.dart';
 part 'profile_state.dart';
 
 class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
-  ProfileBloc() : super(ProfileState()) {
+  ProfileBloc() : super(const ProfileState()) {
     on<ProfileChangeName>(_onProfileChangeName);
     on<ProfileChangeEmail>(_onProfileChangeEmail);
     on<ProfileChangePassword>(_onProfileChangePassword);
@@ -31,7 +31,9 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   }
 
   Future<void> _onProfileChangePassword(
-      ProfileChangePassword event, Emitter<ProfileState> emit) async {
+    ProfileChangePassword event,
+    Emitter<ProfileState> emit,
+  ) async {
     emit(state.copyWith(password: event.password));
   }
 

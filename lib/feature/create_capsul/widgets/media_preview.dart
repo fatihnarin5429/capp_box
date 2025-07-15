@@ -89,7 +89,9 @@ class _MediaPreviewState extends State<MediaPreview> {
                                   context
                                           .read<CreateCapsuleBloc>()
                                           .state
-                                          .createCapsuleModel
+                                          .createCapsuleResponseModel
+                                          .data
+                                          .capsule
                                           .mediaType ==
                                       MediaType.voice
                               ? _buildAudioPreview()
@@ -122,7 +124,7 @@ class _MediaPreviewState extends State<MediaPreview> {
             Container(
               padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
-                color: const Color(0xFFA737FF).withOpacity(0.2),
+                color: const Color(0xFFA737FF).withValues(alpha: 0.2),
                 borderRadius: BorderRadius.circular(12),
               ),
               child: const Icon(Icons.audiotrack, color: Colors.white),

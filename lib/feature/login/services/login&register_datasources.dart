@@ -1,4 +1,4 @@
-import 'package:capp_box/feature/create_capsul/model/create_capsule_model.dart';
+import 'package:capp_box/feature/create_capsul/model/create_capsule_response_model.dart';
 import 'package:capp_box/feature/login/services/model/register_response_model.dart';
 import 'package:capp_box/product/services/network_client.dart';
 import 'package:capp_box/product/services/services_paths.dart';
@@ -46,8 +46,10 @@ class LoginRegisterRemoteDatasource {
     final res = await client.get<Map<String, dynamic>>(path);
     final map = res.data;
     if (map == null || map['data'] is! List) {
-      throw FormatException('Beklenmeyen format');
+      throw const FormatException('Beklenmeyen format');
     }
-    return map['data'].map((e) => CreateCapsuleModel.fromJson(e)).toList();
+    return map['data']
+        .map((e) => CreateCapsuleResponseModel.fromJson(e))
+        .toList();
   }
 }

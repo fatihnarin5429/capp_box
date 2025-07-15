@@ -43,15 +43,13 @@ class ContinueButton extends StatelessWidget {
           onPressed: () {
             context.read<CreateCapsuleBloc>().add(
               CreateCapsuleAction(
-                createCapsuleModel: context
+                context
                     .read<CreateCapsuleBloc>()
                     .state
-                    .createCapsuleModel
+                    .createCapsuleResponseModel
                     .copyWith(
-                      displayName: displayNameController.text,
-                      email: mailController.text,
-                      phoneNumber: phoneController.text,
-                      mediaType: secilenTip,
+                      openDate:
+                          DateTime.now().millisecondsSinceEpoch.toString(),
                     ),
               ),
             );

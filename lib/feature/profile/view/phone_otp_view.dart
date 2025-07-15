@@ -16,8 +16,10 @@ class PhoneOtpView extends StatefulWidget {
 }
 
 class _PhoneOtpViewState extends State<PhoneOtpView> {
-  List<TextEditingController> controllers =
-      List.generate(4, (index) => TextEditingController());
+  List<TextEditingController> controllers = List.generate(
+    4,
+    (index) => TextEditingController(),
+  );
   List<FocusNode> focusNodes = List.generate(4, (index) => FocusNode());
   Timer? _timer;
   int _remainingTime = 59;
@@ -62,9 +64,9 @@ class _PhoneOtpViewState extends State<PhoneOtpView> {
     _timer?.cancel();
     if (!mounted) return;
 
-    context
-        .read<ProfileBloc>()
-        .add(ProfileChangePhone(phone: widget.phoneNumber));
+    context.read<ProfileBloc>().add(
+      ProfileChangePhone(phone: widget.phoneNumber),
+    );
 
     SuccessDialog.show(
       context: context,
@@ -90,11 +92,11 @@ class _PhoneOtpViewState extends State<PhoneOtpView> {
                   padding: const EdgeInsets.symmetric(horizontal: 24),
                   child: Column(
                     children: [
-                      Row(
+                      const Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           BackButtonWidget(),
-                          const Expanded(
+                          Expanded(
                             child: Text(
                               'Telefon Doğrulama',
                               textAlign: TextAlign.center,
@@ -106,7 +108,7 @@ class _PhoneOtpViewState extends State<PhoneOtpView> {
                               ),
                             ),
                           ),
-                          const SizedBox(width: 40),
+                          SizedBox(width: 40),
                         ],
                       ),
                       const SizedBox(height: 32),
@@ -132,11 +134,12 @@ class _PhoneOtpViewState extends State<PhoneOtpView> {
                             ),
                             height: 75,
                             decoration: BoxDecoration(
-                                border: Border.all(
-                                  width: 2,
-                                  color: const Color(0xFF737A7F),
-                                ),
-                                borderRadius: BorderRadius.circular(12)),
+                              border: Border.all(
+                                width: 2,
+                                color: const Color(0xFF737A7F),
+                              ),
+                              borderRadius: BorderRadius.circular(12),
+                            ),
                           ),
                           defaultPinTheme: PinTheme(
                             textStyle: const TextStyle(
@@ -147,8 +150,9 @@ class _PhoneOtpViewState extends State<PhoneOtpView> {
                             ),
                             height: 75,
                             decoration: BoxDecoration(
-                                color: const Color(0xFF282943),
-                                borderRadius: BorderRadius.circular(12)),
+                              color: const Color(0xFF282943),
+                              borderRadius: BorderRadius.circular(12),
+                            ),
                           ),
                           errorText: 'Hatalı kod girdiniz, tekrar deneyiniz.',
                           length: 4,

@@ -59,7 +59,7 @@ class SelectedMediaPreview extends StatelessWidget {
                 return Container(
                   width: double.infinity,
                   height: 250,
-                  color: Colors.grey.withOpacity(0.3),
+                  color: Colors.grey.withValues(alpha: 0.3),
                   child: const Center(
                     child: Text(
                       'Resim yüklenemedi',
@@ -143,7 +143,7 @@ class SelectedMediaPreview extends StatelessWidget {
                 Container(
                   padding: const EdgeInsets.all(12),
                   decoration: BoxDecoration(
-                    color: const Color(0xFFA737FF).withOpacity(0.2),
+                    color: const Color(0xFFA737FF).withValues(alpha: 0.2),
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: const Icon(Icons.audiotrack, color: Colors.white),
@@ -166,7 +166,7 @@ class SelectedMediaPreview extends StatelessWidget {
                       Text(
                         selectedFileName ?? 'Ses dosyası seçildi',
                         style: TextStyle(
-                          color: Colors.white.withOpacity(0.7),
+                          color: Colors.white.withValues(alpha: 0.7),
                           fontSize: 14,
                           fontFamily: 'Urbanist',
                         ),

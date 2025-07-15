@@ -6,10 +6,7 @@ import 'package:capp_box/feature/create_capsul/bloc/create_capsule_bloc.dart';
 class ReceiverInfo extends StatelessWidget {
   final CreateCapsuleState state;
 
-  const ReceiverInfo({
-    Key? key,
-    required this.state,
-  }) : super(key: key);
+  const ReceiverInfo({Key? key, required this.state}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +27,7 @@ class ReceiverInfo extends StatelessWidget {
                 ),
               ),
               Text(
-                state.createCapsuleModel.displayName ??
+                state.createCapsuleResponseModel.data?.capsule.recipientUser ??
                     context.tr('recipient_name', args: {}),
                 style: const TextStyle(
                   color: Colors.white,
@@ -38,7 +35,7 @@ class ReceiverInfo extends StatelessWidget {
                   fontFamily: 'Urbanist',
                   fontWeight: FontWeight.w600,
                 ),
-              )
+              ),
             ],
           ),
           Row(
@@ -53,7 +50,7 @@ class ReceiverInfo extends StatelessWidget {
                 ),
               ),
               Text(
-                state.createCapsuleModel.email ?? 'E-posta sağlanmadı',
+                state.createCapsuleResponseModel.recipientEmail,
                 style: const TextStyle(
                   color: Colors.white,
                   fontSize: 16,
@@ -62,7 +59,7 @@ class ReceiverInfo extends StatelessWidget {
                 ),
               ),
             ],
-          )
+          ),
         ],
       ),
     );

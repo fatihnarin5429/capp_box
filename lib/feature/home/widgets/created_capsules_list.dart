@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:capp_box/core/extensions/localization_extension.dart';
 import 'package:capp_box/feature/create_capsul/bloc/create_capsule_bloc.dart';
-import 'package:capp_box/feature/create_capsul/model/create_capsule_model.dart';
+import 'package:capp_box/feature/create_capsul/model/create_capsule_response_model.dart';
 import 'package:capp_box/feature/home/widgets/capsule_card.dart';
 import 'package:mesh_gradient/mesh_gradient.dart';
 
 /// A widget that displays the list of capsules created by the user.
 class CreatedCapsulesList extends StatelessWidget {
   final AnimatedMeshGradientController gradientController;
-  final Function(CreateCapsuleModel) buildTimeWidget;
-  final Function(CreateCapsuleModel) isCapsuleReadyToOpen;
+  final Function(CreateCapsuleResponseModel) buildTimeWidget;
+  final Function(CreateCapsuleResponseModel) isCapsuleReadyToOpen;
 
   const CreatedCapsulesList({
     super.key,
@@ -60,17 +60,13 @@ class CreatedCapsulesList extends StatelessWidget {
       width: double.infinity,
       padding: const EdgeInsets.symmetric(vertical: 30),
       decoration: BoxDecoration(
-        color: Colors.white.withOpacity(0.05),
+        color: Colors.white.withValues(alpha: 0.05),
         borderRadius: BorderRadius.circular(16),
       ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Icon(
-            Icons.inbox_outlined,
-            size: 60,
-            color: Colors.white54,
-          ),
+          const Icon(Icons.inbox_outlined, size: 60, color: Colors.white54),
           const SizedBox(height: 16),
           Text(
             context.tr('No_Capsules_Created_Yet'),
@@ -86,7 +82,9 @@ class CreatedCapsulesList extends StatelessWidget {
   }
 
   Widget _buildCapsulesList(
-      BuildContext context, List<CreateCapsuleModel> capsules) {
+    BuildContext context,
+    List<CreateCapsuleResponseModel> capsules,
+  ) {
     return SizedBox(
       height: 300, // CapsuleCard'ın yüksekliğine göre ayarlayın
       child: ListView.builder(
@@ -98,7 +96,8 @@ class CreatedCapsulesList extends StatelessWidget {
             padding: const EdgeInsets.only(right: 16.0),
             child: CapsuleCard(
               senderName:
-                  capsule.displayName ?? context.tr('anonymous', args: {}),
+                  capsule.data?.capsule?.sender ??
+                  context.tr('anonymous', args: {}),
               imageUrl: "https://picsum.photos/200/300", // varsayılan bir resim
               timerWidget: buildTimeWidget(capsule),
               controller: gradientController,

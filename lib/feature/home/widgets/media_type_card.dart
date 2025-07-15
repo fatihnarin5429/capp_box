@@ -34,7 +34,7 @@ class MediaTypeCard extends StatelessWidget {
                 builder:
                     (context) => CreateCapsulContentView(
                       controller: TextEditingController(),
-                      onChanged: (String) {},
+                      onChanged: (value) {},
                       type: type,
                     ),
               ),

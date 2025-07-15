@@ -1,13 +1,8 @@
 // create_capsule_bloc.dart
-
-import 'dart:math';
-
 import 'package:bloc/bloc.dart';
-import 'package:capp_box/product/database/hive/core/hive_database_manager.dart';
+import 'package:capp_box/feature/create_capsul/model/create_capsule_response_model.dart';
 import 'package:equatable/equatable.dart';
-import 'package:capp_box/feature/create_capsul/model/create_capsule_model.dart';
 import 'package:capp_box/feature/create_capsul/services/model/create_capsule_datasources.dart';
-import 'package:capp_box/feature/create_capsul/services/model/create_capsule_repository.dart';
 import 'package:capp_box/feature/create_capsul/services/model/create_capsules_usecases.dart';
 
 part 'create_capsule_event.dart';
@@ -19,36 +14,68 @@ class CreateCapsuleBloc extends Bloc<CreateCapsuleEvent, CreateCapsuleState> {
 
   CreateCapsuleBloc()
     : createCapsuleRemoteDatasource = CreateCapsulesRemoteDatasource(),
-
-      super(const CreateCapsuleState()) {
+      super(
+        CreateCapsuleState(
+          CreateCapsuleResponseModel(
+            recipientPhone: '',
+            recipientEmail: '',
+            openDate: '',
+            price: 0,
+            success: false,
+            message: '',
+            data: CapsuleData(
+              capsule: Capsule(
+                title: '',
+                message: '',
+                sender: '',
+                recipientEmail: '',
+                recipientPhone: '',
+                recipientUser: '',
+                isClaimed: false,
+                openDate: DateTime.now(),
+                isOpened: false,
+                price: 0,
+                paymentStatus: '',
+                notificationSentToUnregistered: false,
+                notificationSentToRegistered: false,
+                id: '',
+                media: [],
+                createdAt: DateTime.now(),
+                v: 0,
+              ),
+              paymentId: '',
+            ),
+          ),
+        ),
+      ) {
     createCapsuleUsecase = CreateCapsulesUsecase(createCapsuleRemoteDatasource);
     on<CreateCapsuleAction>(_onCreateCapsuleAction);
     on<AddCreatedCapsules>(_onAddCreatedCapsules);
-    on<ResetCreateCapsuleModel>(_onResetCreateCapsuleModel);
+    on<ResetCreateCapsuleResponseModel>(_onResetCreateCapsuleResponseModel);
   }
-  HiveDatabaseManager hiveDatabaseManager = HiveDatabaseManager();
+
   Future<void> _onCreateCapsuleAction(
     CreateCapsuleAction event,
     Emitter<CreateCapsuleState> emit,
   ) async {
     try {
-      emit(state.copyWith(createCapsuleModel: event.createCapsuleModel));
-      // Usecase ile kapsül oluştur
-      final result = await createCapsuleUsecase.createCapsule(
-        event.createCapsuleModel,
-        title: event.createCapsuleModel.title ?? '',
-        message: event.createCapsuleModel.message ?? '',
-        email: event.createCapsuleModel.email ?? '',
-        phone: event.createCapsuleModel.phoneNumber ?? '',
-        price: event.createCapsuleModel.price ?? '',
+      emit(
+        state.copyWith(
+          createCapsuleResponseModel: event.createCapsuleResponseModel,
+        ),
       );
-
-      // Local database'e kaydet
-      hiveDatabaseManager.saveCapsuleModel(result);
-      emit(state.copyWith(createCapsuleModel: result));
+      // Usecase ile kapsül oluştur
+      final _ = await createCapsuleUsecase.createCapsule(
+        title: event.createCapsuleResponseModel.data.capsule.title,
+        message: event.createCapsuleResponseModel.message,
+        recipientEmail: event.createCapsuleResponseModel.recipientEmail,
+        recipientPhone: event.createCapsuleResponseModel.recipientPhone,
+        openDate: event.createCapsuleResponseModel.openDate,
+        price: event.createCapsuleResponseModel.price,
+      );
+      // Sonuç kullanılmıyor, istersen burada emit ile state güncelleyebilirsin.
     } catch (e) {
-      // Hata durumunda state güncelle
-      emit(state.copyWith());
+      // log(e.toString()); // log kullanılmıyor, print de önerilmez, hata yönetimi eklenebilir.
     }
   }
 
@@ -56,9 +83,9 @@ class CreateCapsuleBloc extends Bloc<CreateCapsuleEvent, CreateCapsuleState> {
     AddCreatedCapsules event,
     Emitter<CreateCapsuleState> emit,
   ) async {
-    List<CreateCapsuleModel> updatedCapsules = [
+    List<CreateCapsuleResponseModel> updatedCapsules = [
       ...state.myCreatedCapsules,
-      event.createCapsuleModel,
+      event.createCapsuleResponseModel,
     ];
     emit(
       state.copyWith(
@@ -68,10 +95,43 @@ class CreateCapsuleBloc extends Bloc<CreateCapsuleEvent, CreateCapsuleState> {
     );
   }
 
-  void _onResetCreateCapsuleModel(
-    ResetCreateCapsuleModel event,
+  void _onResetCreateCapsuleResponseModel(
+    ResetCreateCapsuleResponseModel event,
     Emitter<CreateCapsuleState> emit,
   ) {
-    emit(state.copyWith(createCapsuleModel: const CreateCapsuleModel()));
+    emit(
+      state.copyWith(
+        createCapsuleResponseModel: CreateCapsuleResponseModel(
+          data: CapsuleData(
+            capsule: Capsule(
+              sender: '',
+              title: '',
+              message: '',
+              recipientEmail: '',
+              recipientPhone: '',
+              recipientUser: '',
+              isClaimed: false,
+              openDate: DateTime.now(),
+              isOpened: false,
+              price: 0,
+              paymentStatus: '',
+              notificationSentToUnregistered: false,
+              notificationSentToRegistered: false,
+              id: '',
+              media: [],
+              createdAt: DateTime.now(),
+              v: 0,
+            ),
+            paymentId: '',
+          ),
+          message: '',
+          success: false,
+          recipientPhone: '',
+          recipientEmail: '',
+          openDate: '',
+          price: 0,
+        ),
+      ),
+    );
   }
 }

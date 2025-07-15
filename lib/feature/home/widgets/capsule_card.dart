@@ -93,10 +93,10 @@ class CapsuleCard extends StatelessWidget {
                   borderRadius: BorderRadius.circular(borderRadius),
                   child: AnimatedMeshGradient(
                     colors: [
-                      ColorConst.backgroundColor.withOpacity(1),
-                      ColorConst.backgroundDark1.withOpacity(0.5),
-                      ColorConst.backgroundPurple1.withOpacity(0.5),
-                      ColorConst.backgroundPurple2.withOpacity(0.5),
+                      ColorConst.backgroundColor.withValues(alpha: 1),
+                      ColorConst.backgroundDark1.withValues(alpha: 0.5),
+                      ColorConst.backgroundPurple1.withValues(alpha: 0.5),
+                      ColorConst.backgroundPurple2.withValues(alpha: 0.5),
                     ],
                     options: AnimatedMeshGradientOptions(
                       speed: 2,
@@ -135,7 +135,7 @@ class CapsuleCard extends StatelessWidget {
                             Text(
                               context.tr('Sender', args: {}),
                               style: TextStyle(
-                                color: Colors.white.withOpacity(0.5),
+                                color: Colors.white.withValues(alpha: 0.5),
                                 fontSize:
                                     cardSize == CapsuleCardSize.small ? 10 : 12,
                                 fontFamily: 'Urbanist',

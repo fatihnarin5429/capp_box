@@ -8,43 +8,45 @@ abstract class CreateCapsuleEvent extends Equatable {
 }
 
 class CreateCapsuleAction extends CreateCapsuleEvent {
-  final CreateCapsuleModel createCapsuleModel;
-
-  const CreateCapsuleAction({required this.createCapsuleModel});
+  final CreateCapsuleResponseModel createCapsuleResponseModel;
+  const CreateCapsuleAction(this.createCapsuleResponseModel);
 
   @override
-  List<Object?> get props => [createCapsuleModel];
+  List<Object?> get props => [createCapsuleResponseModel];
 }
 
 class AddCreatedCapsules extends CreateCapsuleEvent {
-  final CreateCapsuleModel createCapsuleModel;
-  const AddCreatedCapsules({required this.createCapsuleModel});
+  final CreateCapsuleResponseModel createCapsuleResponseModel;
+  const AddCreatedCapsules(this.createCapsuleResponseModel);
   @override
-  List<Object?> get props => [createCapsuleModel];
+  List<Object?> get props => [createCapsuleResponseModel];
 }
 
 class RegisterAction extends CreateCapsuleEvent {
   final String title;
   final String message;
-  final String email;
-  final String phone;
-  final String price;
+  final String recipientEmail;
+  final String openDate;
+  final String recipientPhone;
+  final int price;
 
   const RegisterAction({
     required this.title,
     required this.message,
-    required this.email,
-    required this.phone,
+    required this.openDate,
+    required this.recipientEmail,
+    required this.recipientPhone,
     required this.price,
   });
 
   @override
-  List<Object?> get props => [title, message, email, phone, price];
+  List<Object?> get props => [
+    title,
+    message,
+    recipientEmail,
+    recipientPhone,
+    price,
+  ];
 }
 
-class ResetCreateCapsuleModel extends CreateCapsuleEvent {
-  const ResetCreateCapsuleModel();
-
-  @override
-  List<Object?> get props => [];
-}
+class ResetCreateCapsuleResponseModel extends CreateCapsuleEvent {}

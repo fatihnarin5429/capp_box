@@ -19,7 +19,7 @@ class ProfileHeaderWidget extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
         decoration: BoxDecoration(
-          color: Colors.white.withOpacity(0.03),
+          color: Colors.white.withValues(alpha: 0.03),
           borderRadius: BorderRadius.circular(30),
         ),
         child: Row(
@@ -27,10 +27,7 @@ class ProfileHeaderWidget extends StatelessWidget {
             SizedBox(
               width: 24,
               height: 24,
-              child: Image.asset(
-                'assets/icons/menu.png',
-                color: Colors.white,
-              ),
+              child: Image.asset('assets/icons/menu.png', color: Colors.white),
             ),
             const SizedBox(width: 24),
             _buildProfileImage(),
@@ -51,21 +48,16 @@ class ProfileHeaderWidget extends StatelessWidget {
         color: Colors.white,
         shape: BoxShape.circle,
       ),
-      child: profileImageUrl != null
-          ? Image.network(
-              profileImageUrl!,
-              fit: BoxFit.fill,
-              errorBuilder: (context, error, stackTrace) => const Icon(
-                Icons.person,
-                color: Colors.grey,
-                size: 30,
-              ),
-            )
-          : const Icon(
-              Icons.person,
-              color: Colors.grey,
-              size: 30,
-            ),
+      child:
+          profileImageUrl != null
+              ? Image.network(
+                profileImageUrl!,
+                fit: BoxFit.fill,
+                errorBuilder:
+                    (context, error, stackTrace) =>
+                        const Icon(Icons.person, color: Colors.grey, size: 30),
+              )
+              : const Icon(Icons.person, color: Colors.grey, size: 30),
     );
   }
 

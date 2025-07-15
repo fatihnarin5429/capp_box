@@ -2,8 +2,8 @@
 import 'dart:io';
 
 import 'package:capp_box/feature/create_capsul/bloc/create_capsule_bloc.dart';
-import 'package:capp_box/feature/create_capsul/mixin/capsule_review_mixin.dart'
-    show CapsuleReviewMixin;
+import 'package:capp_box/feature/create_capsul/mixin/capsule_review_mixin.dart';
+
 import 'package:capp_box/product/utility/enums/mediaType_enum.dart';
 import 'package:capp_box/product/widgets/background_gradient.dart';
 import 'package:flutter/material.dart';
@@ -89,22 +89,16 @@ class _CapsuleReviewState extends State<CapsuleReview> with CapsuleReviewMixin {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        CapsuleTitle(title: state.createCapsuleModel.title ?? '', state: state),
+        CapsuleTitle(
+          title: state.createCapsuleResponseModel.data.capsule.title,
+          state: state,
+        ),
         MediaPreview(
-          type: state.createCapsuleModel.mediaType ?? MediaType.text,
-          photoFile: state.createCapsuleModel.mediaUrl,
-          audioFile:
-              state.createCapsuleModel.mediaType == MediaType.voice
-                  ? state.createCapsuleModel.mediaUrl
-                  : widget.audioFile,
-          videoFile:
-              state.createCapsuleModel.mediaType == MediaType.video
-                  ? state.createCapsuleModel.mediaUrl
-                  : widget.videoFile,
-          selectedFileName:
-              state.createCapsuleModel.mediaType == MediaType.voice
-                  ? state.createCapsuleModel.mediaUrl?.path
-                  : widget.selectedFileName,
+          type: state.createCapsuleResponseModel.data.capsule.mediaType,
+          photoFile: _getPhotoFile(state),
+          audioFile: _getAudioFile(state),
+          videoFile: _getVideoFile(state),
+          selectedFileName: widget.selectedFileName,
         ),
         ReceiverInfo(state: state),
         CapsuleDateInfo(state: state),
@@ -114,5 +108,33 @@ class _CapsuleReviewState extends State<CapsuleReview> with CapsuleReviewMixin {
         ),
       ],
     );
+  }
+
+  dynamic _getPhotoFile(CreateCapsuleState state) {
+    if (state.createCapsuleResponseModel.data.capsule.mediaType ==
+        MediaType.photo) {
+      // Eğer widget.photoFile null değilse onu, yoksa url'yi döndür
+      return widget.photoFile ??
+          state.createCapsuleResponseModel.data.capsule.mediaUrl;
+    }
+    return widget.photoFile;
+  }
+
+  dynamic _getAudioFile(CreateCapsuleState state) {
+    if (state.createCapsuleResponseModel.data.capsule.mediaType ==
+        MediaType.voice) {
+      return widget.audioFile ??
+          state.createCapsuleResponseModel.data.capsule.mediaUrl;
+    }
+    return widget.audioFile;
+  }
+
+  dynamic _getVideoFile(CreateCapsuleState state) {
+    if (state.createCapsuleResponseModel.data.capsule.mediaType ==
+        MediaType.video) {
+      return widget.videoFile ??
+          state.createCapsuleResponseModel.data.capsule.mediaUrl;
+    }
+    return widget.videoFile;
   }
 }

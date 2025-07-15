@@ -83,7 +83,7 @@ class UpcomingCapsuleCard extends StatelessWidget {
                     Text(
                       'Açılma: ${dateFormatter.format(capsule.openingDate)}',
                       style: TextStyle(
-                        color: Colors.white.withOpacity(0.7),
+                        color: Colors.white.withValues(alpha: 0.7),
                         fontSize: 12,
                         fontFamily: 'Urbanist',
                         fontWeight: FontWeight.w500,
@@ -99,7 +99,7 @@ class UpcomingCapsuleCard extends StatelessWidget {
                   vertical: 6,
                 ),
                 decoration: BoxDecoration(
-                  color: Colors.white.withOpacity(0.1),
+                  color: Colors.white.withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Text(

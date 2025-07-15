@@ -13,13 +13,10 @@ class _LoginBackgroundGradientState extends State<LoginBackgroundGradient> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         gradient: RadialGradient(
           center: Alignment.centerLeft,
-          colors: [
-            ColorConst.backgroundDark1,
-            ColorConst.backgroundDark1,
-          ],
+          colors: [ColorConst.backgroundDark1, ColorConst.backgroundDark1],
         ),
       ),
     );

@@ -142,10 +142,19 @@ mixin CapsuleReviewMixin<T extends StatefulWidget> on State<T> {
   ) {
     context.read<CreateCapsuleBloc>().add(
       CreateCapsuleAction(
-        createCapsuleModel: state.createCapsuleModel.copyWith(
-          isSendInfoReceiver: shareInfo,
-          isSendInfoSms: sendSMS,
-        ),
+        context
+            .read<CreateCapsuleBloc>()
+            .state
+            .createCapsuleResponseModel
+            .copyWith(
+              openDate: DateTime.now().millisecondsSinceEpoch.toString(),
+              data:
+                  context
+                      .read<CreateCapsuleBloc>()
+                      .state
+                      .createCapsuleResponseModel
+                      .data,
+            ),
       ),
     );
   }

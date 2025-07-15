@@ -1,6 +1,6 @@
 import 'package:capp_box/core/extensions/localization_extension.dart';
 import 'package:capp_box/feature/create_capsul/bloc/create_capsule_bloc.dart';
-import 'package:capp_box/feature/create_capsul/model/create_capsule_model.dart';
+import 'package:capp_box/feature/create_capsul/model/create_capsule_response_model.dart';
 import 'package:capp_box/feature/home/widgets/capsule_card.dart';
 
 import 'package:flutter/material.dart';
@@ -14,7 +14,10 @@ class CapsuleListWidget extends StatefulWidget {
   final void Function(int) onPageChanged;
   final CreateCapsuleState state;
   final AnimatedMeshGradientController controller;
-  final void Function(BuildContext, {required CreateCapsuleModel capsule})
+  final void Function(
+    BuildContext, {
+    required CreateCapsuleResponseModel capsule,
+  })
   onCapsuleTap;
 
   const CapsuleListWidget({
@@ -63,9 +66,10 @@ class _CapsuleListWidgetState extends State<CapsuleListWidget> {
               : widget.state.filteredCapsules;
 
       for (var capsule in capsules) {
-        if (capsule.openedDate != null) {
-          _timerValues[capsule.openedDate!] = _calculateTimeRemaining(
-            capsule.openedDate,
+        if (capsule.data?.capsule?.openDate != null) {
+          _timerValues[capsule.data?.capsule?.openDate.toString() ??
+              ''] = _calculateTimeRemaining(
+            capsule.data?.capsule?.openDate.toString(),
           );
         }
       }
@@ -156,7 +160,7 @@ class _CapsuleListWidgetState extends State<CapsuleListWidget> {
             final isCurrent = index == widget.currentPage;
 
             final int? openedDateMillis = int.tryParse(
-              capsule.openedDate ?? '',
+              capsule.data?.capsule?.openDate.toString() ?? '',
             );
             final isReadyToOpen =
                 openedDateMillis != null &&
@@ -170,7 +174,7 @@ class _CapsuleListWidgetState extends State<CapsuleListWidget> {
                 child: InkWell(
                   onTap: () => widget.onCapsuleTap(context, capsule: capsule),
                   child: CapsuleCard(
-                    senderName: capsule.displayName ?? '',
+                    senderName: capsule.data?.capsule?.sender ?? '',
                     imageUrl: "https://placehold.co/40x40",
                     isReadyToOpen: isReadyToOpen,
                     controller: widget.controller,
@@ -178,8 +182,12 @@ class _CapsuleListWidgetState extends State<CapsuleListWidget> {
                     timerWidget: Padding(
                       padding: const EdgeInsets.only(bottom: 10, right: 8),
                       child: Text(
-                        _timerValues[capsule.openedDate ?? ''] ??
-                            _calculateTimeRemaining(capsule.openedDate),
+                        _timerValues[capsule.data?.capsule?.openDate
+                                    .toString() ??
+                                ''] ??
+                            _calculateTimeRemaining(
+                              capsule.data?.capsule?.openDate.toString(),
+                            ),
                         style: const TextStyle(
                           color: Colors.white,
                           fontSize: 17,

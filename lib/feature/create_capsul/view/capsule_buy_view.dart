@@ -100,12 +100,11 @@ class _CapsuleBuyViewState extends State<CapsuleBuyView>
                                   // Hiçbir doğrulama yapmadan devam et
                                   context.read<CreateCapsuleBloc>().add(
                                     AddCreatedCapsules(
-                                      createCapsuleModel:
-                                          state.createCapsuleModel,
+                                      state.createCapsuleResponseModel,
                                     ),
                                   );
                                   context.read<CreateCapsuleBloc>().add(
-                                    ResetCreateCapsuleModel(),
+                                    ResetCreateCapsuleResponseModel(),
                                   );
 
                                   // Direkt olarak HomePage'e git
@@ -142,7 +141,7 @@ class _CapsuleBuyViewState extends State<CapsuleBuyView>
         children: [
           Container(
             height: 1,
-            color: Colors.white.withOpacity(0.15),
+            color: Colors.white.withValues(alpha: 0.15),
             width: MediaQuery.of(context).size.width * 0.85,
           ),
           const SizedBox(height: 20),

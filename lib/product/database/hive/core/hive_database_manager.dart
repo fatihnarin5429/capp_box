@@ -37,7 +37,7 @@ final class HiveDatabaseManager {
       // Eğer user yoksa sadece isFirst ile yeni bir model oluştur
       await userModelBoxHive.put(
         HiveDatabaseConstants.userModel,
-        UserModel(isFirst: true),
+        const UserModel(isFirst: true),
       );
       print('Created new user with isFirst: true');
     }

@@ -40,9 +40,9 @@ class _CapsuleViewState extends State<CapsuleView> with CapsuleViewMixin {
                           selectedIndex: selectedIndex,
                           onFilterSelected: (index) {
                             setState(() => selectedIndex = index);
-                            context.read<CreateCapsuleBloc>().add(
-                                  FilterCapsules(filterIndex: index),
-                                );
+                            // context.read<CreateCapsuleBloc>().add(
+                            //       FilterCapsules(filterIndex: index),
+                            //     );
                           },
                         ),
                       ),
@@ -53,10 +53,10 @@ class _CapsuleViewState extends State<CapsuleView> with CapsuleViewMixin {
                           selectedIndex == 0
                               ? context.tr('all_capsules')
                               : selectedIndex == 1
-                                  ? context.tr('coming_soon_capsules')
-                                  : selectedIndex == 2
-                                      ? context.tr('ready_to_open_capsules')
-                                      : context.tr('my_created_capsules'),
+                              ? context.tr('coming_soon_capsules')
+                              : selectedIndex == 2
+                              ? context.tr('ready_to_open_capsules')
+                              : context.tr('my_created_capsules'),
                           style: const TextStyle(
                             color: Colors.white,
                             fontSize: 16,
@@ -70,8 +70,8 @@ class _CapsuleViewState extends State<CapsuleView> with CapsuleViewMixin {
                         selectedIndex: selectedIndex,
                         pageController: pageController,
                         currentPage: currentPage,
-                        onPageChanged: (index) =>
-                            setState(() => currentPage = index),
+                        onPageChanged:
+                            (index) => setState(() => currentPage = index),
                         state: state,
                         controller: controller,
                         onCapsuleTap: showCapsulePopup,

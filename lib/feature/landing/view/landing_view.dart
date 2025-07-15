@@ -19,37 +19,29 @@ class _LandingViewState extends State<LandingView>
   @override
   void initState() {
     super.initState();
-    
+
     // Fade animasyonu
     _fadeController = AnimationController(
       duration: const Duration(milliseconds: 1500),
       vsync: this,
     );
-    _fadeAnimation = Tween<double>(
-      begin: 0.0,
-      end: 1.0,
-    ).animate(CurvedAnimation(
-      parent: _fadeController,
-      curve: Curves.easeInOut,
-    ));
+    _fadeAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
+      CurvedAnimation(parent: _fadeController, curve: Curves.easeInOut),
+    );
 
     // Pulse animasyonu
     _pulseController = AnimationController(
       duration: const Duration(milliseconds: 1000),
       vsync: this,
     );
-    _pulseAnimation = Tween<double>(
-      begin: 0.8,
-      end: 1.1,
-    ).animate(CurvedAnimation(
-      parent: _pulseController,
-      curve: Curves.easeInOut,
-    ));
+    _pulseAnimation = Tween<double>(begin: 0.8, end: 1.1).animate(
+      CurvedAnimation(parent: _pulseController, curve: Curves.easeInOut),
+    );
 
     // Animasyonları başlat
     _fadeController.forward();
     _pulseController.repeat(reverse: true);
-    
+
     // Sayfa açıldığında initialize event'i tetikle
     WidgetsBinding.instance.addPostFrameCallback((_) {
       context.read<LandingBloc>().add(LandingInitializeEvent());
@@ -71,7 +63,7 @@ class _LandingViewState extends State<LandingView>
           // Database başlatıldıktan sonra ve henüz user check yapılmamışsa kullanıcı kontrolü yap
           context.read<LandingBloc>().add(LandingCheckUserEvent());
         }
-        
+
         if (state.navigationPath != null) {
           // Navigation path geldiğinde yönlendir
           Navigator.pushReplacementNamed(context, state.navigationPath!);
@@ -114,7 +106,9 @@ class _LandingViewState extends State<LandingView>
                                     borderRadius: BorderRadius.circular(60),
                                     boxShadow: [
                                       BoxShadow(
-                                        color: Colors.black.withOpacity(0.1),
+                                        color: Colors.black.withValues(
+                                          alpha: 0.1,
+                                        ),
                                         blurRadius: 20,
                                         spreadRadius: 5,
                                       ),
@@ -136,9 +130,9 @@ class _LandingViewState extends State<LandingView>
                         );
                       },
                     ),
-                    
+
                     const SizedBox(height: 40),
-                    
+
                     // Yükleniyor yazısı
                     FadeTransition(
                       opacity: _fadeAnimation,
@@ -152,9 +146,9 @@ class _LandingViewState extends State<LandingView>
                         ),
                       ),
                     ),
-                    
+
                     const SizedBox(height: 20),
-                    
+
                     // Loading indicator
                     if (state.isLoading)
                       FadeTransition(
@@ -165,7 +159,9 @@ class _LandingViewState extends State<LandingView>
                               width: 30,
                               height: 30,
                               child: CircularProgressIndicator(
-                                valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                                valueColor: AlwaysStoppedAnimation<Color>(
+                                  Colors.white,
+                                ),
                                 strokeWidth: 3,
                               ),
                             ),

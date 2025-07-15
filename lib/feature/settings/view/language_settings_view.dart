@@ -76,12 +76,7 @@ class _LanguageSettingsViewState extends State<LanguageSettingsView> {
                   ColorConst.topLeftPurple1,
                   ColorConst.backgroundDark1,
                 ],
-                stops: [
-                  0.03,
-                  0.3,
-                  0.19,
-                  0.89,
-                ],
+                stops: [0.03, 0.3, 0.19, 0.89],
               ),
             ),
           ),
@@ -128,12 +123,7 @@ class _LanguageSettingsViewState extends State<LanguageSettingsView> {
                 ColorConst.topLeftPurple1,
                 ColorConst.backgroundDark1,
               ],
-              stops: [
-                0.03,
-                0.3,
-                0.19,
-                0.89,
-              ],
+              stops: [0.03, 0.3, 0.19, 0.89],
             ),
           ),
         ),
@@ -231,7 +221,9 @@ class _LanguageSettingsViewState extends State<LanguageSettingsView> {
                       backgroundColor: ColorConst.gradientMiddle2,
                       foregroundColor: Colors.white,
                       padding: const EdgeInsets.symmetric(
-                          horizontal: 32, vertical: 12),
+                        horizontal: 32,
+                        vertical: 12,
+                      ),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(12),
                       ),
@@ -240,7 +232,9 @@ class _LanguageSettingsViewState extends State<LanguageSettingsView> {
                     child: Text(
                       context.tr('ok', args: {}),
                       style: const TextStyle(
-                          fontSize: 16, fontWeight: FontWeight.bold),
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
                 ),
@@ -252,8 +246,12 @@ class _LanguageSettingsViewState extends State<LanguageSettingsView> {
     );
   }
 
-  Widget _buildLanguageOption(BuildContext context, String title,
-      String subtitle, String languageCode) {
+  Widget _buildLanguageOption(
+    BuildContext context,
+    String title,
+    String subtitle,
+    String languageCode,
+  ) {
     final isSelected = _currentLanguageCode == languageCode;
     final localizations = AppLocalizations.of(context);
 
@@ -264,11 +262,14 @@ class _LanguageSettingsViewState extends State<LanguageSettingsView> {
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
         decoration: BoxDecoration(
           color:
-              isSelected ? Colors.white.withOpacity(0.1) : Colors.transparent,
+              isSelected
+                  ? Colors.white.withValues(alpha: 0.1)
+                  : Colors.transparent,
           borderRadius: BorderRadius.circular(16),
-          border: isSelected
-              ? Border.all(color: ColorConst.topLeftPurple1, width: 1)
-              : null,
+          border:
+              isSelected
+                  ? Border.all(color: ColorConst.topLeftPurple1, width: 1)
+                  : null,
         ),
         child: Row(
           children: [
@@ -288,7 +289,7 @@ class _LanguageSettingsViewState extends State<LanguageSettingsView> {
                   Text(
                     subtitle,
                     style: TextStyle(
-                      color: Colors.white.withOpacity(0.7),
+                      color: Colors.white.withValues(alpha: 0.7),
                       fontSize: 14,
                     ),
                   ),
@@ -298,7 +299,7 @@ class _LanguageSettingsViewState extends State<LanguageSettingsView> {
             Radio<String>(
               value: languageCode,
               groupValue: _currentLanguageCode,
-              fillColor: MaterialStateProperty.all(Colors.white),
+              fillColor: WidgetStateProperty.all(Colors.white),
               onChanged: (value) {
                 if (value != null) {
                   _changeLanguage(value);

@@ -1,4 +1,4 @@
-import 'package:capp_box/feature/create_capsul/model/create_capsule_model.dart';
+import 'package:capp_box/feature/create_capsul/model/create_capsule_response_model.dart';
 import 'package:capp_box/feature/home/service/home_repository.dart';
 import 'package:capp_box/feature/home/service/home_datasources.dart';
 
@@ -8,7 +8,7 @@ class HomeUsecase implements IHomeRepository {
   HomeUsecase(this.datasource);
 
   @override
-  Future<List<CreateCapsuleModel>> fetchCapsules() {
+  Future<List<CreateCapsuleResponseModel>> fetchCapsules() {
     return datasource.fetchCapsules();
   }
 }

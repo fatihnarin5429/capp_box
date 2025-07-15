@@ -1,4 +1,4 @@
-import 'package:capp_box/feature/create_capsul/model/create_capsule_model.dart';
+import 'package:capp_box/feature/create_capsul/model/create_capsule_response_model.dart';
 import 'package:capp_box/feature/home/bloc/home_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -34,16 +34,17 @@ mixin CapsuleViewMixin<T extends StatefulWidget> on State<T> {
 
   void showCapsulePopup(
     BuildContext context, {
-    required CreateCapsuleModel capsule,
+    required CreateCapsuleResponseModel capsule,
   }) {
     final isReadyToOpen =
-        capsule.openedDate != null &&
-        int.parse(capsule.openedDate!) <= DateTime.now().millisecondsSinceEpoch;
+        capsule.data?.capsule?.openDate != null &&
+        int.parse(capsule.data?.capsule?.openDate.toString() ?? '0') <=
+            DateTime.now().millisecondsSinceEpoch;
 
     final openDate =
-        capsule.openedDate != null
+        capsule.data?.capsule?.openDate != null
             ? DateTime.fromMillisecondsSinceEpoch(
-              int.parse(capsule.openedDate!),
+              int.parse(capsule.data?.capsule?.openDate.toString() ?? '0'),
             )
             : null;
 

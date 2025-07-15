@@ -33,7 +33,7 @@ class HomeView extends StatelessWidget {
                           vertical: 16,
                         ),
                         decoration: BoxDecoration(
-                          color: Colors.white.withOpacity(0.03),
+                          color: Colors.white.withValues(alpha: 0.03),
                           borderRadius: BorderRadius.circular(30),
                         ),
                         child: Row(
@@ -66,14 +66,14 @@ class HomeView extends StatelessWidget {
                               children: [
                                 Text(
                                   context.tr('welcome', args: {}),
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     color: Colors.white,
                                     fontSize: 14,
                                     fontFamily: 'Urbanist',
                                     fontWeight: FontWeight.w600,
                                   ),
                                 ),
-                                Text(
+                                const Text(
                                   'Fatih Narin',
                                   style: TextStyle(
                                     color: Colors.white,

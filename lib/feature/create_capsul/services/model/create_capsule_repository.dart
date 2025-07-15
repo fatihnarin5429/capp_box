@@ -1,11 +1,12 @@
-import 'package:capp_box/feature/create_capsul/model/create_capsule_model.dart';
+import 'package:capp_box/feature/create_capsul/model/create_capsule_response_model.dart';
 
 abstract class ICreateCapsulesRepository {
-  Future<CreateCapsuleModel> createCapsule({
+  Future<CreateCapsuleResponseModel> createCapsule({
     required String title,
     required String message,
-    required String email,
-    required String phone,
-    required String price,
+    required String recipientEmail,
+    required String recipientPhone,
+    required String openDate,
+    required int price,
   });
 }

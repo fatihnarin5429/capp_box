@@ -206,12 +206,15 @@ class _TimeCapsuleHistoryViewState extends State<TimeCapsuleHistoryView> {
     if (combinedDateTime != null) {
       context.read<CreateCapsuleBloc>().add(
         CreateCapsuleAction(
-          createCapsuleModel: context
+          context
               .read<CreateCapsuleBloc>()
               .state
-              .createCapsuleModel
+              .createCapsuleResponseModel
               .copyWith(
-                openedDate: combinedDateTime.millisecondsSinceEpoch.toString(),
+                openDate: combinedDateTime.millisecondsSinceEpoch.toString(),
+                recipientEmail: widget.email ?? '',
+                recipientPhone: '',
+                price: 0,
               ),
         ),
       );
