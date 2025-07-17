@@ -1,137 +1,107 @@
 // create_capsule_bloc.dart
+
 import 'package:bloc/bloc.dart';
+import 'package:bot_toast/bot_toast.dart';
+import 'package:capp_box/feature/create_capsul/model/create_capsule_body_model.dart';
 import 'package:capp_box/feature/create_capsul/model/create_capsule_response_model.dart';
-import 'package:equatable/equatable.dart';
 import 'package:capp_box/feature/create_capsul/services/model/create_capsule_datasources.dart';
 import 'package:capp_box/feature/create_capsul/services/model/create_capsules_usecases.dart';
+import 'package:capp_box/feature/login/services/login&register_datasources.dart';
+import 'package:capp_box/feature/login/services/login&register_usecases.dart';
+import 'package:capp_box/feature/login/services/model/user_model.dart';
+import 'package:capp_box/product/database/hive/core/hive_database_manager.dart';
+import 'package:capp_box/product/utility/enums/mediaType_enum.dart';
+import 'package:capp_box/product/utility/enums/status_enum.dart';
+import 'package:equatable/equatable.dart';
 
 part 'create_capsule_event.dart';
 part 'create_capsule_state.dart';
 
 class CreateCapsuleBloc extends Bloc<CreateCapsuleEvent, CreateCapsuleState> {
   final CreateCapsulesRemoteDatasource createCapsuleRemoteDatasource;
-  late final CreateCapsulesUsecase createCapsuleUsecase;
+  late final CreateCapsulesUsecase createCapsulesUsecase;
 
   CreateCapsuleBloc()
     : createCapsuleRemoteDatasource = CreateCapsulesRemoteDatasource(),
-      super(
-        CreateCapsuleState(
-          CreateCapsuleResponseModel(
-            recipientPhone: '',
-            recipientEmail: '',
-            openDate: '',
-            price: 0,
-            success: false,
-            message: '',
-            data: CapsuleData(
-              capsule: Capsule(
-                title: '',
-                message: '',
-                sender: '',
-                recipientEmail: '',
-                recipientPhone: '',
-                recipientUser: '',
-                isClaimed: false,
-                openDate: DateTime.now(),
-                isOpened: false,
-                price: 0,
-                paymentStatus: '',
-                notificationSentToUnregistered: false,
-                notificationSentToRegistered: false,
-                id: '',
-                media: [],
-                createdAt: DateTime.now(),
-                v: 0,
-              ),
-              paymentId: '',
-            ),
-          ),
-        ),
-      ) {
-    createCapsuleUsecase = CreateCapsulesUsecase(createCapsuleRemoteDatasource);
-    on<CreateCapsuleAction>(_onCreateCapsuleAction);
-    on<AddCreatedCapsules>(_onAddCreatedCapsules);
-    on<ResetCreateCapsuleResponseModel>(_onResetCreateCapsuleResponseModel);
+      super(const CreateCapsuleState()) {
+    createCapsulesUsecase = CreateCapsulesUsecase(
+      createCapsuleRemoteDatasource,
+    );
+    on<CreateCapsuleBodyAction>(onCreateCapsuleBodyAction);
+    // on<CreateCapsuleResponseAction>(onCreateCapsuleResponseAction);
+    on<CreateCapsuleMediaTypeAction>(onCreateCapsuleMediaTypeAction);
+    on<CreateCapsuleSubmitAction>(onCreateCapsuleSubmitAction);
   }
 
-  Future<void> _onCreateCapsuleAction(
-    CreateCapsuleAction event,
+  HiveDatabaseManager hiveDatabaseManager = HiveDatabaseManager();
+
+  Future<void> onCreateCapsuleBodyAction(
+    CreateCapsuleBodyAction event,
     Emitter<CreateCapsuleState> emit,
   ) async {
+    emit(
+      state.copyWith(
+        status: StatusEnum.loading,
+        createCapsuleBodyModel: event.createCapsuleBodyModel,
+      ),
+    );
+    print(state.createCapsuleBodyModel?.toJson());
+  }
+
+  // Future<void> onCreateCapsuleResponseAction(
+  //   CreateCapsuleResponseAction event,
+  //   Emitter<CreateCapsuleState> emit,
+  // ) async {
+  //   final response = await createCapsulesUsecase.createCapsule(
+  //     createCapsuleBodyModel: state.createCapsuleBodyModel,
+  //   );
+  //   print(response.toJson());
+  //   if (response.data != null) {
+  //     emit(state.copyWith(status: StatusEnum.success));
+  //   } else {
+  //     emit(state.copyWith(status: StatusEnum.error));
+  //   }
+  //   emit(
+  //     state.copyWith(
+  //       status: StatusEnum.loading,
+  //       createCapsuleResponseModel: event.createCapsuleResponseModel,
+  //     ),
+  //   );
+  // }
+
+  Future<void> onCreateCapsuleSubmitAction(
+    CreateCapsuleSubmitAction event,
+    Emitter<CreateCapsuleState> emit,
+  ) async {
+    final userModel = hiveDatabaseManager.getUserModel();
+    emit(state.copyWith(status: StatusEnum.loading));
     try {
-      emit(
-        state.copyWith(
-          createCapsuleResponseModel: event.createCapsuleResponseModel,
-        ),
+      final response = await createCapsulesUsecase.createCapsule(
+        createCapsuleBodyModel: state.createCapsuleBodyModel,
+        token: userModel?.token ?? '',
       );
-      // Usecase ile kapsül oluştur
-      final _ = await createCapsuleUsecase.createCapsule(
-        title: event.createCapsuleResponseModel.data.capsule.title,
-        message: event.createCapsuleResponseModel.message,
-        recipientEmail: event.createCapsuleResponseModel.recipientEmail,
-        recipientPhone: event.createCapsuleResponseModel.recipientPhone,
-        openDate: event.createCapsuleResponseModel.openDate,
-        price: event.createCapsuleResponseModel.price,
-      );
-      // Sonuç kullanılmıyor, istersen burada emit ile state güncelleyebilirsin.
+
+      if (response != null) {
+        emit(
+          state.copyWith(
+            status: StatusEnum.success,
+            createCapsuleResponseModel: response,
+          ),
+        );
+      } else {
+        emit(state.copyWith(status: StatusEnum.error));
+        BotToast.showText(text: 'Kapsül oluşturulamadı.');
+      }
     } catch (e) {
-      // log(e.toString()); // log kullanılmıyor, print de önerilmez, hata yönetimi eklenebilir.
+      emit(state.copyWith(status: StatusEnum.error));
+      BotToast.showText(text: 'Kapsül oluştururken hata: $e');
     }
   }
 
-  Future<void> _onAddCreatedCapsules(
-    AddCreatedCapsules event,
+  Future<void> onCreateCapsuleMediaTypeAction(
+    CreateCapsuleMediaTypeAction event,
     Emitter<CreateCapsuleState> emit,
   ) async {
-    List<CreateCapsuleResponseModel> updatedCapsules = [
-      ...state.myCreatedCapsules,
-      event.createCapsuleResponseModel,
-    ];
-    emit(
-      state.copyWith(
-        myCreatedCapsules: updatedCapsules,
-        filteredCapsules: updatedCapsules, // Also update filtered capsules
-      ),
-    );
-  }
-
-  void _onResetCreateCapsuleResponseModel(
-    ResetCreateCapsuleResponseModel event,
-    Emitter<CreateCapsuleState> emit,
-  ) {
-    emit(
-      state.copyWith(
-        createCapsuleResponseModel: CreateCapsuleResponseModel(
-          data: CapsuleData(
-            capsule: Capsule(
-              sender: '',
-              title: '',
-              message: '',
-              recipientEmail: '',
-              recipientPhone: '',
-              recipientUser: '',
-              isClaimed: false,
-              openDate: DateTime.now(),
-              isOpened: false,
-              price: 0,
-              paymentStatus: '',
-              notificationSentToUnregistered: false,
-              notificationSentToRegistered: false,
-              id: '',
-              media: [],
-              createdAt: DateTime.now(),
-              v: 0,
-            ),
-            paymentId: '',
-          ),
-          message: '',
-          success: false,
-          recipientPhone: '',
-          recipientEmail: '',
-          openDate: '',
-          price: 0,
-        ),
-      ),
-    );
+    emit(state.copyWith(mediaType: event.mediaType));
   }
 }

@@ -2,6 +2,7 @@ import 'package:capp_box/core/extensions/localization_extension.dart';
 import 'package:capp_box/feature/home/view/home_view_2.dart';
 import 'package:capp_box/feature/login/bloc/login_bloc.dart';
 import 'package:capp_box/feature/package/widgets/custom_text_field.dart';
+import 'package:capp_box/product/utility/enums/status_enum.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -102,63 +103,70 @@ class RegisterFormView extends StatelessWidget {
   }
 
   Widget _buildRegisterButton(BuildContext context) {
-    return InkWell(
-      onTap: () {
-        if (emailController.text.isEmpty ||
-            passwordController.text.isEmpty ||
-            passwordConfirmController.text.isEmpty) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text(context.tr('fill_all_fields', args: {}))),
-          );
-          return;
-        }
-        if (passwordController.text != passwordConfirmController.text) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text(context.tr('passwords_not_matching', args: {})),
+    return BlocBuilder<LoginBloc, LoginState>(
+      builder: (context, state) {
+        return InkWell(
+          onTap: () async {
+            if (emailController.text.isEmpty ||
+                passwordController.text.isEmpty ||
+                passwordConfirmController.text.isEmpty) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text(context.tr('fill_all_fields', args: {})),
+                ),
+              );
+              return;
+            }
+            if (passwordController.text != passwordConfirmController.text) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text(context.tr('passwords_not_matching', args: {})),
+                ),
+              );
+              return;
+            }
+            context.read<LoginBloc>().add(
+              RegisterAction(
+                name: nameController.text,
+                email: emailController.text,
+                phone: '5426165975',
+                password: passwordController.text,
+              ),
+            );
+            if (state.status == StatusEnum.success) {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const HomeView2()),
+              );
+            }
+          },
+          child: Container(
+            width: double.infinity,
+            height: 56,
+            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+            decoration: BoxDecoration(
+              gradient: const LinearGradient(
+                begin: Alignment.centerRight,
+                end: Alignment.centerLeft,
+                colors: [Color(0xFFB224EF), Color(0xFF7579FF)],
+              ),
+              borderRadius: BorderRadius.circular(100),
             ),
-          );
-          return;
-        }
-        context.read<LoginBloc>().add(
-          RegisterAction(
-            name: nameController.text,
-            email: emailController.text,
-            phone: '5426165975',
-            password: passwordController.text,
+            child: Center(
+              child: Text(
+                context.tr('register_button', args: {}),
+                style: const TextStyle(
+                  color: Color(0xFFE5E5E5),
+                  fontSize: 14,
+                  fontFamily: 'Urbanist',
+                  fontWeight: FontWeight.w700,
+                  height: 1.70,
+                ),
+              ),
+            ),
           ),
         );
-        // Navigator.push(
-        //   context,
-        //   MaterialPageRoute(builder: (context) => const HomeView2()),
-        // );
-        onRegisterSuccess();
       },
-      child: Container(
-        width: double.infinity,
-        height: 56,
-        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
-        decoration: BoxDecoration(
-          gradient: const LinearGradient(
-            begin: Alignment.centerRight,
-            end: Alignment.centerLeft,
-            colors: [Color(0xFFB224EF), Color(0xFF7579FF)],
-          ),
-          borderRadius: BorderRadius.circular(100),
-        ),
-        child: Center(
-          child: Text(
-            context.tr('register_button', args: {}),
-            style: const TextStyle(
-              color: Color(0xFFE5E5E5),
-              fontSize: 14,
-              fontFamily: 'Urbanist',
-              fontWeight: FontWeight.w700,
-              height: 1.70,
-            ),
-          ),
-        ),
-      ),
     );
   }
 }

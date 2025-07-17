@@ -1,32 +1,37 @@
 part of 'create_capsule_bloc.dart';
 
 final class CreateCapsuleState extends Equatable {
-  final CreateCapsuleResponseModel createCapsuleResponseModel;
-  final List<CreateCapsuleResponseModel> myCreatedCapsules;
-  final List<CreateCapsuleResponseModel> filteredCapsules;
+  final StatusEnum status;
+  final CreateCapsuleBodyModel createCapsuleBodyModel;
+  final CreateCapsuleResponseModel? createCapsuleResponseModel;
+  final MediaType? mediaType;
 
-  const CreateCapsuleState(
-    this.createCapsuleResponseModel, {
-    this.myCreatedCapsules = const [],
-    this.filteredCapsules = const [],
+  const CreateCapsuleState({
+    this.status = StatusEnum.loading,
+    this.createCapsuleBodyModel = const CreateCapsuleBodyModel(),
+    this.createCapsuleResponseModel,
+    this.mediaType,
   });
 
   CreateCapsuleState copyWith({
+    StatusEnum? status,
+    CreateCapsuleBodyModel? createCapsuleBodyModel,
     CreateCapsuleResponseModel? createCapsuleResponseModel,
-    List<CreateCapsuleResponseModel>? myCreatedCapsules,
-    List<CreateCapsuleResponseModel>? filteredCapsules,
+    MediaType? mediaType,
   }) {
     return CreateCapsuleState(
-      createCapsuleResponseModel ?? this.createCapsuleResponseModel,
-      myCreatedCapsules: myCreatedCapsules ?? this.myCreatedCapsules,
-      filteredCapsules: filteredCapsules ?? this.filteredCapsules,
+      status: status ?? this.status,
+      createCapsuleBodyModel: createCapsuleBodyModel ?? this.createCapsuleBodyModel,
+      createCapsuleResponseModel: createCapsuleResponseModel ?? this.createCapsuleResponseModel,
+      mediaType: mediaType ?? this.mediaType,
     );
   }
 
   @override
   List<Object?> get props => [
+    status,
+    createCapsuleBodyModel,
     createCapsuleResponseModel,
-    myCreatedCapsules,
-    filteredCapsules,
+    mediaType,
   ];
 }

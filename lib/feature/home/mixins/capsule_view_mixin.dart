@@ -32,165 +32,165 @@ mixin CapsuleViewMixin<T extends StatefulWidget> on State<T> {
     super.dispose();
   }
 
-  void showCapsulePopup(
-    BuildContext context, {
-    required CreateCapsuleResponseModel capsule,
-  }) {
-    final isReadyToOpen =
-        capsule.data.capsule.openDate != null &&
-        int.parse(capsule.data.capsule.openDate.toString()) <=
-            DateTime.now().millisecondsSinceEpoch;
+  // void showCapsulePopup(
+  //   BuildContext context, {
+  //   required CreateCapsuleResponseModel capsule,
+  // }) {
+  //   final isReadyToOpen =
+  //       capsule.openDate != null &&
+  //       int.parse(capsule.openDate.toString()) <=
+  //           DateTime.now().millisecondsSinceEpoch;
 
-    final openDate =
-        capsule.data.capsule.openDate != null
-            ? DateTime.fromMillisecondsSinceEpoch(
-              int.parse(capsule.data.capsule.openDate.toString()),
-            )
-            : null;
+  //   final openDate =
+  //       capsule.data.capsule.openDate != null
+  //           ? DateTime.fromMillisecondsSinceEpoch(
+  //             int.parse(capsule.data.capsule.openDate.toString()),
+  //           )
+  //           : null;
 
-    // Popup için timer değerini başlat
-    if (openDate != null && !isReadyToOpen) {
-      _currentTimerValue = calculateTimeRemaining(openDate);
-      _startPopupTimer(openDate);
-    }
+  //   // Popup için timer değerini başlat
+  //   if (openDate != null && !isReadyToOpen) {
+  //     _currentTimerValue = calculateTimeRemaining(openDate);
+  //     _startPopupTimer(openDate);
+  //   }
 
-    showDialog(
-      context: context,
-      builder:
-          (context) => Dialog(
-            backgroundColor: const Color(0xFF10101C),
-            insetPadding: EdgeInsets.zero,
-            child: Container(
-              padding: const EdgeInsets.all(24),
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                  colors: [
-                    const Color(0xFF10101C),
-                    const Color(0xFF262742).withValues(alpha: 0.1),
-                  ],
-                ),
-                borderRadius: BorderRadius.circular(30),
-              ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      Image.asset(
-                        isReadyToOpen
-                            ? 'assets/icons/kapsul_without_bg.png'
-                            : 'assets/images/kilitkapsul.png',
-                        width: MediaQuery.of(context).size.width * 0.9,
-                        height: MediaQuery.of(context).size.height * 0.4,
-                        fit: BoxFit.contain,
-                      ),
-                      if (!isReadyToOpen && openDate != null)
-                        Padding(
-                          padding: const EdgeInsets.only(bottom: 10, right: 8),
-                          child: Align(
-                            alignment: Alignment.center,
-                            child: StatefulBuilder(
-                              builder: (context, setInnerState) {
-                                _popupTimer?.cancel();
-                                _popupTimer = Timer.periodic(
-                                  const Duration(seconds: 1),
-                                  (timer) {
-                                    final newValue = calculateTimeRemaining(
-                                      openDate,
-                                    );
-                                    if (newValue != _currentTimerValue) {
-                                      setInnerState(() {
-                                        _currentTimerValue = newValue;
-                                      });
-                                    }
-                                  },
-                                );
+  //   showDialog(
+  //     context: context,
+  //     builder:
+  //         (context) => Dialog(
+  //           backgroundColor: const Color(0xFF10101C),
+  //           insetPadding: EdgeInsets.zero,
+  //           child: Container(
+  //             padding: const EdgeInsets.all(24),
+  //             decoration: BoxDecoration(
+  //               gradient: LinearGradient(
+  //                 begin: Alignment.topLeft,
+  //                 end: Alignment.bottomRight,
+  //                 colors: [
+  //                   const Color(0xFF10101C),
+  //                   const Color(0xFF262742).withValues(alpha: 0.1),
+  //                 ],
+  //               ),
+  //               borderRadius: BorderRadius.circular(30),
+  //             ),
+  //             child: Column(
+  //               mainAxisAlignment: MainAxisAlignment.center,
+  //               children: [
+  //                 Stack(
+  //                   alignment: Alignment.center,
+  //                   children: [
+  //                     Image.asset(
+  //                       isReadyToOpen
+  //                           ? 'assets/icons/kapsul_without_bg.png'
+  //                           : 'assets/images/kilitkapsul.png',
+  //                       width: MediaQuery.of(context).size.width * 0.9,
+  //                       height: MediaQuery.of(context).size.height * 0.4,
+  //                       fit: BoxFit.contain,
+  //                     ),
+  //                     if (!isReadyToOpen && openDate != null)
+  //                       Padding(
+  //                         padding: const EdgeInsets.only(bottom: 10, right: 8),
+  //                         child: Align(
+  //                           alignment: Alignment.center,
+  //                           child: StatefulBuilder(
+  //                             builder: (context, setInnerState) {
+  //                               _popupTimer?.cancel();
+  //                               _popupTimer = Timer.periodic(
+  //                                 const Duration(seconds: 1),
+  //                                 (timer) {
+  //                                   final newValue = calculateTimeRemaining(
+  //                                     openDate,
+  //                                   );
+  //                                   if (newValue != _currentTimerValue) {
+  //                                     setInnerState(() {
+  //                                       _currentTimerValue = newValue;
+  //                                     });
+  //                                   }
+  //                                 },
+  //                               );
 
-                                return Text(
-                                  _currentTimerValue,
-                                  style: const TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 17,
-                                    fontFamily: 'Urbanist',
-                                    fontWeight: FontWeight.w700,
-                                  ),
-                                );
-                              },
-                            ),
-                          ),
-                        ),
-                    ],
-                  ),
-                  const SizedBox(height: 24),
-                  Text(
-                    isReadyToOpen
-                        ? 'Tebrikler! Kapsülünüz açılmaya hazır'
-                        : 'Kapsülünüzün açılma\ntarihi henüz gelmedi.',
-                    textAlign: TextAlign.center,
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 24,
-                      fontFamily: 'Urbanist',
-                      fontWeight: FontWeight.w700,
-                    ),
-                  ),
-                  const SizedBox(height: 16),
-                  Text(
-                    isReadyToOpen
-                        ? 'Hadi hemen ne gönderilmiş kontrol edelim!'
-                        : openDate != null
-                        ? '${openDate.day.toString().padLeft(2, '0')}.${openDate.month.toString().padLeft(2, '0')}.${openDate.year} tarihinde kapsülü\naçabilirsiniz.'
-                        : 'Kapsülün açılma tarihi belirlenmemiş.',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color: Colors.white.withValues(alpha: 0.7),
-                      fontSize: 16,
-                      fontFamily: 'Urbanist',
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                  const SizedBox(height: 24),
-                  InkWell(
-                    onTap: () {
-                      _popupTimer?.cancel();
-                      Navigator.pop(context);
-                    },
-                    child: Container(
-                      width: MediaQuery.of(context).size.width * 0.8,
-                      height: 50,
-                      decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                          begin: const Alignment(1.00, 0.00),
-                          end: const Alignment(-1, 0),
-                          colors: [
-                            const Color(0xFFB224EF),
-                            const Color(0xFF7579FF).withValues(alpha: 0.8),
-                          ],
-                        ),
-                        borderRadius: BorderRadius.circular(50),
-                      ),
-                      child: const Center(
-                        child: Text(
-                          'Kapat',
-                          style: TextStyle(
-                            color: Color(0xFFE5E5E5),
-                            fontSize: 16,
-                            fontFamily: 'Urbanist',
-                            fontWeight: FontWeight.w700,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-    );
-  }
+  //                               return Text(
+  //                                 _currentTimerValue,
+  //                                 style: const TextStyle(
+  //                                   color: Colors.white,
+  //                                   fontSize: 17,
+  //                                   fontFamily: 'Urbanist',
+  //                                   fontWeight: FontWeight.w700,
+  //                                 ),
+  //                               );
+  //                             },
+  //                           ),
+  //                         ),
+  //                       ),
+  //                   ],
+  //                 ),
+  //                 const SizedBox(height: 24),
+  //                 Text(
+  //                   isReadyToOpen
+  //                       ? 'Tebrikler! Kapsülünüz açılmaya hazır'
+  //                       : 'Kapsülünüzün açılma\ntarihi henüz gelmedi.',
+  //                   textAlign: TextAlign.center,
+  //                   style: const TextStyle(
+  //                     color: Colors.white,
+  //                     fontSize: 24,
+  //                     fontFamily: 'Urbanist',
+  //                     fontWeight: FontWeight.w700,
+  //                   ),
+  //                 ),
+  //                 const SizedBox(height: 16),
+  //                 Text(
+  //                   isReadyToOpen
+  //                       ? 'Hadi hemen ne gönderilmiş kontrol edelim!'
+  //                       : openDate != null
+  //                       ? '${openDate.day.toString().padLeft(2, '0')}.${openDate.month.toString().padLeft(2, '0')}.${openDate.year} tarihinde kapsülü\naçabilirsiniz.'
+  //                       : 'Kapsülün açılma tarihi belirlenmemiş.',
+  //                   textAlign: TextAlign.center,
+  //                   style: TextStyle(
+  //                     color: Colors.white.withValues(alpha: 0.7),
+  //                     fontSize: 16,
+  //                     fontFamily: 'Urbanist',
+  //                     fontWeight: FontWeight.w500,
+  //                   ),
+  //                 ),
+  //                 const SizedBox(height: 24),
+  //                 InkWell(
+  //                   onTap: () {
+  //                     _popupTimer?.cancel();
+  //                     Navigator.pop(context);
+  //                   },
+  //                   child: Container(
+  //                     width: MediaQuery.of(context).size.width * 0.8,
+  //                     height: 50,
+  //                     decoration: BoxDecoration(
+  //                       gradient: LinearGradient(
+  //                         begin: const Alignment(1.00, 0.00),
+  //                         end: const Alignment(-1, 0),
+  //                         colors: [
+  //                           const Color(0xFFB224EF),
+  //                           const Color(0xFF7579FF).withValues(alpha: 0.8),
+  //                         ],
+  //                       ),
+  //                       borderRadius: BorderRadius.circular(50),
+  //                     ),
+  //                     child: const Center(
+  //                       child: Text(
+  //                         'Kapat',
+  //                         style: TextStyle(
+  //                           color: Color(0xFFE5E5E5),
+  //                           fontSize: 16,
+  //                           fontFamily: 'Urbanist',
+  //                           fontWeight: FontWeight.w700,
+  //                         ),
+  //                       ),
+  //                     ),
+  //                   ),
+  //                 ),
+  //               ],
+  //             ),
+  //           ),
+  //         ),
+  //   );
+  // }
 
   void _startPopupTimer(DateTime openDate) {
     _popupTimer?.cancel();

@@ -1,5 +1,6 @@
 import 'package:capp_box/core/extensions/localization_extension.dart';
 import 'package:capp_box/feature/create_capsul/bloc/create_capsule_bloc.dart';
+import 'package:capp_box/feature/create_capsul/model/create_capsule_response_model.dart';
 import 'package:capp_box/feature/home/mixins/capsule_view_mixin.dart';
 import 'package:capp_box/feature/home/widgets/capsule_list_widget.dart';
 import 'package:capp_box/feature/package/widgets/capsule_widgets.dart';
@@ -74,7 +75,7 @@ class _CapsuleViewState extends State<CapsuleView> with CapsuleViewMixin {
                             (index) => setState(() => currentPage = index),
                         state: state,
                         controller: controller,
-                        onCapsuleTap: showCapsulePopup,
+                        onCapsuleTap: () {}
                       ),
                     ],
                   ),

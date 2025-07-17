@@ -1,10 +1,12 @@
 // create_capsule_bloc.dart
 
 import 'package:bloc/bloc.dart';
+import 'package:bot_toast/bot_toast.dart';
 import 'package:capp_box/feature/login/services/login&register_datasources.dart';
 import 'package:capp_box/feature/login/services/login&register_usecases.dart';
 import 'package:capp_box/feature/login/services/model/user_model.dart';
 import 'package:capp_box/product/database/hive/core/hive_database_manager.dart';
+import 'package:capp_box/product/utility/enums/status_enum.dart';
 import 'package:equatable/equatable.dart';
 
 part 'login_event.dart';
@@ -45,8 +47,10 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     emit(state.copyWith(phone: event.phone));
   }
 
-  void _onRegisterAction(RegisterAction event, Emitter<LoginState> emit) async {
-    print('buraya girdi');
+  Future<void> _onRegisterAction(
+    RegisterAction event,
+    Emitter<LoginState> emit,
+  ) async {
     try {
       final response = await loginRegisterUsecase.register(
         name: event.name,
@@ -54,25 +58,20 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         phone: event.phone,
         password: event.password,
       );
-      print('value: $response');
-      print('response.success: ${response.success}');
-      print('response.token: ${response.token}');
-      
+
       if (response.success == true && response.token.isNotEmpty) {
         await hiveDatabaseManager.saveUserModel(
-          UserModel(name: event.name, token: response.token),
+          UserModel(name: event.name, token: 'Bearer ${response.token}'),
         );
-        print('user model saved');
-        print('user model: ${hiveDatabaseManager.getUserModel()}');
         await hiveDatabaseManager.setFirst();
-        emit(state.copyWith(isAuthenticated: true));
+        emit(state.copyWith(isAuthenticated: true, status: StatusEnum.success));
       } else {
-        print('register failed - success: ${response.success}, token: ${response.token}');
-        emit(state.copyWith(isAuthenticated: false));
+        emit(state.copyWith(isAuthenticated: false, status: StatusEnum.error));
+        BotToast.showText(text: 'Kayıt başarısız');
       }
     } catch (e) {
-      print('register error: $e');
-      emit(state.copyWith(isAuthenticated: false));
+      emit(state.copyWith(isAuthenticated: false, status: StatusEnum.error));
+      BotToast.showText(text: 'Kayıt başarısız');
     }
   }
 }

@@ -3,7 +3,6 @@
 import 'package:capp_box/core/extensions/localization_extension.dart';
 import 'package:capp_box/feature/create_capsul/view/capsule_buy_view.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import '../bloc/create_capsule_bloc.dart';
 import '../widgets/back_button_widget.dart';
 import '../widgets/page_title.dart';
@@ -74,7 +73,7 @@ mixin CapsuleReviewMixin<T extends StatefulWidget> on State<T> {
     bool sendSMS,
   ) {
     return InkWell(
-      onTap: () => _handleCreateCapsuleAction(state, shareInfo, sendSMS),
+      onTap: () {},
       child: Text(
         context.tr('save_draft'),
         style: const TextStyle(
@@ -95,7 +94,6 @@ mixin CapsuleReviewMixin<T extends StatefulWidget> on State<T> {
   ) {
     return GestureDetector(
       onTap: () {
-        _handleCreateCapsuleAction(state, shareInfo, sendSMS);
         CapsuleSuccessDialog.show(context);
 
         // CapsuleSuccessDialog gösterildikten sonra CapsuleView'a yönlendirilecek
@@ -134,28 +132,4 @@ mixin CapsuleReviewMixin<T extends StatefulWidget> on State<T> {
     );
   }
 
-  /// Handles the action of creating or updating a capsule
-  void _handleCreateCapsuleAction(
-    CreateCapsuleState state,
-    bool shareInfo,
-    bool sendSMS,
-  ) {
-    context.read<CreateCapsuleBloc>().add(
-      CreateCapsuleAction(
-        context
-            .read<CreateCapsuleBloc>()
-            .state
-            .createCapsuleResponseModel
-            .copyWith(
-              openDate: DateTime.now().millisecondsSinceEpoch.toString(),
-              data:
-                  context
-                      .read<CreateCapsuleBloc>()
-                      .state
-                      .createCapsuleResponseModel
-                      .data,
-            ),
-      ),
-    );
-  }
 }

@@ -134,14 +134,6 @@ class HomeView extends StatelessWidget {
                             );
                           },
                           child: ContinueButton(
-                            displayNameController: TextEditingController(),
-                            mailController: TextEditingController(),
-                            phoneController: TextEditingController(),
-                            videoFile: null,
-                            photoFile: null,
-                            audioFile: null,
-                            type: null,
-                            secilenTip: null,
                             onPressed: () {
                               Navigator.push(
                                 context,

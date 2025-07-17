@@ -205,31 +205,18 @@ class _TimeCapsuleHistoryViewState extends State<TimeCapsuleHistoryView> {
     final combinedDateTime = dateTimeSelection.combinedDateTime;
     if (combinedDateTime != null) {
       context.read<CreateCapsuleBloc>().add(
-        CreateCapsuleAction(
-          context
-              .read<CreateCapsuleBloc>()
-              .state
-              .createCapsuleResponseModel
-              .copyWith(
-                openDate: combinedDateTime.millisecondsSinceEpoch.toString(),
-                recipientEmail: widget.email ?? '',
-                recipientPhone: '',
-                price: 0,
-              ),
+        CreateCapsuleBodyAction(
+          context.read<CreateCapsuleBloc>().state.createCapsuleBodyModel!.copyWith(
+            openDate: combinedDateTime.millisecondsSinceEpoch.toString(),
+          ),
         ),
       );
-
       Navigator.push(
         context,
         MaterialPageRoute(
           builder:
               (context) => CapsuleReview(
                 currentStep: widget.currentStep,
-                videoFile: widget.videoFile,
-                photoFile: widget.photoFile,
-                audioFile: widget.audioFile,
-                type: widget.type,
-                selectedFileName: widget.selectedFileName,
               ),
         ),
       );

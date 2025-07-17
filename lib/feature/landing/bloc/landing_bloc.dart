@@ -36,7 +36,7 @@ class LandingBloc extends Bloc<LandingEvent, LandingState> {
       print('user: $user');
 
       if (user != null && user.token?.isNotEmpty == true) {
-        emit(state.copyWith(userChecked: true, navigationPath: '/phone_login_view'));
+        emit(state.copyWith(userChecked: true, navigationPath: '/login'));
       } else {
         emit(state.copyWith(userChecked: true, navigationPath: '/login'));
       }
