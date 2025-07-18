@@ -7,19 +7,11 @@ import 'package:capp_box/product/utility/enums/mediaType_enum.dart';
 import '../widgets/review_container.dart';
 
 class MediaPreview extends StatefulWidget {
-  final MediaType type;
-  final File? photoFile;
-  final File? audioFile;
-  final File? videoFile;
-  final String? selectedFileName;
+  final CreateCapsuleState state;
 
   const MediaPreview({
     Key? key,
-    required this.type,
-    this.photoFile,
-    this.audioFile,
-    this.videoFile,
-    this.selectedFileName,
+    required this.state,
   }) : super(key: key);
 
   @override
@@ -37,8 +29,8 @@ class _MediaPreviewState extends State<MediaPreview> {
   }
 
   Future<void> _initializeVideoPlayer() async {
-    if (widget.videoFile != null) {
-      _videoPlayerController = VideoPlayerController.file(widget.videoFile!)
+    if (widget.state.mediaType == MediaType.video) {
+      _videoPlayerController = VideoPlayerController.file(widget.state.createCapsuleBodyModel?.mediaFiles ?? File(''))
         ..initialize().then((_) {
           setState(() {});
         });
@@ -55,10 +47,10 @@ class _MediaPreviewState extends State<MediaPreview> {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.symmetric(
-        vertical: widget.type == MediaType.text ? 8 : 24,
+        vertical: widget.state.mediaType == MediaType.text ? 8 : 24,
       ),
       child:
-          widget.type != MediaType.text
+          widget.state.mediaType != MediaType.text
               ? ReviewContainer(
                 width: 340,
                 padding: 0,
@@ -74,25 +66,23 @@ class _MediaPreviewState extends State<MediaPreview> {
                         ),
                       ),
                       child:
-                          widget.type == MediaType.photo &&
-                                  widget.photoFile != null
+                          widget.state.mediaType == MediaType.photo &&
+                                  widget.state.createCapsuleBodyModel?.mediaFiles != null
                               ? ClipRRect(
                                 borderRadius: BorderRadius.circular(16),
                                 child: Image.file(
-                                  widget.photoFile!,
+                                  widget.state.createCapsuleBodyModel!.mediaFiles!,
                                   width: double.infinity,
                                   height: 250,
                                   fit: BoxFit.cover,
                                 ),
                               )
-                              : widget.type != MediaType.text &&
+                              : widget.state.mediaType != MediaType.text &&
                                   context
                                           .read<CreateCapsuleBloc>()
                                           .state
-                                          .createCapsuleResponseModel
-                                          .data
-                                          .capsule
-                                          .mediaType ==
+                                          .createCapsuleBodyModel
+                                          ?.mediaFiles ==
                                       MediaType.voice
                               ? _buildAudioPreview()
                               : _videoPlayerController != null &&

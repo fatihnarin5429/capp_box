@@ -87,36 +87,27 @@ class _CapsuleBuyViewState extends State<CapsuleBuyView>
                                 vertical: 32.0,
                               ),
                               child: ContinueButton(
-                                displayNameController: TextEditingController(),
-                                mailController: TextEditingController(),
-                                phoneController: TextEditingController(),
-                                videoFile: null,
-                                photoFile: null,
-                                audioFile: null,
-                                type: null,
-                                selectedFileName: null,
-                                secilenTip: null,
-                                onPressed: () {
-                                  // Hiçbir doğrulama yapmadan devam et
+                                onPressed: () async {
+                                  final updatedBody = state
+                                      .createCapsuleBodyModel
+                                      .copyWith(paymentMethod: 'credit_card');
                                   context.read<CreateCapsuleBloc>().add(
-                                    AddCreatedCapsules(
-                                      state.createCapsuleResponseModel,
-                                    ),
-                                  );
-                                  context.read<CreateCapsuleBloc>().add(
-                                    ResetCreateCapsuleResponseModel(),
+                                    CreateCapsuleBodyAction(updatedBody),
                                   );
 
-                                  // Direkt olarak HomePage'e git
-                                  Navigator.pushAndRemoveUntil(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder:
-                                          (context) =>
-                                              const HomePage(initialIndex: 0),
-                                    ),
-                                    (route) => false,
+                                  // 2) API çağrısını tetikle
+                                  context.read<CreateCapsuleBloc>().add(
+                                    const CreateCapsuleSubmitAction(),
                                   );
+                                  // Navigator.pushAndRemoveUntil(234
+                                  //   context,
+                                  //   MaterialPageRoute(
+                                  //     builder:
+                                  //         (context) =>
+                                  //             const HomePage(initialIndex: 0),
+                                  //   ),
+                                  //   (route) => false,
+                                  // );
                                 },
                               ),
                             ),

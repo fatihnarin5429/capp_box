@@ -1,9 +1,14 @@
+import 'package:capp_box/feature/home/view/home_view_2.dart';
+import 'package:capp_box/feature/login/bloc/login_bloc.dart';
 import 'package:capp_box/feature/login/view/login_form_view.dart';
 import 'package:capp_box/feature/login/view/register_form_view.dart';
 import 'package:capp_box/feature/create_capsul/widgets/back_button_widget.dart';
+import 'package:capp_box/product/database/hive/core/hive_database_manager.dart';
+import 'package:capp_box/product/utility/enums/status_enum.dart';
 
 import 'package:capp_box/product/widgets/background_gradient.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({super.key});
@@ -19,6 +24,7 @@ class _LoginViewState extends State<LoginView> with TickerProviderStateMixin {
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _passwordConfirmController =
       TextEditingController();
+  final HiveDatabaseManager hiveDatabaseManager = HiveDatabaseManager();
 
   @override
   void initState() {
@@ -38,49 +44,65 @@ class _LoginViewState extends State<LoginView> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: GestureDetector(
-        onTap: () {
-          FocusScope.of(context).unfocus();
-        },
-        child: Stack(
-          children: [
-            const BackgroundGradient(),
-            SafeArea(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                    child: Column(
-                      children: [
-                        const Padding(
-                          padding: EdgeInsets.only(
-                            top: 20,
-                            bottom: 20,
-                            right: 0,
-                            left: 0,
-                          ),
-                          child: Align(
-                            alignment: Alignment.centerLeft,
-                            child: BackButtonWidget(),
-                          ),
-                        ),
-                        const SizedBox(height: 20),
-                        _buildTabBar(),
-                      ],
-                    ),
-                  ),
-                  Expanded(
-                    child: Padding(
+    return BlocListener<LoginBloc, LoginState>(
+      listener: (context, state) async{
+        if (state.status == StatusEnum.success) {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (_) => const HomeView2()),
+          );
+          await hiveDatabaseManager.getUserModel();
+        }
+        if (state.status == StatusEnum.error) {
+          ScaffoldMessenger.of(
+            context,
+          ).showSnackBar(const SnackBar(content: Text('İşlem başarısız')));
+        }
+      },
+      child: Scaffold(
+        body: GestureDetector(
+          onTap: () {
+            FocusScope.of(context).unfocus();
+          },
+          child: Stack(
+            children: [
+              const BackgroundGradient(),
+              SafeArea(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 20),
-                      child: _buildTabBarView(),
+                      child: Column(
+                        children: [
+                          const Padding(
+                            padding: EdgeInsets.only(
+                              top: 20,
+                              bottom: 20,
+                              right: 0,
+                              left: 0,
+                            ),
+                            child: Align(
+                              alignment: Alignment.centerLeft,
+                              child: BackButtonWidget(),
+                            ),
+                          ),
+                          const SizedBox(height: 20),
+                          _buildTabBar(),
+                        ],
+                      ),
                     ),
-                  ),
-                ],
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                        child: _buildTabBarView(),
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

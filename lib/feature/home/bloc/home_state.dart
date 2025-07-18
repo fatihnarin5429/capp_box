@@ -5,7 +5,7 @@ enum CapsuleStatus { initial, loading, loaded, error }
 class HomeState extends Equatable {
   const HomeState({
     this.status = CapsuleStatus.initial,
-    this.capsules = const [],
+    this.capsules,
     this.filteredCapsules = const [],
     this.searchQuery = '',
     this.filterType = '',
@@ -15,7 +15,7 @@ class HomeState extends Equatable {
   });
 
   final CapsuleStatus status;
-  final List<dynamic> capsules;
+  final List<CapsuleModel>? capsules;
   final List<dynamic> filteredCapsules;
   final String searchQuery;
   final String filterType;
@@ -37,7 +37,7 @@ class HomeState extends Equatable {
 
   HomeState copyWith({
     CapsuleStatus? status,
-    List<dynamic>? capsules,
+    List<CapsuleModel>? capsules,
     List<dynamic>? filteredCapsules,
     String? searchQuery,
     String? filterType,

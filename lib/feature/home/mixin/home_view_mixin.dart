@@ -1,3 +1,4 @@
+import 'package:capp_box/feature/create_capsul/model/get_capsule_response_model.dart';
 import 'package:flutter/material.dart';
 import 'package:capp_box/feature/create_capsul/model/create_capsule_response_model.dart';
 import 'package:capp_box/core/extensions/localization_extension.dart';
@@ -26,14 +27,14 @@ mixin HomeViewMixin<T extends StatefulWidget> on State<T> {
   }
 
   /// Determines if a capsule is ready to be opened based on its openedDate.
-  bool isCapsuleReadyToOpen(CreateCapsuleResponseModel capsule) {
+  bool isCapsuleReadyToOpen(CapsuleModel capsule) {
     // Açılma tarihi geçmiş mi kontrolü
-    if (capsule.data.capsule.openDate == null) return false;
+    if (capsule.openDate == null) return false;
 
     // openedDate bir String olduğu için DateTime'a çevirip kontrol etmemiz gerekiyor
     try {
       final openDateMillis = int.tryParse(
-        capsule.data.capsule.openDate.toString(),
+        capsule.openDate.toString(),
       );
       if (openDateMillis == null) return false;
 
@@ -45,9 +46,9 @@ mixin HomeViewMixin<T extends StatefulWidget> on State<T> {
   }
 
   /// Builds a timer widget for a capsule based on its openedDate.
-  Widget buildTimeWidget(CreateCapsuleResponseModel capsule) {
+  Widget buildTimeWidget(CapsuleModel capsule) {
     // Kapsülün açılma tarihine kalan süreyi gösteren widget
-    if (capsule.data.capsule.openDate == null) {
+    if (capsule.openDate == null) {
       return Center(
         child: Text(
           context.tr('Date_Unknown', args: {}),
@@ -66,7 +67,7 @@ mixin HomeViewMixin<T extends StatefulWidget> on State<T> {
       height: 30,
       child: Center(
         child: TimerDisplayWidget(
-          openDate: capsule.data.capsule.openDate.toString(),
+          openDate: capsule.openDate.toString(),
           isCompact: true,
           fontSize: 10, // Küçük kapsüller için küçük font
         ),

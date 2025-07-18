@@ -44,13 +44,13 @@ class _TimerDisplayWidgetState extends State<TimerDisplayWidget> {
         // Get the current capsule model from the bloc if openDate is not provided
         WidgetsBinding.instance.addPostFrameCallback((_) {
           final capsuleBloc = context.read<CreateCapsuleBloc>();
-          final openDateStr =
-              capsuleBloc
-                  .state
-                  .createCapsuleResponseModel
-                  .data
-                  ?.capsule
-                  ?.openDate;
+          final openDateStr = '1726502400000';
+              // capsuleBloc
+              //     .state
+              //     .createCapsuleResponseModel
+              //     .data
+              //     ?.capsule
+              //     ?.openDate;
 
           if (openDateStr != null && openDateStr.toString().isNotEmpty) {
             int openDateMillis = int.parse(openDateStr.toString());

@@ -27,7 +27,7 @@ class ReceiverInfo extends StatelessWidget {
                 ),
               ),
               Text(
-                state.createCapsuleResponseModel.data.capsule.recipientUser ??
+                state.createCapsuleBodyModel?.recipientPhone ??
                     context.tr('recipient_name', args: {}),
                 style: const TextStyle(
                   color: Colors.white,
@@ -50,7 +50,7 @@ class ReceiverInfo extends StatelessWidget {
                 ),
               ),
               Text(
-                state.createCapsuleResponseModel.recipientEmail,
+                state.createCapsuleBodyModel?.recipientEmail ?? '',
                 style: const TextStyle(
                   color: Colors.white,
                   fontSize: 16,

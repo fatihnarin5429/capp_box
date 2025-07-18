@@ -326,73 +326,15 @@ class _CreateCapsulContentViewState extends State<CreateCapsulContentView>
                         Padding(
                           padding: const EdgeInsets.symmetric(vertical: 32.0),
                           child: ContinueButton(
-                            displayNameController: TextEditingController(),
-                            mailController: TextEditingController(),
-                            phoneController: TextEditingController(),
-                            videoFile: videoFile,
-                            photoFile: photoFile,
-                            audioFile: audioFile,
-                            type: widget.type!,
-                            selectedFileName: selectedFileName,
-                            secilenTip: widget.type!,
                             onPressed: () {
                               context.read<CreateCapsuleBloc>().add(
-                                CreateCapsuleAction(
-                                  CreateCapsuleResponseModel(
-                                    recipientPhone: '',
-                                    recipientEmail: '',
-                                    openDate: '',
-                                    price: 0,
-                                    success: true, // veya uygun değer
-                                    message: '',
-                                    data: CapsuleData(
-                                      capsule: Capsule(
-                                        title: _titleController.text,
-                                        message: _messageController.text,
-                                        sender:
-                                            '', // veya uygun bir kullanıcı ID'si/string
-                                        recipientEmail: widget.email ?? '',
-                                        recipientUser: '',
-                                        isOpened: false,
-                                        recipientPhone: '',
-                                        openDate:
-                                            DateTime.now(), // veya uygun bir DateTime
-                                        price: 0,
-                                        // Diğer gerekli alanlar...
-                                        media: [
-                                          Media(
-                                            type: widget.type!,
-                                            url:
-                                                widget.type == MediaType.photo
-                                                    ? photoFile?.path ?? ''
-                                                    : widget.type ==
-                                                        MediaType.video
-                                                    ? videoFile?.path ?? ''
-                                                    : audioFile?.path ?? '',
-                                            mimetype:
-                                                widget.type == MediaType.photo
-                                                    ? 'image/jpeg'
-                                                    : widget.type ==
-                                                        MediaType.video
-                                                    ? 'video/mp4'
-                                                    : 'audio/mpeg',
-                                            size: 0,
-                                            id: '',
-                                          ),
-                                        ], // veya uygun şekilde doldur
-                                        isClaimed: false,
-
-                                        paymentStatus: '',
-                                        notificationSentToUnregistered: false,
-                                        notificationSentToRegistered: false,
-                                        id: '',
-                                        createdAt: DateTime.now(),
-                                        v: 0,
-                                      ),
-                                      paymentId: '',
-                                    ),
+                                CreateCapsuleBodyAction(
+                                  state.createCapsuleBodyModel!.copyWith(
+                                    title: _titleController.text,
+                                    message: _messageController.text,
+                                    mediaFiles: widget.type == MediaType.photo ? photoFile : widget.type == MediaType.video ? videoFile : audioFile,
                                   ),
-                                ),
+                                )
                               );
                               Navigator.push(
                                 context,
@@ -403,9 +345,6 @@ class _CreateCapsulContentViewState extends State<CreateCapsulContentView>
                                         onChanged: widget.onChanged,
                                       ),
                                 ),
-                              );
-                              print(
-                                'state1: ${state.myCreatedCapsules} and ${state.createCapsuleResponseModel}',
                               );
                             },
                           ),

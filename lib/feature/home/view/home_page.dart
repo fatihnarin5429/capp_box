@@ -33,7 +33,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     _currentIndex = widget.initialIndex;
-    // context.read<HomeBloc>().add(const HomeGetCapsules());
+    context.read<HomeBloc>().add(const HomeGetCapsules());
     super.initState();
   }
 
@@ -45,10 +45,9 @@ class _HomePageState extends State<HomePage> {
         canPop: false,
         child: BlocBuilder<CreateCapsuleBloc, CreateCapsuleState>(
           builder: (context, state) {
-            print('state6: ${state.myCreatedCapsules}');
 
             _pages = [
-              context.read<HomeBloc>().state.capsules.isNotEmpty
+              context.read<HomeBloc>().state.capsules?.isNotEmpty ?? false
                   ? const HomeView2()
                   : const HomeView(),
               const capsules_view.CapsuleView(),

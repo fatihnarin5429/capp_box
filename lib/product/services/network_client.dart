@@ -93,12 +93,14 @@ class NetworkClient {
     Map<String, dynamic>? queryParameters,
     Options? options,
     CancelToken? cancelToken,
+    dynamic data,
     void Function(int, int)? onReceiveProgress,
   }) => _safeRequest(
     () => dio.get<T>(
       path,
       queryParameters: queryParameters,
       options: options,
+      data: data,
       cancelToken: cancelToken,
       onReceiveProgress: onReceiveProgress,
     ),

@@ -1,5 +1,5 @@
-import 'package:capp_box/feature/create_capsul/model/create_capsule_response_model.dart';
+import 'package:capp_box/feature/create_capsul/model/get_capsule_response_model.dart';
 
 abstract class IHomeRepository {
-  Future<List<CreateCapsuleResponseModel>> fetchCapsules();
+  Future<GetCapsulesResponseModel> fetchCapsules();
 }

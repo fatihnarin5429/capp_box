@@ -14,11 +14,7 @@ class CapsuleListWidget extends StatefulWidget {
   final void Function(int) onPageChanged;
   final CreateCapsuleState state;
   final AnimatedMeshGradientController controller;
-  final void Function(
-    BuildContext, {
-    required CreateCapsuleResponseModel capsule,
-  })
-  onCapsuleTap;
+  final VoidCallback onCapsuleTap;
 
   const CapsuleListWidget({
     Key? key,
@@ -60,10 +56,7 @@ class _CapsuleListWidgetState extends State<CapsuleListWidget> {
 
   void _updateAllTimers() {
     setState(() {
-      final capsules =
-          widget.selectedIndex == 3
-              ? widget.state.myCreatedCapsules
-              : widget.state.filteredCapsules;
+      final capsules = [];
 
       for (var capsule in capsules) {
         if (capsule.data?.capsule?.openDate != null) {
@@ -104,63 +97,64 @@ class _CapsuleListWidgetState extends State<CapsuleListWidget> {
 
   @override
   Widget build(BuildContext context) {
-    if (widget.state.myCreatedCapsules.isEmpty) {
-      return Center(
-        child: Padding(
-          padding: const EdgeInsets.only(top: 32.0),
-          child: Text(
-            context.tr('no_capsules_created'),
-            style: const TextStyle(
-              color: Colors.white,
-              fontSize: 16,
-              fontFamily: 'Urbanist',
-              fontWeight: FontWeight.w600,
-            ),
-          ),
-        ),
-      );
-    } else if (widget.state.filteredCapsules.isEmpty) {
-      return Center(
-        child: Padding(
-          padding: const EdgeInsets.only(top: 32.0),
-          child: Text(
-            widget.selectedIndex == 1
-                ? context.tr('coming_soon_capsules_message')
-                : widget.selectedIndex == 2
-                ? context.tr('ready_to_open_capsules_message')
-                : widget.selectedIndex == 3
-                ? context.tr('no_capsules_created')
-                : context.tr('no_capsules_message'),
-            style: const TextStyle(
-              color: Colors.white,
-              fontSize: 16,
-              fontFamily: 'Urbanist',
-              fontWeight: FontWeight.w600,
-            ),
-          ),
-        ),
-      );
-    } else {
+    // if (widget.state.myCreatedCapsules.isEmpty) {
+    //   return Center(
+    //     child: Padding(
+    //       padding: const EdgeInsets.only(top: 32.0),
+    //       child: Text(
+    //         context.tr('no_capsules_created'),
+    //         style: const TextStyle(
+    //           color: Colors.white,
+    //           fontSize: 16,
+    //           fontFamily: 'Urbanist',
+    //           fontWeight: FontWeight.w600,
+    //         ),
+    //       ),
+    //     ),
+    //   );
+    // } else if (widget.state.createCapsuleResponseModel.data.capsules.isEmpty) {
+    //   return Center(
+    //     child: Padding(
+    //       padding: const EdgeInsets.only(top: 32.0),
+    //       child: Text(
+    //         widget.selectedIndex == 1
+    //             ? context.tr('coming_soon_capsules_message')
+    //             : widget.selectedIndex == 2
+    //             ? context.tr('ready_to_open_capsules_message')
+    //             : widget.selectedIndex == 3
+    //             ? context.tr('no_capsules_created')
+    //             : context.tr('no_capsules_message'),
+    //         style: const TextStyle(
+    //           color: Colors.white,
+    //           fontSize: 16,
+    //           fontFamily: 'Urbanist',
+    //           fontWeight: FontWeight.w600,
+    //         ),
+    //       ),
+    //     ),
+    //   );
+    // } else {
       return SizedBox(
         height: MediaQuery.of(context).size.height * 0.45,
         child: PageView.builder(
           padEnds: false,
           controller: widget.pageController,
-          itemCount:
-              widget.selectedIndex == 3
-                  ? widget.state.myCreatedCapsules.length
-                  : widget.state.filteredCapsules.length,
+          itemCount:0,
+              // widget.selectedIndex == 3
+              //     ? widget.state.myCreatedCapsules.length
+              //     : widget.state.filteredCapsules.length,
           onPageChanged: widget.onPageChanged,
           itemBuilder: (context, index) {
-            final capsule =
-                widget.selectedIndex == 3
-                    ? widget.state.myCreatedCapsules[index]
-                    : widget.state.filteredCapsules[index];
+            // final capsule =
+            //     widget.selectedIndex == 3
+            //         ? widget.state.myCreatedCapsules[index]
+            //         : widget.state.filteredCapsules[index];
 
             final isCurrent = index == widget.currentPage;
 
             final int? openedDateMillis = int.tryParse(
-              capsule.data?.capsule?.openDate.toString() ?? '',
+              // capsule.data?.capsule?.openDate.toString() ?? '',
+              '',
             );
             final isReadyToOpen =
                 openedDateMillis != null &&
@@ -172,9 +166,9 @@ class _CapsuleListWidgetState extends State<CapsuleListWidget> {
                 scale: isCurrent ? 1.0 : 0.9,
                 duration: const Duration(milliseconds: 300),
                 child: InkWell(
-                  onTap: () => widget.onCapsuleTap(context, capsule: capsule),
+                  onTap: widget.onCapsuleTap,
                   child: CapsuleCard(
-                    senderName: capsule.data?.capsule?.sender ?? '',
+                    senderName: '',
                     imageUrl: "https://placehold.co/40x40",
                     isReadyToOpen: isReadyToOpen,
                     controller: widget.controller,
@@ -182,11 +176,9 @@ class _CapsuleListWidgetState extends State<CapsuleListWidget> {
                     timerWidget: Padding(
                       padding: const EdgeInsets.only(bottom: 10, right: 8),
                       child: Text(
-                        _timerValues[capsule.data?.capsule?.openDate
-                                    .toString() ??
-                                ''] ??
+                        _timerValues[''] ??
                             _calculateTimeRemaining(
-                              capsule.data?.capsule?.openDate.toString(),
+                              '',
                             ),
                         style: const TextStyle(
                           color: Colors.white,
@@ -205,4 +197,3 @@ class _CapsuleListWidgetState extends State<CapsuleListWidget> {
       );
     }
   }
-}

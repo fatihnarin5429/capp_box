@@ -85,10 +85,6 @@ class _ChangePassword2State extends State<ChangePassword2> {
                   _buildResendCodeSection(context),
                   const Spacer(),
                   ContinueButton(
-                    displayNameController: _pinController,
-                    mailController: TextEditingController(),
-                    phoneController: TextEditingController(),
-                    secilenTip: MediaType.mail,
                     onPressed: _verifyOtpAndProceed,
                   ),
                   const SizedBox(height: 32),

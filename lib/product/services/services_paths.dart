@@ -1,6 +1,6 @@
 enum ServicePath {
   //General
-  capsules('capsules'),
+  capsules('capsules/'),
   register('auth/register'),
   login('auth/login');
 

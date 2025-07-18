@@ -5,34 +5,27 @@ import 'package:flutter/material.dart';
 class KapsulSecenekCard extends StatelessWidget {
   final String icon;
   final String baslik;
-  final bool isPremium;
-  final bool premiumOdendi;
   final String fiyat;
-  final MediaType? secilenTip;
   final MediaType tip;
   final VoidCallback onTap;
+  final bool secili;
 
   const KapsulSecenekCard({
     Key? key,
     required this.icon,
     required this.baslik,
-    this.isPremium = false,
-    this.premiumOdendi = false,
     required this.fiyat,
-    this.secilenTip,
     required this.tip,
     required this.onTap,
+    required this.secili,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final bool aktif = !isPremium || premiumOdendi;
-    final bool secili = secilenTip == tip;
-
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 16),
       child: GestureDetector(
-        onTap: aktif ? onTap : null,
+        onTap: onTap,
         child: Container(
           width: 335,
           height: 67,
@@ -77,9 +70,7 @@ class KapsulSecenekCard extends StatelessWidget {
                       TextSpan(
                         text: '${baslik} ',
                         style: TextStyle(
-                          color: isPremium && !premiumOdendi
-                              ? const Color(0xFF5D5E72)
-                              : Colors.white,
+                          color: Colors.white,
                           fontSize: 16,
                           fontFamily: 'Urbanist',
                           fontWeight: FontWeight.w700,

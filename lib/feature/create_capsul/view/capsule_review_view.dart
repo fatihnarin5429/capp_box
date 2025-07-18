@@ -17,22 +17,7 @@ import '../widgets/capsule_title.dart';
 
 class CapsuleReview extends StatefulWidget {
   final int currentStep;
-  final File? videoFile;
-  final File? photoFile;
-  final File? audioFile;
-  final MediaType? type;
-  final String? selectedFileName;
-  final String? email;
-  const CapsuleReview({
-    Key? key,
-    this.currentStep = 3,
-    this.videoFile,
-    this.photoFile,
-    this.audioFile,
-    this.type,
-    this.selectedFileName,
-    this.email,
-  }) : super(key: key);
+  const CapsuleReview({Key? key, this.currentStep = 3}) : super(key: key);
 
   @override
   State<CapsuleReview> createState() => _CapsuleReviewState();
@@ -86,29 +71,30 @@ class _CapsuleReviewState extends State<CapsuleReview> with CapsuleReviewMixin {
 
   /// Builds the main content of the capsule including title, media, receiver info, etc.
   Widget _buildCapsuleContent(CreateCapsuleState state) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        CapsuleTitle(
-          title: state.createCapsuleResponseModel.data.capsule.title,
-          state: state,
-        ),
-        MediaPreview(
-          type: state.createCapsuleResponseModel.data.capsule.mediaType,
-          photoFile: _getPhotoFile(state),
-          audioFile: _getAudioFile(state),
-          videoFile: _getVideoFile(state),
-          selectedFileName: widget.selectedFileName,
-        ),
-        ReceiverInfo(state: state),
-        CapsuleDateInfo(state: state),
-        InfoSharingOptions(
-          shareInfo: _shareInfo,
-          onShareInfoChanged: (value) => setState(() => _shareInfo = value),
-        ),
-      ],
+    return BlocBuilder<CreateCapsuleBloc, CreateCapsuleState>(
+      builder: (context, state) {
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            CapsuleTitle(
+              title: state.createCapsuleBodyModel?.title ?? '',
+              state: state,
+            ),
+            MediaPreview(
+              state: state,
+            ),
+            ReceiverInfo(state: state),
+            CapsuleDateInfo(state: state),
+            InfoSharingOptions(
+              shareInfo: _shareInfo,
+              onShareInfoChanged: (value) => setState(() => _shareInfo = value),
+            ),
+          ],
+        );
+      },
     );
   }
+<<<<<<< HEAD
 
   dynamic _getPhotoFile(CreateCapsuleState state) {
     if (state.createCapsuleResponseModel.data.capsule.mediaType ==
@@ -140,4 +126,6 @@ class _CapsuleReviewState extends State<CapsuleReview> with CapsuleReviewMixin {
     }
     return widget.videoFile;
   }
+=======
+>>>>>>> 69fae8ba02711afe6ca03ebb2bc150fbd4c0113b
 }

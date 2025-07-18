@@ -1,3 +1,7 @@
+import 'dart:io';
+
+import 'package:bot_toast/bot_toast.dart';
+import 'package:capp_box/feature/create_capsul/model/create_capsule_body_model.dart';
 import 'package:capp_box/feature/create_capsul/model/create_capsule_response_model.dart';
 import 'package:capp_box/feature/login/services/model/register_response_model.dart';
 import 'package:capp_box/product/services/network_client.dart';
@@ -16,36 +20,37 @@ class CreateCapsulesRemoteDatasource {
   /// Başarılı olursa [RegisterResponseModel] döner.
   /// Hata olursa açıklayıcı bir [Exception] fırlatır.
   Future<CreateCapsuleResponseModel> createCapsule({
-    required String title,
-    required String message,
-    required String recipientEmail,
-    required String recipientPhone,
-    required String openDate,
-    required int price,
+    required CreateCapsuleBodyModel createCapsuleBodyModel,
+    required String token,
   }) async {
     try {
       final path = ServicePath.capsules.value;
       final res = await client.post<Map<String, dynamic>>(
         path,
-        data: {
-          'title': title,
-          'message': message,
-          'recipientEmail': recipientEmail,
-          'recipientPhone': recipientPhone,
-          'openDate': openDate,
-          'price': price,
-        },
+        data: createCapsuleBodyModel.toJson(), // Fixed: Remove extra map wrapping
         options: Options(
           headers: {
+            'Authorization': 'Bearer $token',
             'Content-Type': 'application/json',
             'Connection': 'keep-alive',
           },
         ),
       );
+      print('responsee${res.data}');
       final map = res.data;
-      return CreateCapsuleResponseModel.fromJson(map?['data'] ?? {});
+      if (res.statusCode != null) {
+        if (res.statusCode! >= 200 && res.statusCode! < 300) {
+          return CreateCapsuleResponseModel.fromJson(map ?? {});
+        } else if (res.statusCode! >= 400 && res.statusCode! < 500) {
+          throw Exception('Client error: ${res.statusCode}');
+        } else if (res.statusCode! >= 500 && res.statusCode! < 600) {
+          throw Exception('Server error: ${res.statusCode}');
+        }
+      }
+      throw Exception('Invalid response status code');
     } catch (e) {
-      throw Exception('Kayıt olurken hata oluştu: $e');
+      BotToast.showText(text: 'Kapsül oluştururken hata oluştu: $e');
+      throw Exception('Kapsül oluştururken hata oluştu: $e');
     }
   }
 
