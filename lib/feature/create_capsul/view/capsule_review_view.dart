@@ -113,9 +113,10 @@ class _CapsuleReviewState extends State<CapsuleReview> with CapsuleReviewMixin {
   dynamic _getPhotoFile(CreateCapsuleState state) {
     if (state.createCapsuleResponseModel.data.capsule.mediaType ==
         MediaType.photo) {
-      // Eğer widget.photoFile null değilse onu, yoksa url'yi döndür
       return widget.photoFile ??
-          state.createCapsuleResponseModel.data.capsule.mediaUrl;
+          (state.createCapsuleResponseModel.data.capsule.mediaUrl != null
+              ? File(state.createCapsuleResponseModel.data.capsule.mediaUrl!)
+              : null);
     }
     return widget.photoFile;
   }
@@ -124,7 +125,9 @@ class _CapsuleReviewState extends State<CapsuleReview> with CapsuleReviewMixin {
     if (state.createCapsuleResponseModel.data.capsule.mediaType ==
         MediaType.voice) {
       return widget.audioFile ??
-          state.createCapsuleResponseModel.data.capsule.mediaUrl;
+          (state.createCapsuleResponseModel.data.capsule.mediaUrl != null
+              ? File(state.createCapsuleResponseModel.data.capsule.mediaUrl!)
+              : null);
     }
     return widget.audioFile;
   }
