@@ -27,10 +27,11 @@ class CreateCapsulesRemoteDatasource {
       final path = ServicePath.capsules.value;
       final res = await client.post<Map<String, dynamic>>(
         path,
-        data: createCapsuleBodyModel.toJson(), // Fixed: Remove extra map wrapping
+        data:
+            createCapsuleBodyModel.toJson(), // Fixed: Remove extra map wrapping
         options: Options(
           headers: {
-            'Authorization': 'Bearer $token',
+            'Authorization': token,
             'Content-Type': 'application/json',
             'Connection': 'keep-alive',
           },

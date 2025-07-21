@@ -21,11 +21,8 @@ class CapsuleDateInfo extends StatelessWidget {
 
             child: Center(
               child: Text(
-<<<<<<< HEAD
-                '${context.tr('capsule_open_date')}: ${DateFormat('dd.MM.yyyy').format(DateTime.parse(state.createCapsuleResponseModel.data.capsule.openDate.toString()))}',
-=======
                 '${context.tr('capsule_open_date')}: ${DateFormat('dd.MM.yyyy').format(DateTime.fromMillisecondsSinceEpoch(int.parse(state.createCapsuleBodyModel?.openDate ?? '')))}',
->>>>>>> 69fae8ba02711afe6ca03ebb2bc150fbd4c0113b
+
                 style: const TextStyle(
                   color: Colors.white,
                   fontSize: 16,
@@ -43,11 +40,7 @@ class CapsuleDateInfo extends StatelessWidget {
             width: 330,
             child: Center(
               child: Text(
-<<<<<<< HEAD
-                '${context.tr('capsule_open_time')}: ${state.createCapsuleResponseModel.data.capsule.openDate == null ? '' : DateFormat('HH.mm').format(DateTime.parse(state.createCapsuleResponseModel.data.capsule.openDate.toString()))}',
-=======
-                '${context.tr('capsule_open_time')}: ${state.createCapsuleBodyModel?.openDate == null ? '' : DateFormat('HH.mm').format(DateTime.fromMillisecondsSinceEpoch(int.parse(state.createCapsuleBodyModel!.openDate!)))}',
->>>>>>> 69fae8ba02711afe6ca03ebb2bc150fbd4c0113b
+                '${context.tr('capsule_open_time')}: ${state.createCapsuleBodyModel.openDate == null ? '' : DateFormat('HH.mm').format(DateTime.fromMillisecondsSinceEpoch(int.parse(state.createCapsuleBodyModel!.openDate!)))}',
                 style: const TextStyle(
                   color: Colors.white,
                   fontSize: 16,

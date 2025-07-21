@@ -74,6 +74,7 @@ class CreateCapsuleBloc extends Bloc<CreateCapsuleEvent, CreateCapsuleState> {
     Emitter<CreateCapsuleState> emit,
   ) async {
     final userModel = hiveDatabaseManager.getUserModel();
+    print('tokenennnnn ${userModel?.token}');
     emit(state.copyWith(status: StatusEnum.loading));
     try {
       final response = await createCapsulesUsecase.createCapsule(

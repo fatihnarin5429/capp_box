@@ -80,9 +80,7 @@ class _CapsuleReviewState extends State<CapsuleReview> with CapsuleReviewMixin {
               title: state.createCapsuleBodyModel?.title ?? '',
               state: state,
             ),
-            MediaPreview(
-              state: state,
-            ),
+            MediaPreview(state: state),
             ReceiverInfo(state: state),
             CapsuleDateInfo(state: state),
             InfoSharingOptions(
@@ -94,38 +92,4 @@ class _CapsuleReviewState extends State<CapsuleReview> with CapsuleReviewMixin {
       },
     );
   }
-<<<<<<< HEAD
-
-  dynamic _getPhotoFile(CreateCapsuleState state) {
-    if (state.createCapsuleResponseModel.data.capsule.mediaType ==
-        MediaType.photo) {
-      return widget.photoFile ??
-          (state.createCapsuleResponseModel.data.capsule.mediaUrl != null
-              ? File(state.createCapsuleResponseModel.data.capsule.mediaUrl!)
-              : null);
-    }
-    return widget.photoFile;
-  }
-
-  dynamic _getAudioFile(CreateCapsuleState state) {
-    if (state.createCapsuleResponseModel.data.capsule.mediaType ==
-        MediaType.voice) {
-      return widget.audioFile ??
-          (state.createCapsuleResponseModel.data.capsule.mediaUrl != null
-              ? File(state.createCapsuleResponseModel.data.capsule.mediaUrl!)
-              : null);
-    }
-    return widget.audioFile;
-  }
-
-  dynamic _getVideoFile(CreateCapsuleState state) {
-    if (state.createCapsuleResponseModel.data.capsule.mediaType ==
-        MediaType.video) {
-      return widget.videoFile ??
-          state.createCapsuleResponseModel.data.capsule.mediaUrl;
-    }
-    return widget.videoFile;
-  }
-=======
->>>>>>> 69fae8ba02711afe6ca03ebb2bc150fbd4c0113b
 }

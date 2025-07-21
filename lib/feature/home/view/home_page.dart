@@ -45,11 +45,10 @@ class _HomePageState extends State<HomePage> {
         canPop: false,
         child: BlocBuilder<CreateCapsuleBloc, CreateCapsuleState>(
           builder: (context, state) {
-
             _pages = [
-              context.read<HomeBloc>().state.capsules?.isNotEmpty ?? false
-                  ? const HomeView2()
-                  : const HomeView(),
+              context.read<HomeBloc>().state.capsules?.isEmpty ?? true
+                  ? const HomeView()
+                  : const HomeView2(),
               const capsules_view.CapsuleView(),
               const NotificationView(),
               const ProfilView(),
