@@ -39,7 +39,7 @@ class _PhoneLoginViewState extends State<PhoneLoginView> {
   Widget build(BuildContext context) {
     return BlocBuilder<LoginBloc, LoginState>(
       builder: (context, state) {
-        _phoneController.text = state.phone ?? "5XX XXX XX XX";
+        _phoneController.text = state.phone ?? _phoneController.text;
 
         return Scaffold(
           body: GestureDetector(

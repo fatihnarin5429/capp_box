@@ -3,6 +3,8 @@ part of 'home_bloc.dart';
 enum CapsuleStatus { initial, loading, loaded, error }
 
 class HomeState extends Equatable {
+  final UserModel? userModel;
+
   const HomeState({
     this.status = CapsuleStatus.initial,
     this.capsules,
@@ -12,6 +14,7 @@ class HomeState extends Equatable {
     this.sortBy = '',
     this.selectedCapsuleId = '',
     this.error,
+    this.userModel,
   });
 
   final CapsuleStatus status;
@@ -33,6 +36,7 @@ class HomeState extends Equatable {
     sortBy,
     selectedCapsuleId,
     error,
+    userModel,
   ];
 
   HomeState copyWith({
@@ -44,6 +48,7 @@ class HomeState extends Equatable {
     String? sortBy,
     String? selectedCapsuleId,
     String? error,
+    UserModel? userModel,
   }) {
     return HomeState(
       status: status ?? this.status,
@@ -54,6 +59,7 @@ class HomeState extends Equatable {
       sortBy: sortBy ?? this.sortBy,
       selectedCapsuleId: selectedCapsuleId ?? this.selectedCapsuleId,
       error: error ?? this.error,
+      userModel: userModel ?? this.userModel,
     );
   }
 }

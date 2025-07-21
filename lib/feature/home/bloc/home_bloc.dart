@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:capp_box/feature/create_capsul/model/get_capsule_response_model.dart';
 import 'package:capp_box/feature/home/service/home_datasources.dart';
 import 'package:capp_box/feature/home/service/home_usecases.dart';
+import 'package:capp_box/feature/login/services/model/user_model.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -13,10 +14,13 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     // on<CapsuleSearch>(_onCapsuleSearch);
     on<CapsuleFilter>(_onCapsuleFilter);
     on<CapsuleSort>(_onCapsuleSort);
+
     // on<CapsuleFavorite>(_onCapsuleFavorite);
     // on<CapsuleDelete>(_onCapsuleDelete);
     on<CapsuleView>(_onCapsuleView);
     on<HomeGetCapsules>(_onHomeGetCapsules);
+    on<HomeGetUser>(_onHomeGetUser);
+    on<HomeSetUser>(_onHomeSetUser);
   }
 
   final HomeUsecase homeUsecase = HomeUsecase(HomeRemoteDatasource());
@@ -94,5 +98,25 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     Emitter<HomeState> emit,
   ) async {
     emit(state.copyWith(selectedCapsuleId: event.capsuleId));
+  }
+
+  Future<void> _onHomeGetUser(
+    HomeGetUser event,
+    Emitter<HomeState> emit,
+  ) async {
+    // Burada user'ı bir servisten, localden veya mock olarak alabilirsin.
+    // Örnek:
+    // final user = UserModel(
+    //   name: "Fatih Narin",
+    //   photo: "https://picsum.photos/200/300",
+    // );
+    // emit(state.copyWith(userModel: user));
+  }
+
+  Future<void> _onHomeSetUser(
+    HomeSetUser event,
+    Emitter<HomeState> emit,
+  ) async {
+    emit(state.copyWith(userModel: event.user));
   }
 }

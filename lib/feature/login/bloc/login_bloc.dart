@@ -56,6 +56,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         name: event.name,
         email: event.email,
         phone: event.phone,
+
         password: event.password,
       );
 

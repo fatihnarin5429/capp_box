@@ -19,6 +19,7 @@ class LoginView extends StatefulWidget {
 
 class _LoginViewState extends State<LoginView> with TickerProviderStateMixin {
   late TabController _tabController;
+  final TextEditingController _phoneController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _nameController = TextEditingController();
@@ -45,7 +46,7 @@ class _LoginViewState extends State<LoginView> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return BlocListener<LoginBloc, LoginState>(
-      listener: (context, state) async{
+      listener: (context, state) async {
         if (state.status == StatusEnum.success) {
           Navigator.pushReplacement(
             context,
@@ -160,6 +161,7 @@ class _LoginViewState extends State<LoginView> with TickerProviderStateMixin {
       children: [
         SingleChildScrollView(
           child: RegisterFormView(
+            phoneController: _phoneController,
             emailController: _emailController,
             passwordController: _passwordController,
             passwordConfirmController: _passwordConfirmController,

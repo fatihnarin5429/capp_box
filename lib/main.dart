@@ -77,7 +77,6 @@ class MyAppState extends State<MyApp> {
       title: 'Capp Box',
       // locale: _currentLocale,
       theme: ThemeData(
-        primarySwatch: Colors.blue,
         brightness: Brightness.light,
         fontFamily: 'Poppins',
         colorScheme: ColorScheme.fromSeed(
@@ -99,7 +98,7 @@ class MyAppState extends State<MyApp> {
         BotToastNavigatorObserver(),
         ChuckerFlutter.navigatorObserver,
       ],
-      initialRoute: '/landing_view',
+      initialRoute: '/onboard1',
       routes: {
         '/onboard1': (context) => const Onboard1View(),
         '/': (context) => const HomePage(),

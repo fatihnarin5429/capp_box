@@ -1,4 +1,5 @@
 import 'package:capp_box/core/extensions/localization_extension.dart';
+import 'package:capp_box/feature/home/view/home_view.dart';
 import 'package:capp_box/feature/home/view/home_view_2.dart';
 import 'package:capp_box/feature/login/bloc/login_bloc.dart';
 import 'package:capp_box/feature/package/widgets/custom_text_field.dart';
@@ -11,6 +12,7 @@ class RegisterFormView extends StatelessWidget {
   final TextEditingController emailController;
   final TextEditingController passwordController;
   final TextEditingController passwordConfirmController;
+  final TextEditingController phoneController;
   final VoidCallback onRegisterSuccess;
   final TextEditingController nameController;
   const RegisterFormView({
@@ -19,6 +21,8 @@ class RegisterFormView extends StatelessWidget {
     required this.passwordConfirmController,
     required this.onRegisterSuccess,
     required this.nameController,
+    required this.phoneController,
+
     super.key,
   });
 
@@ -109,7 +113,8 @@ class RegisterFormView extends StatelessWidget {
           onTap: () async {
             if (emailController.text.isEmpty ||
                 passwordController.text.isEmpty ||
-                passwordConfirmController.text.isEmpty) {
+                passwordConfirmController.text.isEmpty ||
+                phoneController.text.isEmpty) {
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
                   content: Text(context.tr('fill_all_fields', args: {})),
@@ -129,14 +134,14 @@ class RegisterFormView extends StatelessWidget {
               RegisterAction(
                 name: nameController.text,
                 email: emailController.text,
-                phone: '5426165975',
+                phone: phoneController.text,
                 password: passwordController.text,
               ),
             );
             if (state.status == StatusEnum.success) {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const HomeView2()),
+                MaterialPageRoute(builder: (context) => const HomeView()),
               );
             }
           },

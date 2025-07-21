@@ -1,5 +1,7 @@
 import 'package:capp_box/feature/create_capsul/model/create_capsule_response_model.dart';
+import 'package:capp_box/feature/login/services/model/login_response_model.dart';
 import 'package:capp_box/feature/login/services/model/register_response_model.dart';
+import 'package:capp_box/feature/login/services/model/user_model.dart';
 import 'package:capp_box/product/services/network_client.dart';
 import 'package:capp_box/product/services/services_paths.dart';
 import 'package:dio/dio.dart';
@@ -41,15 +43,28 @@ class LoginRegisterRemoteDatasource {
     }
   }
 
-  Future<void> login(String email, String password) async {
-    final path = ServicePath.capsules.value;
-    final res = await client.get<Map<String, dynamic>>(path);
-    final map = res.data;
-    if (map == null || map['data'] is! List) {
-      throw const FormatException('Beklenmeyen format');
+  Future<LoginResponseModel> login({
+    required String email,
+    required String password,
+  }) async {
+    try {
+      final path = ServicePath.login.value;
+      final res = await client.post<Map<String, dynamic>>(
+        path,
+        data: {'email': email, 'password': password},
+        options: Options(
+          headers: {
+            'Content-Type': 'application/json',
+            'Connection': 'keep-alive',
+          },
+        ),
+      );
+      final map = res.data;
+      print('Login API Response: $map'); // Debug için
+      return LoginResponseModel.fromJson(map ?? {});
+    } catch (e) {
+      print('Login network error: $e'); // Debug için
+      throw Exception('Giriş işlemi sırasında bir hata oluştu: $e');
     }
-    return map['data']
-        .map((e) => CreateCapsuleResponseModel.fromJson(e))
-        .toList();
   }
 }

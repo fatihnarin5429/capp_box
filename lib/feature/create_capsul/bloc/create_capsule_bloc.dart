@@ -6,9 +6,7 @@ import 'package:capp_box/feature/create_capsul/model/create_capsule_body_model.d
 import 'package:capp_box/feature/create_capsul/model/create_capsule_response_model.dart';
 import 'package:capp_box/feature/create_capsul/services/model/create_capsule_datasources.dart';
 import 'package:capp_box/feature/create_capsul/services/model/create_capsules_usecases.dart';
-import 'package:capp_box/feature/login/services/login&register_datasources.dart';
-import 'package:capp_box/feature/login/services/login&register_usecases.dart';
-import 'package:capp_box/feature/login/services/model/user_model.dart';
+
 import 'package:capp_box/product/database/hive/core/hive_database_manager.dart';
 import 'package:capp_box/product/utility/enums/mediaType_enum.dart';
 import 'package:capp_box/product/utility/enums/status_enum.dart';

@@ -1,13 +1,13 @@
 import 'package:capp_box/feature/login/services/model/user_model.dart';
 
-class RegisterResponseModel {
+class LoginResponseModel {
   final bool success;
   final String token;
 
-  RegisterResponseModel({required this.success, required this.token});
+  LoginResponseModel({required this.success, required this.token});
 
-  factory RegisterResponseModel.fromJson(Map<String, dynamic> json) {
-    return RegisterResponseModel(
+  factory LoginResponseModel.fromJson(Map<String, dynamic> json) {
+    return LoginResponseModel(
       success: json['success'] ?? false,
       token: json['token'] ?? '',
     );

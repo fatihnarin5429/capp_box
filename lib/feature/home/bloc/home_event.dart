@@ -67,3 +67,15 @@ class CapsuleView extends HomeEvent {
   @override
   List<Object> get props => [capsuleId];
 }
+
+class HomeGetUser extends HomeEvent {
+  const HomeGetUser();
+}
+
+class HomeSetUser extends HomeEvent {
+  final UserModel user;
+  const HomeSetUser(this.user);
+
+  @override
+  List<Object> get props => [user];
+}

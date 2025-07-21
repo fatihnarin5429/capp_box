@@ -25,47 +25,51 @@ class _HomeView2State extends State<HomeView2> with HomeViewMixin {
     context.read<HomeBloc>().add(const HomeGetCapsules());
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
-        return Material(
-          type: MaterialType.transparency,
-          child: Scaffold(
-            extendBody: true,
-            body: Stack(
-              children: [
-                const BackgroundGradient(),
-                SafeArea(
-                  child: SingleChildScrollView(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        // Profile Header
-                        const ProfileHeaderWidget(
-                          username: 'Erva',
-                          profileImageUrl: "https://picsum.photos/200/300",
-                        ),
+    return Material(
+      type: MaterialType.transparency,
+      child: Scaffold(
+        extendBody: true,
+        body: Stack(
+          children: [
+            const BackgroundGradient(),
+            SafeArea(
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    // Profile Header
+                    ProfileHeaderWidget(
+                      username:
+                          context.read<HomeBloc>().state.userModel?.name ??
+                          'Beyza',
+                      profileImageUrl: "https://picsum.photos/200/300",
+                    ),
 
-                        // Media Options Grid
-                        const MediaOptionsGrid(),
+                    // Media Options Grid
+                    const MediaOptionsGrid(),
 
-                        // Created Capsules List
-                        CreatedCapsulesList(
-                          gradientController: gradientController,
-                          buildTimeWidget: (capsule) => TimerDisplayWidget(
+                    // Created Capsules List
+                    CreatedCapsulesList(
+                      gradientController: gradientController,
+                      buildTimeWidget:
+                          (capsule) => TimerDisplayWidget(
                             openDate: capsule.openDate.toString(),
                           ),
-                          isCapsuleReadyToOpen: (capsule) =>
-                              isCapsuleReadyToOpen(capsule),
-                        ),
-
-                        const SizedBox(height: 40),
-                      ],
+                      isCapsuleReadyToOpen:
+                          (capsule) => isCapsuleReadyToOpen(capsule),
                     ),
-                  ),
+
+                    const SizedBox(height: 40),
+                  ],
                 ),
-              ],
+              ),
             ),
-          ),
-        );
+          ],
+        ),
+      ),
+    );
   }
 }
