@@ -8,11 +8,11 @@ sealed class ProfileEvent extends Equatable {
 }
 
 class ProfileChangeName extends ProfileEvent {
-  final String displayName;
-  const ProfileChangeName({required this.displayName});
+  final String name;
+  const ProfileChangeName({required this.name});
 
   @override
-  List<Object> get props => [displayName];
+  List<Object> get props => [name];
 }
 
 class ProfileChangeEmail extends ProfileEvent {
@@ -48,19 +48,9 @@ class ProfileChangeImage extends ProfileEvent {
 }
 
 class ProfileLogout extends ProfileEvent {
-  final String email;
-  final String password;
-  const ProfileLogout({required this.email, required this.password});
-
-  @override
-  List<Object> get props => [email, password];
+  const ProfileLogout();
 }
 
 class ProfileDelete extends ProfileEvent {
-  final String email;
-  final String password;
-  const ProfileDelete({required this.email, required this.password});
-
-  @override
-  List<Object> get props => [email, password];
+  const ProfileDelete();
 }

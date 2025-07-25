@@ -7,10 +7,7 @@ import 'dart:io';
 class ProfileHeaderWidget extends StatelessWidget {
   final VoidCallback onImageTap;
 
-  const ProfileHeaderWidget({
-    super.key,
-    required this.onImageTap,
-  });
+  const ProfileHeaderWidget({super.key, required this.onImageTap});
 
   @override
   Widget build(BuildContext context) {
@@ -39,20 +36,21 @@ class ProfileHeaderWidget extends StatelessWidget {
                     color: Colors.grey[300],
                     shape: const OvalBorder(),
                   ),
-                  child: state.imagePath != null
-                      ? ClipOval(
-                          child: Image.file(
-                            File(state.imagePath!),
-                            width: 83,
-                            height: 83,
-                            fit: BoxFit.cover,
+                  child:
+                      state.photo.isNotEmpty
+                          ? ClipOval(
+                            child: Image.file(
+                              File(state.photo),
+                              width: 83,
+                              height: 83,
+                              fit: BoxFit.cover,
+                            ),
+                          )
+                          : const Icon(
+                            Icons.camera_alt,
+                            color: Colors.grey,
+                            size: 30,
                           ),
-                        )
-                      : const Icon(
-                          Icons.camera_alt,
-                          color: Colors.grey,
-                          size: 30,
-                        ),
                 ),
               ),
             ),

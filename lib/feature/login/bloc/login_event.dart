@@ -21,18 +21,18 @@ class LogoutAction extends LoginEvent {}
 class RegisterAction extends LoginEvent {
   final String name;
   final String email;
-  final String phone;
+
   final String password;
 
   const RegisterAction({
     required this.name,
     required this.email,
-    required this.phone,
+
     required this.password,
   });
 
   @override
-  List<Object?> get props => [name, email, phone, password];
+  List<Object?> get props => [name, email, password];
 }
 
 class LoginChangePhone extends LoginEvent {

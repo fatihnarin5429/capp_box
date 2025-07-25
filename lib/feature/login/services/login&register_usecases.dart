@@ -4,6 +4,14 @@ import 'package:capp_box/feature/login/services/model/login_response_model.dart'
 import 'package:capp_box/feature/login/services/model/register_response_model.dart';
 import 'package:capp_box/feature/login/services/model/user_model.dart';
 
+abstract class ILoginRegisterRepository {
+  Future<RegisterResponseModel> register({
+    required String name,
+    required String email,
+    required String password,
+  });
+}
+
 class LoginRegisterUsecase implements ILoginRegisterRepository {
   final LoginRegisterRemoteDatasource datasource;
 
@@ -12,17 +20,10 @@ class LoginRegisterUsecase implements ILoginRegisterRepository {
   @override
   Future<RegisterResponseModel> register({
     required String name,
-
     required String email,
-    required String phone,
     required String password,
   }) {
-    return datasource.register(
-      name: name,
-      email: email,
-      phone: phone,
-      password: password,
-    );
+    return datasource.register(name: name, email: email, password: password);
   }
 }
 

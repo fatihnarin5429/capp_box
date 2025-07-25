@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:bot_toast/bot_toast.dart';
 import 'package:capp_box/feature/create_capsul/model/create_capsule_body_model.dart';
 import 'package:capp_box/feature/create_capsul/model/create_capsule_response_model.dart';

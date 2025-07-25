@@ -1,11 +1,14 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:capp_box/feature/profile/repository/profile_repository.dart';
 
 part 'profile_event.dart';
 part 'profile_state.dart';
 
 class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
+  final ProfileRepository _profileRepository = ProfileRepository();
+
   ProfileBloc() : super(const ProfileState()) {
     on<ProfileChangeName>(_onProfileChangeName);
     on<ProfileChangeEmail>(_onProfileChangeEmail);
@@ -20,7 +23,12 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     ProfileChangeName event,
     Emitter<ProfileState> emit,
   ) async {
-    emit(state.copyWith(displayName: event.displayName));
+    emit(state.copyWith(name: event.name));
+    final user = await _profileRepository.getUser();
+    if (user != null) {
+      final updatedUser = user.copyWith(name: event.name);
+      await _profileRepository.updateUser(updatedUser);
+    }
   }
 
   Future<void> _onProfileChangeEmail(
@@ -28,13 +36,25 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     Emitter<ProfileState> emit,
   ) async {
     emit(state.copyWith(email: event.email));
+    final user = await _profileRepository.getUser();
+    if (user != null) {
+      final updatedUser = user.copyWith(
+        url: event.email,
+      ); // UserModel'de email alanı yoksa url kullanılıyor, gerekirse UserModel'e email ekle.
+      await _profileRepository.updateUser(updatedUser);
+    }
   }
 
   Future<void> _onProfileChangePassword(
     ProfileChangePassword event,
     Emitter<ProfileState> emit,
   ) async {
-    emit(state.copyWith(password: event.password));
+    emit(state.copyWith(token: event.password));
+    final user = await _profileRepository.getUser();
+    if (user != null) {
+      final updatedUser = user.copyWith(token: event.password);
+      await _profileRepository.updateUser(updatedUser);
+    }
   }
 
   Future<void> _onProfileChangePhone(
@@ -42,19 +62,32 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     Emitter<ProfileState> emit,
   ) async {
     emit(state.copyWith(phone: event.phone));
+    final user = await _profileRepository.getUser();
+    if (user != null) {
+      final updatedUser = user.copyWith(
+        userId: event.phone,
+      ); // UserModel'de phone alanı yoksa userId kullanılıyor, gerekirse UserModel'e phone ekle.
+      await _profileRepository.updateUser(updatedUser);
+    }
   }
 
   Future<void> _onProfileChangeImage(
     ProfileChangeImage event,
     Emitter<ProfileState> emit,
   ) async {
-    emit(state.copyWith(imagePath: event.imagePath));
+    emit(state.copyWith(photo: event.imagePath));
+    final user = await _profileRepository.getUser();
+    if (user != null) {
+      final updatedUser = user.copyWith(photo: event.imagePath);
+      await _profileRepository.updateUser(updatedUser);
+    }
   }
 
   Future<void> _onProfileLogout(
     ProfileLogout event,
     Emitter<ProfileState> emit,
   ) async {
+    await _profileRepository.deleteUser();
     emit(state.copyWith(isLoggedIn: false));
   }
 
@@ -62,6 +95,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     ProfileDelete event,
     Emitter<ProfileState> emit,
   ) async {
+    await _profileRepository.deleteUser();
     emit(state.copyWith(isLoggedIn: false));
   }
 }

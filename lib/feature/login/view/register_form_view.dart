@@ -12,7 +12,7 @@ class RegisterFormView extends StatelessWidget {
   final TextEditingController emailController;
   final TextEditingController passwordController;
   final TextEditingController passwordConfirmController;
-  final TextEditingController phoneController;
+
   final VoidCallback onRegisterSuccess;
   final TextEditingController nameController;
   const RegisterFormView({
@@ -21,7 +21,6 @@ class RegisterFormView extends StatelessWidget {
     required this.passwordConfirmController,
     required this.onRegisterSuccess,
     required this.nameController,
-    required this.phoneController,
 
     super.key,
   });
@@ -111,10 +110,15 @@ class RegisterFormView extends StatelessWidget {
       builder: (context, state) {
         return InkWell(
           onTap: () async {
-            if (emailController.text.isEmpty ||
-                passwordController.text.isEmpty ||
-                passwordConfirmController.text.isEmpty ||
-                phoneController.text.isEmpty) {
+            print('name: "' + nameController.text + '"');
+            print('email: "' + emailController.text + '"');
+
+            print('password: "' + passwordController.text + '"');
+            print('passwordConfirm: "' + passwordConfirmController.text + '"');
+            if (emailController.text.trim().isEmpty ||
+                passwordController.text.trim().isEmpty ||
+                passwordConfirmController.text.trim().isEmpty ||
+                nameController.text.trim().isEmpty) {
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
                   content: Text(context.tr('fill_all_fields', args: {})),
@@ -134,7 +138,7 @@ class RegisterFormView extends StatelessWidget {
               RegisterAction(
                 name: nameController.text,
                 email: emailController.text,
-                phone: phoneController.text,
+
                 password: passwordController.text,
               ),
             );
@@ -165,7 +169,6 @@ class RegisterFormView extends StatelessWidget {
                   fontSize: 14,
                   fontFamily: 'Urbanist',
                   fontWeight: FontWeight.w700,
-                  height: 1.70,
                 ),
               ),
             ),

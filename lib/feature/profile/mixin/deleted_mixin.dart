@@ -17,9 +17,7 @@ mixin ProfileMixin {
           confirmButtonText: context.tr('delete_account_button', args: {}),
           cancelButtonText: context.tr('cancel_button', args: {}),
           onConfirm: () {
-            context.read<ProfileBloc>().add(
-                  ProfileDelete(password: '', email: ''),
-                );
+            context.read<ProfileBloc>().add(const ProfileDelete());
             Navigator.pop(context);
           },
           onCancel: () => Navigator.pop(context),
@@ -40,9 +38,7 @@ mixin ProfileMixin {
           confirmButtonText: context.tr('logout_button', args: {}),
           cancelButtonText: context.tr('cancel_button', args: {}),
           onConfirm: () {
-            context.read<ProfileBloc>().add(
-                  ProfileLogout(email: '', password: ''),
-                );
+            context.read<ProfileBloc>().add(const ProfileLogout());
             Navigator.pop(context);
           },
           onCancel: () => Navigator.pop(context),

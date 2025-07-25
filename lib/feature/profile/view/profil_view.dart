@@ -48,8 +48,9 @@ class _ProfilViewState extends State<ProfilView>
                         leadingIcon: 'assets/icons/profile3.png',
                         title: localizations.translate('full_name'),
                         subtitle:
-                            state.displayName ??
-                            localizations.translate('full_name'),
+                            state.name.isNotEmpty
+                                ? state.name
+                                : localizations.translate('full_name'),
                         onTap:
                             () => Navigator.push(
                               context,
@@ -73,7 +74,8 @@ class _ProfilViewState extends State<ProfilView>
                       ProfileListTile(
                         leadingIcon: 'assets/icons/password.png',
                         title: localizations.translate('password'),
-                        subtitle: state.password ?? '**********',
+                        subtitle:
+                            state.token.isNotEmpty ? state.token : '**********',
                         onTap:
                             () => Navigator.push(
                               context,

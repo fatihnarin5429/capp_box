@@ -14,19 +14,14 @@ class LoginRegisterRemoteDatasource {
   Future<RegisterResponseModel> register({
     required String name,
     required String email,
-    required String phone,
+
     required String password,
   }) async {
     try {
       final path = ServicePath.register.value;
       final res = await client.post<Map<String, dynamic>>(
         path,
-        data: {
-          'name': name,
-          'email': email,
-          'password': password,
-          'phone': phone,
-        },
+        data: {'name': name, 'email': email, 'password': password},
         options: Options(
           headers: {
             'Content-Type': 'application/json',

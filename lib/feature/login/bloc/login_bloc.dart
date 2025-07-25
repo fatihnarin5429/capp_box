@@ -55,7 +55,6 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       final response = await loginRegisterUsecase.register(
         name: event.name,
         email: event.email,
-        phone: event.phone,
 
         password: event.password,
       );

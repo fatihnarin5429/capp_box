@@ -23,7 +23,7 @@ class _NameViewState extends State<NameView> {
   Widget build(BuildContext context) {
     return BlocBuilder<ProfileBloc, ProfileState>(
       builder: (context, state) {
-        _nameController.text = state.displayName ?? "";
+        _nameController.text = state.name;
         return Scaffold(
           body: Stack(
             children: [
@@ -93,7 +93,7 @@ class _NameViewState extends State<NameView> {
     return BuilEditButton(
       targetRouteOnpressed: () {
         context.read<ProfileBloc>().add(
-          ProfileChangeName(displayName: _nameController.text),
+          ProfileChangeName(name: _nameController.text),
         );
         Navigator.of(context).pushNamedAndRemoveUntil('/', (route) => false);
         // HomePage'i ProfileView seçili olarak aç

@@ -161,7 +161,6 @@ class _LoginViewState extends State<LoginView> with TickerProviderStateMixin {
       children: [
         SingleChildScrollView(
           child: RegisterFormView(
-            phoneController: _phoneController,
             emailController: _emailController,
             passwordController: _passwordController,
             passwordConfirmController: _passwordConfirmController,

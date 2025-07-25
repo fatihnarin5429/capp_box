@@ -2,62 +2,64 @@ part of 'profile_bloc.dart';
 
 final class ProfileState extends Equatable {
   const ProfileState({
-    this.displayName = '',
-    this.email = '',
-    this.currentPassword = '',
-    this.newPassword = '',
-    this.phone = '',
-    this.error,
     this.name = '',
-    this.password = '',
-    this.imagePath,
+    this.email = '',
+    this.phone = '',
+    this.photo = '',
+    this.userId = '',
+    this.token = '',
+    this.isFirst = false,
+    this.error,
     this.isLoggedIn = false,
     this.isDeleted = false,
   });
 
-  final String displayName;
+  final String name;
   final String email;
   final String phone;
-  final String currentPassword;
-  final String newPassword;
+  final String photo;
+  final String userId;
+  final String token;
+  final bool isFirst;
   final String? error;
-  final String? name;
-  final String password;
-  final String? imagePath;
   final bool isLoggedIn;
   final bool isDeleted;
+
   @override
   List<Object?> get props => [
-    displayName,
+    name,
     email,
     phone,
+    photo,
+    userId,
+    token,
+    isFirst,
     error,
-    name,
-    password,
-    imagePath,
     isLoggedIn,
     isDeleted,
   ];
 
   ProfileState copyWith({
-    String? displayName,
+    String? name,
     String? email,
     String? phone,
-    String? name,
+    String? photo,
+    String? userId,
+    String? token,
+    bool? isFirst,
     String? error,
-    String? password,
     bool? isLoggedIn,
     bool? isDeleted,
-    String? imagePath,
   }) {
     return ProfileState(
-      displayName: displayName ?? this.displayName,
+      name: name ?? this.name,
       email: email ?? this.email,
       phone: phone ?? this.phone,
-      name: name ?? this.name,
+      photo: photo ?? this.photo,
+      userId: userId ?? this.userId,
+      token: token ?? this.token,
+      isFirst: isFirst ?? this.isFirst,
       error: error ?? this.error,
-      password: password ?? this.password,
-      imagePath: imagePath ?? this.imagePath,
       isLoggedIn: isLoggedIn ?? this.isLoggedIn,
       isDeleted: isDeleted ?? this.isDeleted,
     );
