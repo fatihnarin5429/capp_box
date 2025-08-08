@@ -1,4 +1,4 @@
-package com.example.capp_box
+package com.zendey.cappbox
 
 import io.flutter.embedding.android.FlutterActivity
 

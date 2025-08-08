@@ -1,3 +1,4 @@
+import 'package:capp_box/core/service/auth_service.dart';
 import 'package:capp_box/feature/home/view/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -17,6 +18,7 @@ mixin Onboard2Mixin<T extends StatefulWidget> on State<T> {
       children: [
         buildOutlinedButton(
           onPressed: () {
+            AuthService().signInWithApple();
             setState(() {
               selectedButtonIndex = 0;
             });
@@ -37,6 +39,7 @@ mixin Onboard2Mixin<T extends StatefulWidget> on State<T> {
         const SizedBox(height: 12),
         buildOutlinedButton(
           onPressed: () {
+            AuthService().signInWithGoogle();
             setState(() {
               selectedButtonIndex = 1;
             });

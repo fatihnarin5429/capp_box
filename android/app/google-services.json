@@ -14,7 +14,7 @@
       },
       "oauth_client": [
         {
-          "client_id": "844098176129-9nq8psdgi1icruqor8fjub50e5qv90bl.apps.googleusercontent.com",
+          "client_id": "85488913814-7h13auq7vmghho8sffaae6a8odd0be2h.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
@@ -25,7 +25,55 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "85488913814-7h13auq7vmghho8sffaae6a8odd0be2h.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "85488913814-83lck16sgtd3ss2m3h3gn0r61c52tiqu.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.zendey.cappbox"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:85488913814:android:e1617bb8a10d3e792361b7",
+        "android_client_info": {
+          "package_name": "com.zendey.cappbox"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "85488913814-7h13auq7vmghho8sffaae6a8odd0be2h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB7BmhpnAjG4bTab6XrwXDFO6hnbTAOjiI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "85488913814-7h13auq7vmghho8sffaae6a8odd0be2h.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "85488913814-83lck16sgtd3ss2m3h3gn0r61c52tiqu.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.zendey.cappbox"
+              }
+            }
+          ]
         }
       }
     }

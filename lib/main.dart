@@ -2,6 +2,7 @@ import 'package:bot_toast/bot_toast.dart';
 import 'package:capp_box/core/l10n/app_localizations.dart';
 import 'package:capp_box/core/service/auth_service.dart';
 import 'package:capp_box/core/service/language_service.dart';
+import 'package:capp_box/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:capp_box/feature/create_capsul/bloc/create_capsule_bloc.dart';
 import 'package:capp_box/feature/create_capsul/view/create_capsule_choose_view.dart';
@@ -31,7 +32,7 @@ void main() async {
   await dotenv.load(fileName: ".env.cappbox");
 
   // Initialize Firebase
-  await Firebase.initializeApp();
+  Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
   // Initialize language service
   final languageService = LanguageService();
