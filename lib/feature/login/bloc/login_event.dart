@@ -21,13 +21,11 @@ class LogoutAction extends LoginEvent {}
 class RegisterAction extends LoginEvent {
   final String name;
   final String email;
-
   final String password;
 
   const RegisterAction({
     required this.name,
     required this.email,
-
     required this.password,
   });
 
@@ -42,3 +40,20 @@ class LoginChangePhone extends LoginEvent {
   @override
   List<Object?> get props => [phone];
 }
+
+// Firebase Authentication Events
+class AppleSignInAction extends LoginEvent {}
+
+class GoogleSignInAction extends LoginEvent {}
+
+class EmailPasswordLoginAction extends LoginEvent {
+  final String email;
+  final String password;
+
+  const EmailPasswordLoginAction({required this.email, required this.password});
+
+  @override
+  List<Object?> get props => [email, password];
+}
+
+class CheckAuthStatusAction extends LoginEvent {}

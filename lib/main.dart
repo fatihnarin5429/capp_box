@@ -1,6 +1,8 @@
 import 'package:bot_toast/bot_toast.dart';
 import 'package:capp_box/core/l10n/app_localizations.dart';
+import 'package:capp_box/core/service/auth_service.dart';
 import 'package:capp_box/core/service/language_service.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:capp_box/feature/create_capsul/bloc/create_capsule_bloc.dart';
 import 'package:capp_box/feature/create_capsul/view/create_capsule_choose_view.dart';
 import 'package:capp_box/feature/home/bloc/home_bloc.dart' as home_bloc;
@@ -27,6 +29,10 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await dotenv.load(fileName: ".env.cappbox");
+
+  // Initialize Firebase
+  await Firebase.initializeApp();
+
   // Initialize language service
   final languageService = LanguageService();
   await languageService.init();
@@ -35,7 +41,9 @@ void main() async {
     MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => ProfileBloc()),
-        BlocProvider(create: (context) => LoginBloc()),
+        BlocProvider(
+          create: (context) => LoginBloc(authService: AuthService()),
+        ),
         BlocProvider(create: (context) => CreateCapsuleBloc()),
         BlocProvider(create: (context) => home_bloc.HomeBloc()),
         BlocProvider(create: (context) => LandingBloc()),

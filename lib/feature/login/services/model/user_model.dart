@@ -16,6 +16,7 @@ final class UserModel with EquatableMixin, HiveModelMixin {
     this.name,
     this.photo,
     this.userId,
+    this.email,
     this.token,
     this.isFirst,
   });
@@ -36,20 +37,23 @@ final class UserModel with EquatableMixin, HiveModelMixin {
   @HiveField(3)
   final String? userId;
   @HiveField(4)
-  final String? token;
+  final String? email;
   @HiveField(5)
+  final String? token;
+  @HiveField(6)
   final bool? isFirst;
 
   Map<String, dynamic> toJson() => _$UserModelToJson(this);
 
   @override
-  List<Object?> get props => [url, name, photo, userId, token, isFirst];
+  List<Object?> get props => [url, name, photo, userId, email, token, isFirst];
 
   UserModel copyWith({
     String? url,
     String? name,
     String? photo,
     String? userId,
+    String? email,
     String? token,
     bool? isFirst,
   }) {
@@ -58,6 +62,7 @@ final class UserModel with EquatableMixin, HiveModelMixin {
       name: name ?? this.name,
       photo: photo ?? this.photo,
       userId: userId ?? this.userId,
+      email: email ?? this.email,
       token: token ?? this.token,
       isFirst: isFirst ?? this.isFirst,
     );
