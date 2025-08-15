@@ -19,7 +19,6 @@ class LoginView extends StatefulWidget {
 
 class _LoginViewState extends State<LoginView> with TickerProviderStateMixin {
   late TabController _tabController;
-  final TextEditingController _phoneController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _nameController = TextEditingController();

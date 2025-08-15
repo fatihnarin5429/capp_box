@@ -13,69 +13,70 @@ class Onboard2View extends StatefulWidget {
 class _Onboard2ViewState extends State<Onboard2View> with Onboard2Mixin {
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+
     return Scaffold(
       body: Container(
         width: double.infinity,
+        height: double.infinity,
         decoration: const BoxDecoration(
           gradient: LinearGradient(
-            colors: [
-              ColorConst.backgroundColor,
-              ColorConst.backgroundColor,
-            ],
+            colors: [ColorConst.backgroundColor, ColorConst.backgroundColor],
           ),
         ),
         child: SingleChildScrollView(
-          // Kaydırılabilir ekran
-          physics:
-              const BouncingScrollPhysics(), // iOS ve Android için güzel kaydırma efekti
-          child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 60),
-            child: Container(
-              width: double.infinity,
+          physics: const BouncingScrollPhysics(),
+          child: Center(
+            child: ConstrainedBox(
               constraints: BoxConstraints(
-                minHeight: MediaQuery.of(context).size.height, // Taşmayı önler
+                minHeight: size.height,
+                maxWidth: 400,
               ),
-              padding: const EdgeInsets.symmetric(
-                  horizontal: 20), // Kenarlardan padding ekledik
               child: Padding(
-                padding: const EdgeInsets.symmetric(vertical: 40),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 20,
+                  vertical: 60,
+                ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
+                    // Logo
                     Image.asset(
                       'assets/images/logocappbox.png',
-                      width: 200,
-                      height: 200,
+                      width: 180,
+                      height: 180,
                     ),
+                    const SizedBox(height: 30),
 
+                    // Yüklenme animasyonu veya metin
                     isLoading
-                        ? const CircularProgressIndicator()
+                        ? const CircularProgressIndicator(color: Colors.white)
                         : SizedBox(
-                            width: 322,
-                            child: Text.rich(
-                              TextSpan(
-                                children: [
-                                  TextSpan(
-                                    text: context
-                                        .tr('remember_your_memories', args: {}),
-                                    style: _textStyle(20),
+                          width: 322,
+                          child: Text.rich(
+                            TextSpan(
+                              children: [
+                                TextSpan(
+                                  text: context.tr(
+                                    'remember_your_memories',
+                                    args: {},
                                   ),
-                                  TextSpan(
-                                    text:
-                                        context.tr('carry_to_future', args: {}),
-                                    style: _textStyle(32),
-                                  ),
-                                ],
-                              ),
-                              textAlign: TextAlign.center,
+                                  style: _textStyle(20),
+                                ),
+                                TextSpan(
+                                  text: context.tr('carry_to_future', args: {}),
+                                  style: _textStyle(32),
+                                ),
+                              ],
                             ),
+                            textAlign: TextAlign.center,
                           ),
-                    // Butonlar için boşluk
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 40),
-                      child: buildAuthButtons(),
-                    ),
-                    // En altta biraz boşluk bırak
+                        ),
+
+                    const SizedBox(height: 40),
+
+                    // Giriş butonları (Apple, Google, Email, Phone)
+                    buildAuthButtons(),
                   ],
                 ),
               ),
@@ -94,6 +95,20 @@ class _Onboard2ViewState extends State<Onboard2View> with Onboard2Mixin {
       fontWeight: FontWeight.w700,
       letterSpacing: -0.32,
       height: 1.25,
+    );
+  }
+
+  @override
+  void _showErr(String msg) {
+    // Burada mixin'deki metodu override edip snackbar ile gösterebiliriz
+    if (!mounted) return;
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(msg),
+        backgroundColor: Colors.redAccent,
+        behavior: SnackBarBehavior.floating,
+        margin: const EdgeInsets.all(16),
+      ),
     );
   }
 }

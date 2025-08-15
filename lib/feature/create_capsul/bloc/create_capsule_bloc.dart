@@ -43,7 +43,7 @@ class CreateCapsuleBloc extends Bloc<CreateCapsuleEvent, CreateCapsuleState> {
         createCapsuleBodyModel: event.createCapsuleBodyModel,
       ),
     );
-    print(state.createCapsuleBodyModel?.toJson());
+    print(state.createCapsuleBodyModel.toJson());
   }
 
   // Future<void> onCreateCapsuleResponseAction(
@@ -71,7 +71,7 @@ class CreateCapsuleBloc extends Bloc<CreateCapsuleEvent, CreateCapsuleState> {
     CreateCapsuleSubmitAction event,
     Emitter<CreateCapsuleState> emit,
   ) async {
-    final userModel = hiveDatabaseManager.getUserModel();
+    final userModel = await hiveDatabaseManager.getUserModel();
     print('tokenennnnn ${userModel?.token}');
     emit(state.copyWith(status: StatusEnum.loading));
     try {

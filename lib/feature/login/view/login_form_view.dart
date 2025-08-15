@@ -148,117 +148,6 @@ class _LoginFormViewState extends State<LoginFormView> with LoginMixin {
                 ),
               ),
               const SizedBox(height: 20),
-              // Apple Sign-In Butonu
-              BlocBuilder<LoginBloc, LoginState>(
-                builder: (context, state) {
-                  return InkWell(
-                    onTap:
-                        state.status == StatusEnum.loading
-                            ? null
-                            : () {
-                              context.read<LoginBloc>().add(
-                                AppleSignInAction(),
-                              );
-                            },
-                    child: Container(
-                      width: double.infinity,
-                      height: 56,
-                      decoration: BoxDecoration(
-                        color:
-                            state.status == StatusEnum.loading
-                                ? Colors.grey
-                                : Colors.black,
-                        borderRadius: BorderRadius.circular(100),
-                      ),
-                      child: Center(
-                        child:
-                            state.status == StatusEnum.loading
-                                ? const CircularProgressIndicator(
-                                  color: Colors.white,
-                                  strokeWidth: 2,
-                                )
-                                : Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    const Icon(
-                                      Icons.apple,
-                                      color: Colors.white,
-                                      size: 24,
-                                    ),
-                                    const SizedBox(width: 8),
-                                    Text(
-                                      'Apple ile Giriş Yap',
-                                      style: const TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 14,
-                                        fontFamily: 'Urbanist',
-                                        fontWeight: FontWeight.w700,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                      ),
-                    ),
-                  );
-                },
-              ),
-              const SizedBox(height: 12),
-              // Google Sign-In Butonu
-              BlocBuilder<LoginBloc, LoginState>(
-                builder: (context, state) {
-                  return InkWell(
-                    onTap:
-                        state.status == StatusEnum.loading
-                            ? null
-                            : () {
-                              context.read<LoginBloc>().add(
-                                GoogleSignInAction(),
-                              );
-                            },
-                    child: Container(
-                      width: double.infinity,
-                      height: 56,
-                      decoration: BoxDecoration(
-                        color:
-                            state.status == StatusEnum.loading
-                                ? Colors.grey.shade200
-                                : Colors.white,
-                        borderRadius: BorderRadius.circular(100),
-                        border: Border.all(color: Colors.grey.shade300),
-                      ),
-                      child: Center(
-                        child:
-                            state.status == StatusEnum.loading
-                                ? const CircularProgressIndicator(
-                                  color: Colors.grey,
-                                  strokeWidth: 2,
-                                )
-                                : Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Image.asset(
-                                      'assets/icons/google.svg',
-                                      height: 24,
-                                      width: 24,
-                                    ),
-                                    const SizedBox(width: 8),
-                                    Text(
-                                      'Google ile Giriş Yap',
-                                      style: TextStyle(
-                                        color: Colors.grey.shade800,
-                                        fontSize: 14,
-                                        fontFamily: 'Urbanist',
-                                        fontWeight: FontWeight.w700,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                      ),
-                    ),
-                  );
-                },
-              ),
-              const SizedBox(height: 20),
               // Email/Password ile Giriş Butonu
               BlocBuilder<LoginBloc, LoginState>(
                 builder: (context, state) {
@@ -297,20 +186,15 @@ class _LoginFormViewState extends State<LoginFormView> with LoginMixin {
                           borderRadius: BorderRadius.circular(100),
                         ),
                         child: Center(
-                          child:
-                              state.status == StatusEnum.loading
-                                  ? const CircularProgressIndicator(
-                                    color: Colors.white,
-                                  )
-                                  : Text(
-                                    context.tr('login_button', args: {}),
-                                    style: const TextStyle(
-                                      color: Color(0xFFE5E5E5),
-                                      fontSize: 14,
-                                      fontFamily: 'Urbanist',
-                                      fontWeight: FontWeight.w700,
-                                    ),
-                                  ),
+                          child: Text(
+                            context.tr('login_button', args: {}),
+                            style: const TextStyle(
+                              color: Color(0xFFE5E5E5),
+                              fontSize: 14,
+                              fontFamily: 'Urbanist',
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
                         ),
                       ),
                     ),

@@ -29,8 +29,19 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     HomeGetCapsules event,
     Emitter<HomeState> emit,
   ) async {
-    GetCapsulesResponseModel capsules = await homeUsecase.fetchCapsules();
-    emit(state.copyWith(capsules: capsules.data));
+    try {
+      GetCapsulesResponseModel capsules = await homeUsecase.fetchCapsules();
+      emit(state.copyWith(capsules: capsules.data));
+    } catch (e) {
+      print('Kapsüller getirilirken hata: $e');
+      // Kullanıcı giriş yapmamışsa sessizce geç, hata gösterme
+      if (e.toString().contains('Lütfen giriş yapın')) {
+        emit(state.copyWith(capsules: []));
+      } else {
+        // Diğer hatalar için state'i güncelle
+        emit(state.copyWith(capsules: []));
+      }
+    }
   }
 
   // Future<void> _onCapsuleSearch(

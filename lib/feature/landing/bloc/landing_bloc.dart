@@ -27,12 +27,12 @@ class LandingBloc extends Bloc<LandingEvent, LandingState> {
     }
   }
 
-  void _onLandingCheckUserEvent(
+  Future<void> _onLandingCheckUserEvent(
     LandingCheckUserEvent event,
     Emitter<LandingState> emit,
-  ) {
+  ) async {
     try {
-      final user = hiveDatabaseManager.getUserModel();
+      final user = await hiveDatabaseManager.getUserModel();
       print('user: $user');
 
       if (user != null && user.token?.isNotEmpty == true) {

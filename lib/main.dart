@@ -3,6 +3,7 @@ import 'package:capp_box/core/l10n/app_localizations.dart';
 import 'package:capp_box/core/service/auth_service.dart';
 import 'package:capp_box/core/service/language_service.dart';
 import 'package:capp_box/firebase_options.dart';
+import 'package:capp_box/product/database/hive/core/hive_database_manager.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:capp_box/feature/create_capsul/bloc/create_capsule_bloc.dart';
 import 'package:capp_box/feature/create_capsul/view/create_capsule_choose_view.dart';
@@ -26,9 +27,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Hive.initFlutter();
+
+  // HiveDatabaseManager'ı başlat
+  final hiveDatabaseManager = HiveDatabaseManager();
+  await hiveDatabaseManager.init();
+
   await dotenv.load(fileName: ".env.cappbox");
 
   // Initialize Firebase

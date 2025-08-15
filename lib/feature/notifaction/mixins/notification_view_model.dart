@@ -9,7 +9,7 @@ mixin NotificationViewModel<T extends StatefulWidget> on State<T> {
     return List.generate(
       20,
       (index) => {
-        "name": "Ted Mosby",
+        "name": "Capp Box",
         "message": context.tr('notification_sent_capsule_message'),
         "date": context.formatDate(futureDate),
         "image": "https://placehold.co/40x40",

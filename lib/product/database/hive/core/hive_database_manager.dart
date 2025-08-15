@@ -27,7 +27,7 @@ final class HiveDatabaseManager {
 
   Future<void> setFirst() async {
     // Mevcut user modelini al
-    final existingUser = getUserModel();
+    final existingUser = await getUserModel();
     if (existingUser != null) {
       // Mevcut user bilgilerini koruyarak sadece isFirst'ü güncelle
       final updatedUser = existingUser.copyWith(isFirst: true);
@@ -47,7 +47,7 @@ final class HiveDatabaseManager {
     await userModelBoxHive.put(HiveDatabaseConstants.userModel, userModel);
   }
 
-  UserModel? getUserModel() {
+  Future<UserModel?> getUserModel() async {
     try {
       print('Getting user model from Hive...');
       final user = userModelBoxHive.get(HiveDatabaseConstants.userModel);

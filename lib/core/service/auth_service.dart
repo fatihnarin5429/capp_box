@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:math';
+import 'dart:io';
 
 import 'package:crypto/crypto.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -7,7 +8,28 @@ import 'package:flutter/foundation.dart' show kIsWeb, debugPrint;
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
-/// Güvenli nonce üretir (Apple için)
+/// Durumlar
+enum AuthStatus {
+  success,
+  cancelled,
+  configError,
+  networkError,
+  unauthorized,
+  unknown,
+}
+
+/// Tek tip sonuç modeli
+class AuthResult {
+  final AuthStatus status;
+  final String? message;
+  final User? user;
+
+  const AuthResult(this.status, {this.message, this.user});
+
+  bool get isSuccess => status == AuthStatus.success;
+}
+
+/// Nonce üret (Apple için)
 String _generateNonce([int length = 32]) {
   const charset =
       '0123456789ABCDEFGHIJKLMNOPQRSTUVXYZabcdefghijklmnopqrstuvwxyz-._';
@@ -18,7 +40,7 @@ String _generateNonce([int length = 32]) {
   ).join();
 }
 
-/// String'in sha256 hash'i (hex)
+/// sha256 hash (Apple için)
 String _sha256ofString(String input) {
   final bytes = utf8.encode(input);
   final digest = sha256.convert(bytes);
@@ -26,13 +48,10 @@ String _sha256ofString(String input) {
 }
 
 abstract class IAuthService {
-  Future<UserCredential?> signInWithApple();
-  Future<UserCredential?> signInWithGoogle();
-  Future<UserCredential?> signInWithEmailPassword(
-    String email,
-    String password,
-  );
-  Future<UserCredential?> createUserWithEmailAndPassword(
+  Future<AuthResult> signInWithApple();
+  Future<AuthResult> signInWithGoogle();
+  Future<AuthResult> signInWithEmailPassword(String email, String password);
+  Future<AuthResult> createUserWithEmailAndPassword(
     String email,
     String password,
   );
@@ -52,67 +71,87 @@ class AuthService implements IAuthService {
   final GoogleSignIn _googleSignIn = GoogleSignIn();
 
   @override
-  Future<UserCredential?> signInWithApple() async {
+  Future<AuthResult> signInWithApple() async {
+    if (!Platform.isIOS) {
+      return const AuthResult(
+        AuthStatus.configError,
+        message: 'Apple girişi sadece iOS’ta destekleniyor.',
+      );
+    }
     try {
-      final available = await SignInWithApple.isAvailable();
-      if (!available) {
-        debugPrint('Apple Sign-In bu platformda desteklenmiyor.');
-        return null;
+      if (!await SignInWithApple.isAvailable()) {
+        return const AuthResult(
+          AuthStatus.configError,
+          message: 'Apple Sign-In bu cihazda desteklenmiyor.',
+        );
       }
 
       final rawNonce = _generateNonce();
       final nonce = _sha256ofString(rawNonce);
 
       final appleCredential = await SignInWithApple.getAppleIDCredential(
-        scopes: const [
+        scopes: [
           AppleIDAuthorizationScopes.email,
           AppleIDAuthorizationScopes.fullName,
         ],
         nonce: nonce,
       );
 
-      final oauthCredential = OAuthProvider(
+      final oauth = OAuthProvider(
         'apple.com',
       ).credential(idToken: appleCredential.identityToken, rawNonce: rawNonce);
 
-      final userCred = await _auth.signInWithCredential(oauthCredential);
+      final userCred = await _auth.signInWithCredential(oauth);
 
-      // İlk girişte isim güncelle
+      // İsim ekleme (ilk giriş)
       if (userCred.user != null &&
           (userCred.user!.displayName == null ||
               userCred.user!.displayName!.isEmpty)) {
         final fullName = [
           appleCredential.givenName,
           appleCredential.familyName,
-        ].where((e) => e != null && e!.isNotEmpty).join(' ');
+        ].where((e) => e != null && e.isNotEmpty).join(' ');
         if (fullName.isNotEmpty) {
           await userCred.user!.updateDisplayName(fullName);
         }
       }
 
-      return userCred;
-    } on FirebaseAuthException catch (e) {
-      debugPrint(
-        'Apple Sign-In FirebaseAuthException: ${e.code} - ${e.message}',
+      return AuthResult(AuthStatus.success, user: userCred.user);
+    } on SignInWithAppleAuthorizationException catch (e) {
+      if (e.code == AuthorizationErrorCode.canceled) {
+        return const AuthResult(
+          AuthStatus.cancelled,
+          message: 'Apple girişi iptal edildi.',
+        );
+      }
+      return const AuthResult(
+        AuthStatus.configError,
+        message: 'Apple girişi yapılandırma hatası.',
       );
-      return null;
+    } on FirebaseAuthException catch (e) {
+      return AuthResult(_mapStatus(e.code), message: _mapFirebaseMessage(e));
     } catch (e) {
-      debugPrint('Apple Sign-In hatası: $e');
-      return null;
+      return AuthResult(
+        AuthStatus.unknown,
+        message: 'Apple girişi başarısız: $e',
+      );
     }
   }
 
   @override
-  Future<UserCredential?> signInWithGoogle() async {
+  Future<AuthResult> signInWithGoogle() async {
     try {
       if (kIsWeb) {
         final provider = GoogleAuthProvider();
-        return await _auth.signInWithPopup(provider);
+        final cred = await _auth.signInWithPopup(provider);
+        return AuthResult(AuthStatus.success, user: cred.user);
       } else {
         final googleUser = await _googleSignIn.signIn();
         if (googleUser == null) {
-          debugPrint('Google Sign-In iptal edildi.');
-          return null;
+          return const AuthResult(
+            AuthStatus.cancelled,
+            message: 'Google girişi iptal edildi.',
+          );
         }
 
         final googleAuth = await googleUser.authentication;
@@ -120,48 +159,52 @@ class AuthService implements IAuthService {
           accessToken: googleAuth.accessToken,
           idToken: googleAuth.idToken,
         );
-        return await _auth.signInWithCredential(credential);
+        final cred = await _auth.signInWithCredential(credential);
+        return AuthResult(AuthStatus.success, user: cred.user);
       }
     } on FirebaseAuthException catch (e) {
-      debugPrint(
-        'Google Sign-In FirebaseAuthException: ${e.code} - ${e.message}',
-      );
-      return null;
+      return AuthResult(_mapStatus(e.code), message: _mapFirebaseMessage(e));
     } catch (e) {
-      debugPrint('Google Sign-In hatası: $e');
-      return null;
+      return AuthResult(
+        AuthStatus.unknown,
+        message: 'Google girişi başarısız: $e',
+      );
     }
   }
 
   @override
-  Future<UserCredential?> signInWithEmailPassword(
+  Future<AuthResult> signInWithEmailPassword(
     String email,
     String password,
   ) async {
     try {
-      return await _auth.signInWithEmailAndPassword(
+      final cred = await _auth.signInWithEmailAndPassword(
         email: email,
         password: password,
       );
+      return AuthResult(AuthStatus.success, user: cred.user);
+    } on FirebaseAuthException catch (e) {
+      return AuthResult(_mapStatus(e.code), message: _mapFirebaseMessage(e));
     } catch (e) {
-      debugPrint('Email/Password Sign-In hatası: $e');
-      return null;
+      return AuthResult(AuthStatus.unknown, message: 'Email girişi hatası: $e');
     }
   }
 
   @override
-  Future<UserCredential?> createUserWithEmailAndPassword(
+  Future<AuthResult> createUserWithEmailAndPassword(
     String email,
     String password,
   ) async {
     try {
-      return await _auth.createUserWithEmailAndPassword(
+      final cred = await _auth.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );
+      return AuthResult(AuthStatus.success, user: cred.user);
+    } on FirebaseAuthException catch (e) {
+      return AuthResult(_mapStatus(e.code), message: _mapFirebaseMessage(e));
     } catch (e) {
-      debugPrint('Email/Password Registration hatası: $e');
-      return null;
+      return AuthResult(AuthStatus.unknown, message: 'Kayıt hatası: $e');
     }
   }
 
@@ -175,7 +218,7 @@ class AuthService implements IAuthService {
       }
       await _auth.signOut();
     } catch (e) {
-      debugPrint('SignOut hatası: $e');
+      debugPrint('Çıkış hatası: $e');
     }
   }
 
@@ -204,6 +247,32 @@ class AuthService implements IAuthService {
     } catch (e) {
       debugPrint('ID Token alma hatası: $e');
       return null;
+    }
+  }
+
+  // --- Yardımcı mapping fonksiyonları ---
+  AuthStatus _mapStatus(String code) {
+    switch (code) {
+      case 'network-request-failed':
+        return AuthStatus.networkError;
+      case 'user-disabled':
+      case 'operation-not-allowed':
+        return AuthStatus.unauthorized;
+      default:
+        return AuthStatus.unknown;
+    }
+  }
+
+  String _mapFirebaseMessage(FirebaseAuthException e) {
+    switch (e.code) {
+      case 'network-request-failed':
+        return 'İnternet bağlantısı yok.';
+      case 'account-exists-with-different-credential':
+        return 'Bu e-posta başka bir sağlayıcı ile kayıtlı.';
+      case 'invalid-credential':
+        return 'Geçersiz kimlik bilgisi.';
+      default:
+        return 'Hata: ${e.message ?? e.code}';
     }
   }
 }
