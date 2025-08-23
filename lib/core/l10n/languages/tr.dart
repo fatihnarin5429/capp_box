@@ -419,4 +419,23 @@ final Map<String, String> tr = {
   "country_hint": "Ülke adını girin",
 
   "phone_number_hint": "Telefon numaranızı girin",
+
+  // Media Selection
+  "photo_selection": "Fotoğraf Seçimi",
+  "video_selection": "Video Seçimi",
+  "audio_selection": "Ses Seçimi",
+  "text_selection": "Metin Seçimi",
+  "select_photo": "Fotoğraf Seç",
+  "select_video": "Video Seç",
+  "select_audio": "Ses Seç",
+  "write_text": "Metin Yaz",
+  "feature_not_available": "Bu özellik henüz mevcut değil",
+  "file_selection_error": "Dosya seçilirken bir hata oluştu",
+  "tap_to_select": "Seçmek için dokunun",
+  "reset": "Sıfırla",
+  "selected": "Dosya seçildi",
+  "change": "Değiştir",
+  "remove": "Kaldır",
+  "save_error": "Kaydetme hatası",
+  "fit_toggle": "Kapla / Sığdır",
 };

@@ -4,8 +4,6 @@ import 'package:capp_box/core/l10n/languages/tr.dart';
 import 'package:capp_box/core/l10n/languages/de.dart';
 import 'package:capp_box/core/l10n/languages/it.dart';
 import 'package:capp_box/core/l10n/languages/pt.dart';
-import 'package:capp_box/core/l10n/languages/hi.dart';
-import 'package:capp_box/core/l10n/languages/zh.dart';
 import 'package:capp_box/core/l10n/languages/ru.dart';
 
 class AppLocalizations {
@@ -40,12 +38,6 @@ class AppLocalizations {
       case 'pt':
         _localizedStrings = pt;
         break;
-      case 'hi':
-        _localizedStrings = hi;
-        break;
-      case 'zh':
-        _localizedStrings = zh;
-        break;
       case 'ru':
         _localizedStrings = ru;
         break;
@@ -75,8 +67,14 @@ class _AppLocalizationsDelegate
 
   @override
   bool isSupported(Locale locale) {
-    return ['en', 'tr', 'de', 'it', 'pt', 'hi', 'zh', 'ru']
-        .contains(locale.languageCode);
+    return [
+      'en',
+      'tr',
+      'de',
+      'it',
+      'pt',
+      'ru',
+    ].contains(locale.languageCode);
   }
 
   @override

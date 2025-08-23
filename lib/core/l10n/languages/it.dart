@@ -152,8 +152,7 @@ final Map<String, String> it = {
   'german': 'Tedesco',
   'italian': 'Italiano',
   'portuguese': 'Portoghese',
-  'hindi': 'Hindi',
-  'chinese': 'Cinese',
+
   'russian': 'Russo',
   'language_changed': 'Lingua cambiata con successo',
 
@@ -277,4 +276,23 @@ final Map<String, String> it = {
   'price_video_capsule': '24,99 €',
   'price_audio_capsule': '14,99 €',
   'price_photo_capsule': '9,99 €',
+
+  // Media Selection
+  'photo_selection': 'Selezione foto',
+  'video_selection': 'Selezione video',
+  'audio_selection': 'Selezione audio',
+  'text_selection': 'Selezione testo',
+  'select_photo': 'Seleziona foto',
+  'select_video': 'Seleziona video',
+  'select_audio': 'Seleziona audio',
+  'write_text': 'Scrivi testo',
+  'feature_not_available': 'Questa funzionalità non è ancora disponibile',
+  'file_selection_error': 'Errore nella selezione del file',
+  'tap_to_select': 'Tocca per selezionare',
+  'reset': 'Ripristina',
+  'selected': 'File selezionato',
+  'change': 'Cambia',
+  'remove': 'Rimuovi',
+  'save_error': 'Errore di salvataggio',
+  'fit_toggle': 'Adatta / Copri',
 };

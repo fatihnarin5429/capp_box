@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:bot_toast/bot_toast.dart';
 import 'package:capp_box/core/l10n/app_localizations.dart';
 import 'package:capp_box/core/service/auth_service.dart';
@@ -19,6 +20,7 @@ import 'package:capp_box/feature/login/view/login_view.dart';
 import 'package:capp_box/feature/login/view/phone_login_view.dart';
 import 'package:capp_box/feature/notifaction/notifaction_view.dart';
 import 'package:capp_box/feature/onboard/view/onboard1_view.dart';
+import 'package:capp_box/feature/onboard/view/onboard2_view.dart';
 import 'package:capp_box/feature/profile/bloc/profile_bloc.dart';
 import 'package:capp_box/feature/profile/view/profil_view.dart';
 import 'package:capp_box/feature/settings/view/language_settings_view.dart';
@@ -72,27 +74,40 @@ class MyApp extends StatefulWidget {
 }
 
 class MyAppState extends State<MyApp> {
-  // late Locale _currentLocale;
+  late Locale _currentLocale;
+  StreamSubscription<Locale>? _languageSubscription;
 
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   _currentLocale = widget.languageService.currentLocale;
-  // }
+  @override
+  void initState() {
+    super.initState();
+    _currentLocale = widget.languageService.currentLocale;
 
-  // void setLocale(Locale locale) async {
-  //   await widget.languageService.setLocale(locale);
-  //   setState(() {
-  //     _currentLocale = locale;
-  //   });
-  // }
+    // Listen to language changes
+    _languageSubscription = widget.languageService.localeStream.listen((
+      locale,
+    ) {
+      setState(() {
+        _currentLocale = locale;
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    _languageSubscription?.cancel();
+    super.dispose();
+  }
+
+  void setLocale(Locale locale) async {
+    await widget.languageService.setLocale(locale);
+  }
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Capp Box',
-      // locale: _currentLocale,
+      locale: _currentLocale,
       theme: ThemeData(
         brightness: Brightness.light,
         fontFamily: 'Poppins',
@@ -118,6 +133,7 @@ class MyAppState extends State<MyApp> {
       initialRoute: '/onboard1',
       routes: {
         '/onboard1': (context) => const Onboard1View(),
+        '/onboard2': (context) => const Onboard2View(),
         '/': (context) => const HomePage(),
         '/home_view': (context) => const HomeView(),
         '/home_view_2': (context) => const HomeView2(),

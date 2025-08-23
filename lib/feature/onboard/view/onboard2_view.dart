@@ -1,6 +1,7 @@
 import 'package:capp_box/core/extensions/localization_extension.dart';
 import 'package:capp_box/product/constants/color_cons.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import '../mixin/onboard2_mixin.dart';
 
 class Onboard2View extends StatefulWidget {
@@ -41,10 +42,10 @@ class _Onboard2ViewState extends State<Onboard2View> with Onboard2Mixin {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     // Logo
-                    Image.asset(
-                      'assets/images/logocappbox.png',
-                      width: 180,
-                      height: 180,
+                    SvgPicture.asset(
+                      'assets/icons/cappbox_splash.svg',
+                      width: 240,
+                      height: 240,
                     ),
                     const SizedBox(height: 30),
 
@@ -53,23 +54,20 @@ class _Onboard2ViewState extends State<Onboard2View> with Onboard2Mixin {
                         ? const CircularProgressIndicator(color: Colors.white)
                         : SizedBox(
                           width: 322,
-                          child: Text.rich(
-                            TextSpan(
-                              children: [
-                                TextSpan(
-                                  text: context.tr(
-                                    'remember_your_memories',
-                                    args: {},
-                                  ),
-                                  style: _textStyle(20),
-                                ),
-                                TextSpan(
-                                  text: context.tr('carry_to_future', args: {}),
-                                  style: _textStyle(32),
-                                ),
-                              ],
-                            ),
-                            textAlign: TextAlign.center,
+                          child: Column(
+                            children: [
+                              Text(
+                                context.tr('remember_your_memories', args: {}),
+                                style: _textStyle(24),
+                                textAlign: TextAlign.center,
+                              ),
+                              const SizedBox(height: 8),
+                              Text(
+                                context.tr('carry_to_future', args: {}),
+                                style: _textStyle(36),
+                                textAlign: TextAlign.center,
+                              ),
+                            ],
                           ),
                         ),
 

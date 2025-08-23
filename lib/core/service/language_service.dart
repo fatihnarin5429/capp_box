@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -11,6 +12,8 @@ class LanguageService {
 
   final String _languageCodeKey = 'languageCode';
   Locale? _currentLocale;
+  final StreamController<Locale> _localeController =
+      StreamController<Locale>.broadcast();
 
   // Supported locales
   final List<Locale> supportedLocales = const [
@@ -19,8 +22,6 @@ class LanguageService {
     Locale('de'), // German
     Locale('it'), // Italian
     Locale('pt'), // Portuguese
-    Locale('hi'), // Hindi
-    Locale('zh'), // Chinese
     Locale('ru'), // Russian
   ];
 
@@ -40,8 +41,9 @@ class LanguageService {
     if (prefs.getString(_languageCodeKey) == null) {
       // Check if device language is supported
       String deviceLanguage = deviceLocale.languageCode;
-      if (supportedLocales
-          .any((locale) => locale.languageCode == deviceLanguage)) {
+      if (supportedLocales.any(
+        (locale) => locale.languageCode == deviceLanguage,
+      )) {
         await setLocale(Locale(deviceLanguage));
       } else {
         // If device language is not supported, set English as default
@@ -57,6 +59,17 @@ class LanguageService {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setString(_languageCodeKey, locale.languageCode);
     _currentLocale = locale;
+
+    // Notify listeners about locale change
+    _localeController.add(locale);
+  }
+
+  // Get stream for locale changes
+  Stream<Locale> get localeStream => _localeController.stream;
+
+  // Dispose the stream controller
+  void dispose() {
+    _localeController.close();
   }
 
   // Get saved language code

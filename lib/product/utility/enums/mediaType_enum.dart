@@ -1,4 +1,4 @@
-enum MediaType { text, photo, video, voice, mail }
+enum MediaType { text, photo, video, voice }
 
 MediaType mediaTypeFromString(String type) {
   switch (type) {
@@ -12,10 +12,8 @@ MediaType mediaTypeFromString(String type) {
       return MediaType.voice;
     case 'text':
       return MediaType.text;
-    case 'mail':
-      return MediaType.mail;
     default:
-      return MediaType.text; // veya bir 'unknown' ekleyebilirsin
+      return MediaType.text;
   }
 }
 
@@ -29,8 +27,6 @@ String mediaTypeToString(MediaType type) {
       return 'audio';
     case MediaType.text:
       return 'text';
-    case MediaType.mail:
-      return 'mail';
     default:
       return 'text';
   }

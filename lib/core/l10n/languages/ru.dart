@@ -149,8 +149,7 @@ final Map<String, String> ru = {
   'german': 'Немецкий',
   'italian': 'Итальянский',
   'portuguese': 'Португальский',
-  'hindi': 'Хинди',
-  'chinese': 'Китайский',
+
   'russian': 'Русский',
   'language_changed': 'Язык успешно изменен',
 
@@ -280,4 +279,23 @@ final Map<String, String> ru = {
   'price_video_capsule': '1999 ₽',
   'price_audio_capsule': '1199 ₽',
   'price_photo_capsule': '799 ₽',
+
+  // Media Selection
+  'photo_selection': 'Выбор фото',
+  'video_selection': 'Выбор видео',
+  'audio_selection': 'Выбор аудио',
+  'text_selection': 'Выбор текста',
+  'select_photo': 'Выбрать фото',
+  'select_video': 'Выбрать видео',
+  'select_audio': 'Выбрать аудио',
+  'write_text': 'Написать текст',
+  'feature_not_available': 'Эта функция пока недоступна',
+  'file_selection_error': 'Ошибка выбора файла',
+  'tap_to_select': 'Нажмите для выбора',
+  'reset': 'Сбросить',
+  'selected': 'Файл выбран',
+  'change': 'Изменить',
+  'remove': 'Удалить',
+  'save_error': 'Ошибка сохранения',
+  'fit_toggle': 'Подогнать / Покрыть',
 };

@@ -30,7 +30,7 @@ class SelectedMediaPreview extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (type == MediaType.photo && photoFile != null) {
-      return _buildPhotoPreview();
+      return _buildPhotoPreview(context);
     } else if (type == MediaType.video && videoFile != null) {
       return _buildVideoPreview();
     } else if (type == MediaType.voice && audioFile != null) {
@@ -39,53 +39,58 @@ class SelectedMediaPreview extends StatelessWidget {
     return const SizedBox();
   }
 
-  Widget _buildPhotoPreview() {
-    return Container(
-      margin: const EdgeInsets.symmetric(vertical: 16),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: Colors.white.withValues(alpha: 0.2)),
-      ),
-      child: Stack(
-        children: [
-          ClipRRect(
+  Widget _buildPhotoPreview(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 16),
+      child: AspectRatio(
+        aspectRatio: 3 / 4,
+        child: Container(
+          decoration: BoxDecoration(
+            color: const Color(0xFF262742),
             borderRadius: BorderRadius.circular(16),
-            child: Image.file(
-              photoFile!,
-              width: double.infinity,
-              height: 250,
-              fit: BoxFit.cover,
-              errorBuilder: (context, error, stackTrace) {
-                return Container(
-                  width: double.infinity,
-                  height: 250,
-                  color: Colors.grey.withValues(alpha: 0.3),
-                  child: const Center(
-                    child: Text(
-                      'Resim yüklenemedi',
-                      style: TextStyle(color: Colors.white),
+            border: Border.all(color: Colors.white.withValues(alpha: 0.2)),
+          ),
+          child: Stack(
+            children: [
+              Align(
+                alignment: Alignment.center,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(16),
+                  child: Image.file(
+                    photoFile!,
+                    errorBuilder: (context, error, stackTrace) {
+                      return const Center(
+                        child: Text(
+                          'Resim yüklenemedi',
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      );
+                    },
+                  ),
+                ),
+              ),
+              Positioned(
+                top: 8,
+                right: 8,
+                child: GestureDetector(
+                  onTap: onRemovePhoto,
+                  child: Container(
+                    padding: const EdgeInsets.all(8),
+                    decoration: BoxDecoration(
+                      color: Colors.black.withValues(alpha: 0.5),
+                      shape: BoxShape.circle,
+                    ),
+                    child: const Icon(
+                      Icons.close,
+                      color: Colors.white,
+                      size: 20,
                     ),
                   ),
-                );
-              },
-            ),
-          ),
-          Positioned(
-            top: 8,
-            right: 8,
-            child: GestureDetector(
-              onTap: onRemovePhoto,
-              child: Container(
-                padding: const EdgeInsets.all(8),
-                decoration: BoxDecoration(
-                  color: Colors.black.withValues(alpha: 0.5),
-                  shape: BoxShape.circle,
                 ),
-                child: const Icon(Icons.close, color: Colors.white, size: 20),
               ),
-            ),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }

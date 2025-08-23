@@ -17,10 +17,10 @@ import '../widgets/back_button_widget.dart';
 import '../widgets/page_title.dart';
 import '../widgets/step_indicator.dart';
 import '../widgets/continue_button.dart';
-import '../widgets/media_selector_button.dart';
 import '../mixins/media_mixin.dart';
-import '../widgets/selected_media_preview.dart';
+
 import 'package:capp_box/feature/profile/widgets/file_validator.dart';
+import 'capsule_post_view.dart';
 
 class CreateCapsulContentView extends StatefulWidget {
   final TextEditingController controller;
@@ -61,7 +61,7 @@ class CreateCapsulContentView extends StatefulWidget {
 class _CreateCapsulContentViewState extends State<CreateCapsulContentView>
     with MediaMixin {
   bool hasText = false;
-  final int currentStep = 0;
+  final int currentStep = 1;
   File? photoFile;
   File? videoFile;
   File? audioFile;
@@ -257,92 +257,71 @@ class _CreateCapsulContentViewState extends State<CreateCapsulContentView>
                           },
                         ),
                         const SizedBox(height: 20),
-                        Align(
-                          alignment: Alignment.centerLeft,
-                          child: Text(
-                            widget.type == MediaType.text
-                                ? context.tr('add_text')
-                                : widget.type == MediaType.voice
-                                ? context.tr('add_voice')
-                                : context.tr('add_media'),
-                            style: const TextStyle(
-                              color: Colors.white,
-                              fontSize: 18,
-                              fontFamily: 'Urbanist',
-                              fontWeight: FontWeight.w500,
-                              height: 1.40,
-                            ),
-                          ),
-                        ),
-                        widget.type == MediaType.photo
-                            ? const SizedBox()
-                            : Align(
-                              alignment: Alignment.centerLeft,
-                              child: Text(
-                                context.tr('select_video'),
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 12,
-                                  fontFamily: 'Urbanist',
-                                  fontWeight: FontWeight.w400,
-                                  height: 1.70,
-                                  letterSpacing: -0.50,
-                                ),
-                              ),
-                            ),
-                        const SizedBox(height: 12),
-                        MediaSelectorButton(
-                          type: widget.type!,
-                          onTap: () {
-                            if (widget.type == MediaType.photo) {
-                              pickAndValidateFile(context, 'image');
-                            } else if (widget.type == MediaType.video) {
-                              pickAndValidateFile(context, 'video');
-                            } else if (widget.type == MediaType.voice) {
-                              pickAndValidateFile(context, 'audio');
-                            }
-                          },
-                        ),
-                        SelectedMediaPreview(
-                          type: widget.type!,
-                          photoFile: photoFile,
-                          videoFile: videoFile,
-                          audioFile: audioFile,
-                          selectedFileName: selectedFileName,
-                          videoPlayerController: _videoPlayerController,
-                          onRemovePhoto: () => setState(() => photoFile = null),
-                          onRemoveVideo:
-                              () => setState(() {
-                                videoFile = null;
-                                _videoPlayerController?.dispose();
-                                _videoPlayerController = null;
-                              }),
-                          onRemoveAudio:
-                              () => setState(() {
-                                audioFile = null;
-                                selectedFileName = null;
-                              }),
-                        ),
                         Padding(
                           padding: const EdgeInsets.symmetric(vertical: 32.0),
                           child: ContinueButton(
                             onPressed: () {
-                              context.read<CreateCapsuleBloc>().add(
-                                CreateCapsuleBodyAction(
-                                  state.createCapsuleBodyModel!.copyWith(
-                                    title: _titleController.text,
-                                    message: _messageController.text,
-                                    mediaFiles: widget.type == MediaType.photo ? photoFile : widget.type == MediaType.video ? videoFile : audioFile,
-                                  ),
-                                )
+                              print(
+                                'Devam Et butonuna tıklandı - ${widget.type}',
                               );
+                              // Önce CapsulePostView ekranına geç
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
                                   builder:
-                                      (context) => CreateCapsulInformationView(
-                                        controller: _titleController,
-                                        onChanged: widget.onChanged,
+                                      (context) => CapsulePostView(
+                                        currentStep: currentStep,
+                                        type: widget.type!,
+                                        onMediaSelected: (
+                                          photoFile,
+                                          videoFile,
+                                          audioFile,
+                                          fileName,
+                                        ) {
+                                          print(
+                                            'Medya seçildi: photo=$photoFile, video=$videoFile, audio=$audioFile',
+                                          );
+                                          setState(() {
+                                            this.photoFile = photoFile;
+                                            this.videoFile = videoFile;
+                                            this.audioFile = audioFile;
+                                            this.selectedFileName = fileName;
+                                          });
+
+                                          // Medya seçildikten sonra CreateCapsulInformationView'e geç
+                                          context.read<CreateCapsuleBloc>().add(
+                                            CreateCapsuleBodyAction(
+                                              state.createCapsuleBodyModel!
+                                                  .copyWith(
+                                                    title:
+                                                        _titleController.text,
+                                                    message:
+                                                        _messageController.text,
+                                                    mediaFiles:
+                                                        widget.type ==
+                                                                MediaType.photo
+                                                            ? photoFile
+                                                            : widget.type ==
+                                                                MediaType.video
+                                                            ? videoFile
+                                                            : audioFile,
+                                                  ),
+                                            ),
+                                          );
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder:
+                                                  (context) =>
+                                                      CreateCapsulInformationView(
+                                                        controller:
+                                                            _titleController,
+                                                        onChanged:
+                                                            widget.onChanged,
+                                                      ),
+                                            ),
+                                          );
+                                        },
                                       ),
                                 ),
                               );

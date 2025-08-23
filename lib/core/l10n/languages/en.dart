@@ -398,4 +398,23 @@ final Map<String, String> en = {
   "country_hint": "Enter country name",
 
   "phone_number_hint": "Enter your phone number",
+
+  // Media Selection
+  "photo_selection": "Photo Selection",
+  "video_selection": "Video Selection",
+  "audio_selection": "Audio Selection",
+  "text_selection": "Text Selection",
+  "select_photo": "Select Photo",
+  "select_video": "Select Video",
+  "select_audio": "Select Audio",
+  "write_text": "Write Text",
+  "feature_not_available": "This feature is not available yet",
+  "file_selection_error": "An error occurred while selecting file",
+  "tap_to_select": "Tap to select",
+  "reset": "Reset",
+  "selected": "File selected",
+  "change": "Change",
+  "remove": "Remove",
+  "save_error": "Save error",
+  "fit_toggle": "Fit / Cover",
 };

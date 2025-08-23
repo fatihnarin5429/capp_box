@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:bot_toast/bot_toast.dart';
 import 'package:capp_box/core/extensions/localization_extension.dart';
 import 'package:capp_box/core/l10n/app_localizations.dart';
@@ -42,7 +43,7 @@ class _LanguageSettingsViewState extends State<LanguageSettingsView> {
     if (mounted) {
       final state = context.findAncestorStateOfType<MyAppState>();
       if (state != null) {
-        // state.setLocale(locale);
+        state.setLocale(locale);
 
         BotToast.showText(
           text: AppLocalizations.of(context).translate('language_changed'),
@@ -191,20 +192,6 @@ class _LanguageSettingsViewState extends State<LanguageSettingsView> {
                         const SizedBox(height: 16),
                         _buildLanguageOption(
                           context,
-                          'हिन्दी',
-                          localizations.translate('hindi'),
-                          'hi',
-                        ),
-                        const SizedBox(height: 16),
-                        _buildLanguageOption(
-                          context,
-                          '中文',
-                          localizations.translate('chinese'),
-                          'zh',
-                        ),
-                        const SizedBox(height: 16),
-                        _buildLanguageOption(
-                          context,
                           'Русский',
                           localizations.translate('russian'),
                           'ru',
@@ -324,10 +311,6 @@ class _LanguageSettingsViewState extends State<LanguageSettingsView> {
         return localizations.translate('Italian');
       case 'pt':
         return localizations.translate('Portuguese');
-      case 'hi':
-        return localizations.translate('Hindi');
-      case 'zh':
-        return localizations.translate('Chinese');
       case 'ru':
         return localizations.translate('Russian');
       default:
